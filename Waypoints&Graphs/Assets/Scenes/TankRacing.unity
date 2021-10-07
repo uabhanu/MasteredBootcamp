@@ -180,16 +180,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 35c1c886898f94ca0833cccc2e3388a4, type: 3}
---- !u!1 &26209199 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 35c1c886898f94ca0833cccc2e3388a4, type: 3}
-  m_PrefabInstance: {fileID: 182541858}
-  m_PrefabAsset: {fileID: 0}
---- !u!1 &27235156 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 35c1c886898f94ca0833cccc2e3388a4, type: 3}
-  m_PrefabInstance: {fileID: 224012597}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &43577152
 GameObject:
   m_ObjectHideFlags: 0
@@ -250,19 +240,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 15
-  rotSpeed: 10
-  lookAhead: 10
 --- !u!4 &43577156
 Transform:
   m_ObjectHideFlags: 0
@@ -820,19 +797,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 50
-  rotSpeed: 8
-  lookAhead: 10
 --- !u!4 &124365496
 Transform:
   m_ObjectHideFlags: 0
@@ -1129,19 +1093,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 50
-  rotSpeed: 8
-  lookAhead: 10
 --- !u!4 &191584065
 Transform:
   m_ObjectHideFlags: 0
@@ -1543,11 +1494,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 394643390}
   m_Mesh: {fileID: -476746044771901990, guid: 5263a76370a7b435ca5044a8d04b2e4b, type: 3}
---- !u!1 &420062435 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 35c1c886898f94ca0833cccc2e3388a4, type: 3}
-  m_PrefabInstance: {fileID: 1153812308}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &449796260
 GameObject:
   m_ObjectHideFlags: 0
@@ -1608,19 +1554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 15
-  rotSpeed: 10
-  lookAhead: 10
 --- !u!4 &449796264
 Transform:
   m_ObjectHideFlags: 0
@@ -1894,19 +1827,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 40
-  rotSpeed: 3
-  lookAhead: 10
 --- !u!4 &525663358
 Transform:
   m_ObjectHideFlags: 0
@@ -2064,19 +1984,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 5
-  rotSpeed: 15
-  lookAhead: 10
 --- !u!4 &587033068
 Transform:
   m_ObjectHideFlags: 0
@@ -2152,19 +2059,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 5
-  rotSpeed: 15
-  lookAhead: 10
 --- !u!4 &605458652
 Transform:
   m_ObjectHideFlags: 0
@@ -2344,11 +2238,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 613345233}
   m_Mesh: {fileID: -476746044771901990, guid: 5263a76370a7b435ca5044a8d04b2e4b, type: 3}
---- !u!1 &638881449 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 35c1c886898f94ca0833cccc2e3388a4, type: 3}
-  m_PrefabInstance: {fileID: 16519799}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &645866045
 GameObject:
   m_ObjectHideFlags: 0
@@ -2465,11 +2354,6 @@ Transform:
   m_Father: {fileID: 1461599026}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &678473001 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 35c1c886898f94ca0833cccc2e3388a4, type: 3}
-  m_PrefabInstance: {fileID: 60457987}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &686160107
 GameObject:
   m_ObjectHideFlags: 0
@@ -2646,11 +2530,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
---- !u!1 &717471878 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 35c1c886898f94ca0833cccc2e3388a4, type: 3}
-  m_PrefabInstance: {fileID: 1305324022}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &721753312
 GameObject:
   m_ObjectHideFlags: 0
@@ -2733,11 +2612,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 721753312}
   m_Mesh: {fileID: 4214266722782416146, guid: 5263a76370a7b435ca5044a8d04b2e4b, type: 3}
---- !u!1 &754471314 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 35c1c886898f94ca0833cccc2e3388a4, type: 3}
-  m_PrefabInstance: {fileID: 1040721653}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &754600368
 GameObject:
   m_ObjectHideFlags: 0
@@ -3113,19 +2987,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 15
-  rotSpeed: 10
-  lookAhead: 10
 --- !u!4 &955170868
 Transform:
   m_ObjectHideFlags: 0
@@ -4008,19 +3869,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 5
-  rotSpeed: 15
-  lookAhead: 10
 --- !u!4 &1261410044
 Transform:
   m_ObjectHideFlags: 0
@@ -4036,11 +3884,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 25
   m_LocalEulerAnglesHint: {x: 0, y: -90, z: 0}
---- !u!1 &1286036272 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 35c1c886898f94ca0833cccc2e3388a4, type: 3}
-  m_PrefabInstance: {fileID: 1403707900}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1305324022
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4345,11 +4188,6 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1375099414}
   m_Mesh: {fileID: 6815173180928607309, guid: 5263a76370a7b435ca5044a8d04b2e4b, type: 3}
---- !u!1 &1383226272 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: -927199367670048503, guid: 35c1c886898f94ca0833cccc2e3388a4, type: 3}
-  m_PrefabInstance: {fileID: 1507504639}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1403707900
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -4583,19 +4421,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 40
-  rotSpeed: 3
-  lookAhead: 10
 --- !u!4 &1461599026
 Transform:
   m_ObjectHideFlags: 0
@@ -5127,19 +4952,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 50
-  rotSpeed: 8
-  lookAhead: 10
 --- !u!4 &1662738270
 Transform:
   m_ObjectHideFlags: 0
@@ -5332,19 +5144,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 40
-  rotSpeed: 3
-  lookAhead: 10
 --- !u!4 &1784635546
 Transform:
   m_ObjectHideFlags: 0
@@ -6810,19 +6609,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 50
-  rotSpeed: 8
-  lookAhead: 10
 --- !u!54 &2713447972708953234
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7249,19 +7035,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 15
-  rotSpeed: 10
-  lookAhead: 10
 --- !u!54 &5462622198115272028
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7606,19 +7379,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 5
-  rotSpeed: 15
-  lookAhead: 10
 --- !u!54 &6584456359551941307
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -7658,7 +7418,6 @@ GameObject:
   m_Component:
   - component: {fileID: 7863693248642204184}
   - component: {fileID: 6591627735941132302}
-  - component: {fileID: 6591627735941132300}
   - component: {fileID: 6591627735941132301}
   m_Layer: 0
   m_Name: GreenTank
@@ -7667,31 +7426,6 @@ GameObject:
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
   m_IsActive: 1
---- !u!114 &6591627735941132300
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 6591627735941132299}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 92c36e9eeed76a048ad9966a969482ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  waypoints:
-  - {fileID: 27235156}
-  - {fileID: 26209199}
-  - {fileID: 754471314}
-  - {fileID: 638881449}
-  - {fileID: 420062435}
-  - {fileID: 717471878}
-  - {fileID: 678473001}
-  - {fileID: 1383226272}
-  - {fileID: 1286036272}
-  speed: 40
-  rotSpeed: 3
-  lookAhead: 10
 --- !u!54 &6591627735941132301
 Rigidbody:
   m_ObjectHideFlags: 0

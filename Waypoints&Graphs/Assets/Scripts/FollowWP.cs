@@ -1,5 +1,6 @@
 ﻿using UnityEngine;
 
+// TODO Not sure why getting compile error message when trying to attach this script to the Tank when there are no errors at all
 public class FollowWp : MonoBehaviour 
 {
     // Array of way points
