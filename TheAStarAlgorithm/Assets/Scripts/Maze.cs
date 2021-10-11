@@ -35,7 +35,7 @@ public class MapLocation
 
 public class Maze : MonoBehaviour
 {
-    protected readonly List<MapLocation> Directions = new List<MapLocation>() {
+    public List<MapLocation> Directions = new List<MapLocation>() {
                                             new MapLocation(1 ,0),
                                             new MapLocation(0 ,1),
                                             new MapLocation(-1 ,0),
