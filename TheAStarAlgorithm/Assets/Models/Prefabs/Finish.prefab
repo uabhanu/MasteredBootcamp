@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6856673923357348330}
   - component: {fileID: 6856673923357348331}
   m_Layer: 0
-  m_Name: End
+  m_Name: Finish
   m_TagString: marker
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
