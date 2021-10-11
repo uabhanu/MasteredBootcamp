@@ -1,5 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 
 public class MapLocation       
@@ -7,101 +6,120 @@ public class MapLocation
     public int x;
     public int z;
 
-    public MapLocation(int _x, int _z)
+    public MapLocation(int x , int z)
     {
-        x = _x;
-        z = _z;
+        this.x = x;
+        this.z = z;
     }
 
-    public Vector2 ToVector()
+    public Vector2 ToVector2()
     {
-        return new Vector2(x, z);
+        return new Vector2(x , z);
     }
 
-    public static MapLocation operator +(MapLocation a, MapLocation b)
-       => new MapLocation(a.x + b.x, a.z + b.z);
+    public static MapLocation operator + (MapLocation a , MapLocation b) //This is Operator Overloading
+       => new MapLocation(a.x + b.x , a.z + b.z);
 
+    public override bool Equals(object obj)
+    {
+        if((obj == null) || GetType() == obj.GetType())
+        {
+            return false;
+        }
+        else
+        {
+            return x == ((MapLocation) obj).x && z == ((MapLocation) obj).z;
+        } 
+    }
 }
 
 public class Maze : MonoBehaviour
 {
-    public List<MapLocation> directions = new List<MapLocation>() {
-                                            new MapLocation(1,0),
-                                            new MapLocation(0,1),
-                                            new MapLocation(-1,0),
-                                            new MapLocation(0,-1) };
+    protected readonly List<MapLocation> Directions = new List<MapLocation>() {
+                                            new MapLocation(1 ,0),
+                                            new MapLocation(0 ,1),
+                                            new MapLocation(-1 ,0),
+                                            new MapLocation(0 ,-1) };
     public int width = 30; //x length
     public int depth = 30; //z length
-    public byte[,] map;
+    protected byte[,] Map;
     public int scale = 6;
-
-    // Start is called before the first frame update
-    void Start()
+    
+    private void Start()
     {
         InitialiseMap();
         Generate();
         DrawMap();
     }
 
-    void InitialiseMap()
+    public int CountAllNeighbours(int x , int z)
     {
-        map = new byte[width,depth];
-        for (int z = 0; z < depth; z++)
-            for (int x = 0; x < width; x++)
-            {
-                    map[x, z] = 1;     //1 = wall  0 = corridor
-            }
+        return CountSquareNeighbours(x , z) + CountDiagonalNeighbours(x , z);
     }
-
-    public virtual void Generate()
+    
+    private int CountDiagonalNeighbours(int x , int z)
     {
-        for (int z = 0; z < depth; z++)
-            for (int x = 0; x < width; x++)
-            {
-               if(Random.Range(0,100) < 50)
-                 map[x, z] = 0;     //1 = wall  0 = corridor
-            }
-    }
-
-    void DrawMap()
-    {
-        for (int z = 0; z < depth; z++)
-            for (int x = 0; x < width; x++)
-            {
-                if (map[x, z] == 1)
-                {
-                    Vector3 pos = new Vector3(x * scale, 0, z * scale);
-                    GameObject wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
-                    wall.transform.localScale = new Vector3(scale, scale, scale);
-                    wall.transform.position = pos;
-                }
-            }
-    }
-
-    public int CountSquareNeighbours(int x, int z)
-    {
-        int count = 0;
-        if (x <= 0 || x >= width - 1 || z <= 0 || z >= depth - 1) return 5;
-        if (map[x - 1, z] == 0) count++;
-        if (map[x + 1, z] == 0) count++;
-        if (map[x, z + 1] == 0) count++;
-        if (map[x, z - 1] == 0) count++;
+        var count = 0;
+        
+        if(x <= 0 || x >= width - 1 || z <= 0 || z >= depth - 1) return 5;
+        if(Map[x - 1 , z - 1] == 0) count++;
+        if(Map[x + 1 , z + 1] == 0) count++;
+        if(Map[x - 1 , z + 1] == 0) count++;
+        if(Map[x + 1 , z - 1] == 0) count++;
+        
         return count;
     }
 
-    public int CountDiagonalNeighbours(int x, int z)
+    protected int CountSquareNeighbours(int x , int z)
     {
-        int count = 0;
-        if (x <= 0 || x >= width - 1 || z <= 0 || z >= depth - 1) return 5;
-        if (map[x - 1, z - 1] == 0) count++;
-        if (map[x + 1, z + 1] == 0) count++;
-        if (map[x - 1, z + 1] == 0) count++;
-        if (map[x + 1, z - 1] == 0) count++;
+        var count = 0;
+        
+        if(x <= 0 || x >= width - 1 || z <= 0 || z >= depth - 1) return 5;
+        
+        if(Map[x - 1 , z] == 0) count++;
+        if(Map[x + 1 , z] == 0) count++;
+        if(Map[x , z + 1] == 0) count++;
+        if(Map[x , z - 1] == 0) count++;
+        
         return count;
     }
-
-    public int CountAllNeighbours(int x, int z)
+    
+    private void DrawMap()
     {
-        return CountSquareNeighbours(x,z) + CountDiagonalNeighbours(x,z);
+        for(var z = 0; z < depth; z++)
+        for(var x = 0; x < width; x++)
+        {
+            if(Map[x , z] != 1) continue;
+                
+            var pos = new Vector3(x * scale , 0 , z * scale);
+            var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
+            wall.transform.localScale = new Vector3(scale , scale , scale);
+            wall.transform.position = pos;
+        }
+    }
+
+    protected virtual void Generate()
+    {
+        for(var z = 0; z < depth; z++)
+        for(var x = 0; x < width; x++)
+        {
+            if(Random.Range(0 ,100) < 50)
+                Map[x , z] = 0;     //1 = wall  0 = corridor
+        }
+    }
+
+    public override int GetHashCode()
+    {
+        return 0;
+    }
+    
+    private void InitialiseMap()
+    {
+        Map = new byte[width , depth];
+        for(var z = 0; z < depth; z++)
+        for(var x = 0; x < width; x++)
+        {
+            Map[x, z] = 1;     //1 = wall  0 = corridor
+        }
     }
 }
