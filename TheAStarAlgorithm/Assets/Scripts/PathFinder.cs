@@ -67,9 +67,27 @@ public class PathFinder : MonoBehaviour
     private PathMarker _lastPos;
     private PathMarker _startNode;
 
+    private void Update()
+    {
+        if(Input.GetKeyDown(KeyCode.P))
+        {
+            BeginSearch();
+        }
+        
+        if(Input.GetKeyDown(KeyCode.C) && !_isDone)
+        {
+            Search(_lastPos);
+        }
+        
+        if(Input.GetKeyDown(KeyCode.M))
+        {
+            GetPath();
+        }
+    }
+    
     private void BeginSearch()
     {
-        _isDone = true;
+        _isDone = false;
         RemoveAllMarkers();
 
         var locations = new List<MapLocation>();
@@ -100,6 +118,23 @@ public class PathFinder : MonoBehaviour
         _lastPos = _startNode;
     }
 
+    private void GetPath()
+    {
+        // TODO Not giving the intended results
+        
+        RemoveAllMarkers();
+
+        var begin = _lastPos;
+        
+        while(!_startNode.Equals(begin) && begin != null)
+        {
+            Instantiate(pathMarkerObj , new Vector3(begin.MapLocation.x * maze.scale , 0 , begin.MapLocation.z * maze.scale) , Quaternion.identity);
+            begin = begin.ParentPathMarker;
+        }
+        
+        Instantiate(pathMarkerObj , new Vector3(_startNode.MapLocation.x * maze.scale , 0 , _startNode.MapLocation.z * maze.scale) , Quaternion.identity);
+    }
+
     private bool IsClosed(MapLocation marker)
     {
         for(var index = 0; index < _closed.Count; index++)
@@ -110,10 +145,27 @@ public class PathFinder : MonoBehaviour
 
         return false;
     }
+    
+    private static void RemoveAllMarkers()
+    {
+        var markerObjs = GameObject.FindGameObjectsWithTag("Marker");
+
+        foreach(var markerObj in markerObjs)
+        {
+            Destroy(markerObj);
+        }
+    }
 
     private void Search(PathMarker currentNode)
     {
-        if(!Equals(currentNode , _finishNode)) return;
+        // TODO Not giving the intended results
+        
+        if(currentNode.Equals(_finishNode))
+        {
+            _isDone = true;
+            return;
+        }
+        
         _isDone = true;
 
         for(var index = 0; index < maze.Directions.Count; index++)
@@ -136,7 +188,7 @@ public class PathFinder : MonoBehaviour
             values[2].text = "F : " + F.ToString("0.00");
             values[0].text = "G : " + G.ToString("0.00");
             values[1].text = "H : " + H.ToString("0.00");
-            
+
             if(!UpdateMarker(neighbour , F , G , H , currentNode)) _opened.Add(new PathMarker(F , G , H , pathObj , neighbour , currentNode));
         }
 
@@ -147,29 +199,8 @@ public class PathFinder : MonoBehaviour
         _opened.RemoveAt(0);
 
         pm.MarkerObj.GetComponent<Renderer>().material = closeMaterial;
-    }
 
-    private static void RemoveAllMarkers()
-    {
-        var markerObjs = GameObject.FindGameObjectsWithTag("Marker");
-
-        foreach(var markerObj in markerObjs)
-        {
-            Destroy(markerObj);
-        }
-    }
-
-    private void Update()
-    {
-        if(Input.GetKeyDown(KeyCode.P))
-        {
-            BeginSearch();
-        }
-        
-        if(Input.GetKeyDown(KeyCode.C))
-        {
-            Search(_lastPos);
-        }
+        _lastPos = pm;
     }
 
     private bool UpdateMarker(MapLocation mapLocation , float f , float g , float h , PathMarker pathMarker)
@@ -189,7 +220,7 @@ public class PathFinder : MonoBehaviour
                 return true;
             }
         }
-
+        
         return false;
     }
 }

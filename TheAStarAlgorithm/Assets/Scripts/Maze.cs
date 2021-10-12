@@ -35,6 +35,8 @@ public class MapLocation
 
 public class Maze : MonoBehaviour
 {
+    [SerializeField] private Material mazeMaterial;
+    
     public List<MapLocation> Directions = new List<MapLocation>() {
                                             new MapLocation(1 ,0),
                                             new MapLocation(0 ,1),
@@ -95,6 +97,7 @@ public class Maze : MonoBehaviour
             var wall = GameObject.CreatePrimitive(PrimitiveType.Cube);
             wall.transform.localScale = new Vector3(scale , scale , scale);
             wall.transform.position = pos;
+            wall.gameObject.GetComponent<Renderer>().material = mazeMaterial; //Bhanu has done this on his own
         }
     }
 

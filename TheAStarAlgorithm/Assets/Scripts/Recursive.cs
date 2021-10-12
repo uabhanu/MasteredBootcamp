@@ -1,4 +1,6 @@
-﻿public class Recursive : Maze
+﻿using UnityEngine;
+
+public class Recursive : Maze
 {
     protected override void Generate()
     {
@@ -22,6 +24,4 @@
             z = z + Directions[3].z;
         }
     }
-    
-    //TODO If instructor doesn't tell you already, do the maze size and colour as shown by the instructor as yours is different and not that good
 }

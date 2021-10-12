@@ -404,8 +404,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1005088011}
-  - component: {fileID: 1005088014}
   - component: {fileID: 1005088010}
+  - component: {fileID: 1005088014}
   m_Layer: 0
   m_Name: Maze
   m_TagString: Untagged
@@ -457,6 +457,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 33bbdb95ccc4b4577a62495732a02d3e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  mazeMaterial: {fileID: 2100000, guid: 05893fc3b659b442887050c52afecc9b, type: 2}
   width: 30
   depth: 30
   scale: 6
