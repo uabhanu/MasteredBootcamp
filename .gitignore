@@ -98,3 +98,8 @@ TheAStarAlgorithm/obj/
 NavigationMeshes/Library/
 NavigationMeshes/Logs/
 NavigationMeshes/Temp/
+FiniteStateMachines/Library/
+FiniteStateMachines/Logs/
+FiniteStateMachines/Temp/
+FiniteStateMachines/.idea/
+FiniteStateMachines/obj/
