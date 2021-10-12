@@ -95,3 +95,6 @@ TheAStarAlgorithm/Logs/
 TheAStarAlgorithm/Temp/
 TheAStarAlgorithm/.idea/
 TheAStarAlgorithm/obj/
+NavigationMeshes/Library/
+NavigationMeshes/Logs/
+NavigationMeshes/Temp/
