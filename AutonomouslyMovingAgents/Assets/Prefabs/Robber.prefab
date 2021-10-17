@@ -1406,6 +1406,7 @@ MonoBehaviour:
   minimumDistanceFromCop: 7
   target: {fileID: 0}
   agent: {fileID: -5355821202399537346}
+  robberData: {fileID: 11400000, guid: 2945982155a82d4489aac986020b6bb2, type: 2}
 --- !u!1 &7654464796460211274
 GameObject:
   m_ObjectHideFlags: 0

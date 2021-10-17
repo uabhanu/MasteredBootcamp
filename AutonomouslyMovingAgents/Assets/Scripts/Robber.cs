@@ -1,5 +1,4 @@
-﻿using System;
-using ScriptableObjects;
+﻿using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.AI;
 
@@ -11,18 +10,15 @@ public class Robber : MonoBehaviour
     [SerializeField] private float minimumDistanceFromCop;
     [SerializeField] private GameObject target;
     [SerializeField] private NavMeshAgent agent;
-
-    private void Start()
-    {
-        Debug.Log("Minimum Distance from Cop : " + minimumDistanceFromCop);
-    }
-
+    [SerializeField] private RobberData robberData;
+    
     private void Update()
     {
-        BhanuEvade(); // I like this effect more
+        //BhanuEvade(); // I like this effect more
         //Evade();
         //Flee(target.transform.position);
         //Pursue();
+        Wander();
     }
     
     private void BhanuEvade()
@@ -33,9 +29,6 @@ public class Robber : MonoBehaviour
         var fromTargetAngle = Vector3.Angle(transform.forward , transform.TransformVector(targetDir));
         var currentDistanceAwayFromCop = Vector3.Distance(transform.position , copScript.gameObject.transform.position);
 
-        Debug.Log("Current Distance : " + currentDistanceAwayFromCop);
-        
-        
         if((fromTargetAngle < 90 && relativeHeading > 20) || currentDistanceAwayFromCop < minimumDistanceFromCop)
         {
              Flee(target.transform.position);
@@ -74,11 +67,22 @@ public class Robber : MonoBehaviour
     {
         agent.SetDestination(location);
     }
-    
-    //Bhanu created this which can be used if we require the Robber to chase the Cop 
-    private void Towards(Vector3 location)
+
+    private void Wander()
     {
-        var towardsVector = location - transform.position;
-        agent.SetDestination(transform.position + towardsVector); 
+        var wanderDistance = robberData.WanderDistance;
+        var wanderJitter = robberData.WanderJitter;
+        var wanderRadius = robberData.WanderRadius;
+        var wanderTarget = robberData.WanderTarget;
+        
+        var randomValue = Random.Range(-1.0f , 1.0f);
+        wanderTarget += new Vector3(randomValue * wanderJitter , 0 , randomValue * wanderJitter);
+        wanderTarget.Normalize();
+        wanderTarget *= wanderRadius;
+
+        var localTarget  = wanderTarget + new Vector3(0 , 0 , wanderDistance);
+        var worldTarget = gameObject.transform.InverseTransformVector(localTarget);
+        
+        Seek(worldTarget);
     }
 }

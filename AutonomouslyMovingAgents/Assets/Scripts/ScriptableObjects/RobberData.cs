@@ -1,18 +1,37 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class RobberData : MonoBehaviour
+namespace ScriptableObjects
 {
-    // Start is called before the first frame update
-    void Start()
+    [CreateAssetMenu]
+    public class RobberData : ScriptableObject
     {
-        
-    }
+        [SerializeField] private float wanderDistance;
+        [SerializeField] private float wanderJitter;
+        [SerializeField] private float wanderRadius;
+        [SerializeField] private Vector3 wanderTarget;
 
-    // Update is called once per frame
-    void Update()
-    {
+        public float WanderDistance
+        {
+            get => wanderDistance;
+            set => wanderDistance = value;
+        }
         
+        public float WanderJitter
+        {
+            get => wanderJitter;
+            set => wanderJitter = value;
+        }
+
+        public float WanderRadius
+        {
+            get => wanderRadius;
+            set => wanderRadius = value;
+        }
+
+        public Vector3 WanderTarget
+        {
+            get => wanderTarget;
+            set => wanderTarget = value;
+        }
     }
 }
