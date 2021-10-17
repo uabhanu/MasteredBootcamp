@@ -113,3 +113,6 @@ AutonomouslyMovingAgents/Logs/
 AutonomouslyMovingAgents/Temp/
 AutonomouslyMovingAgents/.idea/
 AutonomouslyMovingAgents/obj/
+CrowdSimulation/Library/
+CrowdSimulation/Logs/
+CrowdSimulation/Temp/
