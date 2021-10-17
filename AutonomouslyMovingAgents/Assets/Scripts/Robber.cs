@@ -19,16 +19,22 @@ public class Robber : MonoBehaviour
 
         if(!_coolDown)
         {
-            if(CopCanSeeMe() && CanSeeCop())
+            if(CannotSeeCop())
+            {
+                Wander();
+            }
+            
+            else if(CopCanSeeMe() && CanSeeCop())
             {
                 CleverHide();
                 _coolDown = true;
                 Invoke("BehaviourCooldown" , 5);
             }
+            
             else
             {
                 Pursue();
-            }   
+            }
         }
         //Evade();
         //Flee(target.transform.position);
@@ -68,6 +74,21 @@ public class Robber : MonoBehaviour
                 return true;
             }
         }
+
+        return false;
+    }
+
+    //Bhanu has done this on his own through the challenge
+    private bool CannotSeeCop()
+    {
+        var distanceFromTheCop = Vector3.Distance(transform.position , target.transform.position);
+
+        if(distanceFromTheCop >= 10)
+        {
+            return true;    
+        }
+        
+        Debug.Log("Distance : " + distanceFromTheCop);
 
         return false;
     }
