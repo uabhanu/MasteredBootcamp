@@ -1,25 +1,26 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI;  // Added since we're using a navmesh.
 
 public class AI : MonoBehaviour
 {
     // Variables to handle what we need to send through to our state.
-    NavMeshAgent agent; // To store the NPC NavMeshAgent component.
-    Animator anim; // To store the Animator component.
-    public Transform player;  // To store the transform of the player. This will let the guard know where the player is, so it can face the player and know whether it should be shooting or chasing (depending on the distance).
-    State currentState;
+    private NavMeshAgent _agent; // To store the NPC NavMeshAgent component.
+    private Animator _anim; // To store the Animator component.
+    private State _currentState;
+    
+    [SerializeField] private Transform player;  
+    // To store the transform of the player. This will let the guard know where the player is, so it can face the player and know whether it should be shooting or chasing (depending on the distance).
+    // Bhanu has turned the public variable into SerializeField private to do the same thing but now the variable is not exposed to other classes as not required
 
-    void Start()
+    private void Start()
     {
-        agent = this.GetComponent<NavMeshAgent>(); // Grab agents NavMeshAgent.
-        anim = this.GetComponent<Animator>(); // Grab agents Animator component.
-        currentState = new Idle(this.gameObject, agent, anim, player); // Create our first state.
+        _agent = this.GetComponent<NavMeshAgent>(); // Grab agents NavMeshAgent.
+        _anim = this.GetComponent<Animator>(); // Grab agents Animator component.
+        _currentState = new Idle(this.gameObject, _agent, _anim, player); // Create our first state.
     }
 
-    void Update()
+    private void Update()
     {
-        currentState = currentState.Process(); // Calls Process method to ensure correct state is set.
+        _currentState = _currentState.Process(); // Calls Process method to ensure correct state is set.
     }
 }

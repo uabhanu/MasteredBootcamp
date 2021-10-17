@@ -1,10 +1,12 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using System.Linq; // Added since we need to use 'OrderBy' to sort waypoint sequence.
 
 public sealed class GameEnvironment
 {
+    // As instructor advised, I have taken the variable away from State class
+    private GameObject _safePlaceObj;
+    
     // Create an instance of the GameEnvironment class called 'instance'.
     private static GameEnvironment instance;
 
@@ -22,13 +24,18 @@ public sealed class GameEnvironment
             if(instance == null)
             {
                 instance = new GameEnvironment();
-                instance.Checkpoints.AddRange(
-                    GameObject.FindGameObjectsWithTag("Checkpoint"));
-
+                instance.Checkpoints.AddRange(GameObject.FindGameObjectsWithTag("Checkpoint"));
                 instance.checkpoints = instance.checkpoints.OrderBy(waypoint => waypoint.name).ToList(); // Order waypoints in ascending alphabetical order by name, so that the NPC follows them correctly.
+                instance.SafePlaceObj = GameObject.FindGameObjectWithTag("Safe");
             }
+            
             return instance;
         }
     }
 
+    public GameObject SafePlaceObj
+    {
+        get => _safePlaceObj;
+        set => _safePlaceObj = value;
+    }
 }

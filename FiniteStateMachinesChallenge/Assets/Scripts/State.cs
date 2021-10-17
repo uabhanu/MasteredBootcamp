@@ -1,6 +1,4 @@
-﻿using System.Collections;
-using System.Collections.Generic;
-using UnityEngine;
+﻿using UnityEngine;
 using UnityEngine.AI; // Added since we're using a navmesh.
 
 public class State
@@ -47,13 +45,15 @@ public class State
     // The method that will get run from outside and progress the state through each of the different stages.
     public State Process()
     {
-        if (stage == EVENT.ENTER) Enter();
-        if (stage == EVENT.UPDATE) Update();
-        if (stage == EVENT.EXIT)
+        if(stage == EVENT.ENTER) Enter();
+        if(stage == EVENT.UPDATE) Update();
+        
+        if(stage == EVENT.EXIT)
         {
             Exit();
             return nextState; // Notice that this method returns a 'state'.
         }
+        
         return this; // If we're not returning the nextState, then return the same state.
     }
 
@@ -77,16 +77,18 @@ public class State
         float angle = Vector3.Angle(direction, npc.transform.forward); // Provide angle of sight.
 
         // If player is close enough to the NPC AND within the visible viewing angle...
-        if (direction.magnitude < 2 && angle < 30)
+        if(direction.magnitude < 2 && angle < 30)
         {
             return true; // Player IS behind the NPC.
         }
+        
         return false; // Player IS NOT behind the NPC.
     }
 
     public bool CanAttackPlayer()
     {
         Vector3 direction = player.position - npc.transform.position; // Provides the vector from the NPC to the player.
+        
         if(direction.magnitude < shootDist)
         {
             return true; // NPC IS close enough to the player to attack.
@@ -111,7 +113,7 @@ public class Idle : State
     }
     public override void Update()
     {
-        if (CanSeePlayer())
+        if(CanSeePlayer())
         {
             nextState = new Pursue(npc, agent, anim, player);
             stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
@@ -148,7 +150,7 @@ public class Patrol : State
         float lastDist = Mathf.Infinity; // Store distance between NPC and waypoints.
 
         // Calculate closest waypoint by looping around each one and calculating the distance between the NPC and each waypoint.
-        for (int i = 0; i < GameEnvironment.Singleton.Checkpoints.Count; i++)
+        for(int i = 0; i < GameEnvironment.Singleton.Checkpoints.Count; i++)
         {
             GameObject thisWP = GameEnvironment.Singleton.Checkpoints[i];
             float distance = Vector3.Distance(npc.transform.position, thisWP.transform.position);
@@ -176,13 +178,13 @@ public class Patrol : State
             agent.SetDestination(GameEnvironment.Singleton.Checkpoints[currentIndex].transform.position); // Set agents destination to position of next waypoint.
         }
 
-        if (CanSeePlayer())
+        if(CanSeePlayer())
         {
             nextState = new Pursue(npc, agent, anim, player);
             stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
         }
 
-        else if (IsPlayerBehind())
+        else if(IsPlayerBehind())
         {
             nextState = new RunAway(npc, agent, anim, player);
             stage = EVENT.EXIT; // The next time 'Process' runs, the EXIT stage will run instead, which will then return the nextState.
@@ -217,13 +219,13 @@ public class Pursue : State
         agent.SetDestination(player.position);  // Set goal for NPC to reach but navmesh processing might not have taken place, so...
         if(agent.hasPath)                       // ...check if agent has a path yet.
         {
-            if (CanAttackPlayer())
+            if(CanAttackPlayer())
             {
                 nextState = new Attack(npc, agent, anim, player); // If NPC can attack player, set correct nextState.
                 stage = EVENT.EXIT; // Set stage correctly as we are finished with Pursue state.
             }
             // If NPC can't see the player, switch back to Patrol state.
-            else if (!CanSeePlayer())
+            else if(!CanSeePlayer())
             {
                 nextState = new Patrol(npc, agent, anim, player); // If NPC can't see player, set correct nextState.
                 stage = EVENT.EXIT; // Set stage correctly as we are finished with Pursue state.
@@ -284,6 +286,8 @@ public class Attack : State
     }
 }
 
+// TODO Interestingly, if I change the tag of another Object in the scene to Safe and disable the cube, the NPC doesn't quite run to it
+// TODO Not sure why this is happening so understand and fix it if time permits
 public class RunAway : State
 {
     GameObject safeLocation; // Store object used for safe location.
@@ -292,7 +296,7 @@ public class RunAway : State
                 : base(_npc, _agent, _anim, _player)
     {
         name = STATE.RUNAWAY; // Set name to correct state.
-        safeLocation = GameObject.FindGameObjectWithTag("Safe"); // Find object that was tagged with "Safe" and assign top safeLocation.
+        safeLocation = GameEnvironment.Singleton.SafePlaceObj; // Bhanu is accessing the Safe Obj from Game Environment following the instructor's idea
     }
 
     public override void Enter()
