@@ -2,7 +2,6 @@
 using UnityEngine;
 using UnityEngine.AI;
 
-//TODO Use Finite State Machines to implement the Robber Behaviour if time permits
 public class Robber : MonoBehaviour
 {
     [SerializeField] private Cop copScript;
@@ -15,10 +14,12 @@ public class Robber : MonoBehaviour
     private void Update()
     {
         //BhanuEvade(); // I like this effect more
+        if(CopCanSeeTarget()) CleverHide();
         //Evade();
         //Flee(target.transform.position);
+        //Hide();
         //Pursue();
-        Wander();
+        //Wander();
     }
     
     private void BhanuEvade()
@@ -35,6 +36,54 @@ public class Robber : MonoBehaviour
         }
     }
 
+    private bool CopCanSeeTarget()
+    {
+        RaycastHit hit;
+        var rayToTarget = target.transform.position - transform.position;
+
+        if(Physics.Raycast(transform.position , rayToTarget , out hit))
+        {
+            if(hit.transform.gameObject.CompareTag("Cop"))
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+    
+    private void CleverHide()
+    {
+        var distance = Mathf.Infinity;
+        var chosenDirection = Vector3.zero;
+        var chosenSpot = Vector3.zero;
+
+        var chosenGameObject = World.GetHidingSpots()[0];
+
+        for(var i = 0; i < World.GetHidingSpots().Length; i++)
+        {
+            var hideDir = World.GetHidingSpots()[i].transform.position - target.transform.position;
+            var hidePos = World.GetHidingSpots()[i].transform.position + hideDir.normalized;
+
+            if(Vector3.Distance(transform.position , hidePos) < distance)
+            {
+                chosenSpot = hidePos;
+                chosenDirection = hideDir;
+                chosenGameObject = World.GetHidingSpots()[i];
+                distance = Vector3.Distance(transform.position , hidePos);
+            }
+        }
+        
+        var hideCollider = chosenGameObject.GetComponent<Collider>();
+
+        Ray backRay = new Ray(chosenSpot , -chosenDirection.normalized);
+        RaycastHit hit;
+        var rayDistance = 100.0f;
+        hideCollider.Raycast(backRay , out hit , rayDistance);
+
+        Seek(hit.point + chosenDirection.normalized);
+    }
+
     private void Evade()
     {
         var targetDir = target.transform.position - transform.position;
@@ -46,6 +95,26 @@ public class Robber : MonoBehaviour
     {
         var fleeVector = location - transform.position;
         agent.SetDestination(transform.position - fleeVector);
+    }
+
+    private void Hide()
+    {
+        var distance = Mathf.Infinity;
+        var chosenSpot = Vector3.zero;
+
+        for(var i = 0; i < World.GetHidingSpots().Length; i++)
+        {
+            var hideDir = World.GetHidingSpots()[i].transform.position - target.transform.position;
+            var hidePos = World.GetHidingSpots()[i].transform.position + hideDir.normalized;
+
+            if(Vector3.Distance(transform.position , hidePos) < distance)
+            {
+                chosenSpot = hidePos;
+                distance = Vector3.Distance(transform.position , hidePos);
+            }
+        }
+
+        Seek(chosenSpot);
     }
 
     private void Pursue()
