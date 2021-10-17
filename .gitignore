@@ -116,3 +116,5 @@ AutonomouslyMovingAgents/obj/
 CrowdSimulation/Library/
 CrowdSimulation/Logs/
 CrowdSimulation/Temp/
+CrowdSimulation/.idea/
+CrowdSimulation/obj/
