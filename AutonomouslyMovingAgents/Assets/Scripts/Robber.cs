@@ -4,6 +4,8 @@ using UnityEngine.AI;
 
 public class Robber : MonoBehaviour
 {
+    private bool _coolDown;
+    
     [SerializeField] private Cop copScript;
     [SerializeField] private CopData copData;
     [SerializeField] private float minimumDistanceFromCop;
@@ -14,12 +16,30 @@ public class Robber : MonoBehaviour
     private void Update()
     {
         //BhanuEvade(); // I like this effect more
-        if(CopCanSeeTarget()) CleverHide();
+
+        if(!_coolDown)
+        {
+            if(CopCanSeeMe() && CanSeeCop())
+            {
+                CleverHide();
+                _coolDown = true;
+                Invoke("BehaviourCooldown" , 5);
+            }
+            else
+            {
+                Pursue();
+            }   
+        }
         //Evade();
         //Flee(target.transform.position);
         //Hide();
         //Pursue();
         //Wander();
+    }
+
+    private void BehaviourCooldown()
+    {
+        _coolDown = false;
     }
     
     private void BhanuEvade()
@@ -36,7 +56,7 @@ public class Robber : MonoBehaviour
         }
     }
 
-    private bool CopCanSeeTarget()
+    private bool CanSeeCop()
     {
         RaycastHit hit;
         var rayToTarget = target.transform.position - transform.position;
@@ -82,6 +102,19 @@ public class Robber : MonoBehaviour
         hideCollider.Raycast(backRay , out hit , rayDistance);
 
         Seek(hit.point + chosenDirection.normalized);
+    }
+
+    private bool CopCanSeeMe()
+    {
+        var toAgent = transform.position - target.transform.position;
+        var lookingAngle = Vector3.Angle(target.transform.forward , toAgent);
+
+        if(lookingAngle < 60)
+        {
+            return true;
+        }
+
+        return false;
     }
 
     private void Evade()
