@@ -191,6 +191,10 @@ PrefabInstance:
       propertyPath: target
       value: 
       objectReference: {fileID: 880072455}
+    - target: {fileID: -6741625019667176502, guid: b79d0b13355dc8f44b7956db61a82656, type: 3}
+      propertyPath: copScript
+      value: 
+      objectReference: {fileID: 880072456}
     - target: {fileID: 7423567203501390115, guid: b79d0b13355dc8f44b7956db61a82656, type: 3}
       propertyPath: m_RootOrder
       value: 1
@@ -246,6 +250,17 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 6644603938449114179, guid: 35d11d1e1dd397942b5024ee78060e27, type: 3}
   m_PrefabInstance: {fileID: 73510359}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &880072456 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 727603736, guid: 35d11d1e1dd397942b5024ee78060e27, type: 3}
+  m_PrefabInstance: {fileID: 73510359}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 880072455}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8252f08ac0b234ec99bccd94ec15a342, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &990943971
 GameObject:
   m_ObjectHideFlags: 0

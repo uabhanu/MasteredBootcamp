@@ -1401,9 +1401,11 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8c02e4e9723a36c449f7d9c63efd6d27, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  copScript: {fileID: 0}
   copData: {fileID: 11400000, guid: 0337496527dd37541a6b4eafc32b9117, type: 2}
-  agent: {fileID: -5355821202399537346}
+  minimumDistanceFromCop: 7
   target: {fileID: 0}
+  agent: {fileID: -5355821202399537346}
 --- !u!1 &7654464796460211274
 GameObject:
   m_ObjectHideFlags: 0

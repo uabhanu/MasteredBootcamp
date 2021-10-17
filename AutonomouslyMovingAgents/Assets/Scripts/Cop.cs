@@ -1,7 +1,7 @@
 ﻿using ScriptableObjects;
 using UnityEngine;
 
-public class Drive : MonoBehaviour
+public class Cop : MonoBehaviour
 {
     [SerializeField] private CopData copData;
 
