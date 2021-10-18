@@ -22,13 +22,13 @@ namespace GOAP
 
     public class GPlanner {
 
-        public Queue<GAction> plan(List<GAction> actions, Dictionary<string, int> goal, WorldStates states) {
+        public Queue<GAction> Plan(List<GAction> actions, Dictionary<string, int> goal, WorldStates states) {
 
             List<GAction> usableActions = new List<GAction>();
 
             foreach (GAction a in actions) {
 
-                if (a.IsAchievable()) {
+                if (a.IsAchievable()) { //TODO Getting NullReferenceException
 
                     usableActions.Add(a);
                 }

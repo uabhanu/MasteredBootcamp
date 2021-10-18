@@ -76,7 +76,7 @@ namespace GOAP
 
                 foreach (KeyValuePair<SubGoal, int> sg in sortedGoals) {
 
-                    actionQueue = planner.plan(actions, sg.Key.sGoals, null);
+                    actionQueue = planner.Plan(actions, sg.Key.sGoals, null);
                     // If actionQueue is not = null then we must have a plan
                     if (actionQueue != null) {
 
