@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using GOAP;
 using UnityEngine;
 
-public class GoToHospital : GAction
+public class GoToWaitingRoom : GAction
 {
     public override bool PrePerform()
     {

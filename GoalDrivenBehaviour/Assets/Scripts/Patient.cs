@@ -1,9 +1,16 @@
-﻿public class Patient : GAgent {
+﻿using System.Collections;
+using System.Collections.Generic;
+using GOAP;
+using UnityEngine;
 
-    new void Start() {
+public class Patient : GAgent
+{
+    // Start is called before the first frame update
+    new void Start()
+    {
         base.Start();
         SubGoal s1 = new SubGoal("isWaiting", 1, true);
-        goals.Add(s1, 3);
+        goals.Add(s1, 3); 
     }
 
 }
