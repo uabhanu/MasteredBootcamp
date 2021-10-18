@@ -28,7 +28,7 @@ public class GAgent : MonoBehaviour {
     public GAction currentAction;
     SubGoal currentGoal;
 
-    // Start is called before the first frame update
+    // Unlike in normal cases, this needs to be public and not private so it can be accessed by child class like Patient
     public void Start() {
 
         GAction[] acts = this.GetComponents<GAction>();

@@ -3743,6 +3743,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 6317959289080014943, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
+      propertyPath: target
+      value: 
+      objectReference: {fileID: 1000317771}
     - target: {fileID: 7880970886039044016, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
       propertyPath: m_RootOrder
       value: 13
@@ -3791,10 +3795,6 @@ PrefabInstance:
       propertyPath: m_Name
       value: Patient
       objectReference: {fileID: 0}
-    - target: {fileID: 8119552832615869777, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
-      propertyPath: target
-      value: 
-      objectReference: {fileID: 1000317771}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d36c43225f9391e4c8810c98eb7ef85e, type: 3}
 --- !u!1 &1896877307

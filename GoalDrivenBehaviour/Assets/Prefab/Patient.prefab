@@ -2658,9 +2658,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7880970886039044016}
-  - component: {fileID: 8119552832615869777}
-  - component: {fileID: 612105570655212539}
-  - component: {fileID: 2951248290386839093}
+  - component: {fileID: 6317959289080014943}
+  - component: {fileID: 82395661048043176}
+  - component: {fileID: 2016612082628279401}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -2683,7 +2683,7 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &8119552832615869777
+--- !u!114 &6317959289080014943
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2706,7 +2706,7 @@ MonoBehaviour:
     value: 1
   agent: {fileID: 0}
   running: 0
---- !u!195 &612105570655212539
+--- !u!195 &82395661048043176
 NavMeshAgent:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -2728,7 +2728,7 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
---- !u!114 &2951248290386839093
+--- !u!114 &2016612082628279401
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
