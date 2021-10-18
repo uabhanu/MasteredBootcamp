@@ -12,6 +12,7 @@ namespace GOAP
         public float cost = 1.0f;
         // Target where the action is going to take place
         public GameObject target;
+        public GInventory GInventory;
         // Store the tag
         public string targetTag;
         // Duration the action should take
@@ -43,6 +44,7 @@ namespace GOAP
 
             // Get hold of the agents NavMeshAgent
             agent = this.gameObject.GetComponent<NavMeshAgent>();
+            GInventory = GetComponent<GAgent>().inventory;
 
             // Check validity of preConditions
             if (preConditions != null) {

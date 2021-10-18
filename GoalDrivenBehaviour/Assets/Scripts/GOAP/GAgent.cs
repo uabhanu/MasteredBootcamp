@@ -24,6 +24,7 @@ namespace GOAP
 
         public List<GAction> actions = new List<GAction>();
         public Dictionary<SubGoal, int> goals = new Dictionary<SubGoal, int>();
+        public GInventory inventory = new GInventory();
 
         GPlanner planner;
         Queue<GAction> actionQueue;
