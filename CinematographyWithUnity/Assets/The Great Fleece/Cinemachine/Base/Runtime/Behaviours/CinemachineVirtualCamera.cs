@@ -85,7 +85,7 @@ namespace Cinemachine
         /// provides access to this pipleline, as do the CinemachineComponent-family of
         /// public methods in this class.
         /// The lifecycle of the pipeline GameObject is managed automatically.</summary>
-        public const string PipelineName = "cm";
+        public const string PipelineName = "CMVirtualCameras";
 
         /// <summary>The CameraState object holds all of the information
         /// necessary to position the Unity camera.  It is the output of this class.</summary>
@@ -161,14 +161,14 @@ namespace Cinemachine
         /// child object, to support undo.</summary>
         protected override void OnDestroy()
         {
-            if (m_ComponentOwner != null)
-            {
-                if (DestroyPipelineOverride != null)
-                    DestroyPipelineOverride(m_ComponentOwner.gameObject);
-                else
-                    DestroyImmediate(m_ComponentOwner.gameObject);
-                m_ComponentOwner = null;
-            }
+            // if (m_ComponentOwner != null)
+            // {
+            //     if (DestroyPipelineOverride != null)
+            //         DestroyPipelineOverride(m_ComponentOwner.gameObject);
+            //     else
+            //         DestroyImmediate(m_ComponentOwner.gameObject);
+            //     m_ComponentOwner = null;
+            // }
             base.OnDestroy();
         }
 
