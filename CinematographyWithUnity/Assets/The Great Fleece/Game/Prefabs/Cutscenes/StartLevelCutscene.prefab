@@ -233,7 +233,7 @@ GameObject:
   - component: {fileID: 4931160109606720}
   - component: {fileID: 95084700621804480}
   m_Layer: 0
-  m_Name: Start_Level_Cutscene
+  m_Name: StartLevelCutscene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

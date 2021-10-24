@@ -1106,7 +1106,7 @@ GameObject:
   - component: {fileID: 4493662556010484}
   - component: {fileID: 95629642685438564}
   m_Layer: 0
-  m_Name: Win_Level_Cutscene
+  m_Name: WinLevelCutscene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0

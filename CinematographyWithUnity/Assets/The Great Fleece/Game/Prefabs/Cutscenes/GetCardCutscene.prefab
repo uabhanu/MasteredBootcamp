@@ -841,7 +841,7 @@ GameObject:
   - component: {fileID: 4328310163252698}
   - component: {fileID: 95483830545951576}
   m_Layer: 0
-  m_Name: Get_Card_Cutscene
+  m_Name: GetCardCutscene
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
