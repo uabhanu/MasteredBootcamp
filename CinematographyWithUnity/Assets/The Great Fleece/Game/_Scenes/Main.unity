@@ -1285,6 +1285,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 101900382}
+  - component: {fileID: 101900384}
   - component: {fileID: 101900383}
   m_Layer: 0
   m_Name: CMFullShot
@@ -1301,7 +1302,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 101900381}
   m_LocalRotation: {x: -0.107836545, y: 0.3568472, z: -0.0415113, w: -0.9269888}
-  m_LocalPosition: {x: -7.5793047, y: 5.10454, z: -22.177025}
+  m_LocalPosition: {x: -10.018815, y: 5.864539, z: -26.447937}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 789927817}
@@ -1334,6 +1335,25 @@ MonoBehaviour:
     FarClipPlane: 5000
     Dutch: 0
   m_ComponentOwner: {fileID: 789927817}
+--- !u!95 &101900384
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 101900381}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &104077983
 GameObject:
   m_ObjectHideFlags: 0
@@ -30618,12 +30638,12 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1667906166}
-  m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -2.66, y: 2.99, z: -24.529999}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: -6.25, y: 3.75, z: -21.1}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
-  m_Father: {fileID: 1770398372}
-  m_RootOrder: 3
+  m_Father: {fileID: 4874210868047041108}
+  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &1667906168
 MonoBehaviour:
@@ -30645,10 +30665,10 @@ MonoBehaviour:
     steps: 20
   m_Looped: 0
   m_Waypoints:
-  - position: {x: -4.919305, y: 2.1145396, z: 2.352974}
-    tangent: {x: -0.15207195, y: 0, z: -1.8271561}
+  - position: {x: -3.768591, y: 2.1145396, z: -5.3517227}
+    tangent: {x: -0.15207195, y: 0, z: 2.4934464}
     roll: 0
-  - position: {x: 4.5884314, y: 3.2346287, z: -0.6140747}
+  - position: {x: 8.056064, y: 3.2346282, z: -6.8573303}
     tangent: {x: 2.6786652, y: 2.4385052, z: 4.9574738}
     roll: 0
 --- !u!1 &1675700363
@@ -32145,7 +32165,6 @@ Transform:
   - {fileID: 101900382}
   - {fileID: 1602495256}
   - {fileID: 1774736318}
-  - {fileID: 1667906167}
   m_Father: {fileID: 4874210868047041108}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -32241,7 +32260,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1774736317}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -7.5793047, y: 5.10454, z: -22.177025}
+  m_LocalPosition: {x: -10.018591, y: 5.8645396, z: -26.451721}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 464783126}
@@ -41353,7 +41372,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043896029}
   m_LocalRotation: {x: -0.107836545, y: 0.3568472, z: -0.0415113, w: -0.9269888}
-  m_LocalPosition: {x: -2.3293047, y: 3.1445398, z: -84.77702}
+  m_LocalPosition: {x: -4.768591, y: 3.9045396, z: -89.05172}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -54012,6 +54031,7 @@ Transform:
   m_Children:
   - {fileID: 4880280562089642080}
   - {fileID: 1770398372}
+  - {fileID: 1667906167}
   m_Father: {fileID: 861166600}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -62601,8 +62621,14 @@ PlayableDirector:
   m_SceneBindings:
   - key: {fileID: -2218171200729351904, guid: 18f1eceba4fb39a46a15b67dd8985888, type: 2}
     value: {fileID: 4821040710828933640}
+  - key: {fileID: 8784704217000832407, guid: 18f1eceba4fb39a46a15b67dd8985888, type: 2}
+    value: {fileID: 2043896032}
+  - key: {fileID: 285173332091238934, guid: 18f1eceba4fb39a46a15b67dd8985888, type: 2}
+    value: {fileID: 101900384}
   m_ExposedReferences:
     m_References:
+    - a39e13812ea053a488f47cd07dfbc8e2: {fileID: 101900383}
+    - f7af32a2eddc0fb4db9cfce3fb782ade: {fileID: 1774736319}
     - 88564e8b69540024f99bd8b6a576eca6: {fileID: 101900383}
 --- !u!1 &4877842924913054258
 GameObject:
