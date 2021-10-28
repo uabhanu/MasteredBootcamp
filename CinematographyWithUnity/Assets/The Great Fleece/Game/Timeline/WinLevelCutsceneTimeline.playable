@@ -524,7 +524,7 @@ MonoBehaviour:
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
+  m_Parent: {fileID: 5369068817399863612}
   m_Children: []
   m_Clips: []
   m_Markers:
@@ -565,7 +565,7 @@ MonoBehaviour:
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
+  m_Parent: {fileID: 5369068817399863612}
   m_Children: []
   m_Clips: []
   m_Markers:
@@ -606,7 +606,7 @@ MonoBehaviour:
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
+  m_Parent: {fileID: 5369068817399863612}
   m_Children: []
   m_Clips: []
   m_Markers:
@@ -643,15 +643,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   m_Version: 0
   m_Tracks:
-  - {fileID: 8850195894260883879}
   - {fileID: -7077761581597232550}
-  - {fileID: 6437566073054298162}
-  - {fileID: -2672360928155124193}
-  - {fileID: 1103019448014212100}
-  - {fileID: 4463315365140821272}
-  - {fileID: -706970620785125870}
-  - {fileID: 4958156327118890878}
-  - {fileID: -131922619185681348}
+  - {fileID: 5369068817399863612}
   m_FixedDuration: 0
   m_EditorSettings:
     m_Framerate: 60
@@ -790,7 +783,7 @@ MonoBehaviour:
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
+  m_Parent: {fileID: 5369068817399863612}
   m_Children: []
   m_Clips: []
   m_Markers:
@@ -1188,7 +1181,7 @@ MonoBehaviour:
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
+  m_Parent: {fileID: 5369068817399863612}
   m_Children: []
   m_Clips: []
   m_Markers:
@@ -1251,7 +1244,7 @@ MonoBehaviour:
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
+  m_Parent: {fileID: 5369068817399863612}
   m_Children: []
   m_Clips: []
   m_Markers:
@@ -1274,6 +1267,37 @@ MonoBehaviour:
   m_OpenClipOffsetRotation: {x: 0, y: 0, z: 0, w: 1}
   m_Rotation: {x: 0, y: 0, z: 0, w: 1}
   m_ApplyOffsets: 0
+--- !u!114 &5369068817399863612
+MonoBehaviour:
+  m_ObjectHideFlags: 1
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0fc6f5187a81dc47999eefade6f0935, type: 3}
+  m_Name: AnimationTracks
+  m_EditorClassIdentifier: 
+  m_Version: 3
+  m_AnimClip: {fileID: 0}
+  m_Locked: 0
+  m_Muted: 0
+  m_CustomPlayableFullTypename: 
+  m_Curves: {fileID: 0}
+  m_Parent: {fileID: 11400000}
+  m_Children:
+  - {fileID: 8850195894260883879}
+  - {fileID: 6437566073054298162}
+  - {fileID: -2672360928155124193}
+  - {fileID: 1103019448014212100}
+  - {fileID: 4463315365140821272}
+  - {fileID: -706970620785125870}
+  - {fileID: 4958156327118890878}
+  - {fileID: -131922619185681348}
+  m_Clips: []
+  m_Markers:
+    m_Objects: []
 --- !u!74 &5537906280510943689
 AnimationClip:
   m_ObjectHideFlags: 0
@@ -1406,7 +1430,7 @@ MonoBehaviour:
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
+  m_Parent: {fileID: 5369068817399863612}
   m_Children: []
   m_Clips: []
   m_Markers:
@@ -1447,7 +1471,7 @@ MonoBehaviour:
   m_Muted: 0
   m_CustomPlayableFullTypename: 
   m_Curves: {fileID: 0}
-  m_Parent: {fileID: 11400000}
+  m_Parent: {fileID: 5369068817399863612}
   m_Children: []
   m_Clips:
   - m_Version: 1
