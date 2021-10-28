@@ -13725,6 +13725,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 514486931}
+  - component: {fileID: 514486933}
   - component: {fileID: 514486932}
   m_Layer: 0
   m_Name: CMKeycardShot
@@ -13740,8 +13741,8 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 514486930}
-  m_LocalRotation: {x: -0.077558234, y: -0.8738, z: 0.14847969, w: -0.4565218}
-  m_LocalPosition: {x: -1.2196263, y: 1.6293023, z: -103.38168}
+  m_LocalRotation: {x: -0.19649038, y: -0.7989259, z: 0.35134643, w: -0.44683865}
+  m_LocalPosition: {x: -6.75, y: 10.915145, z: -100.84}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 284988364}
@@ -13774,6 +13775,25 @@ MonoBehaviour:
     FarClipPlane: 5000
     Dutch: 0
   m_ComponentOwner: {fileID: 284988364}
+--- !u!95 &514486933
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 514486930}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1001 &516796220
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -14382,6 +14402,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 536779700}
+  - component: {fileID: 536779702}
   - component: {fileID: 536779701}
   m_Layer: 0
   m_Name: CMSleepingGuardShot
@@ -14397,14 +14418,14 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 536779699}
-  m_LocalRotation: {x: 0.0075931395, y: -0.99241704, z: 0.08536707, w: 0.088109165}
-  m_LocalPosition: {x: 2.5452414, y: 4.9947724, z: -60.205906}
+  m_LocalRotation: {x: 0.00048626665, y: 0.9978706, z: -0.06479172, w: 0.007489093}
+  m_LocalPosition: {x: -0.58000004, y: 3.66, z: -71.15001}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1006477080}
   m_Father: {fileID: 1410573983}
   m_RootOrder: 10
-  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+  m_LocalEulerAnglesHint: {x: 7.43, y: 179.14, z: 0}
 --- !u!114 &536779701
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -14431,6 +14452,25 @@ MonoBehaviour:
     FarClipPlane: 5000
     Dutch: 0
   m_ComponentOwner: {fileID: 1006477080}
+--- !u!95 &536779702
+Animator:
+  serializedVersion: 3
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 536779699}
+  m_Enabled: 1
+  m_Avatar: {fileID: 0}
+  m_Controller: {fileID: 0}
+  m_CullingMode: 0
+  m_UpdateMode: 0
+  m_ApplyRootMotion: 0
+  m_LinearVelocityBlending: 0
+  m_WarningMessage: 
+  m_HasTransformHierarchy: 1
+  m_AllowConstantClipSamplingOptimization: 1
+  m_KeepAnimatorControllerStateOnDisable: 0
 --- !u!1 &540719831
 GameObject:
   m_ObjectHideFlags: 0
@@ -39207,6 +39247,10 @@ PlayableDirector:
     value: {fileID: 114551830}
   - key: {fileID: -4068881934788223551, guid: 9079c9854a96cf14aacccd3ce6867780, type: 2}
     value: {fileID: 699328851}
+  - key: {fileID: 1690261478088154400, guid: 9079c9854a96cf14aacccd3ce6867780, type: 2}
+    value: {fileID: 536779702}
+  - key: {fileID: 8096669315299214021, guid: 9079c9854a96cf14aacccd3ce6867780, type: 2}
+    value: {fileID: 514486933}
   m_ExposedReferences:
     m_References:
     - 0a4512bfb89e25c4db5964b9b34c72c9: {fileID: 514486932}
@@ -46076,7 +46120,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2043896029}
-  m_LocalRotation: {x: -0.039761513, y: -0.6621738, z: 0.23037687, w: 0.7146734}
+  m_LocalRotation: {x: -0.055886004, y: -0.9307053, z: 0.32380164, w: -0.1606763}
   m_LocalPosition: {x: -7.453, y: 13.304492, z: 36.45719}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
