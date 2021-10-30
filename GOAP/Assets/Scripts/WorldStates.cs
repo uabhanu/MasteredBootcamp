@@ -4,8 +4,8 @@ using UnityEngine;
 [System.Serializable]
 public class WorldState
 {
-    [SerializeField] private string key;
-    [SerializeField] private int value;
+    public string key;
+    public int value;
 }
 
 public class WorldStates
