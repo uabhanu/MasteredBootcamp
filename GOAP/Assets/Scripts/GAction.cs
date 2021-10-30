@@ -1,4 +1,3 @@
-using System;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.AI;
@@ -7,15 +6,16 @@ using UnityEngine.AI;
 public abstract class GAction : MonoBehaviour
 {
     [SerializeField] private bool running = false;
-    [SerializeField] private float cost = 1.0f;
     [SerializeField] private float duration = 0.0f;
     [SerializeField] private GameObject targetObj;
     [SerializeField] private GameObject targetTagObj;
     [SerializeField] private NavMeshAgent navMeshAgent;
-    [SerializeField] private string actionName = "Action";
     [SerializeField] private WorldState[] worldStatePreConditions;
     [SerializeField] private WorldState[] worldStateAfterEffects;
 
+    public float Cost = 1.0f;
+    public string actionName;
+    
     //For some reason, these can't be declared as [SerializeField] private
     public Dictionary<string , int> Preconditions;
     public Dictionary<string , int> AfterEffects;

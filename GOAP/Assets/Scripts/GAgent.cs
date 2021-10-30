@@ -1,6 +1,4 @@
-using System;
 using System.Collections.Generic;
-using System.Linq; //So we can access sorting functions
 using UnityEngine;
 
 public class SubGoal

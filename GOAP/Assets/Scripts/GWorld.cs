@@ -16,7 +16,7 @@ public sealed class GWorld
         get { return Instance; }
     }
 
-    public WorldStates GetWorldStates()
+    public WorldStates GetWorld()
     {
         return _worldStates;
     }
