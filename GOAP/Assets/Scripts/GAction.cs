@@ -5,16 +5,17 @@ using UnityEngine.AI;
 // As Penny instructed, this is declared as an abstract class so this can be inherited later
 public abstract class GAction : MonoBehaviour
 {
-    [SerializeField] private bool running = false;
-    [SerializeField] private float duration = 0.0f;
-    [SerializeField] private GameObject targetObj;
-    [SerializeField] private GameObject targetTagObj;
-    [SerializeField] private NavMeshAgent navMeshAgent;
     [SerializeField] private WorldState[] worldStatePreConditions;
     [SerializeField] private WorldState[] worldStateAfterEffects;
 
+    public bool Running = false;
     public float Cost = 1.0f;
-    public string actionName;
+    public float Duration = 0.0f;
+    public GameObject TargetObj;
+    //public GameObject targetTagObj; //Not sure why Penny declared this as GameObject so declared this as string below instead
+    public NavMeshAgent NavMeshAgent;
+    public string ActionName;
+    public string TargetObjTag;
     
     //For some reason, these can't be declared as [SerializeField] private
     public Dictionary<string , int> Preconditions;
@@ -29,8 +30,7 @@ public abstract class GAction : MonoBehaviour
 
     public void Awake()
     {
-        
-        navMeshAgent = GetComponent<NavMeshAgent>(); //This may not be necessary as you have SerializedFiled but leave it for now
+        NavMeshAgent = GetComponent<NavMeshAgent>();
 
         if(worldStatePreConditions != null)
         {

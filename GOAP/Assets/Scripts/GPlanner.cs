@@ -149,7 +149,7 @@ public class GPlanner
 
         foreach(GAction ga in queue)
         {
-            Debug.Log("Q : " + ga.actionName);
+            Debug.Log("Q : " + ga.ActionName);
         }
 
         return queue;

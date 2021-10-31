@@ -2659,6 +2659,8 @@ GameObject:
   m_Component:
   - component: {fileID: 7880970886039044016}
   - component: {fileID: 1087931300131985008}
+  - component: {fileID: 3930715229771019557}
+  - component: {fileID: -7455786593584501547}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -2703,6 +2705,43 @@ NavMeshAgent:
   m_BaseOffset: 1
   m_WalkableMask: 4294967295
   m_ObstacleAvoidanceType: 4
+--- !u!114 &3930715229771019557
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881807149238628900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: e452e3c78ffb4294092352a19eb1c49d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldStatePreConditions: []
+  worldStateAfterEffects:
+  - key: IsWaiting
+    value: 0
+  Running: 0
+  Cost: 1
+  Duration: 0
+  TargetObj: {fileID: 0}
+  NavMeshAgent: {fileID: 0}
+  ActionName: 
+  TargetObjTag: 
+--- !u!114 &-7455786593584501547
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881807149238628900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0cd2ff6f6d4de234d9e913add6be56e9, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentAction: {fileID: 3930715229771019557}
+  actionsList: []
 --- !u!1 &7927236269272520591
 GameObject:
   m_ObjectHideFlags: 0
