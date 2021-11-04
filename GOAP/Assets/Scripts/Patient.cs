@@ -1,3 +1,5 @@
+using GOAP;
+
 public class Patient : GAgent
 {
     private void Start()

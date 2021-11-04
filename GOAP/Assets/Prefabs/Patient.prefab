@@ -2660,7 +2660,9 @@ GameObject:
   - component: {fileID: 7880970886039044016}
   - component: {fileID: 1087931300131985008}
   - component: {fileID: 3930715229771019557}
+  - component: {fileID: -6459174336997159857}
   - component: {fileID: -7455786593584501547}
+  - component: {fileID: 8672159943203440522}
   m_Layer: 0
   m_Name: Patient
   m_TagString: Untagged
@@ -2719,6 +2721,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   worldStatePreConditions: []
   worldStateAfterEffects:
+  - key: HasArrived
+    value: 0
+  Running: 0
+  Cost: 1
+  Duration: 2
+  TargetObj: {fileID: 0}
+  NavMeshAgent: {fileID: 0}
+  ActionName: Go To Hospital
+  TargetObjTag: Door
+--- !u!114 &-6459174336997159857
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881807149238628900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6065cbf0814e84fe096ae7aa08d0acc4, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldStatePreConditions:
+  - key: HasRegistered
+    value: 0
+  worldStateAfterEffects:
   - key: IsWaiting
     value: 0
   Running: 0
@@ -2726,8 +2753,8 @@ MonoBehaviour:
   Duration: 0
   TargetObj: {fileID: 0}
   NavMeshAgent: {fileID: 0}
-  ActionName: 
-  TargetObjTag: 
+  ActionName: Go To Waiting Room
+  TargetObjTag: WaitingArea
 --- !u!114 &-7455786593584501547
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2742,6 +2769,31 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   currentAction: {fileID: 3930715229771019557}
   actionsList: []
+--- !u!114 &8672159943203440522
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 7881807149238628900}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78dc2b1fdb0012049817c60a628af031, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  worldStatePreConditions:
+  - key: HasArrived
+    value: 0
+  worldStateAfterEffects:
+  - key: HasRegistered
+    value: 0
+  Running: 0
+  Cost: 1
+  Duration: 2
+  TargetObj: {fileID: 0}
+  NavMeshAgent: {fileID: 0}
+  ActionName: Register
+  TargetObjTag: Reception
 --- !u!1 &7927236269272520591
 GameObject:
   m_ObjectHideFlags: 0
