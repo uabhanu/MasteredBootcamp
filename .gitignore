@@ -142,3 +142,10 @@ MLAPIAndNetworking_GoldenPath/Library/
 MLAPIAndNetworking_GoldenPath/Logs/
 MLAPIAndNetworking_GoldenPath/Temp/
 MLAPIAndNetworking_GoldenPath/Build/
+MLAPIAndNetworking_GoldenPath_ModuleOne/.idea/
+MLAPIAndNetworking_GoldenPath_ModuleOne/HelloWorldClient/
+MLAPIAndNetworking_GoldenPath_ModuleOne/HelloWorldServer/
+MLAPIAndNetworking_GoldenPath_ModuleOne/Library/
+MLAPIAndNetworking_GoldenPath_ModuleOne/Logs/
+MLAPIAndNetworking_GoldenPath_ModuleOne/obj/
+MLAPIAndNetworking_GoldenPath_ModuleOne/Temp/
