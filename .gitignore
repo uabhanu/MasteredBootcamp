@@ -137,3 +137,8 @@ MLAPIAndNetworking/Library/
 MLAPIAndNetworking/Logs/
 MLAPIAndNetworking/Temp/
 MLAPIAndNetworking/.idea/
+MLAPIAndNetworking_GoldenPath/.idea/
+MLAPIAndNetworking_GoldenPath/Library/
+MLAPIAndNetworking_GoldenPath/Logs/
+MLAPIAndNetworking_GoldenPath/Temp/
+MLAPIAndNetworking_GoldenPath/Build/
