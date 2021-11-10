@@ -3,15 +3,15 @@ using UnityEngine;
 
 public class NetworkVariableTest : NetworkBehaviour
 {
-    private NetworkVariable<float> ServerNetworkVariable = new NetworkVariable<float>();
     private float last_t = 0.0f;
+    private NetworkVariable<float> _serverNetworkVariable = new NetworkVariable<float>();
 
     public override void OnNetworkSpawn()
     {
         if(IsServer)
         {
-            ServerNetworkVariable.Value = 0.0f;
-            Debug.Log("Server's var initialized to: " + ServerNetworkVariable.Value);
+            _serverNetworkVariable.Value = 0.0f;
+            //Debug.Log("Server's var initialized to: " + ServerNetworkVariable.Value);
         }
     }
 
@@ -21,12 +21,12 @@ public class NetworkVariableTest : NetworkBehaviour
         
         if(IsServer)
         {
-            ServerNetworkVariable.Value = ServerNetworkVariable.Value + 0.1f;
+            _serverNetworkVariable.Value = _serverNetworkVariable.Value + 0.1f;
             
             if(t_now - last_t > 0.5f)
             {
                 last_t = t_now;
-                Debug.Log("Server set its var to: " + ServerNetworkVariable.Value);
+                //Debug.Log("Server set its var to: " + ServerNetworkVariable.Value);
             }
         }
     }

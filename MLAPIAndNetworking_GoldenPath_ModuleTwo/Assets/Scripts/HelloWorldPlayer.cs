@@ -1,12 +1,36 @@
+using ScriptableObjects;
 using Unity.Netcode;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 public class HelloWorldPlayer : NetworkBehaviour
 {
+    private Material _materialToUse;
+    
+    [SerializeField] private PlayerData playerData;
+    
     public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
-
+    
     public override void OnNetworkSpawn()
     {
+        if(IsClient)
+        {
+            _materialToUse = playerData.ClientPlayerMaterial;
+            gameObject.GetComponent<MeshRenderer>().material = _materialToUse;
+        }
+        
+        if(IsHost)
+        {
+            _materialToUse = playerData.HostPlayerMaterial;
+            gameObject.GetComponent<MeshRenderer>().material = _materialToUse;
+        }
+        
+        if(IsServer)
+        {
+            _materialToUse = playerData.HostPlayerMaterial;
+            gameObject.GetComponent<MeshRenderer>().material = _materialToUse;
+        }
+        
         if(IsOwner)
         {
             Move();
