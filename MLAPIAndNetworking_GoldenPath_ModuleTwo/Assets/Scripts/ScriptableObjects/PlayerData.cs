@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace ScriptableObjects
@@ -7,7 +8,7 @@ namespace ScriptableObjects
     {
         [SerializeField] private Material clientPlayerMaterial;
         [SerializeField] private Material hostPlayerMaterial;
-
+        
         public Material ClientPlayerMaterial
         {
             get => clientPlayerMaterial;
