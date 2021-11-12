@@ -69,6 +69,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d661bd8fb77bd224f800ff7f95b37e64, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  playerData: {fileID: 11400000, guid: e90b956ddde1cb74c9c7f8f1089e504d, type: 2}
   Position:
     m_InternalValue: {x: 0, y: 0, z: 0}
 --- !u!23 &2702662920442690214
