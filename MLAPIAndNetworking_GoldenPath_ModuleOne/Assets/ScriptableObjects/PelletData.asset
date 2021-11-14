@@ -1,0 +1,17 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a78160a88c057dc4ba0415c3e7458af3, type: 3}
+  m_Name: PelletData
+  m_EditorClassIdentifier: 
+  moveSpeed: 25
+  prefab: {fileID: 3565183416343315821, guid: 84651663ca7da5340af9b2dcdbcaf57d, type: 3}
+  maxPelletsAtASpawn: 0

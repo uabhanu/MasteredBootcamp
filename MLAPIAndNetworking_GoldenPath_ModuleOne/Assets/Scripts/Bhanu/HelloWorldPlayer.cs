@@ -1,6 +1,8 @@
 using Bhanu.ScriptableObjects;
+using Unity.Mathematics;
 using Unity.Netcode;
 using UnityEngine;
+using Random = UnityEngine.Random;
 
 namespace Bhanu
 {
@@ -9,6 +11,9 @@ namespace Bhanu
         private Material materialToUse;
         
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private PelletData pelletData;
+        
+        public static int numberOfPellets = 0;
         
         public NetworkVariable<Vector3> Position = new NetworkVariable<Vector3>();
 
@@ -38,10 +43,23 @@ namespace Bhanu
                 Vector3 randomPosition = GetRandomPositionOnPlane();
                 transform.position = randomPosition;
                 Position.Value = randomPosition;
+                transform.position = Position.Value;
             }
             else
             {
                 SubmitPositionRequestServerRpc();
+            }
+        }
+
+        public void Shoot()
+        {
+            if(Input.GetKeyDown(KeyCode.Space))
+            {
+                if(numberOfPellets < pelletData.MAXPelletsAllowed)
+                {
+                    Instantiate(pelletData.Prefab , transform.position , quaternion.identity);
+                    numberOfPellets++;
+                }
             }
         }
 
@@ -58,7 +76,7 @@ namespace Bhanu
 
         private void Update()
         {
-            transform.position = Position.Value;
+            Shoot();
         }
     }
 }

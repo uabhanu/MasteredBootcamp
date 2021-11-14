@@ -50,16 +50,32 @@ namespace Bhanu
         
         public void MoveButton()
         {
-            NetworkObject playerObject = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
-            HelloWorldPlayer player = playerObject.GetComponent<HelloWorldPlayer>();
-            player.Move();
+            if(GameManager.PlayerExists())
+            {
+                BhanuLogMessages.PlayerExistsMessage();
+                NetworkObject playerObject = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
+                HelloWorldPlayer player = playerObject.GetComponent<HelloWorldPlayer>();
+                player.Move();   
+            }
+            else
+            {
+                BhanuLogMessages.NoPlayerExistsMessage();
+            }
         }
         
         public void RequestChangePositionButton()
         {
-            NetworkObject playerObject = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
-            HelloWorldPlayer player = playerObject.GetComponent<HelloWorldPlayer>();
-            player.Move();
+            if(GameManager.PlayerExists())
+            {
+                BhanuLogMessages.PlayerExistsMessage();
+                NetworkObject playerObject = NetworkManager.Singleton.SpawnManager.GetLocalPlayerObject();
+                HelloWorldPlayer player = playerObject.GetComponent<HelloWorldPlayer>();
+                player.Move();   
+            }
+            else
+            {
+                BhanuLogMessages.NoPlayerToRequestChangePositionMessage();        
+            }
         }
 
         public void ServerButton()

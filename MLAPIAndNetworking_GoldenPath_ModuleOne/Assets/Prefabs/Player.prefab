@@ -16,7 +16,7 @@ GameObject:
   - component: {fileID: 2702662920442690213}
   m_Layer: 0
   m_Name: Player
-  m_TagString: Untagged
+  m_TagString: Player
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -70,6 +70,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playerData: {fileID: 11400000, guid: e90b956ddde1cb74c9c7f8f1089e504d, type: 2}
+  pelletData: {fileID: 11400000, guid: 3445d702a9367a8458031d635114a92e, type: 2}
   Position:
     m_InternalValue: {x: 0, y: 0, z: 0}
 --- !u!23 &2702662920442690214
