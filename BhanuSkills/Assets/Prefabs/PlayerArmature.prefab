@@ -1214,7 +1214,17 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   cmAimCamera: {fileID: 0}
+  aimSensitivity: 0.2
+  cameraAngleOverride: 0
+  clampBottom: -30
+  clampTop: 70
+  normalSensitivity: 0.5
+  cinemachineCameraTarget: {fileID: 8338988566280778634}
+  aimLayerMask:
+    serializedVersion: 2
+    m_Bits: 1
   playerData: {fileID: 11400000, guid: 4cfd1711370d0fd46b8da02209e1edd6, type: 2}
+  debugTransform: {fileID: 0}
 --- !u!1 &4523139366846529165
 GameObject:
   m_ObjectHideFlags: 0
