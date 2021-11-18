@@ -1213,6 +1213,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6016e422a2ce40f4298636ff352a3d06, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  animator: {fileID: 6982812146204527121}
   cmAimCamera: {fileID: 0}
   aimSensitivity: 0.2
   cameraAngleOverride: 0
@@ -1220,6 +1221,7 @@ MonoBehaviour:
   clampTop: 70
   normalSensitivity: 0.5
   cinemachineCameraTarget: {fileID: 8338988566280778634}
+  mainCamera: {fileID: 0}
   aimLayerMask:
     serializedVersion: 2
     m_Bits: 1
