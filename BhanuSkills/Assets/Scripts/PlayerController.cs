@@ -20,12 +20,14 @@ public class PlayerController : MonoBehaviour
     private StarterAssetsInputs _starterAssetsInputs;
 
     [SerializeField] private Animator animator;
+    [SerializeField] private BulletData bulletData;
     [SerializeField] private CinemachineVirtualCamera cmAimCamera;
     [SerializeField] private float aimSensitivity;
     [SerializeField] private float cameraAngleOverride = 0.0f;
     [SerializeField] private float clampBottom = -30f;
     [SerializeField] private float clampTop = 70f;
     [SerializeField] private float normalSensitivity;
+    [SerializeField] private GameObject bulletSpawnObj;
     [SerializeField] private GameObject cinemachineCameraTarget;
     [SerializeField] private GameObject mainCamera;
     [SerializeField] private LayerMask aimLayerMask;
@@ -72,6 +74,14 @@ public class PlayerController : MonoBehaviour
             cmAimCamera.gameObject.SetActive(false);
             SetRotateOnMove(true);
             SetSensitivity(normalSensitivity);
+        }
+
+        if(_starterAssetsInputs.shoot)
+        {
+	        Vector3 bulletSpawnPosition = bulletSpawnObj.transform.position;
+	        Vector3 bulletRotation = (mouseWorldPosition - bulletSpawnPosition).normalized;
+	        Instantiate(bulletData.Prefab , bulletSpawnPosition , Quaternion.LookRotation(bulletRotation , Vector3.up));
+	        _starterAssetsInputs.shoot = false;
         }
     }
     

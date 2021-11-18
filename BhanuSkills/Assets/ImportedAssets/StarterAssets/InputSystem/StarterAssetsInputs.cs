@@ -13,6 +13,7 @@ namespace StarterAssets
 		public Vector2 look;
 		public bool aim;
 		public bool jump;
+		public bool shoot;
 		public bool sprint;
 
 		[Header("Movement Settings")]
@@ -30,11 +31,11 @@ namespace StarterAssets
 			AimInput(value.isPressed);
 		}
 		
-		public void OnMove(InputValue value)
+		public void OnJump(InputValue value)
 		{
-			MoveInput(value.Get<Vector2>());
+			JumpInput(value.isPressed);
 		}
-
+		
 		public void OnLook(InputValue value)
 		{
 			if(cursorInputForLook)
@@ -42,10 +43,15 @@ namespace StarterAssets
 				LookInput(value.Get<Vector2>());
 			}
 		}
-
-		public void OnJump(InputValue value)
+		
+		public void OnMove(InputValue value)
 		{
-			JumpInput(value.isPressed);
+			MoveInput(value.Get<Vector2>());
+		}
+
+		public void OnShoot(InputValue value)
+		{
+			ShootInput(value.isPressed);
 		}
 
 		public void OnSprint(InputValue value)
@@ -61,21 +67,26 @@ namespace StarterAssets
 			aim = newAimState;
 		}
 		
-		public void MoveInput(Vector2 newMoveDirection)
-		{
-			move = newMoveDirection;
-		} 
-
-		public void LookInput(Vector2 newLookDirection)
-		{
-			look = newLookDirection;
-		}
-
 		public void JumpInput(bool newJumpState)
 		{
 			jump = newJumpState;
 		}
+		
+		public void LookInput(Vector2 newLookDirection)
+		{
+			look = newLookDirection;
+		}
+		
+		public void MoveInput(Vector2 newMoveDirection)
+		{
+			move = newMoveDirection;
+		}
 
+		public void ShootInput(bool newShootState)
+		{
+			shoot = newShootState;
+		}
+		
 		public void SprintInput(bool newSprintState)
 		{
 			sprint = newSprintState;
