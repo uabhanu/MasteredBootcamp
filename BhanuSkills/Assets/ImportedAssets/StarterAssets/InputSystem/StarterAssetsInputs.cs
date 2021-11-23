@@ -1,5 +1,6 @@
 using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
+using Bhanu;
 using UnityEngine.InputSystem;
 #endif
 
@@ -10,6 +11,7 @@ namespace StarterAssets
 		[Header("Character Input Values")]
 		public Vector2 move;
 		public Vector2 look;
+		public bool doorOpen;
 		public bool jump;
 		public bool sprint;
 
@@ -23,6 +25,11 @@ namespace StarterAssets
 #endif
 
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
+		public void OnDoorAction(InputValue value)
+		{
+			DoorInput(value.isPressed);
+		}
+		
 		public void OnMove(InputValue value)
 		{
 			MoveInput(value.Get<Vector2>());
@@ -50,6 +57,11 @@ namespace StarterAssets
 #endif
 
 
+		public void DoorInput(bool newDoorState)
+		{
+			doorOpen = newDoorState;
+		}
+		
 		public void MoveInput(Vector2 newMoveDirection)
 		{
 			move = newMoveDirection;

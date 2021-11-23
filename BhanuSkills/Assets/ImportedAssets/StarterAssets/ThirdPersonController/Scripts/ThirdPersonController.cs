@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using Bhanu;
+using UnityEngine;
 #if ENABLE_INPUT_SYSTEM && STARTER_ASSETS_PACKAGES_CHECKED
 using UnityEngine.InputSystem;
 #endif
@@ -100,7 +101,7 @@ namespace StarterAssets
 			}
 		}
 
-		private void Start()
+		public void Start()
 		{
 			_hasAnimator = TryGetComponent(out _animator);
 			_controller = GetComponent<CharacterController>();
@@ -113,7 +114,7 @@ namespace StarterAssets
 			_fallTimeoutDelta = FallTimeout;
 		}
 
-		private void Update()
+		public void Update()
 		{
 			_hasAnimator = TryGetComponent(out _animator);
 			
@@ -245,6 +246,11 @@ namespace StarterAssets
 				if (_verticalVelocity < 0.0f)
 				{
 					_verticalVelocity = -2f;
+				}
+
+				if(_input.doorOpen)
+				{
+					LogMessages.AllIsWellMessage("'E' Button Pressed");
 				}
 
 				// Jump
