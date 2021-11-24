@@ -1,0 +1,12 @@
+fileFormatVersion: 2
+guid: 0608b238bb7bbb04ba1fd1961b4d63fa
+MonoImporter:
+  externalObjects: {}
+  serializedVersion: 2
+  defaultReferences:
+  - dangerClip: {fileID: 8300000, guid: 5aeed155a95728741ae0868f69dacd7d, type: 3}
+  executionOrder: 0
+  icon: {instanceID: 0}
+  userData: 
+  assetBundleName: 
+  assetBundleVariant: 

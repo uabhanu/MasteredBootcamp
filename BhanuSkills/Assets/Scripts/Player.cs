@@ -47,10 +47,20 @@ public class Player : ThirdPersonController //Inheritance
         {
             EventsManager.InvokeEvent(BhanuSkillsEvent.HealthGainEvent);
         }
-        
+
+        if(other.tag.Equals("Info"))
+        {
+            EventsManager.InvokeEvent(BhanuSkillsEvent.InfoEvent);
+        }
+
         if(other.tag.Equals("Key"))
         {
             EventsManager.InvokeEvent(BhanuSkillsEvent.KeyCollectedEvent);
+        }
+        
+        if(other.tag.Equals("Trophy"))
+        {
+            EventsManager.InvokeEvent(BhanuSkillsEvent.ReachedTheRoofEvent);
         }
     }
 

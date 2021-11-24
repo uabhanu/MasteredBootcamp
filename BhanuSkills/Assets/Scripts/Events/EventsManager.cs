@@ -12,7 +12,9 @@ namespace Events
         private static event Action HealthAlmostEmptyAction;
         private static event Action HealthGainAction;
         private static event Action HealthLossAction;
+        private static event Action InfoAction;
         private static event Action KeyCollectedAction;
+        private static event Action ReachedTheRoofAction;
 
         public static void InvokeEvent(BhanuSkillsEvent eventToInvoke)
         {
@@ -50,8 +52,16 @@ namespace Events
                     HealthGainAction?.Invoke(); 
                 return;
                 
+                case BhanuSkillsEvent.InfoEvent:
+                    InfoAction?.Invoke(); 
+                return;
+                
                 case BhanuSkillsEvent.KeyCollectedEvent:
                     KeyCollectedAction?.Invoke(); 
+                return;
+                
+                case BhanuSkillsEvent.ReachedTheRoofEvent:
+                    ReachedTheRoofAction?.Invoke(); 
                 return;
             }
         }
@@ -92,8 +102,16 @@ namespace Events
                     HealthGainAction += actionFunction;
                 return;
                 
+                case BhanuSkillsEvent.InfoEvent:
+                    InfoAction += actionFunction;
+                return;
+                
                 case BhanuSkillsEvent.KeyCollectedEvent:
                     KeyCollectedAction += actionFunction;
+                return;
+                
+                case BhanuSkillsEvent.ReachedTheRoofEvent:
+                    ReachedTheRoofAction += actionFunction;
                 return;
             }
         }
@@ -134,8 +152,16 @@ namespace Events
                     HealthLossAction -= actionFunction;
                 return;
                 
+                case BhanuSkillsEvent.InfoEvent:
+                    InfoAction -= actionFunction;
+                return;
+                
                 case BhanuSkillsEvent.KeyCollectedEvent:
                     KeyCollectedAction -= actionFunction;
+                return;
+                
+                case BhanuSkillsEvent.ReachedTheRoofEvent:
+                    ReachedTheRoofAction -= actionFunction;
                 return;
             }
         }

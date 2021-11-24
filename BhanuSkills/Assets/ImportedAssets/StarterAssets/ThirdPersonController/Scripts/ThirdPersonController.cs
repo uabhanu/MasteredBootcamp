@@ -116,6 +116,11 @@ namespace StarterAssets
 
 		public void Update()
 		{
+			if(Time.timeScale == 0)
+			{
+				return;
+			}
+			
 			_hasAnimator = TryGetComponent(out _animator);
 			
 			JumpAndGravity();

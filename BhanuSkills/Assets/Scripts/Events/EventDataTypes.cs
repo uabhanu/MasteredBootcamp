@@ -10,6 +10,8 @@
         HealthAlmostEmptyEvent,
         HealthGainEvent,
         HealthLossEvent,
-        KeyCollectedEvent
+        InfoEvent,
+        KeyCollectedEvent,
+        ReachedTheRoofEvent
     }
 }
