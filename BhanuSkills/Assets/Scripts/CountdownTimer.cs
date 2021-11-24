@@ -9,6 +9,7 @@ public class CountdownTimer : MonoBehaviour
     private int _secondsLeft = 60;
 
     [SerializeField] private HealthBarData healthBarData;
+    [SerializeField] private Player playerObj;
     [SerializeField] private TMP_Text timerDisplayText;
     
     private void Start()
@@ -19,9 +20,16 @@ public class CountdownTimer : MonoBehaviour
     
     private void Update()
     {
-        if(!_takingAway && _secondsLeft > 0)
+        if(!playerObj.GetKeyCollected())
         {
-            StartCoroutine(TimerTake());
+            if(!_takingAway && _secondsLeft > 0)
+            {
+                StartCoroutine(TimerTake());
+            }   
+        }
+        else
+        {
+            timerDisplayText.enabled = false;
         }
     }
 

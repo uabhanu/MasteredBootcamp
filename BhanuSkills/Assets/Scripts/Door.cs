@@ -26,7 +26,7 @@ public class Door : MonoBehaviour
 
     private void LateUpdate()
     {
-        if(player.GetKeyFound())
+        if(player.GetKeyCollected())
         {
             _materialToUse = doorData.UnlockedMaterial;
             GetComponent<MeshRenderer>().material = _materialToUse;
@@ -50,7 +50,7 @@ public class Door : MonoBehaviour
     private void OnDoorOpen()
     {
         _doorOpened = true;
-        doorAnim.SetBool(DoorOpen , player.GetKeyFound());
+        doorAnim.SetBool(DoorOpen , player.GetKeyCollected());
     }
 
     #region Event Listeners

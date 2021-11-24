@@ -4,55 +4,95 @@ using UnityEngine;
 
 public class Player : ThirdPersonController //Inheritance
 {
+    private bool _keyCollected = false;
     private bool _keyFound = false;
 
-    private void OnHealthGain()
+    [SerializeField] private InGameMenuManager inGameMenuManager;
+
+    private void Start()
     {
-        
-    }
-    
-    private void OnHealthLoss()
-    {
-        
+        base.Start();
+        SubscribeToEvents();
     }
 
-    private void OnTriggerExit(Collider other)
+    private void OnDestroy()
     {
-        if(other.tag.Equals("Door"))
-        {
-            EventsManager.InvokeEvent(BhanuSkillsEvent.DoorCloseEvent);
-        }
+        UnsubscribeFromEvents();
     }
+
+    // private void OnTriggerExit(Collider other)
+    // {
+    //     if(other.tag.Equals("Door"))
+    //     {
+    //         EventsManager.InvokeEvent(BhanuSkillsEvent.DoorCloseEvent);
+    //     }
+    // }
 
     private void OnTriggerEnter(Collider other)
     {
+        if(other.tag.Equals("Collectible"))
+        {
+            if(inGameMenuManager.TotalCollectedByPlayer == inGameMenuManager.TotalToCollect)
+            {
+                EventsManager.InvokeEvent(BhanuSkillsEvent.AllCollectedEvent);
+            }
+        }
+        
         if(other.tag.Equals("Door"))
         {
             EventsManager.InvokeEvent(BhanuSkillsEvent.DoorOpenEvent);
         }
+
+        if(other.tag.Equals("Heart"))
+        {
+            EventsManager.InvokeEvent(BhanuSkillsEvent.HealthGainEvent);
+        }
+        
+        if(other.tag.Equals("Key"))
+        {
+            EventsManager.InvokeEvent(BhanuSkillsEvent.KeyCollectedEvent);
+        }
     }
 
-    public bool GetKeyFound()
+    private void OnAllCollected()
     {
-        return _keyFound;
+        _keyFound = true;
+        SetKeyFound(_keyFound);
+    }
+
+    private void OnKeyCollected()
+    {
+        _keyCollected = true;
+        SetKeyCollected(_keyCollected);
     }
     
+    private void SetKeyCollected(bool keyCollected)
+    {
+        _keyCollected = keyCollected;
+    }
+
     private void SetKeyFound(bool keyFound)
     {
         _keyFound = keyFound;
     }
-
+    
+    public bool GetKeyCollected()
+    {
+        return _keyCollected;
+    }
+    
+    
     #region Event Listeners
     private void SubscribeToEvents()
     {
-        EventsManager.SubscribeToEvent(BhanuSkillsEvent.HealthGainEvent , OnHealthGain);
-        EventsManager.SubscribeToEvent(BhanuSkillsEvent.HealthLossEvent , OnHealthLoss);
+        EventsManager.SubscribeToEvent(BhanuSkillsEvent.AllCollectedEvent , OnAllCollected);
+        EventsManager.SubscribeToEvent(BhanuSkillsEvent.KeyCollectedEvent , OnKeyCollected);
     }
     
     private void UnsubscribeFromEvents()
     {
-        EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.HealthGainEvent , OnHealthGain);
-        EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.HealthLossEvent , OnHealthLoss);
+        EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.AllCollectedEvent , OnAllCollected);
+        EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.KeyCollectedEvent , OnKeyCollected);
     }
     #endregion
 }

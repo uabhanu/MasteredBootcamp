@@ -248,11 +248,6 @@ namespace StarterAssets
 					_verticalVelocity = -2f;
 				}
 
-				if(_input.doorOpen)
-				{
-					LogMessages.AllIsWellMessage("'E' Button Pressed");
-				}
-
 				// Jump
 				if (_input.jump && _jumpTimeoutDelta <= 0.0f)
 				{

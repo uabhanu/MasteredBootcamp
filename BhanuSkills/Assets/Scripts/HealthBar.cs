@@ -1,3 +1,4 @@
+using Events;
 using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
@@ -11,8 +12,9 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Gradient healthBarGradient;
     [SerializeField] private HealthBarData healthBarData;
     [SerializeField] private Image healthBarFillImage;
+    [SerializeField] private Player playerObj;
     [SerializeField] private Slider healthBarSlider;
-
+    
     private void Start()
     {
         _defaultSliderValue = healthBarSlider.value;
@@ -22,7 +24,26 @@ public class HealthBar : MonoBehaviour
 
     private void LateUpdate()
     {
-        healthBarSlider.value = countDownTimer.SecondsLeft * (_defaultSliderValue / _maxTime);
-        healthBarFillImage.color = healthBarGradient.Evaluate(healthBarSlider.normalizedValue);
+        if(!playerObj.GetKeyCollected())
+        {
+            healthBarSlider.value = countDownTimer.SecondsLeft * (_defaultSliderValue / _maxTime);
+            healthBarFillImage.color = healthBarGradient.Evaluate(healthBarSlider.normalizedValue);
+            
+            if(countDownTimer.SecondsLeft <= 15)
+            {
+                EventsManager.InvokeEvent(BhanuSkillsEvent.HealthAlmostEmptyEvent);
+            }
+
+            if(countDownTimer.SecondsLeft <= 0)
+            {
+                EventsManager.InvokeEvent(BhanuSkillsEvent.GameOverEvent);
+            }   
+        }
+    }
+    
+    public float DefaultSliderValue
+    {
+        get => _defaultSliderValue;
+        set => _defaultSliderValue = value;
     }
 }

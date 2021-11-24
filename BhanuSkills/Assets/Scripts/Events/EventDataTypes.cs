@@ -2,9 +2,14 @@
 {
     public enum BhanuSkillsEvent
     {
+        AllCollectedEvent,
+        CollectibleCollectedEvent,
         DoorCloseEvent,
         DoorOpenEvent,
+        GameOverEvent,
+        HealthAlmostEmptyEvent,
         HealthGainEvent,
-        HealthLossEvent
+        HealthLossEvent,
+        KeyCollectedEvent
     }
 }
