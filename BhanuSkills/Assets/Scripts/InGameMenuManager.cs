@@ -11,14 +11,20 @@ public class InGameMenuManager : MonoBehaviour
     private int _totalToCollect;
     
     #region private SerializedField Variables Declarations
+
+    [SerializeField] private bool diegeticUI;
     [SerializeField] private GameObject gameOverMenuObj;
     [SerializeField] private GameObject goToRoofTextObj;
     [SerializeField] private GameObject healthBarOverlayObj;
+    [SerializeField] private GameObject healthUIDiagetic;
+    [SerializeField] private GameObject healthUINonDiagetic;
     [SerializeField] private GameObject heartObj;
     [SerializeField] private GameObject infoObj;
     [SerializeField] private GameObject keyObj;
+    [SerializeField] private GameObject minimapObj;
     [SerializeField] private GameObject pauseMenuObj;
     [SerializeField] private GameObject roofTextObj;
+    [SerializeField] private GameObject scoreUINonDiagetic;
     [SerializeField] private GameObject trophyObj;
     [SerializeField] private Gradient healthBarGradient;
     [SerializeField] private Gradient healthBarWorldGradient;
@@ -33,6 +39,23 @@ public class InGameMenuManager : MonoBehaviour
     #region All Other Functions
     private void Start()
     {
+        if(diegeticUI)
+        {
+            healthUIDiagetic.SetActive(true);
+
+            healthUINonDiagetic.SetActive(false);
+            minimapObj.SetActive(false);
+            scoreUINonDiagetic.SetActive(false);
+        }
+        else
+        {
+            healthUIDiagetic.SetActive(false);
+
+            healthUINonDiagetic.SetActive(true);
+            minimapObj.SetActive(true);
+            scoreUINonDiagetic.SetActive(true);
+        }
+        
         gameOverMenuObj.SetActive(false);
         healthBarOverlayObj.SetActive(false);
         infoObj.SetActive(false);
@@ -49,6 +72,12 @@ public class InGameMenuManager : MonoBehaviour
     private void OnDestroy()
     {
         UnsubscribeFromEvents();
+    }
+    
+    public bool DiegeticUI
+    {
+        get => diegeticUI;
+        set => diegeticUI = value;
     }
 
     private void DisplayMenu()
