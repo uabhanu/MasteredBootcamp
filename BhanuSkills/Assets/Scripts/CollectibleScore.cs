@@ -33,7 +33,7 @@ public class CollectibleScore : MonoBehaviour
         
         ingameMenuManager = FindObjectOfType<InGameMenuManager>();
         
-         if(!ingameMenuManager.DiegeticUI)
+         if(!ingameMenuManager.DiegeticUI && scoreBarWorldCanvasObj != null)
          {
             scoreBarWorldCanvasObj.SetActive(false);
          }

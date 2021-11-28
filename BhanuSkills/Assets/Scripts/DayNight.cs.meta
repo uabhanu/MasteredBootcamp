@@ -1,10 +1,9 @@
 fileFormatVersion: 2
-guid: 0608b238bb7bbb04ba1fd1961b4d63fa
+guid: 2ad1a3c073c82f946aac3db4081a4095
 MonoImporter:
   externalObjects: {}
   serializedVersion: 2
-  defaultReferences:
-  - heartBeatClip: {fileID: 8300000, guid: 6c5da4bface3b2445b3a4744d8c332db, type: 3}
+  defaultReferences: []
   executionOrder: 0
   icon: {instanceID: 0}
   userData: 

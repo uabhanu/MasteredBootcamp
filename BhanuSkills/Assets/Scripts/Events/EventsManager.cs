@@ -4,6 +4,7 @@ namespace Events
 {
     public class EventsManager
     {
+        #region Event Actions Declarations
         private static event Action AllCollectedAction;
         private static event Action CollectibleCollectedAction;
         private static event Action DoorCloseAction;
@@ -15,7 +16,9 @@ namespace Events
         private static event Action InfoAction;
         private static event Action KeyCollectedAction;
         private static event Action ReachedTheRoofAction;
+        #endregion
 
+        #region Invoke Functions
         public static void InvokeEvent(BhanuSkillsEvent eventToInvoke)
         {
             switch(eventToInvoke)
@@ -51,7 +54,7 @@ namespace Events
                 case BhanuSkillsEvent.HealthLossEvent:
                     HealthGainAction?.Invoke(); 
                 return;
-                
+
                 case BhanuSkillsEvent.InfoEvent:
                     InfoAction?.Invoke(); 
                 return;
@@ -65,7 +68,9 @@ namespace Events
                 return;
             }
         }
+        #endregion
 
+        #region Subscribe To Events
         public static void SubscribeToEvent(BhanuSkillsEvent eventToSubscribe , Action actionFunction)
         {
             switch(eventToSubscribe)
@@ -101,7 +106,7 @@ namespace Events
                 case BhanuSkillsEvent.HealthLossEvent:
                     HealthGainAction += actionFunction;
                 return;
-                
+
                 case BhanuSkillsEvent.InfoEvent:
                     InfoAction += actionFunction;
                 return;
@@ -115,7 +120,9 @@ namespace Events
                 return;
             }
         }
+        #endregion
 
+        #region Unsubscribe From Events
         public static void UnsubscribeFromEvent(BhanuSkillsEvent eventToSubscribe , Action actionFunction)
         {
             switch(eventToSubscribe)
@@ -151,7 +158,7 @@ namespace Events
                 case BhanuSkillsEvent.HealthGainEvent:
                     HealthLossAction -= actionFunction;
                 return;
-                
+
                 case BhanuSkillsEvent.InfoEvent:
                     InfoAction -= actionFunction;
                 return;
@@ -165,5 +172,6 @@ namespace Events
                 return;
             }
         }
+        #endregion
     }
 }

@@ -5,12 +5,12 @@ namespace ScriptableObjects
     [CreateAssetMenu]
     public class SoundManagerData : ScriptableObject
     {
-        [SerializeField] private AudioClip dangerClip;
+        [SerializeField] private AudioClip heartBeatClip;
 
-        public AudioClip DangerClip
+        public AudioClip HeartBeatClip
         {
-            get => dangerClip;
-            set => dangerClip = value;
+            get => heartBeatClip;
+            set => heartBeatClip = value;
         }
     }
 }
