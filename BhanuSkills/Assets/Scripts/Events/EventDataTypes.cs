@@ -12,6 +12,8 @@
         HealthLossEvent,
         InfoEvent,
         KeyCollectedEvent,
-        ReachedTheRoofEvent
+        PauseEvent,
+        TrophyCollectedEvent,
+        UnpauseEvent
     }
 }

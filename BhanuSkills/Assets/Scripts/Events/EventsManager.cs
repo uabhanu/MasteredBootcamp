@@ -15,7 +15,9 @@ namespace Events
         private static event Action HealthLossAction;
         private static event Action InfoAction;
         private static event Action KeyCollectedAction;
-        private static event Action ReachedTheRoofAction;
+        private static event Action PauseAction;
+        private static event Action TrophyCollectedAction;
+        private static event Action UnpauseAction;
         #endregion
 
         #region Invoke Functions
@@ -63,8 +65,16 @@ namespace Events
                     KeyCollectedAction?.Invoke(); 
                 return;
                 
-                case BhanuSkillsEvent.ReachedTheRoofEvent:
-                    ReachedTheRoofAction?.Invoke(); 
+                case BhanuSkillsEvent.PauseEvent:
+                    PauseAction?.Invoke(); 
+                return;
+                
+                case BhanuSkillsEvent.TrophyCollectedEvent:
+                    TrophyCollectedAction?.Invoke(); 
+                return;
+                
+                case BhanuSkillsEvent.UnpauseEvent:
+                    UnpauseAction?.Invoke(); 
                 return;
             }
         }
@@ -115,8 +125,16 @@ namespace Events
                     KeyCollectedAction += actionFunction;
                 return;
                 
-                case BhanuSkillsEvent.ReachedTheRoofEvent:
-                    ReachedTheRoofAction += actionFunction;
+                case BhanuSkillsEvent.PauseEvent:
+                    PauseAction += actionFunction;
+                return;
+                
+                case BhanuSkillsEvent.TrophyCollectedEvent:
+                    TrophyCollectedAction += actionFunction;
+                return;
+                
+                case BhanuSkillsEvent.UnpauseEvent:
+                    UnpauseAction += actionFunction;
                 return;
             }
         }
@@ -167,8 +185,16 @@ namespace Events
                     KeyCollectedAction -= actionFunction;
                 return;
                 
-                case BhanuSkillsEvent.ReachedTheRoofEvent:
-                    ReachedTheRoofAction -= actionFunction;
+                case BhanuSkillsEvent.PauseEvent:
+                    PauseAction -= actionFunction;
+                return;
+                
+                case BhanuSkillsEvent.TrophyCollectedEvent:
+                    TrophyCollectedAction -= actionFunction;
+                return;
+                
+                case BhanuSkillsEvent.UnpauseEvent:
+                    UnpauseAction -= actionFunction;
                 return;
             }
         }

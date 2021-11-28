@@ -5,6 +5,7 @@ using UnityEngine;
 
 public class CountdownTimer : MonoBehaviour
 {
+    private bool _bGamePaused;
     private bool _takingAway = false;
     private int _secondsLeft = 60;
 

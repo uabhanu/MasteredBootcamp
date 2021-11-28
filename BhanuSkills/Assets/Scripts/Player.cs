@@ -7,7 +7,7 @@ public class Player : ThirdPersonController //Inheritance
     private bool _keyCollected = false;
     private bool _keyFound = false;
 
-    [SerializeField] private InGameMenuManager inGameMenuManager;
+    [SerializeField] private InGameUIManager inGameUIManager;
 
     private void Start()
     {
@@ -32,7 +32,7 @@ public class Player : ThirdPersonController //Inheritance
     {
         if(other.tag.Equals("Collectible"))
         {
-            if(inGameMenuManager.TotalCollectedByPlayer == inGameMenuManager.TotalToCollect)
+            if(inGameUIManager.TotalCollectedByPlayer == inGameUIManager.TotalToCollect)
             {
                 EventsManager.InvokeEvent(BhanuSkillsEvent.AllCollectedEvent);
             }
@@ -60,7 +60,7 @@ public class Player : ThirdPersonController //Inheritance
         
         if(other.tag.Equals("Trophy"))
         {
-            EventsManager.InvokeEvent(BhanuSkillsEvent.ReachedTheRoofEvent);
+            EventsManager.InvokeEvent(BhanuSkillsEvent.TrophyCollectedEvent);
         }
     }
 

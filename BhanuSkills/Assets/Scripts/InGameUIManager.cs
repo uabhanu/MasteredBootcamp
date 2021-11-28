@@ -3,14 +3,14 @@ using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
 
-public class InGameMenuManager : MonoBehaviour
+public class InGameUIManager : MonoBehaviour
 {
     private float _maxHealth;
     private GameObject[] _totalCollectibleObjs;
     private int _totalCollectedByPlayer = 0;
     private int _totalToCollect;
     
-    #region private SerializedField Variables Declarations
+    #region private Serialized Variables Declarations
 
     [SerializeField] private bool diegeticUI;
     [SerializeField] private GameObject gameOverMenuObj;
@@ -113,8 +113,7 @@ public class InGameMenuManager : MonoBehaviour
 
     public void PauseButton()
     {
-        pauseMenuObj.SetActive(true);
-        Time.timeScale = 0;
+        EventsManager.InvokeEvent(BhanuSkillsEvent.PauseEvent);
     }
     
     public void QuitButton()
@@ -130,8 +129,7 @@ public class InGameMenuManager : MonoBehaviour
 
     public void ResumeButton()
     {
-        pauseMenuObj.SetActive(false);
-        Time.timeScale = 1;
+        EventsManager.InvokeEvent(BhanuSkillsEvent.UnpauseEvent);
     }
     #endregion
     
@@ -176,10 +174,22 @@ public class InGameMenuManager : MonoBehaviour
         keyObj.SetActive(false);
     }
 
-    private void OnReachedTheRoof()
+    private void OnPause()
+    {
+        pauseMenuObj.SetActive(true);
+        Time.timeScale = 0;
+    }
+
+    private void OnTrophyCollected()
     {
         roofTextObj.SetActive(true);
         trophyObj.SetActive(false);
+    }
+
+    private void OnUnpause()
+    {
+        pauseMenuObj.SetActive(false);
+        Time.timeScale = 1;
     }
     #endregion
 
@@ -193,7 +203,9 @@ public class InGameMenuManager : MonoBehaviour
         EventsManager.SubscribeToEvent(BhanuSkillsEvent.HealthGainEvent , OnHealthGain);
         EventsManager.SubscribeToEvent(BhanuSkillsEvent.InfoEvent , OnInfo);
         EventsManager.SubscribeToEvent(BhanuSkillsEvent.KeyCollectedEvent , OnKeyCollected);
-        EventsManager.SubscribeToEvent(BhanuSkillsEvent.ReachedTheRoofEvent , OnReachedTheRoof);
+        EventsManager.SubscribeToEvent(BhanuSkillsEvent.PauseEvent , OnPause);
+        EventsManager.SubscribeToEvent(BhanuSkillsEvent.TrophyCollectedEvent , OnTrophyCollected);
+        EventsManager.SubscribeToEvent(BhanuSkillsEvent.UnpauseEvent , OnUnpause);
     }
     
     private void UnsubscribeFromEvents()
@@ -205,7 +217,9 @@ public class InGameMenuManager : MonoBehaviour
         EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.HealthGainEvent , OnHealthGain);
         EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.InfoEvent , OnInfo);
         EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.KeyCollectedEvent , OnKeyCollected);
-        EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.ReachedTheRoofEvent , OnReachedTheRoof);
+        EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.PauseEvent , OnPause);
+        EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.TrophyCollectedEvent , OnTrophyCollected);
+        EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.UnpauseEvent , OnUnpause);
     }
     #endregion
 }

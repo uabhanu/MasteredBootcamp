@@ -13,7 +13,7 @@ public class CollectibleScore : MonoBehaviour
     [SerializeField] private GameObject scoreBarWorldCanvasObj;
     [SerializeField] private Gradient scoreBarGradient;
     [SerializeField] private Image scoreBarFillImage;
-    [SerializeField] private InGameMenuManager ingameMenuManager;
+    [SerializeField] private InGameUIManager ingameUIManager;
     [SerializeField] private Slider scoreSlider;
     [SerializeField] private TMP_Text collectedDisplayLabel;
     [SerializeField] private TMP_Text collectedValueLabel;
@@ -31,9 +31,9 @@ public class CollectibleScore : MonoBehaviour
         totalValueLabel.text = _totalToCollect.ToString();
         SubscribeToEvents();
         
-        ingameMenuManager = FindObjectOfType<InGameMenuManager>();
+        ingameUIManager = FindObjectOfType<InGameUIManager>();
         
-         if(!ingameMenuManager.DiegeticUI && scoreBarWorldCanvasObj != null)
+         if(!ingameUIManager.DiegeticUI && scoreBarWorldCanvasObj != null)
          {
             scoreBarWorldCanvasObj.SetActive(false);
          }
