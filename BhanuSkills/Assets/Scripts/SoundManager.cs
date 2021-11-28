@@ -1,6 +1,7 @@
 using Events;
 using ScriptableObjects;
 using UnityEngine;
+using UnityEngine.Timeline;
 
 public class SoundManager : MonoBehaviour
 {
@@ -12,6 +13,8 @@ public class SoundManager : MonoBehaviour
 
     private void Start()
     {
+        musicSource.loop = true;
+        musicSource.Play();
         SubscribeToEvents();
     }
 
@@ -24,6 +27,10 @@ public class SoundManager : MonoBehaviour
 
     private void OnGameOver()
     {
+        _audioClipToPlay = soundManagerData.GameOverClip;
+        soundsSource.clip = _audioClipToPlay;
+        soundsSource.loop = false;
+        soundsSource.Play();
         musicSource.Stop();
     }
     
@@ -31,6 +38,7 @@ public class SoundManager : MonoBehaviour
     {
         _audioClipToPlay = soundManagerData.HeartBeatClip;
         soundsSource.clip = _audioClipToPlay;
+        soundsSource.loop = true;
         soundsSource.Play();
     }
 
