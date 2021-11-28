@@ -21,6 +21,12 @@ public class SoundManager : MonoBehaviour
     }
     
     #region Event Functions
+
+    private void OnGameOver()
+    {
+        musicSource.Stop();
+    }
+    
     private void OnHealthAlmostEmpty()
     {
         _audioClipToPlay = soundManagerData.HeartBeatClip;
@@ -48,6 +54,7 @@ public class SoundManager : MonoBehaviour
     #region Event Listeners
     private void SubscribeToEvents()
     {
+        EventsManager.SubscribeToEvent(BhanuSkillsEvent.GameOverEvent , OnGameOver);
         EventsManager.SubscribeToEvent(BhanuSkillsEvent.HealthAlmostEmptyEvent , OnHealthAlmostEmpty);
         EventsManager.SubscribeToEvent(BhanuSkillsEvent.KeyCollectedEvent , OnKeyCollected);
         EventsManager.SubscribeToEvent(BhanuSkillsEvent.PauseEvent , OnPause);
@@ -56,6 +63,7 @@ public class SoundManager : MonoBehaviour
     
     private void UnsubscribeFromEvents()
     {
+        EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.GameOverEvent , OnGameOver);
         EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.HealthAlmostEmptyEvent , OnHealthAlmostEmpty);
         EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.KeyCollectedEvent , OnKeyCollected);
         EventsManager.UnsubscribeFromEvent(BhanuSkillsEvent.PauseEvent , OnPause);

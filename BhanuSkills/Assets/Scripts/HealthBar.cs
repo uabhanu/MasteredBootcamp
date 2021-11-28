@@ -1,3 +1,4 @@
+using Bhanu;
 using Events;
 using ScriptableObjects;
 using UnityEngine;
@@ -12,9 +13,10 @@ public class HealthBar : MonoBehaviour
     [SerializeField] private Gradient healthBarGradient;
     [SerializeField] private HealthBarData healthBarData;
     [SerializeField] private Image healthBarFillImage;
+    [SerializeField] private Image heartImage;
     [SerializeField] private Player playerObj;
     [SerializeField] private Slider healthBarSlider;
-    
+
     private void Start()
     {
         _defaultSliderValue = healthBarSlider.value;
@@ -24,6 +26,8 @@ public class HealthBar : MonoBehaviour
 
     private void LateUpdate()
     {
+        CalculateAndApplySprite();
+        
         if(!playerObj.GetKeyCollected())
         {
             healthBarSlider.value = countDownTimer.SecondsLeft * (_defaultSliderValue / _maxTime);
@@ -38,6 +42,24 @@ public class HealthBar : MonoBehaviour
             {
                 EventsManager.InvokeEvent(BhanuSkillsEvent.GameOverEvent);
             }   
+        }
+    }
+
+    private void CalculateAndApplySprite()
+    {
+        float healthBarPercentage = (healthBarSlider.value / _defaultSliderValue) * 100;
+        Sprite spriteToUse;
+
+        if(healthBarPercentage < 66f)
+        {
+            spriteToUse = healthBarData.YellowSprite;
+            heartImage.sprite = spriteToUse;
+        }
+        
+        if(healthBarPercentage < 33f)
+        {
+            spriteToUse = healthBarData.RedSprite;
+            heartImage.sprite = spriteToUse;
         }
     }
     
