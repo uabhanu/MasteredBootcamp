@@ -2131,7 +2131,7 @@ GameObject:
   - component: {fileID: 507596427}
   - component: {fileID: 507596426}
   m_Layer: 5
-  m_Name: Heart
+  m_Name: HeartImage
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2428,6 +2428,17 @@ RectTransform:
   m_AnchoredPosition: {x: -13.356, y: -1.2129}
   m_SizeDelta: {x: 3.5209, y: 0.5892}
   m_Pivot: {x: 0.5, y: 0.5}
+--- !u!114 &572667822 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 1673917490435125825, guid: e715fedbd69bc6d41b7718ad719043b1, type: 3}
+  m_PrefabInstance: {fileID: 6823070382651059451}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fe87c0e1cc204ed48ad3b37840f39efc, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &636137167
 GameObject:
   m_ObjectHideFlags: 0
@@ -3264,7 +3275,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 32df62eb18e8e0041a9121ee15c476fc, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  diegeticUI: 0
+  diegeticUI: 1
   gameOverMenuObj: {fileID: 1083421153}
   goToRoofTextObj: {fileID: 544944307}
   healthBarOverlayObj: {fileID: 1870048164}
@@ -3337,6 +3348,9 @@ MonoBehaviour:
     m_NumColorKeys: 4
     m_NumAlphaKeys: 2
   healthBar: {fileID: 1702362789}
+  healthBarData: {fileID: 11400000, guid: a4888c52b30fbb142a9f70734454c84e, type: 2}
+  heartImage: {fileID: 507596426}
+  heartWorldImage: {fileID: 572667822}
   healthBarFillImage: {fileID: 1065977163}
   healthBarWorldFillImage: {fileID: 6623508117547487597}
   playerObj: {fileID: 4416926083347132228}
@@ -3431,8 +3445,8 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 860574494}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.474942, y: -2.358714, z: -3.9357448}
-  m_LocalScale: {x: 2, y: 0.1, z: 2}
+  m_LocalPosition: {x: -5.474942, y: -2, z: -3.9357448}
+  m_LocalScale: {x: 2, y: 0.01, z: 2}
   m_Children: []
   m_Father: {fileID: 135750799}
   m_RootOrder: 4
@@ -4110,7 +4124,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
-  m_AnchoredPosition: {x: -0.42849922, y: 0.06510019}
+  m_AnchoredPosition: {x: -0.4284973, y: 0.06510019}
   m_SizeDelta: {x: -0.857, y: -1.6439}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1065977163

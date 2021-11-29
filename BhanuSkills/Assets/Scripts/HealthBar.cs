@@ -28,8 +28,8 @@ public class HealthBar : MonoBehaviour
     {
         CalculateAndApplySprite();
         
-        if(!playerObj.GetKeyCollected())
-        {
+         if(!playerObj.GetKeyCollected())
+         {
             healthBarSlider.value = countDownTimer.SecondsLeft * (_defaultSliderValue / _maxTime);
             healthBarFillImage.color = healthBarGradient.Evaluate(healthBarSlider.normalizedValue);
             
@@ -42,7 +42,7 @@ public class HealthBar : MonoBehaviour
             {
                 EventsManager.InvokeEvent(BhanuSkillsEvent.GameOverEvent);
             }   
-        }
+         }
     }
 
     private void CalculateAndApplySprite()

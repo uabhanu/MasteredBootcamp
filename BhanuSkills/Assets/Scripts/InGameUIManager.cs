@@ -1,4 +1,6 @@
+using Bhanu;
 using Events;
+using ScriptableObjects;
 using UnityEngine;
 using UnityEngine.UI;
 using UnityEngine.SceneManagement;
@@ -6,9 +8,12 @@ using UnityEngine.SceneManagement;
 public class InGameUIManager : MonoBehaviour
 {
     private float _maxHealth;
+    private float _maxHealthWorld;
     private GameObject[] _totalCollectibleObjs;
     private int _totalCollectedByPlayer = 0;
     private int _totalToCollect;
+    private Sprite _heartSprite;
+    private Sprite _heartWorldSprite;
     
     #region private Serialized Variables Declarations
 
@@ -29,6 +34,9 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private Gradient healthBarGradient;
     [SerializeField] private Gradient healthBarWorldGradient;
     [SerializeField] private HealthBar healthBar;
+    [SerializeField] private HealthBarData healthBarData;
+    [SerializeField] private Image heartImage;
+    [SerializeField] private Image heartWorldImage;
     [SerializeField] private Image healthBarFillImage;
     [SerializeField] private Image healthBarWorldFillImage;
     [SerializeField] private Player playerObj;
@@ -39,6 +47,14 @@ public class InGameUIManager : MonoBehaviour
     #region All Other Functions
     private void Start()
     {
+        _heartSprite = healthBarData.GreenSprite;
+        _heartWorldSprite = healthBarData.GreenSprite;
+        _maxHealth = healthBarSlider.value;
+        _maxHealthWorld = healthBarWorldSlider.value;
+        
+        LogMessages.AllIsWellMessage("Health : " + _maxHealth.ToString());
+        LogMessages.AllIsWellMessage("Health World : " + _maxHealthWorld.ToString());
+        
         if(diegeticUI)
         {
             healthUIDiagetic.SetActive(true);
@@ -87,11 +103,12 @@ public class InGameUIManager : MonoBehaviour
 
     private void SetMaxHealth()
     {
-        _maxHealth = healthBar.DefaultSliderValue;
         healthBarSlider.value = _maxHealth;
         healthBarFillImage.color = healthBarGradient.Evaluate(healthBarSlider.normalizedValue);
-        healthBarWorldSlider.value = _maxHealth;
+        healthBarWorldSlider.value = _maxHealthWorld;
         healthBarWorldFillImage.color = healthBarWorldGradient.Evaluate(healthBarWorldSlider.normalizedValue);
+        heartImage.sprite = _heartSprite;
+        heartWorldImage.sprite = _heartWorldSprite;
         heartObj.SetActive(false);
         infoObj.SetActive(true);
     }
