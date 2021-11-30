@@ -3,7 +3,7 @@ Shader "BhanuCube"
     Properties
     {
         _MainTexture("Texture" , 2D) = "white" {}
-        _Colour("Colour" , Color) = (0 , 1 , 1 , 1)
+        _Colour("Colour" , Color) = (0 , 0 , 1 , 1)
     }
     SubShader
     {

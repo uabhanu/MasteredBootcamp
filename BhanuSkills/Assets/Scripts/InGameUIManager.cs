@@ -1,4 +1,3 @@
-using Bhanu;
 using Events;
 using ScriptableObjects;
 using UnityEngine;
@@ -21,8 +20,8 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private GameObject gameOverMenuObj;
     [SerializeField] private GameObject goToRoofTextObj;
     [SerializeField] private GameObject healthBarOverlayObj;
-    [SerializeField] private GameObject healthUIDiagetic;
-    [SerializeField] private GameObject healthUINonDiagetic;
+    [SerializeField] private GameObject healthBarDiagetic;
+    [SerializeField] private GameObject healthBarNonDiagetic;
     [SerializeField] private GameObject heartObj;
     [SerializeField] private GameObject infoObj;
     [SerializeField] private GameObject keyObj;
@@ -51,23 +50,20 @@ public class InGameUIManager : MonoBehaviour
         _heartWorldSprite = healthBarData.GreenSprite;
         _maxHealth = healthBarSlider.value;
         _maxHealthWorld = healthBarWorldSlider.value;
-        
-        LogMessages.AllIsWellMessage("Health : " + _maxHealth.ToString());
-        LogMessages.AllIsWellMessage("Health World : " + _maxHealthWorld.ToString());
-        
+
         if(diegeticUI)
         {
-            healthUIDiagetic.SetActive(true);
+            healthBarDiagetic.SetActive(true);
 
-            healthUINonDiagetic.SetActive(false);
+            healthBarNonDiagetic.SetActive(false);
             minimapObj.SetActive(false);
             scoreUINonDiagetic.SetActive(false);
         }
         else
         {
-            healthUIDiagetic.SetActive(false);
+            healthBarDiagetic.SetActive(false);
 
-            healthUINonDiagetic.SetActive(true);
+            healthBarNonDiagetic.SetActive(true);
             minimapObj.SetActive(true);
             scoreUINonDiagetic.SetActive(true);
         }

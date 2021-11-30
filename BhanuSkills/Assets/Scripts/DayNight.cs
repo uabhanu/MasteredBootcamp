@@ -22,7 +22,7 @@ public class DayNight : MonoBehaviour
     private void NightCheck()
     {
         _dateAndTime = DateTime.Now;
-
+        
         if(_dateAndTime.Hour >= dayNightData.NightHour)
         {
             _light = directionalLightObj.GetComponent<Light>();
@@ -35,5 +35,19 @@ public class DayNight : MonoBehaviour
             _light.intensity = dayNightData.DayLightIntensityValue;
             RenderSettings.skybox = dayNightData.SkyBoxDayMaterial;
         }
+
+        //This is for testing only
+        // if(_bNightTime)
+        // {
+        //     _light = directionalLightObj.GetComponent<Light>();
+        //     _light.intensity = dayNightData.NightLightIntensityValue;
+        //     RenderSettings.skybox = dayNightData.SkyBoxNightMaterial;
+        // }
+        // else
+        // {
+        //     _light = directionalLightObj.GetComponent<Light>();
+        //     _light.intensity = dayNightData.DayLightIntensityValue;
+        //     RenderSettings.skybox = dayNightData.SkyBoxDayMaterial;
+        // }
     }
 }
