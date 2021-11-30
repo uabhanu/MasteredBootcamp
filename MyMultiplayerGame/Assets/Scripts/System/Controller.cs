@@ -33,12 +33,12 @@ public class Controller : MonoBehaviour
     float m_GroundedTimer;
     float m_SpeedAtJump = 0.0f;
 
-    void Awake()
+    private void Awake()
     {
         Instance = this;
     }
-    
-    void Start()
+
+    private void Start()
     {
         //Cursor.lockState = CursorLockMode.Locked;
         //Cursor.visible = false;
@@ -46,7 +46,7 @@ public class Controller : MonoBehaviour
         m_IsPaused = false;
         m_Grounded = true;
         
-        MainCamera.transform.SetParent(CameraPosition, false);
+        MainCamera.transform.SetParent(CameraPosition , false);
         MainCamera.transform.localPosition = Vector3.zero;
         MainCamera.transform.localRotation = Quaternion.identity;
         m_CharacterController = GetComponent<CharacterController>();
@@ -55,17 +55,18 @@ public class Controller : MonoBehaviour
         m_HorizontalAngle = transform.localEulerAngles.y;
     }
 
-    void Update()
+    private void Update()
     {
         bool wasGrounded = m_Grounded;
         bool loosedGrounding = false;
         
-        if (!m_CharacterController.isGrounded)
+        if(!m_CharacterController.isGrounded)
         {
-            if (m_Grounded)
+            if(m_Grounded)
             {
                 m_GroundedTimer += Time.deltaTime;
-                if (m_GroundedTimer >= 0.5f)
+                
+                if(m_GroundedTimer >= 0.5f)
                 {
                     loosedGrounding = true;
                     m_Grounded = false;
@@ -80,10 +81,11 @@ public class Controller : MonoBehaviour
 
         Speed = 0;
         Vector3 move = Vector3.zero;
-        if (!LockControl)
+        
+        if(!LockControl)
         {
             // Jump (we do it first as 
-            if (m_Grounded && Input.GetButtonDown("Jump"))
+            if(m_Grounded && Input.GetButtonDown("Jump"))
             {
                 m_VerticalSpeed = JumpSpeed;
                 m_Grounded = false;
@@ -93,15 +95,15 @@ public class Controller : MonoBehaviour
             bool running = Input.GetButton("Run");
             float actualSpeed = running ? RunningSpeed : PlayerSpeed;
 
-            if (loosedGrounding)
+            if(loosedGrounding)
             {
                 m_SpeedAtJump = actualSpeed;
             }
 
             // Move around with WASD
-            move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
-            if (move.sqrMagnitude > 1.0f)
-                move.Normalize();
+            move = new Vector3(Input.GetAxis("Horizontal") , 0 , Input.GetAxisRaw("Vertical"));
+            
+            if(move.sqrMagnitude > 1.0f) move.Normalize();
 
             float usedSpeed = m_Grounded ? actualSpeed : m_SpeedAtJump;
             
@@ -114,8 +116,8 @@ public class Controller : MonoBehaviour
             float turnPlayer =  Input.GetAxis("Mouse X") * MouseSensitivity;
             m_HorizontalAngle = m_HorizontalAngle + turnPlayer;
 
-            if (m_HorizontalAngle > 360) m_HorizontalAngle -= 360.0f;
-            if (m_HorizontalAngle < 0) m_HorizontalAngle += 360.0f;
+            if(m_HorizontalAngle > 360) m_HorizontalAngle -= 360.0f;
+            if(m_HorizontalAngle < 0) m_HorizontalAngle += 360.0f;
             
             Vector3 currentAngles = transform.localEulerAngles;
             currentAngles.y = m_HorizontalAngle;
@@ -134,12 +136,13 @@ public class Controller : MonoBehaviour
 
         // Fall down / gravity
         m_VerticalSpeed = m_VerticalSpeed - 10.0f * Time.deltaTime;
-        if (m_VerticalSpeed < -10.0f)
-            m_VerticalSpeed = -10.0f; // max fall speed
+        
+        if(m_VerticalSpeed < -10.0f) m_VerticalSpeed = -10.0f; // max fall speed
+        
         var verticalMove = new Vector3(0, m_VerticalSpeed * Time.deltaTime, 0);
         var flag = m_CharacterController.Move(verticalMove);
-        if ((flag & CollisionFlags.Below) != 0)
-            m_VerticalSpeed = 0;
+        
+        if((flag & CollisionFlags.Below) != 0) m_VerticalSpeed = 0;
     }
 
     public void DisplayCursor(bool display)
