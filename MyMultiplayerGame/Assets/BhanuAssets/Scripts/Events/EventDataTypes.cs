@@ -3,6 +3,10 @@
     public enum BhanuEvent
     {
         ConnectedToMasterEvent,
-        JoinedLobbyEvent
+        CreateRoomFailedEvent,
+        CreateRoomRequestEvent,
+        JoinedLobbyEvent,
+        JoinedRoomEvent,
+        LeftRoomEvent
     }
 }
