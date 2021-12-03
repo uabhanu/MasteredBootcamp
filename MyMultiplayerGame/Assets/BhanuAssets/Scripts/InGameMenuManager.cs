@@ -9,17 +9,25 @@ namespace BhanuAssets.Scripts
 {
     public class InGameMenuManager : MonoBehaviour
     {
+        [SerializeField] private bool noInternet = false;
+        
+        #region Serialized Private Variables Declarations
+        
         [SerializeField] private GameObject createRoomMenuObj;
         [SerializeField] private GameObject creatingRoomMenuObj;
         [SerializeField] private GameObject errorMenuObj;
         [SerializeField] private GameObject findingRoomMenuObj;
         [SerializeField] private GameObject leavingRoomMenuObj;
         [SerializeField] private GameObject loadingMenuObj;
-        [SerializeField] private GameObject noNameMenuObj;
         [SerializeField] private GameObject roomMenuObj;
+        [SerializeField] private TMP_Text errorTMP;
+        [SerializeField] private GameObject timerObj;
         [SerializeField] private GameObject titleMenuObj;
+        [SerializeField] private GameObject tryAgainButtonObj;
         [SerializeField] private TMP_InputField roomNameInputField;
         [SerializeField] private TMP_Text roomNameTMP;
+
+        #endregion
         
         #region Unity Functions
         
@@ -32,8 +40,8 @@ namespace BhanuAssets.Scripts
             errorMenuObj.SetActive(false);
             findingRoomMenuObj.SetActive(false);
             leavingRoomMenuObj.SetActive(false);
-            noNameMenuObj.SetActive(false);
             roomMenuObj.SetActive(false);
+            timerObj.SetActive(false);
             titleMenuObj.SetActive(false);
         }
 
@@ -84,8 +92,7 @@ namespace BhanuAssets.Scripts
 
         public void TryAgainButton()
         {
-            createRoomMenuObj.SetActive(true);
-            noNameMenuObj.SetActive(false);
+            EventsManager.InvokeEvent(BhanuEvent.TryAgainEvent);
         }
         
         #endregion
@@ -117,8 +124,9 @@ namespace BhanuAssets.Scripts
 
             if(string.IsNullOrEmpty(roomNameInputField.text))
             {
-                LogMessages.ErrorMessage("Please Enter your Name to Continue");
-                noNameMenuObj.SetActive(true);
+                LogMessages.ErrorMessage("Please Enter a name for your room before trying to create one :)");
+                errorMenuObj.SetActive(true);
+                errorTMP.text = "Please Enter a name for your room before trying to create one :)";
                 return;
             }
             else
@@ -166,14 +174,53 @@ namespace BhanuAssets.Scripts
 
         private void OnLeavingRoom()
         {
-            leavingRoomMenuObj.SetActive(true);
-            PhotonNetwork.LeaveRoom();
+            if(!noInternet)
+            {
+                PhotonNetwork.LeaveRoom();
+                leavingRoomMenuObj.SetActive(true);
+                timerObj.SetActive(true);   
+            }
+            
+            if(noInternet)
+            {
+                EventsManager.InvokeEvent(BhanuEvent.LeavingRoomFailedEvent);
+            }
+        }
+
+        private void OnLeavingRoomFailed()
+        {
+            errorMenuObj.SetActive(true);
+            errorTMP.text = "Unable to leave room as there is no internet connection :( Please check your internet connection and try again :)";
+            leavingRoomMenuObj.SetActive(false);
+            LogMessages.ErrorMessage("No Internet Connection :(");
         }
 
         private void OnLeftRoom()
         {
             leavingRoomMenuObj.SetActive(false);
-            titleMenuObj.SetActive(true);
+            timerObj.SetActive(false);
+
+            if(!noInternet)
+            {
+                errorMenuObj.SetActive(false);
+                titleMenuObj.SetActive(true);   
+            }
+        }
+
+        private void OnNoInternet()
+        {
+            errorMenuObj.SetActive(true);
+            errorTMP.text = "Unable to leave the room :( Please make sure you have active internet connection and then try again :)";
+            leavingRoomMenuObj.SetActive(false);
+            tryAgainButtonObj.SetActive(false);
+            LogMessages.ErrorMessage("No Internet :(");
+            noInternet = true;
+        }
+
+        private void OnTryAgain()
+        {
+            errorMenuObj.SetActive(false);
+            createRoomMenuObj.SetActive(true);
         }
         
         #endregion
@@ -191,8 +238,11 @@ namespace BhanuAssets.Scripts
             EventsManager.SubscribeToEvent(BhanuEvent.JoinedLobbyEvent , OnJoinedLobby);
             EventsManager.SubscribeToEvent(BhanuEvent.JoinedRoomEvent , OnJoinedRoom);
             EventsManager.SubscribeToEvent(BhanuEvent.LeaveRoomRequestEvent , OnLeaveRoomRequest);
-            EventsManager.SubscribeToEvent(BhanuEvent.LeaveRoomRequestEvent , OnLeavingRoom);
+            EventsManager.SubscribeToEvent(BhanuEvent.LeavingRoomEvent , OnLeavingRoom);
+            EventsManager.SubscribeToEvent(BhanuEvent.LeavingRoomFailedEvent , OnLeavingRoomFailed);
             EventsManager.SubscribeToEvent(BhanuEvent.LeftRoomEvent , OnLeftRoom);
+            EventsManager.SubscribeToEvent(BhanuEvent.NoInternetEvent , OnNoInternet);
+            EventsManager.SubscribeToEvent(BhanuEvent.TryAgainEvent , OnTryAgain);
         }
         
         private void UnsubscribeFromEvents()
@@ -206,8 +256,11 @@ namespace BhanuAssets.Scripts
             EventsManager.UnsubscribeFromEvent(BhanuEvent.JoinedLobbyEvent , OnJoinedLobby);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.JoinedRoomEvent , OnJoinedRoom);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.LeaveRoomRequestEvent , OnLeaveRoomRequest);
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.LeaveRoomRequestEvent , OnLeavingRoom);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.LeavingRoomEvent , OnLeavingRoom);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.LeavingRoomFailedEvent , OnLeavingRoomFailed);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.LeftRoomEvent , OnLeftRoom);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.NoInternetEvent , OnNoInternet);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.TryAgainEvent , OnTryAgain);
         }
         
         #endregion

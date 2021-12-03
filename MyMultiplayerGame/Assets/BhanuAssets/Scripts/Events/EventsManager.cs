@@ -16,7 +16,10 @@ namespace Events
         private static event Action JoinedRoomAction;
         private static event Action LeaveRoomRequestAction;
         private static event Action LeavingRoomAction;
+        private static event Action LeavingRoomFailedAction;
         private static event Action LeftRoomAction;
+        private static event Action NoInternetAction;
+        private static event Action TryAgainAction;
         
         #endregion
 
@@ -65,8 +68,20 @@ namespace Events
                     LeavingRoomAction?.Invoke(); 
                 return;
                 
+                case BhanuEvent.LeavingRoomFailedEvent:
+                    LeavingRoomFailedAction?.Invoke(); 
+                return;
+                
                 case BhanuEvent.LeftRoomEvent:
                     LeftRoomAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.NoInternetEvent:
+                    NoInternetAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.TryAgainEvent:
+                    TryAgainAction?.Invoke(); 
                 return;
             }
         }
@@ -117,8 +132,20 @@ namespace Events
                     LeavingRoomAction += actionFunction;
                 return;
                 
+                case BhanuEvent.LeavingRoomFailedEvent:
+                    LeavingRoomFailedAction += actionFunction;
+                return;
+                
                 case BhanuEvent.LeftRoomEvent:
                     LeftRoomAction += actionFunction;
+                return;
+                
+                case BhanuEvent.NoInternetEvent:
+                    NoInternetAction += actionFunction;
+                return;
+                
+                case BhanuEvent.TryAgainEvent:
+                    TryAgainAction += actionFunction;
                 return;
             }
         }
@@ -169,8 +196,20 @@ namespace Events
                     LeavingRoomAction -= actionFunction;
                 return;
                 
+                case BhanuEvent.LeavingRoomFailedEvent:
+                    LeavingRoomFailedAction -= actionFunction;
+                return;
+                
                 case BhanuEvent.LeftRoomEvent:
                     LeftRoomAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.NoInternetEvent:
+                    NoInternetAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.TryAgainEvent:
+                    TryAgainAction -= actionFunction;
                 return;
             }
         }

@@ -12,6 +12,9 @@
         JoinedRoomEvent,
         LeaveRoomRequestEvent,
         LeavingRoomEvent,
+        LeavingRoomFailedEvent,
         LeftRoomEvent,
+        NoInternetEvent,
+        TryAgainEvent
     }
 }
