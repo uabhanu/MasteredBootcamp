@@ -19,6 +19,7 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject findingRoomMenuObj;
         [SerializeField] private GameObject leavingRoomMenuObj;
         [SerializeField] private GameObject loadingMenuObj;
+        [SerializeField] private GameObject mainMenuObj;
         [SerializeField] private GameObject roomMenuObj;
         [SerializeField] private TMP_Text errorTMP;
         [SerializeField] private GameObject timerObj;
@@ -34,7 +35,6 @@ namespace BhanuAssets.Scripts
         private void Start()
         {
             SubscribeToEvents();
-            EventsManager.InvokeEvent(BhanuEvent.ConnectingToMasterEvent);
             createRoomMenuObj.SetActive(false);
             creatingRoomMenuObj.SetActive(false);
             errorMenuObj.SetActive(false);
@@ -71,6 +71,13 @@ namespace BhanuAssets.Scripts
             titleMenuObj.SetActive(false);
         }
 
+        public void ExitButton()
+        {
+            mainMenuObj.SetActive(true);
+            PhotonNetwork.Disconnect();
+            titleMenuObj.SetActive(false);
+        }
+
         public void FindRoomButton()
         {
             EventsManager.InvokeEvent(BhanuEvent.FindRoomEvent);
@@ -88,6 +95,11 @@ namespace BhanuAssets.Scripts
             #else
                 Application.Quit();
             #endif
+        }
+
+        public void StartButton()
+        {
+            EventsManager.InvokeEvent(BhanuEvent.ConnectingToMasterEvent);
         }
 
         public void TryAgainButton()
@@ -108,6 +120,7 @@ namespace BhanuAssets.Scripts
         private void OnConnectingToMaster()
         {
             loadingMenuObj.SetActive(true);
+            mainMenuObj.SetActive(false);
             LogMessages.WarningMessage("Connecting to Master :)");
             PhotonNetwork.ConnectUsingSettings(); //Connect Using the settings that you can find in the Resources folder or by Photon->Highlight Server Settings
         }
