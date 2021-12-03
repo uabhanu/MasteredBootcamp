@@ -5,12 +5,17 @@ namespace Events
     public class EventsManager
     {
         #region Event Actions Declarations
+        
+        private static event Action ConnectedToMasterAction;
+        private static event Action ConnectingToMasterAction;
         private static event Action CreateRoomFailedAction;
         private static event Action CreateRoomRequestAction;
-        private static event Action ConnectedToMasterAction;
+        private static event Action FindingRoomAction;
+        private static event Action FindRoomAction;
         private static event Action JoinedLobbyAction;
         private static event Action JoinedRoomAction;
         private static event Action LeftRoomAction;
+        
         #endregion
 
         #region Invoke Functions
@@ -22,6 +27,10 @@ namespace Events
                     ConnectedToMasterAction?.Invoke(); 
                 return;
                 
+                case BhanuEvent.ConnectingToMasterEvent:
+                    ConnectingToMasterAction?.Invoke(); 
+                return;
+                
                 case BhanuEvent.CreateRoomFailedEvent:
                     CreateRoomFailedAction?.Invoke(); 
                 return;
@@ -30,6 +39,14 @@ namespace Events
                     CreateRoomRequestAction?.Invoke(); 
                 return;
                 
+                case BhanuEvent.FindingRoomEvent:
+                    FindingRoomAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.FindRoomEvent:
+                    FindRoomAction?.Invoke(); 
+                return;
+
                 case BhanuEvent.JoinedLobbyEvent:
                     JoinedLobbyAction?.Invoke(); 
                 return;
@@ -54,12 +71,24 @@ namespace Events
                     ConnectedToMasterAction += actionFunction;
                 return;
                 
+                case BhanuEvent.ConnectingToMasterEvent:
+                    ConnectingToMasterAction += actionFunction;
+                return;
+                
                 case BhanuEvent.CreateRoomFailedEvent:
                     CreateRoomFailedAction += actionFunction;
                 return;
                 
                 case BhanuEvent.CreateRoomRequestEvent:
                     CreateRoomRequestAction += actionFunction;
+                return;
+                
+                case BhanuEvent.FindingRoomEvent:
+                    FindingRoomAction += actionFunction;
+                return;
+                
+                case BhanuEvent.FindRoomEvent:
+                    FindRoomAction += actionFunction;
                 return;
                 
                 case BhanuEvent.JoinedLobbyEvent:
@@ -86,12 +115,24 @@ namespace Events
                     ConnectedToMasterAction -= actionFunction;
                 return;
                 
+                case BhanuEvent.ConnectingToMasterEvent:
+                    ConnectingToMasterAction -= actionFunction;
+                return;
+                
                 case BhanuEvent.CreateRoomFailedEvent:
                     CreateRoomFailedAction -= actionFunction;
                 return;
                 
                 case BhanuEvent.CreateRoomRequestEvent:
                     CreateRoomRequestAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.FindingRoomEvent:
+                    FindingRoomAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.FindRoomEvent:
+                    FindRoomAction -= actionFunction;
                 return;
                 
                 case BhanuEvent.JoinedLobbyEvent:
