@@ -13,7 +13,9 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject creatingRoomMenuObj;
         [SerializeField] private GameObject errorMenuObj;
         [SerializeField] private GameObject findingRoomMenuObj;
+        [SerializeField] private GameObject leavingRoomMenuObj;
         [SerializeField] private GameObject loadingMenuObj;
+        [SerializeField] private GameObject noNameMenuObj;
         [SerializeField] private GameObject roomMenuObj;
         [SerializeField] private GameObject titleMenuObj;
         [SerializeField] private TMP_InputField roomNameInputField;
@@ -29,6 +31,8 @@ namespace BhanuAssets.Scripts
             creatingRoomMenuObj.SetActive(false);
             errorMenuObj.SetActive(false);
             findingRoomMenuObj.SetActive(false);
+            leavingRoomMenuObj.SetActive(false);
+            noNameMenuObj.SetActive(false);
             roomMenuObj.SetActive(false);
             titleMenuObj.SetActive(false);
         }
@@ -66,9 +70,7 @@ namespace BhanuAssets.Scripts
 
         public void LeaveRoomButton()
         {
-            PhotonNetwork.LeaveRoom();
-            loadingMenuObj.SetActive(true);
-            roomMenuObj.SetActive(false);
+            EventsManager.InvokeEvent(BhanuEvent.LeaveRoomRequestEvent);
         }
 
         public void QuitButton()
@@ -78,6 +80,12 @@ namespace BhanuAssets.Scripts
             #else
                 Application.Quit();
             #endif
+        }
+
+        public void TryAgainButton()
+        {
+            createRoomMenuObj.SetActive(true);
+            noNameMenuObj.SetActive(false);
         }
         
         #endregion
@@ -106,15 +114,18 @@ namespace BhanuAssets.Scripts
         private void OnCreateRoomRequested()
         {
             createRoomMenuObj.SetActive(false);
-            creatingRoomMenuObj.SetActive(true);
-            
+
             if(string.IsNullOrEmpty(roomNameInputField.text))
             {
                 LogMessages.ErrorMessage("Please Enter your Name to Continue");
+                noNameMenuObj.SetActive(true);
                 return;
             }
-
-            PhotonNetwork.CreateRoom(roomNameInputField.text);
+            else
+            {
+                creatingRoomMenuObj.SetActive(true);
+                PhotonNetwork.CreateRoom(roomNameInputField.text);   
+            }
         }
 
         private void OnFindingRoom()
@@ -146,8 +157,22 @@ namespace BhanuAssets.Scripts
             roomNameTMP.text = "Room " + roomNameInputField.text;
         }
 
+        private void OnLeaveRoomRequest()
+        {
+            leavingRoomMenuObj.SetActive(true);
+            roomMenuObj.SetActive(false);
+            EventsManager.InvokeEvent(BhanuEvent.LeavingRoomEvent);
+        }
+
+        private void OnLeavingRoom()
+        {
+            leavingRoomMenuObj.SetActive(true);
+            PhotonNetwork.LeaveRoom();
+        }
+
         private void OnLeftRoom()
         {
+            leavingRoomMenuObj.SetActive(false);
             titleMenuObj.SetActive(true);
         }
         
@@ -165,6 +190,8 @@ namespace BhanuAssets.Scripts
             EventsManager.SubscribeToEvent(BhanuEvent.FindRoomEvent , OnFindRoom);
             EventsManager.SubscribeToEvent(BhanuEvent.JoinedLobbyEvent , OnJoinedLobby);
             EventsManager.SubscribeToEvent(BhanuEvent.JoinedRoomEvent , OnJoinedRoom);
+            EventsManager.SubscribeToEvent(BhanuEvent.LeaveRoomRequestEvent , OnLeaveRoomRequest);
+            EventsManager.SubscribeToEvent(BhanuEvent.LeaveRoomRequestEvent , OnLeavingRoom);
             EventsManager.SubscribeToEvent(BhanuEvent.LeftRoomEvent , OnLeftRoom);
         }
         
@@ -178,6 +205,8 @@ namespace BhanuAssets.Scripts
             EventsManager.UnsubscribeFromEvent(BhanuEvent.FindRoomEvent , OnFindRoom);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.JoinedLobbyEvent , OnJoinedLobby);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.JoinedRoomEvent , OnJoinedRoom);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.LeaveRoomRequestEvent , OnLeaveRoomRequest);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.LeaveRoomRequestEvent , OnLeavingRoom);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.LeftRoomEvent , OnLeftRoom);
         }
         

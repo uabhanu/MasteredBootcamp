@@ -14,6 +14,8 @@ namespace Events
         private static event Action FindRoomAction;
         private static event Action JoinedLobbyAction;
         private static event Action JoinedRoomAction;
+        private static event Action LeaveRoomRequestAction;
+        private static event Action LeavingRoomAction;
         private static event Action LeftRoomAction;
         
         #endregion
@@ -53,6 +55,14 @@ namespace Events
                 
                 case BhanuEvent.JoinedRoomEvent:
                     JoinedRoomAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.LeaveRoomRequestEvent:
+                    LeaveRoomRequestAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.LeavingRoomEvent:
+                    LeavingRoomAction?.Invoke(); 
                 return;
                 
                 case BhanuEvent.LeftRoomEvent:
@@ -99,6 +109,14 @@ namespace Events
                     JoinedRoomAction += actionFunction;
                 return;
                 
+                case BhanuEvent.LeaveRoomRequestEvent:
+                    LeaveRoomRequestAction += actionFunction;
+                return;
+                
+                case BhanuEvent.LeavingRoomEvent:
+                    LeavingRoomAction += actionFunction;
+                return;
+                
                 case BhanuEvent.LeftRoomEvent:
                     LeftRoomAction += actionFunction;
                 return;
@@ -141,6 +159,14 @@ namespace Events
                 
                 case BhanuEvent.JoinedRoomEvent:
                     JoinedRoomAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.LeaveRoomRequestEvent:
+                    LeaveRoomRequestAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.LeavingRoomEvent:
+                    LeavingRoomAction -= actionFunction;
                 return;
                 
                 case BhanuEvent.LeftRoomEvent:

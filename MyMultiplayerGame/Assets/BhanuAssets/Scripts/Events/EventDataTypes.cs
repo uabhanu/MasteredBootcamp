@@ -10,6 +10,8 @@
         FindingRoomEvent,
         JoinedLobbyEvent,
         JoinedRoomEvent,
-        LeftRoomEvent
+        LeaveRoomRequestEvent,
+        LeavingRoomEvent,
+        LeftRoomEvent,
     }
 }
