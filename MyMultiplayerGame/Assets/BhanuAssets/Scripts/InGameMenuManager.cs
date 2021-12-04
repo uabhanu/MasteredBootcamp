@@ -1,7 +1,8 @@
 using Bhanu;
-using BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using Photon.Pun;
+using Photon.Realtime;
+using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -12,6 +13,7 @@ namespace BhanuAssets.Scripts
     public class InGameMenuManager : MonoBehaviour
     {
         private bool _bNoInternet;
+        private RoomInfo _roomInfo;
 
         #region Serialized Private Variables Declarations
         
@@ -24,17 +26,19 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject loadingMenuObj;
         [SerializeField] private GameObject mainMenuObj;
         [SerializeField] private GameObject okButtonObj;
+        [SerializeField] private GameObject roomButtonObj;
         [SerializeField] private GameObject roomMenuObj;
         [SerializeField] private TMP_Text errorTMP;
         [SerializeField] private GameObject timerObj;
         [SerializeField] private GameObject titleMenuObj;
         [SerializeField] private GameObject tryAgainButtonObj;
         [SerializeField] private TMP_InputField roomNameInputField;
+        [SerializeField] private TMP_Text roomButtonTMP;
         [SerializeField] private TMP_Text roomNameTMP;
 
         #endregion
         
-        #region Unity Functions
+        #region Unity and Other Functions
         
         private void Start()
         {
@@ -46,9 +50,13 @@ namespace BhanuAssets.Scripts
         {
             UnsubscribeFromEvents();
         }
-        
-        #endregion
 
+        private void JoinRoom()
+        {
+            LogMessages.AllIsWellMessage("Room Name : " + _roomInfo.Name);
+            PhotonNetwork.JoinRoom(_roomInfo.Name);
+        }
+        
         private void ResetAll()
         {
             createRoomMenuObj.SetActive(false);
@@ -56,20 +64,39 @@ namespace BhanuAssets.Scripts
             errorMenuObj.SetActive(false);
             findingRoomMenuObj.SetActive(false);
             leavingRoomMenuObj.SetActive(false);
+            loadingMenuObj.SetActive(false);
+            roomButtonObj.SetActive(false);
             roomMenuObj.SetActive(false);
             timerObj.SetActive(false);
             titleMenuObj.SetActive(false);
             tryAgainButtonObj.SetActive(false);
         }
 
+        private void SetUp(RoomInfo roomInfo)
+        {
+            _roomInfo = roomInfo;
+            LogMessages.AllIsWellMessage("Room Name : " + _roomInfo.Name);
+        }
+        
+        #endregion
+
         #region Button Functions
         
-        public void BackButton()
+        public void BackButton(string menuName)
         {
             if(!_bNoInternet)
             {
-                createRoomMenuObj.SetActive(false);
-                titleMenuObj.SetActive(true);   
+                if(menuName == "FindingRoom")
+                {
+                    findingRoomMenuObj.SetActive(false);
+                    titleMenuObj.SetActive(true);   
+                }
+                
+                else if(menuName == "CreateRoom")
+                {
+                    createRoomMenuObj.SetActive(false);
+                    titleMenuObj.SetActive(true);
+                }
             }
             else
             {
@@ -146,6 +173,12 @@ namespace BhanuAssets.Scripts
                 Application.Quit();
             #endif
         }
+        
+        public void RoomButton()
+        {
+            loadingMenuObj.SetActive(true);
+            JoinRoom();
+        }
 
         public void StartButton()
         {
@@ -193,7 +226,10 @@ namespace BhanuAssets.Scripts
         
         private void OnCreateRoomFailed()
         {
+            createRoomMenuObj.SetActive(false);
+            creatingRoomMenuObj.SetActive(false);
             errorMenuObj.SetActive(true);
+            errorTMP.text = "Unable to create the room as it may already exist";
             LogMessages.ErrorMessage("Unable to create the room :(");
         }
         
@@ -258,10 +294,14 @@ namespace BhanuAssets.Scripts
             {
                 createRoomMenuObj.SetActive(false);
                 creatingRoomMenuObj.SetActive(false);
-                LogMessages.AllIsWellMessage("Joined Room :)");
+                findingRoomMenuObj.SetActive(false);
+                LogMessages.AllIsWellMessage("Created Room :)");
+                roomButtonObj.SetActive(true);
+                roomButtonTMP.text = "Room " + roomNameInputField.text;
                 roomMenuObj.SetActive(true);
                 roomNameTMP.text = "Room " + roomNameInputField.text;
                 timerObj.SetActive(false);
+                titleMenuObj.SetActive(false);
             }
             else
             {
@@ -321,6 +361,14 @@ namespace BhanuAssets.Scripts
             tryAgainButtonObj.SetActive(true);
         }
 
+        private void OnRoomsListUpdated(List<RoomInfo> roomsList)
+        {
+            for(int i = 0; i < roomsList.Count; i++)
+            {
+                SetUp(roomsList[i]);
+            }
+        }
+
         #endregion
         
         #region Event Listeners
@@ -341,6 +389,7 @@ namespace BhanuAssets.Scripts
             EventsManager.SubscribeToEvent(BhanuEvent.LeavingRoomFailedEvent , OnLeavingRoomFailed);
             EventsManager.SubscribeToEvent(BhanuEvent.LeftRoomEvent , OnLeftRoom);
             EventsManager.SubscribeToEvent(BhanuEvent.NoInternetEvent , OnNoInternet);
+            EventsManager.SubscribeToEvent(BhanuEvent.RoomsListUpdatedEvent , OnRoomsListUpdated);
         }
         
         private void UnsubscribeFromEvents()
@@ -359,6 +408,7 @@ namespace BhanuAssets.Scripts
             EventsManager.UnsubscribeFromEvent(BhanuEvent.LeavingRoomFailedEvent , OnLeavingRoomFailed);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.LeftRoomEvent , OnLeftRoom);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.NoInternetEvent , OnNoInternet);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.RoomsListUpdatedEvent , OnRoomsListUpdated);
         }
         
         #endregion

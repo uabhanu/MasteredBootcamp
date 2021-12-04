@@ -1,4 +1,6 @@
-﻿using System;
+﻿using Photon.Realtime;
+using System;
+using System.Collections.Generic;
 
 namespace Events
 {
@@ -20,11 +22,13 @@ namespace Events
         private static event Action LeavingRoomFailedAction;
         private static event Action LeftRoomAction;
         private static event Action NoInternetAction;
+        private static event Action<List<RoomInfo>> RoomsListUpdatedAction;
         private static event Action TryAgainAction;
         
         #endregion
 
         #region Invoke Functions
+        
         public static void InvokeEvent(BhanuEvent eventToInvoke)
         {
             switch(eventToInvoke)
@@ -84,15 +88,27 @@ namespace Events
                 case BhanuEvent.NoInternetEvent:
                     NoInternetAction?.Invoke(); 
                 return;
-                
+
                 case BhanuEvent.TryAgainEvent:
                     TryAgainAction?.Invoke(); 
                 return;
             }
         }
+        
+        public static void InvokeEvent(BhanuEvent eventToInvoke , List<RoomInfo> roomsList)
+        {
+            switch(eventToInvoke)
+            {
+                case BhanuEvent.RoomsListUpdatedEvent:
+                    RoomsListUpdatedAction?.Invoke(roomsList); 
+                return;
+            }
+        }
+        
         #endregion
 
         #region Subscribe To Events
+        
         public static void SubscribeToEvent(BhanuEvent eventToSubscribe , Action actionFunction)
         {
             switch(eventToSubscribe)
@@ -152,15 +168,27 @@ namespace Events
                 case BhanuEvent.NoInternetEvent:
                     NoInternetAction += actionFunction;
                 return;
-                
+
                 case BhanuEvent.TryAgainEvent:
                     TryAgainAction += actionFunction;
                 return;
             }
         }
+        
+        public static void SubscribeToEvent(BhanuEvent eventToSubscribe , Action<List<RoomInfo>> actionFunction)
+        {
+            switch(eventToSubscribe)
+            {
+                case BhanuEvent.RoomsListUpdatedEvent:
+                    RoomsListUpdatedAction += actionFunction;
+                return;
+            }
+        }
+        
         #endregion
 
         #region Unsubscribe From Events
+        
         public static void UnsubscribeFromEvent(BhanuEvent eventToSubscribe , Action actionFunction)
         {
             switch(eventToSubscribe)
@@ -220,12 +248,23 @@ namespace Events
                 case BhanuEvent.NoInternetEvent:
                     NoInternetAction -= actionFunction;
                 return;
-                
+
                 case BhanuEvent.TryAgainEvent:
                     TryAgainAction -= actionFunction;
                 return;
             }
         }
+        
+        public static void UnsubscribeFromEvent(BhanuEvent eventToSubscribe , Action<List<RoomInfo>> actionFunction)
+        {
+            switch(eventToSubscribe)
+            {
+                case BhanuEvent.RoomsListUpdatedEvent:
+                    RoomsListUpdatedAction -= actionFunction;
+                return;
+            }
+        }
+        
         #endregion
     }
 }

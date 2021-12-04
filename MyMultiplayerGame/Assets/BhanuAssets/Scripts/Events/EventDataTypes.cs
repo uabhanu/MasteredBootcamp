@@ -16,6 +16,7 @@
         LeavingRoomFailedEvent,
         LeftRoomEvent,
         NoInternetEvent,
+        RoomsListUpdatedEvent,
         TryAgainEvent
     }
 }

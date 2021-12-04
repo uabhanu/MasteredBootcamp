@@ -13,25 +13,25 @@ namespace BhanuAssets.Scripts
         private int _secondsLeft;
 
         [SerializeField] private CountdownData countDownData;
-        [SerializeField] private TMP_Text timerDisplayText;
+        //[SerializeField] private TMP_Text timerDisplayText;
 
         private void Start()
         {
             _secondsLeft = countDownData.MAXTime;
-            timerDisplayText.text = "00 : " + _secondsLeft;
+            //timerDisplayText.text = "00 : " + _secondsLeft;
         }
 
         private void Update()
         {
             if(!_takingAway && _secondsLeft > 0)
             {
-                timerDisplayText.enabled = true;
+                //timerDisplayText.enabled = true;
                 StartCoroutine(TimerTake());
             }
 
             if(_secondsLeft <= 0)
             {
-                timerDisplayText.enabled = false;
+                //timerDisplayText.enabled = false;
                 EventsManager.InvokeEvent(BhanuEvent.NoInternetEvent);
             }
         }
@@ -39,7 +39,7 @@ namespace BhanuAssets.Scripts
         public void ResetCounter()
         {
             _secondsLeft = countDownData.MAXTime;
-            timerDisplayText.text = "00 : " + _secondsLeft;
+            //timerDisplayText.text = "00 : " + _secondsLeft;
             StartCoroutine(TimerTake());
         }
 
@@ -49,7 +49,7 @@ namespace BhanuAssets.Scripts
             yield return new WaitForSeconds(1f);
             _secondsLeft--;
             _takingAway = false;
-            timerDisplayText.text = "00 : " + _secondsLeft;
+            //timerDisplayText.text = "00 : " + _secondsLeft;
         }
         
         public int SecondsLeft

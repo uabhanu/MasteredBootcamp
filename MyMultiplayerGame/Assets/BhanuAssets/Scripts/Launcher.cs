@@ -1,6 +1,7 @@
 using Events;
 using Photon.Pun;
 using Photon.Realtime;
+using System.Collections.Generic;
 
 namespace BhanuAssets.Scripts
 {
@@ -39,6 +40,11 @@ namespace BhanuAssets.Scripts
         public override void OnLeftRoom()
         {
             EventsManager.InvokeEvent(BhanuEvent.LeftRoomEvent);
+        }
+
+        public override void OnRoomListUpdate(List<RoomInfo> roomsList)
+        {
+            EventsManager.InvokeEvent(BhanuEvent.RoomsListUpdatedEvent); //TODO Find out if this even is getting fired or not
         }
     }
 }
