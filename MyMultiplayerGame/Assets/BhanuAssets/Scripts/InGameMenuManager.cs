@@ -1,4 +1,5 @@
 using Bhanu;
+using BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using Photon.Pun;
 using TMPro;
@@ -10,10 +11,11 @@ namespace BhanuAssets.Scripts
 {
     public class InGameMenuManager : MonoBehaviour
     {
-        [SerializeField] private bool noInternet;
-        
+        private bool _bNoInternet;
+
         #region Serialized Private Variables Declarations
         
+        [SerializeField] private CountdownTimer countdownTimer;
         [SerializeField] private GameObject createRoomMenuObj;
         [SerializeField] private GameObject creatingRoomMenuObj;
         [SerializeField] private GameObject errorMenuObj;
@@ -64,7 +66,7 @@ namespace BhanuAssets.Scripts
         
         public void BackButton()
         {
-            if(!noInternet)
+            if(!_bNoInternet)
             {
                 createRoomMenuObj.SetActive(false);
                 titleMenuObj.SetActive(true);   
@@ -77,12 +79,19 @@ namespace BhanuAssets.Scripts
 
         public void CreateButton()
         {
+            if(_bNoInternet)
+            {
+                timerObj.SetActive(true);
+                countdownTimer.ResetCounter();
+                LogMessages.ErrorMessage("Sir Bhanu, No Internet :(");
+            }
+            
             EventsManager.InvokeEvent(BhanuEvent.CreateRoomRequestEvent);
         }
 
         public void CreateRoomButton()
         {
-            if(!noInternet)
+            if(!_bNoInternet)
             {
                 createRoomMenuObj.SetActive(true);
                 titleMenuObj.SetActive(false);   
@@ -95,7 +104,7 @@ namespace BhanuAssets.Scripts
 
         public void ExitButton()
         {
-            if(!noInternet)
+            if(!_bNoInternet)
             {
                 mainMenuObj.SetActive(true);
                 titleMenuObj.SetActive(false);   
@@ -118,7 +127,7 @@ namespace BhanuAssets.Scripts
 
         public void OKButton()
         {
-            if(!noInternet)
+            if(!_bNoInternet)
             {
                 createRoomMenuObj.SetActive(true);
                 errorMenuObj.SetActive(false);
@@ -154,7 +163,7 @@ namespace BhanuAssets.Scripts
         
         private void OnConnectedToInternet()
         {
-            noInternet = false;
+            _bNoInternet = false;
         }
         
         private void OnConnectedToMaster()
@@ -166,8 +175,10 @@ namespace BhanuAssets.Scripts
         private void OnConnectingToMaster()
         {
             mainMenuObj.SetActive(false);
+            timerObj.SetActive(true);
+            countdownTimer.ResetCounter();
             
-            if(!noInternet)
+            if(!_bNoInternet)
             {
                 loadingMenuObj.SetActive(true);
                 LogMessages.WarningMessage("Connecting to Master :)");
@@ -189,8 +200,8 @@ namespace BhanuAssets.Scripts
         private void OnCreateRoomRequested()
         {
             createRoomMenuObj.SetActive(false);
-            
-            if(!noInternet)
+
+            if(!_bNoInternet)
             {
                 if(string.IsNullOrEmpty(roomNameInputField.text))
                 {
@@ -204,15 +215,11 @@ namespace BhanuAssets.Scripts
                     PhotonNetwork.CreateRoom(roomNameInputField.text);   
                 }   
             }
-            else
-            {
-                LogMessages.ErrorMessage("Sir Bhanu, No Internet :(");
-            }
         }
 
         private void OnFindingRoom()
         {
-            if(!noInternet)
+            if(!_bNoInternet)
             {
                 findingRoomMenuObj.SetActive(true);
                 titleMenuObj.SetActive(false);   
@@ -232,11 +239,12 @@ namespace BhanuAssets.Scripts
         
         private void OnJoinedLobby()
         {
-            if(!noInternet)
+            if(!_bNoInternet)
             {
                 LogMessages.AllIsWellMessage("Joined Lobby :)");
                 loadingMenuObj.SetActive(false);
-                titleMenuObj.SetActive(true);   
+                titleMenuObj.SetActive(true);
+                timerObj.SetActive(false);
             }
             else
             {
@@ -246,13 +254,14 @@ namespace BhanuAssets.Scripts
 
         private void OnJoinedRoom()
         {
-            if(!noInternet)
+            if(!_bNoInternet)
             {
-                LogMessages.AllIsWellMessage("Joined Room :)");
                 createRoomMenuObj.SetActive(false);
                 creatingRoomMenuObj.SetActive(false);
+                LogMessages.AllIsWellMessage("Joined Room :)");
                 roomMenuObj.SetActive(true);
-                roomNameTMP.text = "Room " + roomNameInputField.text;   
+                roomNameTMP.text = "Room " + roomNameInputField.text;
+                timerObj.SetActive(false);
             }
             else
             {
@@ -269,9 +278,10 @@ namespace BhanuAssets.Scripts
 
         private void OnLeavingRoom()
         {
-            PhotonNetwork.LeaveRoom();
             leavingRoomMenuObj.SetActive(true);
+            PhotonNetwork.LeaveRoom();
             timerObj.SetActive(true);
+            countdownTimer.ResetCounter();
         }
 
         private void OnLeavingRoomFailed()
@@ -287,7 +297,7 @@ namespace BhanuAssets.Scripts
             leavingRoomMenuObj.SetActive(false);
             timerObj.SetActive(false);
 
-            if(!noInternet)
+            if(!_bNoInternet)
             {
                 errorMenuObj.SetActive(false);
                 titleMenuObj.SetActive(true);   
@@ -301,8 +311,10 @@ namespace BhanuAssets.Scripts
             errorMenuObj.SetActive(true);
             errorTMP.text = "Unable to connect to the Internet :( Please make sure your internet connection is active :)";
             leavingRoomMenuObj.SetActive(false);
+            loadingMenuObj.SetActive(false);
             LogMessages.ErrorMessage("On No Internet Event :(");
-            noInternet = true;
+            mainMenuObj.SetActive(false);
+            _bNoInternet = true;
             okButtonObj.SetActive(false);
             timerObj.SetActive(false);
             titleMenuObj.SetActive(false);

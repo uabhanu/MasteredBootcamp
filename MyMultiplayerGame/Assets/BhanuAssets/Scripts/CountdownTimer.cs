@@ -1,3 +1,4 @@
+using System;
 using BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using System.Collections;
@@ -9,20 +10,20 @@ namespace BhanuAssets.Scripts
     public class CountdownTimer : MonoBehaviour
     {
         private bool _takingAway = false;
-        [SerializeField] private int _secondsLeft;
+        private int _secondsLeft;
 
         [SerializeField] private CountdownData countDownData;
         [SerializeField] private TMP_Text timerDisplayText;
-    
+
         private void Start()
         {
             _secondsLeft = countDownData.MAXTime;
             timerDisplayText.text = "00 : " + _secondsLeft;
         }
-    
+
         private void Update()
         {
-             if(!_takingAway && _secondsLeft > 0)
+            if(!_takingAway && _secondsLeft > 0)
             {
                 timerDisplayText.enabled = true;
                 StartCoroutine(TimerTake());
@@ -35,6 +36,13 @@ namespace BhanuAssets.Scripts
             }
         }
 
+        public void ResetCounter()
+        {
+            _secondsLeft = countDownData.MAXTime;
+            timerDisplayText.text = "00 : " + _secondsLeft;
+            StartCoroutine(TimerTake());
+        }
+
         private IEnumerator TimerTake()
         {
             _takingAway = true;
@@ -43,7 +51,7 @@ namespace BhanuAssets.Scripts
             _takingAway = false;
             timerDisplayText.text = "00 : " + _secondsLeft;
         }
-    
+        
         public int SecondsLeft
         {
             get => _secondsLeft;
