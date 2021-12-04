@@ -6,6 +6,7 @@ namespace Events
     {
         #region Event Actions Declarations
         
+        private static event Action ConnectedToInternetAction;
         private static event Action ConnectedToMasterAction;
         private static event Action ConnectingToMasterAction;
         private static event Action CreateRoomFailedAction;
@@ -28,6 +29,10 @@ namespace Events
         {
             switch(eventToInvoke)
             {
+                case BhanuEvent.ConnectedToInternetEvent:
+                    ConnectedToInternetAction?.Invoke(); 
+                return;
+                
                 case BhanuEvent.ConnectedToMasterEvent:
                     ConnectedToMasterAction?.Invoke(); 
                 return;
@@ -92,6 +97,10 @@ namespace Events
         {
             switch(eventToSubscribe)
             {
+                case BhanuEvent.ConnectedToInternetEvent:
+                    ConnectedToInternetAction += actionFunction;
+                return;
+                
                 case BhanuEvent.ConnectedToMasterEvent:
                     ConnectedToMasterAction += actionFunction;
                 return;
@@ -156,6 +165,10 @@ namespace Events
         {
             switch(eventToSubscribe)
             {
+                case BhanuEvent.ConnectedToInternetEvent:
+                    ConnectedToInternetAction -= actionFunction;
+                return;
+                
                 case BhanuEvent.ConnectedToMasterEvent:
                     ConnectedToMasterAction -= actionFunction;
                 return;

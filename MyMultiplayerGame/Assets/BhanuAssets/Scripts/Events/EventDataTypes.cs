@@ -2,6 +2,7 @@
 {
     public enum BhanuEvent
     {
+        ConnectedToInternetEvent,
         ConnectedToMasterEvent,
         ConnectingToMasterEvent,
         CreateRoomFailedEvent,

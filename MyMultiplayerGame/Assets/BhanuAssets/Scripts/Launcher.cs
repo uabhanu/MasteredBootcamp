@@ -1,10 +1,16 @@
 using Events;
 using Photon.Pun;
+using Photon.Realtime;
 
 namespace BhanuAssets.Scripts
 {
     public class Launcher : MonoBehaviourPunCallbacks
     {
+        public override void OnConnected()
+        {
+            EventsManager.InvokeEvent(BhanuEvent.ConnectedToInternetEvent);
+        }
+
         public override void OnConnectedToMaster()
         {
             EventsManager.InvokeEvent(BhanuEvent.ConnectedToMasterEvent);
@@ -13,6 +19,11 @@ namespace BhanuAssets.Scripts
         public override void OnCreateRoomFailed(short returnCode , string message)
         {
             EventsManager.InvokeEvent(BhanuEvent.CreateRoomFailedEvent);
+        }
+        
+        public override void OnDisconnected(DisconnectCause cause)
+        {
+            EventsManager.InvokeEvent(BhanuEvent.NoInternetEvent);
         }
 
         public override void OnJoinedLobby()
