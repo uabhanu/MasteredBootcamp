@@ -72,8 +72,10 @@ namespace BhanuAssets.Scripts
 
         private void JoinRoom()
         {
-            loadingMenuObj.SetActive(false);
-            PhotonNetwork.JoinRandomRoom();
+            if(PhotonNetwork.CountOfRooms > 0)
+            {
+                PhotonNetwork.JoinRandomRoom();   
+            }
         }
         
         private void ResetAll()
@@ -327,29 +329,25 @@ namespace BhanuAssets.Scripts
 
         private void OnJoinedRoom()
         {
-            // if(!_bNoInternet)
-            // {
-            //     createRoomButtonObj.SetActive(false);
-            //     createRoomMenuObj.SetActive(false);
-            //     creatingRoomMenuObj.SetActive(false);
-            //     //findingRoomMenuObj.SetActive(false);
-            //     joinRoomButtonObj.SetActive(true);
-            //     LogMessages.AllIsWellMessage("Joined Room :)");
-            //     roomButtonObj.SetActive(true);
-            //     roomButtonTMP.text = "Room " + roomNameInputField.text;
-            //     roomMenuObj.SetActive(true);
-            //     roomNameTMP.text = "Room " + roomNameInputField.text;
-            //     timerObj.SetActive(false);
-            //     titleMenuObj.SetActive(false);
-            // }
-            // else
-            // {
-            //     LogMessages.ErrorMessage("Sir Bhanu, No Internet :(");
-            // }
-
-            if(PhotonNetwork.IsMasterClient)
+            if(!_bNoInternet)
             {
-                PhotonNetwork.LoadLevel("MyMultiplayerGame");
+                createRoomButtonObj.SetActive(false);
+                createRoomMenuObj.SetActive(false);
+                creatingRoomMenuObj.SetActive(false);
+                //findingRoomMenuObj.SetActive(false);
+                joinRoomButtonObj.SetActive(true);
+                loadingMenuObj.SetActive(false);
+                LogMessages.AllIsWellMessage("Joined Room :)");
+                roomButtonObj.SetActive(true);
+                roomButtonTMP.text = "Room " + roomNameInputField.text;
+                roomMenuObj.SetActive(true);
+                roomNameTMP.text = "Room " + roomNameInputField.text;
+                timerObj.SetActive(false);
+                titleMenuObj.SetActive(false);
+            }
+            else
+            {
+                LogMessages.ErrorMessage("Sir Bhanu, No Internet :(");
             }
         }
 
