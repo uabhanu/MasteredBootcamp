@@ -2,6 +2,7 @@ using Events;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
+using Photon.Pun.Demo.Asteroids;
 
 namespace BhanuAssets.Scripts
 {
@@ -24,6 +25,7 @@ namespace BhanuAssets.Scripts
         
         public override void OnDisconnected(DisconnectCause cause)
         {
+            //LogMessages.ErrorMessage("Error : " + cause);
             EventsManager.InvokeEvent(BhanuEvent.NoInternetEvent);
         }
 
@@ -37,6 +39,11 @@ namespace BhanuAssets.Scripts
             EventsManager.InvokeEvent(BhanuEvent.JoinedRoomEvent);
         }
 
+        public override void OnJoinRandomFailed(short returnCode , string message)
+        {
+            EventsManager.InvokeEvent(BhanuEvent.CreateRoomRequestEvent);
+        }
+
         public override void OnLeftRoom()
         {
             EventsManager.InvokeEvent(BhanuEvent.LeftRoomEvent);
@@ -44,7 +51,7 @@ namespace BhanuAssets.Scripts
 
         public override void OnRoomListUpdate(List<RoomInfo> roomsList)
         {
-            EventsManager.InvokeEvent(BhanuEvent.RoomsListUpdatedEvent); //TODO Find out if this even is getting fired or not
+            
         }
     }
 }

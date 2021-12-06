@@ -1,8 +1,6 @@
 using Bhanu;
 using Events;
 using Photon.Pun;
-using Photon.Realtime;
-using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
@@ -13,15 +11,16 @@ namespace BhanuAssets.Scripts
     public class InGameMenuManager : MonoBehaviour
     {
         private bool _bNoInternet;
-        private RoomInfo _roomInfo;
 
         #region Serialized Private Variables Declarations
         
         [SerializeField] private CountdownTimer countdownTimer;
+        [SerializeField] private GameObject createRoomButtonObj;
         [SerializeField] private GameObject createRoomMenuObj;
         [SerializeField] private GameObject creatingRoomMenuObj;
         [SerializeField] private GameObject errorMenuObj;
-        [SerializeField] private GameObject findingRoomMenuObj;
+        //[SerializeField] private GameObject findingRoomMenuObj;
+        [SerializeField] private GameObject joinRoomButtonObj;
         [SerializeField] private GameObject leavingRoomMenuObj;
         [SerializeField] private GameObject loadingMenuObj;
         [SerializeField] private GameObject mainMenuObj;
@@ -42,6 +41,7 @@ namespace BhanuAssets.Scripts
         
         private void Start()
         {
+            InvokeRepeating(nameof(CreateOrJoinButton) , 1f , 1f);
             ResetAll();
             SubscribeToEvents();
         }
@@ -51,10 +51,29 @@ namespace BhanuAssets.Scripts
             UnsubscribeFromEvents();
         }
 
+        private void CreateOrJoinButton()
+        {
+            if(PhotonNetwork.CountOfRooms > 0)
+            {
+                int currentCountOfRooms = PhotonNetwork.CountOfRooms;
+                LogMessages.AllIsWellMessage("Total Rooms : " + currentCountOfRooms);
+                createRoomButtonObj.SetActive(false);
+                joinRoomButtonObj.SetActive(true);
+            }
+            
+            else if(PhotonNetwork.CountOfRooms == 0)
+            {
+                int currentCountOfRooms = PhotonNetwork.CountOfRooms;
+                LogMessages.AllIsWellMessage("Total Rooms : " + currentCountOfRooms);
+                createRoomButtonObj.SetActive(true);
+                joinRoomButtonObj.SetActive(false);
+            }
+        }
+
         private void JoinRoom()
         {
-            LogMessages.AllIsWellMessage("Room Name : " + _roomInfo.Name);
-            PhotonNetwork.JoinRoom(_roomInfo.Name);
+            loadingMenuObj.SetActive(false);
+            PhotonNetwork.JoinRandomRoom();
         }
         
         private void ResetAll()
@@ -62,7 +81,8 @@ namespace BhanuAssets.Scripts
             createRoomMenuObj.SetActive(false);
             creatingRoomMenuObj.SetActive(false);
             errorMenuObj.SetActive(false);
-            findingRoomMenuObj.SetActive(false);
+            //findingRoomMenuObj.SetActive(false);
+            joinRoomButtonObj.SetActive(false);
             leavingRoomMenuObj.SetActive(false);
             loadingMenuObj.SetActive(false);
             roomButtonObj.SetActive(false);
@@ -72,12 +92,6 @@ namespace BhanuAssets.Scripts
             tryAgainButtonObj.SetActive(false);
         }
 
-        private void SetUp(RoomInfo roomInfo)
-        {
-            _roomInfo = roomInfo;
-            LogMessages.AllIsWellMessage("Room Name : " + _roomInfo.Name);
-        }
-        
         #endregion
 
         #region Button Functions
@@ -88,7 +102,7 @@ namespace BhanuAssets.Scripts
             {
                 if(menuName == "FindingRoom")
                 {
-                    findingRoomMenuObj.SetActive(false);
+                    //findingRoomMenuObj.SetActive(false);
                     titleMenuObj.SetActive(true);   
                 }
                 
@@ -146,6 +160,18 @@ namespace BhanuAssets.Scripts
         {
             EventsManager.InvokeEvent(BhanuEvent.FindRoomEvent);
         }
+        
+        public void JoinRoomButton()
+        {
+            JoinRoom();
+            loadingMenuObj.SetActive(true);
+            titleMenuObj.SetActive(false);
+
+            if(_bNoInternet)
+            {
+                timerObj.SetActive(true); 
+            }
+        }
 
         public void LeaveRoomButton()
         {
@@ -164,6 +190,14 @@ namespace BhanuAssets.Scripts
                 LogMessages.ErrorMessage("Sir Bhanu, No Internet :(");
             }
         }
+        
+        public void PlayButton()
+        {
+            if(PhotonNetwork.IsMasterClient)
+            {
+                PhotonNetwork.LoadLevel("MyMultiplayerGame");
+            }
+        }
 
         public void QuitButton()
         {
@@ -172,12 +206,6 @@ namespace BhanuAssets.Scripts
             #else
                 Application.Quit();
             #endif
-        }
-        
-        public void RoomButton()
-        {
-            loadingMenuObj.SetActive(true);
-            JoinRoom();
         }
 
         public void StartButton()
@@ -201,26 +229,36 @@ namespace BhanuAssets.Scripts
         
         private void OnConnectedToMaster()
         {
+            _bNoInternet = false;
             LogMessages.AllIsWellMessage("Connected to Master :)");
+            PhotonNetwork.AutomaticallySyncScene = true;
             PhotonNetwork.JoinLobby(); //This is where you find or create rooms
         }
 
         private void OnConnectingToMaster()
         {
             mainMenuObj.SetActive(false);
-            timerObj.SetActive(true);
-            countdownTimer.ResetCounter();
-            
-            if(!_bNoInternet)
+
+            if(!PhotonNetwork.IsConnected)
             {
-                loadingMenuObj.SetActive(true);
-                LogMessages.WarningMessage("Connecting to Master :)");
-                PhotonNetwork.ConnectUsingSettings(); //Connect Using the settings that you can find in the Resources folder or by Photon->Highlight Server Settings   
+                if(!_bNoInternet)
+                {
+                    loadingMenuObj.SetActive(true);
+                    LogMessages.WarningMessage("Connecting to Master :)");
+                    PhotonNetwork.ConnectUsingSettings(); //Connect Using the settings that you can find in the Resources folder or by Photon->Highlight Server Settings   
+                }
+                else
+                {
+                    countdownTimer.ResetCounter();
+                    timerObj.SetActive(true);
+                    titleMenuObj.SetActive(true);
+                }
             }
             else
             {
-                titleMenuObj.SetActive(true);
                 LogMessages.AllIsWellMessage("Connected to Master Already :)");
+                titleMenuObj.SetActive(true);
+                
             }
         }
         
@@ -231,6 +269,7 @@ namespace BhanuAssets.Scripts
             errorMenuObj.SetActive(true);
             errorTMP.text = "Unable to create the room as it may already exist";
             LogMessages.ErrorMessage("Unable to create the room :(");
+            PhotonNetwork.CreateRoom(roomNameInputField.text);
         }
         
         private void OnCreateRoomRequested()
@@ -257,15 +296,13 @@ namespace BhanuAssets.Scripts
         {
             if(!_bNoInternet)
             {
-                findingRoomMenuObj.SetActive(true);
+                //findingRoomMenuObj.SetActive(true);
                 titleMenuObj.SetActive(false);   
             }
             else
             {
                 LogMessages.ErrorMessage("Sir Bhanu, No Internet :(");
             }
-
-            //Photon Network's Find Room Function here
         }
         
         private void OnFindRoom()
@@ -290,22 +327,29 @@ namespace BhanuAssets.Scripts
 
         private void OnJoinedRoom()
         {
-            if(!_bNoInternet)
+            // if(!_bNoInternet)
+            // {
+            //     createRoomButtonObj.SetActive(false);
+            //     createRoomMenuObj.SetActive(false);
+            //     creatingRoomMenuObj.SetActive(false);
+            //     //findingRoomMenuObj.SetActive(false);
+            //     joinRoomButtonObj.SetActive(true);
+            //     LogMessages.AllIsWellMessage("Joined Room :)");
+            //     roomButtonObj.SetActive(true);
+            //     roomButtonTMP.text = "Room " + roomNameInputField.text;
+            //     roomMenuObj.SetActive(true);
+            //     roomNameTMP.text = "Room " + roomNameInputField.text;
+            //     timerObj.SetActive(false);
+            //     titleMenuObj.SetActive(false);
+            // }
+            // else
+            // {
+            //     LogMessages.ErrorMessage("Sir Bhanu, No Internet :(");
+            // }
+
+            if(PhotonNetwork.IsMasterClient)
             {
-                createRoomMenuObj.SetActive(false);
-                creatingRoomMenuObj.SetActive(false);
-                findingRoomMenuObj.SetActive(false);
-                LogMessages.AllIsWellMessage("Created Room :)");
-                roomButtonObj.SetActive(true);
-                roomButtonTMP.text = "Room " + roomNameInputField.text;
-                roomMenuObj.SetActive(true);
-                roomNameTMP.text = "Room " + roomNameInputField.text;
-                timerObj.SetActive(false);
-                titleMenuObj.SetActive(false);
-            }
-            else
-            {
-                LogMessages.ErrorMessage("Sir Bhanu, No Internet :(");
+                PhotonNetwork.LoadLevel("MyMultiplayerGame");
             }
         }
 
@@ -361,14 +405,6 @@ namespace BhanuAssets.Scripts
             tryAgainButtonObj.SetActive(true);
         }
 
-        private void OnRoomsListUpdated(List<RoomInfo> roomsList)
-        {
-            for(int i = 0; i < roomsList.Count; i++)
-            {
-                SetUp(roomsList[i]);
-            }
-        }
-
         #endregion
         
         #region Event Listeners
@@ -389,7 +425,6 @@ namespace BhanuAssets.Scripts
             EventsManager.SubscribeToEvent(BhanuEvent.LeavingRoomFailedEvent , OnLeavingRoomFailed);
             EventsManager.SubscribeToEvent(BhanuEvent.LeftRoomEvent , OnLeftRoom);
             EventsManager.SubscribeToEvent(BhanuEvent.NoInternetEvent , OnNoInternet);
-            EventsManager.SubscribeToEvent(BhanuEvent.RoomsListUpdatedEvent , OnRoomsListUpdated);
         }
         
         private void UnsubscribeFromEvents()
@@ -408,7 +443,6 @@ namespace BhanuAssets.Scripts
             EventsManager.UnsubscribeFromEvent(BhanuEvent.LeavingRoomFailedEvent , OnLeavingRoomFailed);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.LeftRoomEvent , OnLeftRoom);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.NoInternetEvent , OnNoInternet);
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.RoomsListUpdatedEvent , OnRoomsListUpdated);
         }
         
         #endregion
