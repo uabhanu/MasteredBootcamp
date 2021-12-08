@@ -8,7 +8,7 @@ using UnityEngine.SceneManagement;
 
 namespace BhanuAssets.Scripts
 {
-    public class InGameMenuManager : MonoBehaviour
+    public class MenuManager : MonoBehaviour
     {
         private bool _bNoInternet;
 
@@ -19,7 +19,6 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject createRoomMenuObj;
         [SerializeField] private GameObject creatingRoomMenuObj;
         [SerializeField] private GameObject errorMenuObj;
-        //[SerializeField] private GameObject findingRoomMenuObj;
         [SerializeField] private GameObject joinRoomButtonObj;
         [SerializeField] private GameObject leavingRoomMenuObj;
         [SerializeField] private GameObject loadingMenuObj;
