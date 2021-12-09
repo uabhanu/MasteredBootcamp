@@ -19,6 +19,7 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject createRoomMenuObj;
         [SerializeField] private GameObject creatingRoomMenuObj;
         [SerializeField] private GameObject errorMenuObj;
+        [SerializeField] private GameObject joiningRoomMenuObj;
         [SerializeField] private GameObject joinRoomButtonObj;
         [SerializeField] private GameObject leavingRoomMenuObj;
         [SerializeField] private GameObject loadingMenuObj;
@@ -40,7 +41,7 @@ namespace BhanuAssets.Scripts
         
         private void Start()
         {
-            InvokeRepeating(nameof(CreateOrJoinButton) , 1f , 1f);
+            InvokeRepeating(nameof(CreateOrJoinButton) , 0.1f , 0.5f); //Testing Join Room Button through Event WIP
             ResetAll();
             SubscribeToEvents();
         }
@@ -73,7 +74,14 @@ namespace BhanuAssets.Scripts
         {
             if(PhotonNetwork.CountOfRooms > 0)
             {
-                PhotonNetwork.JoinRandomRoom();   
+                if(PhotonNetwork.IsConnectedAndReady) //Not sure this is working or not
+                {
+                    PhotonNetwork.JoinRandomRoom();   
+                }
+                else
+                {
+                    LogMessages.ErrorMessage("JoinRoom() : There is no client to join a Room :(");
+                }
             }
         }
         
@@ -83,6 +91,7 @@ namespace BhanuAssets.Scripts
             creatingRoomMenuObj.SetActive(false);
             errorMenuObj.SetActive(false);
             //findingRoomMenuObj.SetActive(false);
+            joiningRoomMenuObj.SetActive(false);
             joinRoomButtonObj.SetActive(false);
             leavingRoomMenuObj.SetActive(false);
             loadingMenuObj.SetActive(false);
@@ -165,7 +174,6 @@ namespace BhanuAssets.Scripts
         public void JoinRoomButton()
         {
             JoinRoom();
-            loadingMenuObj.SetActive(true);
             titleMenuObj.SetActive(false);
 
             if(_bNoInternet)
@@ -276,6 +284,7 @@ namespace BhanuAssets.Scripts
         private void OnCreateRoomRequested()
         {
             createRoomMenuObj.SetActive(false);
+            loadingMenuObj.SetActive(false);
 
             if(!_bNoInternet)
             {
@@ -287,7 +296,15 @@ namespace BhanuAssets.Scripts
                 }
                 else
                 {
-                    creatingRoomMenuObj.SetActive(true);
+                    if(PhotonNetwork.CountOfRooms > 0)
+                    {
+                        joiningRoomMenuObj.SetActive(true);
+                    }
+                    else
+                    {
+                        creatingRoomMenuObj.SetActive(true);    
+                    }
+                    
                     PhotonNetwork.CreateRoom(roomNameInputField.text);   
                 }   
             }
@@ -315,10 +332,22 @@ namespace BhanuAssets.Scripts
         {
             if(!_bNoInternet)
             {
-                LogMessages.AllIsWellMessage("Joined Lobby :)");
+                LogMessages.AllIsWellMessage("OnJoinedLobby() :)");
                 loadingMenuObj.SetActive(false);
                 titleMenuObj.SetActive(true);
                 timerObj.SetActive(false);
+
+                //This doesn't seem to hit so doing InvokeRepeating for now
+                // if(PhotonNetwork.CountOfRooms > 0)
+                // {
+                //     createRoomButtonObj.SetActive(false);
+                //     joinRoomButtonObj.SetActive(true);
+                // }
+                // else
+                // {
+                //     createRoomButtonObj.SetActive(true);
+                //     joinRoomButtonObj.SetActive(false);
+                // }
             }
             else
             {
@@ -333,10 +362,11 @@ namespace BhanuAssets.Scripts
                 createRoomButtonObj.SetActive(false);
                 createRoomMenuObj.SetActive(false);
                 creatingRoomMenuObj.SetActive(false);
+                joiningRoomMenuObj.SetActive(false);
                 //findingRoomMenuObj.SetActive(false);
                 joinRoomButtonObj.SetActive(true);
                 loadingMenuObj.SetActive(false);
-                LogMessages.AllIsWellMessage("Joined Room :)");
+                LogMessages.AllIsWellMessage("OnJoinedRoom() :)");
                 roomButtonObj.SetActive(true);
                 roomButtonTMP.text = "Room " + roomNameInputField.text;
                 roomMenuObj.SetActive(true);

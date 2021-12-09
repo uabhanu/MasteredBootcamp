@@ -16,61 +16,39 @@ namespace BhanuAssets.Scripts
 
         private void Start()
         {
-            SelectRenderer();
+            photonView.RPC("SelectRenderer" , RpcTarget.All);
+            //SelectRenderer();
         }
 
         private void Update()
         {
             Move();
         }
-
-        [PunRPC]
+        
         private void Move()
         {
             if(photonView.IsMine)
             {
                 if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
                 {
-                    MoveForward();
+                    photonView.RPC("MoveForward" , RpcTarget.All);
                 }
             
                 if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
                 {
-                    MoveBackward();
+                    photonView.RPC("MoveBackward" , RpcTarget.All);
                 }
             
                 if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
                 {
-                    MoveLeft();
+                    photonView.RPC("MoveLeft" , RpcTarget.All);
                 }
             
                 if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
                 {
-                    MoveRight();
+                    photonView.RPC("MoveRight" , RpcTarget.All);
                 }   
             }
-            // else
-            // {
-            //     if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
-            //     {
-            //         photonView.RPC("MoveForward" , RpcTarget.MasterClient);
-            //     }
-            //
-            //     if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
-            //     {
-            //         photonView.RPC("MoveBackward" , RpcTarget.MasterClient);
-            //     }
-            //
-            //     if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-            //     {
-            //         photonView.RPC("MoveLeft" , RpcTarget.MasterClient);
-            //     }
-            //
-            //     if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-            //     {
-            //         photonView.RPC("MoveRight" , RpcTarget.MasterClient);
-            //     }
-            // }
         }
 
         [PunRPC]
@@ -97,6 +75,7 @@ namespace BhanuAssets.Scripts
             transform.Translate(Vector3.right * playerData.MoveSpeed * Time.deltaTime);
         }
 
+        [PunRPC]
         private void SelectRenderer()
         {
             playerRenderer = GetComponent<MeshRenderer>();
