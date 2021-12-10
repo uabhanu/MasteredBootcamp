@@ -6,6 +6,7 @@ namespace BhanuAssets.Scripts.ScriptableObjects
     public class PlayerData : ScriptableObject
     {
         [SerializeField] private float moveSpeed;
+        [SerializeField] private float rotationSpeed;
         [SerializeField] private GameObject prefab;
         [SerializeField] private Material localMaterial;
         [SerializeField] private Material remoteMaterial;
@@ -32,6 +33,12 @@ namespace BhanuAssets.Scripts.ScriptableObjects
         {
             get => remoteMaterial;
             set => remoteMaterial = value;
+        }
+
+        public float RotationSpeed
+        {
+            get => rotationSpeed;
+            set => rotationSpeed = value;
         }
     }
 }

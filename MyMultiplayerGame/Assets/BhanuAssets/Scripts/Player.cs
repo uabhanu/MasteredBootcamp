@@ -1,4 +1,5 @@
 using BhanuAssets.Scripts.ScriptableObjects;
+using Cinemachine;
 using Photon.Pun;
 using TMPro;
 using UnityEngine;
@@ -7,71 +8,51 @@ namespace BhanuAssets.Scripts
 {
     public class Player : MonoBehaviour
     {
+        private bool _readyToPlay;
         private Material _materialToUse;
         private MeshRenderer _playerRenderer;
         
         [SerializeField] private PhotonView photonView;
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private TMP_InputField nameInputTMP;
         [SerializeField] private TMP_Text nameTMP;
 
         private void Start()
         {
+            //nameInputTMP.enabled = true;
+            _readyToPlay = true;
             photonView.RPC("SelectRenderer" , RpcTarget.All);
         }
 
         private void Update()
         {
-            Move();
+            photonView.RPC("Move" , RpcTarget.All);
         }
         
+        [PunRPC]
         private void Move()
         {
-            if(photonView.IsMine)
+            if(photonView.IsMine && _readyToPlay)
             {
-                if(Input.GetKey(KeyCode.W) || Input.GetKey(KeyCode.UpArrow))
+                float horizontalInput = Input.GetAxis("Horizontal");
+                float verticalInput = Input.GetAxis("Vertical");
+                
+                Vector3 movementDirection = new Vector3(horizontalInput , 0f , verticalInput);
+                movementDirection.Normalize();
+                
+                transform.Translate(movementDirection * playerData.MoveSpeed * Time.deltaTime , Space.World);
+                
+                if(horizontalInput == 0 && verticalInput == 0)
                 {
-                    photonView.RPC("MoveForward" , RpcTarget.All);
+                    movementDirection = Vector3.zero;
                 }
-            
-                if(Input.GetKey(KeyCode.S) || Input.GetKey(KeyCode.DownArrow))
+                
+                if(movementDirection != Vector3.zero)
                 {
-                    photonView.RPC("MoveBackward" , RpcTarget.All);
-                }
-            
-                if(Input.GetKey(KeyCode.A) || Input.GetKey(KeyCode.LeftArrow))
-                {
-                    photonView.RPC("MoveLeft" , RpcTarget.All);
-                }
-            
-                if(Input.GetKey(KeyCode.D) || Input.GetKey(KeyCode.RightArrow))
-                {
-                    photonView.RPC("MoveRight" , RpcTarget.All);
-                }   
+                    Quaternion rotationDirection = Quaternion.LookRotation(movementDirection , Vector3.up);
+                    transform.rotation = Quaternion.RotateTowards(transform.rotation , rotationDirection , playerData.RotationSpeed * Time.deltaTime);
+                }  
             }
-        }
-
-        [PunRPC]
-        private void MoveBackward()
-        {
-            transform.Translate(Vector3.back * playerData.MoveSpeed * Time.deltaTime);
-        }
-        
-        [PunRPC]
-        private void MoveForward()
-        {
-            transform.Translate(Vector3.forward * playerData.MoveSpeed * Time.deltaTime);
-        }
-        
-        [PunRPC]
-        private void MoveLeft()
-        {
-            transform.Translate(Vector3.left * playerData.MoveSpeed * Time.deltaTime);
-        }
-        
-        [PunRPC]
-        private void MoveRight()
-        {
-            transform.Translate(Vector3.right * playerData.MoveSpeed * Time.deltaTime);
         }
 
         [PunRPC]
@@ -93,8 +74,9 @@ namespace BhanuAssets.Scripts
 
         public void UpdateName()
         {
-            GameObject nameInput = GameObject.Find("NameInputField (TMP)");
-            nameTMP.text = nameInput.GetComponent<TMP_InputField>().text;
+            nameTMP.enabled = true;
+            nameTMP.text = nameInputTMP.text;
+            nameInputTMP.enabled = false;
         }
     }
 }
