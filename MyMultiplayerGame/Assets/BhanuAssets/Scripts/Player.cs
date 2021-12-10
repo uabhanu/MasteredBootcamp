@@ -7,8 +7,8 @@ namespace BhanuAssets.Scripts
 {
     public class Player : MonoBehaviour
     {
-        private Material materialToUse;
-        private MeshRenderer playerRenderer;
+        private Material _materialToUse;
+        private MeshRenderer _playerRenderer;
         
         [SerializeField] private PhotonView photonView;
         [SerializeField] private PlayerData playerData;
@@ -17,7 +17,6 @@ namespace BhanuAssets.Scripts
         private void Start()
         {
             photonView.RPC("SelectRenderer" , RpcTarget.All);
-            //SelectRenderer();
         }
 
         private void Update()
@@ -78,17 +77,17 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void SelectRenderer()
         {
-            playerRenderer = GetComponent<MeshRenderer>();
+            _playerRenderer = GetComponent<MeshRenderer>();
             
             if(photonView.IsMine)
             {
-                materialToUse = playerData.LocalMaterial;
-                playerRenderer.material = materialToUse;
+                _materialToUse = playerData.LocalMaterial;
+                _playerRenderer.material = _materialToUse;
             }
             else
             {
-                materialToUse = playerData.RemoteMaterial;
-                playerRenderer.material = materialToUse;
+                _materialToUse = playerData.RemoteMaterial;
+                _playerRenderer.material = _materialToUse;
             }
         }
 
