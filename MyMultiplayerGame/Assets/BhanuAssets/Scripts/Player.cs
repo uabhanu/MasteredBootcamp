@@ -9,9 +9,10 @@ namespace BhanuAssets.Scripts
     public class Player : MonoBehaviour
     {
         private bool _readyToPlay;
+        private CinemachineVirtualCamera _cvm;
         private Material _materialToUse;
         private MeshRenderer _playerRenderer;
-        
+
         [SerializeField] private PhotonView photonView;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private TMP_InputField nameInputTMP;
@@ -19,6 +20,15 @@ namespace BhanuAssets.Scripts
 
         private void Start()
         {
+            _cvm = GameObject.FindGameObjectWithTag("Follow").GetComponent<CinemachineVirtualCamera>();
+            _cvm.Follow = transform;
+            _cvm.LookAt = transform;
+
+            if(!photonView.IsMine)
+            {
+                _cvm = null;
+            }
+            
             //nameInputTMP.enabled = true;
             _readyToPlay = true;
             photonView.RPC("SelectRenderer" , RpcTarget.All);
@@ -37,19 +47,20 @@ namespace BhanuAssets.Scripts
                 float horizontalInput = Input.GetAxis("Horizontal");
                 float verticalInput = Input.GetAxis("Vertical");
                 
-                Vector3 movementDirection = new Vector3(horizontalInput , 0f , verticalInput);
-                movementDirection.Normalize();
+                Vector3 moveInCameraDirection = new Vector3(horizontalInput , 0f , verticalInput);
+                moveInCameraDirection = moveInCameraDirection.x * _cvm.transform.right.normalized + moveInCameraDirection.z * _cvm.transform.forward.normalized;
+                moveInCameraDirection.y = 0f;
                 
-                transform.Translate(movementDirection * playerData.MoveSpeed * Time.deltaTime , Space.World);
+                transform.Translate(moveInCameraDirection * playerData.MoveSpeed * Time.deltaTime , Space.World);
                 
                 if(horizontalInput == 0 && verticalInput == 0)
                 {
-                    movementDirection = Vector3.zero;
+                    moveInCameraDirection = Vector3.zero;
                 }
                 
-                if(movementDirection != Vector3.zero)
+                if(moveInCameraDirection != Vector3.zero)
                 {
-                    Quaternion rotationDirection = Quaternion.LookRotation(movementDirection , Vector3.up);
+                    Quaternion rotationDirection = Quaternion.LookRotation(moveInCameraDirection , Vector3.up);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation , rotationDirection , playerData.RotationSpeed * Time.deltaTime);
                 }  
             }
