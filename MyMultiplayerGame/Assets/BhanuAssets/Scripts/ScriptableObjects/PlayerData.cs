@@ -8,13 +8,20 @@ namespace BhanuAssets.Scripts.ScriptableObjects
         [SerializeField] private float moveSpeed;
         [SerializeField] private float rotationSpeed;
         [SerializeField] private GameObject prefab;
+        [SerializeField] private int electricBoxesCollided = 0;
         [SerializeField] private Material localMaterial;
         [SerializeField] private Material remoteMaterial;
-
+        
         public float MoveSpeed
         {
             get => moveSpeed;
             set => moveSpeed = value;
+        }
+        
+        public float RotationSpeed
+        {
+            get => rotationSpeed;
+            set => rotationSpeed = value;
         }
 
         public GameObject Prefab
@@ -35,10 +42,10 @@ namespace BhanuAssets.Scripts.ScriptableObjects
             set => remoteMaterial = value;
         }
 
-        public float RotationSpeed
+        public int ElectricBoxesCollided
         {
-            get => rotationSpeed;
-            set => rotationSpeed = value;
+            get => electricBoxesCollided;
+            set => electricBoxesCollided = value;
         }
     }
 }

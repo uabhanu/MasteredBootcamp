@@ -24,6 +24,7 @@ namespace Events
         private static event Action NoInternetAction;
         private static event Action<List<RoomInfo>> RoomsListUpdatedAction;
         private static event Action TryAgainAction;
+        private static event Action WinAction;
         
         #endregion
 
@@ -91,6 +92,10 @@ namespace Events
 
                 case BhanuEvent.TryAgainEvent:
                     TryAgainAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.WinEvent:
+                    WinAction?.Invoke(); 
                 return;
             }
         }
@@ -172,6 +177,10 @@ namespace Events
                 case BhanuEvent.TryAgainEvent:
                     TryAgainAction += actionFunction;
                 return;
+                
+                case BhanuEvent.WinEvent:
+                    WinAction += actionFunction;
+                return;
             }
         }
         
@@ -251,6 +260,10 @@ namespace Events
 
                 case BhanuEvent.TryAgainEvent:
                     TryAgainAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.WinEvent:
+                    WinAction -= actionFunction;
                 return;
             }
         }

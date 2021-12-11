@@ -17,6 +17,7 @@
         LeftRoomEvent,
         NoInternetEvent,
         RoomsListUpdatedEvent,
-        TryAgainEvent
+        TryAgainEvent,
+        WinEvent
     }
 }

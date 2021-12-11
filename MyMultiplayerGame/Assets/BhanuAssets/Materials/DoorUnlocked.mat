@@ -20,7 +20,7 @@ Material:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: Maze_TintedGlass_Mat
+  m_Name: DoorUnlocked
   m_Shader: {fileID: 4800000, guid: ee7e4c9a5f6364b688a332c67fc32cca, type: 3}
   m_ShaderKeywords: _ALPHAPREMULTIPLY_ON
   m_LightmapFlags: 4
@@ -125,7 +125,7 @@ Material:
     - _WorkflowMode: 1
     - _ZWrite: 0
     m_Colors:
-    - _BaseColor: {r: 0.14705881, g: 0.14705881, b: 0.14705881, a: 0.509}
+    - _BaseColor: {r: 0, g: 1, b: 0, a: 1}
     - _Color: {r: 0.14705881, g: 0.14705881, b: 0.14705881, a: 0.509}
     - _EmissionColor: {r: 0, g: 0, b: 0, a: 1}
     - _SpecColor: {r: 0.2, g: 0.2, b: 0.2, a: 1}

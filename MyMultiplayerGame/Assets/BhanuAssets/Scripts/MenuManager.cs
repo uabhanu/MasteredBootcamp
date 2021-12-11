@@ -204,7 +204,7 @@ namespace BhanuAssets.Scripts
         {
             if(PhotonNetwork.IsMasterClient)
             {
-                PhotonNetwork.LoadLevel("Game");
+                PhotonNetwork.LoadLevel("Level01");
             }
         }
 
