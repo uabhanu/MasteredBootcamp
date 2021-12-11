@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 3989059705750488371}
   - component: {fileID: 7316278275436662081}
   - component: {fileID: 6234092152782879431}
+  - component: {fileID: 7650890177323718720}
   m_Layer: 0
   m_Name: Box02
   m_TagString: Electric
@@ -112,6 +113,73 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!114 &7650890177323718720
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 550706756726574897}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507cd1b1ac0ed3b47925b3b93890a95f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallObj: {fileID: 852014552427772754}
+  collider: {fileID: 7090008787402228457}
+--- !u!1 &852014552427772754
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 8580732952908985824}
+  - component: {fileID: 7988165532691185048}
+  - component: {fileID: 5138046362464871181}
+  m_Layer: 0
+  m_Name: ElectricBoxWall02
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &8580732952908985824
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852014552427772754}
+  m_LocalRotation: {x: -0, y: 0.48060903, z: -0, w: 0.876935}
+  m_LocalPosition: {x: -30.34, y: 1.47, z: 1.89}
+  m_LocalScale: {x: 4, y: 3, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 4558327735047488431}
+  m_RootOrder: 9
+  m_LocalEulerAnglesHint: {x: 0, y: 57.45, z: 0}
+--- !u!65 &7988165532691185048
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852014552427772754}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &5138046362464871181
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 852014552427772754}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &1636154791799600753
 GameObject:
   m_ObjectHideFlags: 0
@@ -193,6 +261,59 @@ MeshRenderer:
   m_SortingLayer: 0
   m_SortingOrder: 0
   m_AdditionalVertexStreams: {fileID: 0}
+--- !u!1 &2084536419615385914
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6708240634716039150}
+  - component: {fileID: 3899737783316552410}
+  - component: {fileID: 3849689307283038483}
+  m_Layer: 0
+  m_Name: ElectricBoxWall01
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 0
+--- !u!4 &6708240634716039150
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084536419615385914}
+  m_LocalRotation: {x: -0, y: -0.31338444, z: -0, w: 0.9496264}
+  m_LocalPosition: {x: -0.06, y: 1.47, z: 2.06}
+  m_LocalScale: {x: 4, y: 3, z: 0.5}
+  m_Children: []
+  m_Father: {fileID: 4558327735047488431}
+  m_RootOrder: 8
+  m_LocalEulerAnglesHint: {x: 0, y: -36.527, z: 0}
+--- !u!65 &3899737783316552410
+BoxCollider:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084536419615385914}
+  m_Material: {fileID: 0}
+  m_IsTrigger: 0
+  m_Enabled: 1
+  serializedVersion: 2
+  m_Size: {x: 1, y: 1, z: 1}
+  m_Center: {x: 0, y: 0, z: 0}
+--- !u!33 &3849689307283038483
+MeshFilter:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2084536419615385914}
+  m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
 --- !u!1 &3677251397702067448
 GameObject:
   m_ObjectHideFlags: 0
@@ -258,6 +379,8 @@ Transform:
   - {fileID: 8680188410579580225}
   - {fileID: 4262095171869302215}
   - {fileID: 4701528906964523306}
+  - {fileID: 6708240634716039150}
+  - {fileID: 8580732952908985824}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -355,6 +478,7 @@ GameObject:
   - component: {fileID: 6436774510909908778}
   - component: {fileID: 8206507656609741816}
   - component: {fileID: 4926857960489323324}
+  - component: {fileID: 4924274913142509319}
   m_Layer: 0
   m_Name: Box01
   m_TagString: Electric
@@ -454,6 +578,20 @@ Rigidbody:
   m_Interpolate: 0
   m_Constraints: 126
   m_CollisionDetection: 1
+--- !u!114 &4924274913142509319
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 4204159352089582633}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 507cd1b1ac0ed3b47925b3b93890a95f, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  wallObj: {fileID: 2084536419615385914}
+  collider: {fileID: 7485503897642421404}
 --- !u!1 &5409188881645788994
 GameObject:
   m_ObjectHideFlags: 0

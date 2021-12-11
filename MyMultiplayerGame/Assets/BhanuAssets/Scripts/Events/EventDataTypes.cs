@@ -7,6 +7,8 @@
         ConnectingToMasterEvent,
         CreateRoomFailedEvent,
         CreateRoomRequestEvent,
+        ElectricBoxCollidedEvent,
+        ElectricBoxNotCollidedEvent,
         FindRoomEvent,
         FindingRoomEvent,
         JoinedLobbyEvent,

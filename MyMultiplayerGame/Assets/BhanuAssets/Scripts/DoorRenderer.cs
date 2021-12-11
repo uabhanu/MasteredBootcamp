@@ -1,11 +1,10 @@
-using System;
 using BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using UnityEngine;
 
 namespace BhanuAssets.Scripts
 {
-    public class Door : MonoBehaviour
+    public class DoorRenderer : MonoBehaviour
     {
         private bool _doorLocked = true;
         private Material _materialToUse;

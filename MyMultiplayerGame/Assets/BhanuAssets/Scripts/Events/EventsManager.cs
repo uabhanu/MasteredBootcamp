@@ -13,6 +13,8 @@ namespace Events
         private static event Action ConnectingToMasterAction;
         private static event Action CreateRoomFailedAction;
         private static event Action CreateRoomRequestAction;
+        private static event Action ElectricBoxCollidedAction;
+        private static event Action ElectricBoxNotCollidedAction;
         private static event Action FindingRoomAction;
         private static event Action FindRoomAction;
         private static event Action JoinedLobbyAction;
@@ -52,6 +54,14 @@ namespace Events
                 
                 case BhanuEvent.CreateRoomRequestEvent:
                     CreateRoomRequestAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.ElectricBoxCollidedEvent:
+                    ElectricBoxCollidedAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.ElectricBoxNotCollidedEvent:
+                    ElectricBoxNotCollidedAction?.Invoke(); 
                 return;
                 
                 case BhanuEvent.FindingRoomEvent:
@@ -138,6 +148,14 @@ namespace Events
                     CreateRoomRequestAction += actionFunction;
                 return;
                 
+                case BhanuEvent.ElectricBoxCollidedEvent:
+                    ElectricBoxCollidedAction += actionFunction;
+                return;
+                
+                case BhanuEvent.ElectricBoxNotCollidedEvent:
+                    ElectricBoxNotCollidedAction += actionFunction;
+                return;
+                
                 case BhanuEvent.FindingRoomEvent:
                     FindingRoomAction += actionFunction;
                 return;
@@ -220,6 +238,14 @@ namespace Events
                 
                 case BhanuEvent.CreateRoomRequestEvent:
                     CreateRoomRequestAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.ElectricBoxCollidedEvent:
+                    ElectricBoxCollidedAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.ElectricBoxNotCollidedEvent:
+                    ElectricBoxNotCollidedAction -= actionFunction;
                 return;
                 
                 case BhanuEvent.FindingRoomEvent:

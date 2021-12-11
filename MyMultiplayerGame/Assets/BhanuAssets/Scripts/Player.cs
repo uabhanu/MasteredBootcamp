@@ -32,8 +32,7 @@ namespace BhanuAssets.Scripts
         private void Start()
         {
             _electricalBoxes = GameObject.FindGameObjectsWithTag("Electric");
-            playerData.ElectricBoxesCollided = 0;
-            
+
             if(photonView.IsMine)
             {
                 _cvm = GameObject.FindGameObjectWithTag("Follow").GetComponent<CinemachineVirtualCamera>();
@@ -49,6 +48,11 @@ namespace BhanuAssets.Scripts
         private void Update()
         {
             photonView.RPC("Move" , RpcTarget.All);
+            
+            if(playerData.ElectricBoxesCollided == _electricalBoxes.Length)
+            {
+                EventsManager.InvokeEvent(BhanuEvent.WinEvent);
+            }
         }
 
         private void OnCollisionEnter(Collision other)
@@ -57,23 +61,8 @@ namespace BhanuAssets.Scripts
             {
                 if(photonView.IsMine && photonView.AmController)
                 {
+                    EventsManager.InvokeEvent(BhanuEvent.ElectricBoxCollidedEvent);
                     photonView.RPC("ElectricBoxCollidedRPC" , RpcTarget.All);
-                }
-
-                if(playerData.ElectricBoxesCollided == _electricalBoxes.Length)
-                {
-                    EventsManager.InvokeEvent(BhanuEvent.WinEvent);
-                }
-            }
-        }
-        
-        private void OnCollisionExit(Collision other)
-        {
-            if(other.gameObject.tag.Equals("Electric"))
-            {
-                if(photonView.IsMine && photonView.AmController)
-                {
-                    photonView.RPC("ElectricBoxNoLongerCollidedRPC" , RpcTarget.All);
                 }
             }
         }
