@@ -19,7 +19,11 @@
         LeftRoomEvent,
         NoInternetEvent,
         RoomsListUpdatedEvent,
+        StartCutsceneFinishedEvent,
+        StartCutsceneStartedEvent,
         TryAgainEvent,
+        WinCutsceneFinishedEvent,
+        WinCutsceneStartedEvent,
         WinEvent
     }
 }

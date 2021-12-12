@@ -1,3 +1,4 @@
+using Events;
 using Photon.Pun;
 using UnityEngine;
 
@@ -5,30 +6,28 @@ namespace BhanuAssets.Scripts
 {
     public class CutScenesManager : MonoBehaviour
     {
+        private GameObject[] _playersInTheScene;
+        
         [SerializeField] private GameManager gameManager;
 
         public void StartingCutSceneEnded()
         {
-            gameManager.IsReadyToPlay = true;
-            gameManager.CreatePlayer();
+            EventsManager.InvokeEvent(BhanuEvent.StartCutsceneFinishedEvent);
         }
         
         public void StartingCutSceneStarted()
         {
-            gameManager.IsReadyToPlay = false;
+            EventsManager.InvokeEvent(BhanuEvent.StartCutsceneStartedEvent);
         }
         
         public void WinCutSceneEnded()
         {
-            if(PhotonNetwork.IsMasterClient)
-            {
-                PhotonNetwork.LoadLevel("Level02");
-            }
+            EventsManager.InvokeEvent(BhanuEvent.WinCutsceneFinishedEvent);
         }
         
         public void WinCutSceneStarted()
         {
-            gameManager.IsReadyToPlay = false;
+            EventsManager.InvokeEvent(BhanuEvent.WinCutsceneStartedEvent);
         }
     }
 }

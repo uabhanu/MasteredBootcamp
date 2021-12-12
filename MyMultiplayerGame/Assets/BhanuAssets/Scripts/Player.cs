@@ -32,7 +32,7 @@ namespace BhanuAssets.Scripts
         private void Start()
         {
             _electricalBoxes = GameObject.FindGameObjectsWithTag("Electric");
-            _gameManager = FindObjectOfType<GameManager>();
+            _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
             if(photonView.IsMine)
             {
@@ -42,13 +42,16 @@ namespace BhanuAssets.Scripts
             }
             
             //nameInputTMP.enabled = true;
-            photonView.RPC("SelectRenderer" , RpcTarget.All);
+            if(_gameManager != null && _gameManager.StartCutsceneFinished)
+            {
+                photonView.RPC("SelectRenderer" , RpcTarget.All);   
+            }
         }
 
         private void Update()
         {
             photonView.RPC("Move" , RpcTarget.All);
-            
+
             if(playerData.ElectricBoxesCollided == _electricalBoxes.Length)
             {
                 EventsManager.InvokeEvent(BhanuEvent.WinEvent);
@@ -107,7 +110,7 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void Move()
         {
-            if(photonView.IsMine && _gameManager.IsReadyToPlay)
+            if(photonView.IsMine)
             {
                 float horizontalInput = Input.GetAxis("Horizontal");
                 float verticalInput = Input.GetAxis("Vertical");
@@ -134,20 +137,17 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void SelectRenderer()
         {
-            if(_gameManager.IsReadyToPlay)
+            _playerRenderer = GetComponent<MeshRenderer>();
+    
+            if(photonView.IsMine)
             {
-                _playerRenderer = GetComponent<MeshRenderer>();
-            
-                if(photonView.IsMine)
-                {
-                    _materialToUse = playerData.LocalMaterial;
-                    _playerRenderer.material = _materialToUse;
-                }
-                else
-                {
-                    _materialToUse = playerData.RemoteMaterial;
-                    _playerRenderer.material = _materialToUse;
-                }   
+                _materialToUse = playerData.LocalMaterial;
+                _playerRenderer.material = _materialToUse;
+            }
+            else
+            {
+                _materialToUse = playerData.RemoteMaterial;
+                _playerRenderer.material = _materialToUse;
             }
         }
         

@@ -25,7 +25,11 @@ namespace Events
         private static event Action LeftRoomAction;
         private static event Action NoInternetAction;
         private static event Action<List<RoomInfo>> RoomsListUpdatedAction;
+        private static event Action StartCutsceneFinishedAction;
+        private static event Action StartCutsceneStartedAction;
         private static event Action TryAgainAction;
+        private static event Action WinCutsceneFinishedAction;
+        private static event Action WinCutsceneStartedAction;
         private static event Action WinAction;
         
         #endregion
@@ -99,9 +103,25 @@ namespace Events
                 case BhanuEvent.NoInternetEvent:
                     NoInternetAction?.Invoke(); 
                 return;
+                
+                case BhanuEvent.StartCutsceneFinishedEvent:
+                    StartCutsceneFinishedAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.StartCutsceneStartedEvent:
+                    StartCutsceneStartedAction?.Invoke(); 
+                return;
 
                 case BhanuEvent.TryAgainEvent:
                     TryAgainAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.WinCutsceneFinishedEvent:
+                    WinCutsceneFinishedAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.WinCutsceneStartedEvent:
+                    WinCutsceneStartedAction?.Invoke(); 
                 return;
                 
                 case BhanuEvent.WinEvent:
@@ -191,9 +211,25 @@ namespace Events
                 case BhanuEvent.NoInternetEvent:
                     NoInternetAction += actionFunction;
                 return;
+                
+                case BhanuEvent.StartCutsceneFinishedEvent:
+                    StartCutsceneFinishedAction += actionFunction;
+                return;
+                
+                case BhanuEvent.StartCutsceneStartedEvent:
+                    StartCutsceneStartedAction += actionFunction;
+                return;
 
                 case BhanuEvent.TryAgainEvent:
                     TryAgainAction += actionFunction;
+                return;
+                
+                case BhanuEvent.WinCutsceneFinishedEvent:
+                    WinCutsceneFinishedAction += actionFunction;
+                return;
+                
+                case BhanuEvent.WinCutsceneStartedEvent:
+                    WinCutsceneStartedAction += actionFunction;
                 return;
                 
                 case BhanuEvent.WinEvent:
@@ -283,9 +319,25 @@ namespace Events
                 case BhanuEvent.NoInternetEvent:
                     NoInternetAction -= actionFunction;
                 return;
+                
+                case BhanuEvent.StartCutsceneFinishedEvent:
+                    StartCutsceneFinishedAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.StartCutsceneStartedEvent:
+                    StartCutsceneStartedAction -= actionFunction;
+                return;
 
                 case BhanuEvent.TryAgainEvent:
                     TryAgainAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.WinCutsceneFinishedEvent:
+                    WinCutsceneFinishedAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.WinCutsceneStartedEvent:
+                    WinCutsceneStartedAction -= actionFunction;
                 return;
                 
                 case BhanuEvent.WinEvent:
