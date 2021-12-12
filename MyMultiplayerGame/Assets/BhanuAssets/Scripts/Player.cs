@@ -11,8 +11,8 @@ namespace BhanuAssets.Scripts
     {
         #region Private Variables Declarations
         
-        private bool _readyToPlay;
         private CinemachineVirtualCamera _cvm;
+        private GameManager _gameManager;
         private GameObject[] _electricalBoxes;
         private Material _materialToUse;
         private MeshRenderer _playerRenderer;
@@ -28,10 +28,11 @@ namespace BhanuAssets.Scripts
         
         #endregion
 
-        #region Unity & Other Functions
+        #region MonoBehaviour Functions
         private void Start()
         {
             _electricalBoxes = GameObject.FindGameObjectsWithTag("Electric");
+            _gameManager = FindObjectOfType<GameManager>();
 
             if(photonView.IsMine)
             {
@@ -41,7 +42,6 @@ namespace BhanuAssets.Scripts
             }
             
             //nameInputTMP.enabled = true;
-            _readyToPlay = true;
             photonView.RPC("SelectRenderer" , RpcTarget.All);
         }
 
@@ -66,6 +66,10 @@ namespace BhanuAssets.Scripts
                 }
             }
         }
+        
+        #endregion
+        
+        #region User Functions
 
         public void UpdateName()
         {
@@ -103,7 +107,7 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void Move()
         {
-            if(photonView.IsMine/* && _readyToPlay*/)
+            if(photonView.IsMine && _gameManager.IsReadyToPlay)
             {
                 float horizontalInput = Input.GetAxis("Horizontal");
                 float verticalInput = Input.GetAxis("Vertical");
@@ -130,17 +134,20 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void SelectRenderer()
         {
-            _playerRenderer = GetComponent<MeshRenderer>();
+            if(_gameManager.IsReadyToPlay)
+            {
+                _playerRenderer = GetComponent<MeshRenderer>();
             
-            if(photonView.IsMine)
-            {
-                _materialToUse = playerData.LocalMaterial;
-                _playerRenderer.material = _materialToUse;
-            }
-            else
-            {
-                _materialToUse = playerData.RemoteMaterial;
-                _playerRenderer.material = _materialToUse;
+                if(photonView.IsMine)
+                {
+                    _materialToUse = playerData.LocalMaterial;
+                    _playerRenderer.material = _materialToUse;
+                }
+                else
+                {
+                    _materialToUse = playerData.RemoteMaterial;
+                    _playerRenderer.material = _materialToUse;
+                }   
             }
         }
         

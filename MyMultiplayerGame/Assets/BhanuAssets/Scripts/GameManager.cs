@@ -10,13 +10,15 @@ namespace BhanuAssets.Scripts
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private bool _isReadyToPlay = false;
+        
+        [SerializeField] private GameObject startCutSceneObj;
         [SerializeField] private GameObject winCutSceneObj;
         [SerializeField] private PlayerData playerData;
         
-        #region Unity & Other Functions
+        #region MonoBehaviour Functions
         private void Start()
         {
-            CreatePlayer();
             SubscribeToEvents();
         }
 
@@ -24,11 +26,21 @@ namespace BhanuAssets.Scripts
         {
             UnsubscribeFromEvents();
         }
+        
+        #endregion
+        
+        #region User Functions
+        
+        public bool IsReadyToPlay
+        {
+            get => _isReadyToPlay;
+            set => _isReadyToPlay = value;
+        }
 
-        private void CreatePlayer()
+        public void CreatePlayer()
         {
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , new Vector3(Random.Range(-4f , 4f) , 1f , Random.Range(0f , 3.89f)) , Quaternion.identity);
-            winCutSceneObj.SetActive(false);
+            startCutSceneObj.SetActive(false);
         }
 
         private void LoadNextLevel()
