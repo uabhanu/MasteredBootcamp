@@ -202,10 +202,7 @@ namespace BhanuAssets.Scripts
         
         public void PlayButton()
         {
-            if(PhotonNetwork.IsMasterClient)
-            {
-                PhotonNetwork.LoadLevel("Level01");
-            }
+            PhotonNetwork.LoadLevel("Level01");
         }
 
         public void QuitButton()

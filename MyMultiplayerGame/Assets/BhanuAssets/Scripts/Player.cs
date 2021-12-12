@@ -21,11 +21,13 @@ namespace BhanuAssets.Scripts
         
         #region Serialized Private Variables Declarations
 
+        [SerializeField] private MeshRenderer glassesRenderer;
+        [SerializeField] private MeshRenderer playerRenderer;
         [SerializeField] private PhotonView photonView;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private TMP_InputField nameInputTMP;
         [SerializeField] private TMP_Text nameTMP;
-        
+
         #endregion
 
         #region MonoBehaviour Functions
@@ -42,10 +44,7 @@ namespace BhanuAssets.Scripts
             }
             
             //nameInputTMP.enabled = true;
-            if(_gameManager != null && _gameManager.StartCutsceneFinished)
-            {
-                photonView.RPC("SelectRenderer" , RpcTarget.All);   
-            }
+            photonView.RPC("SelectRenderer" , RpcTarget.All);
         }
 
         private void Update()
@@ -114,23 +113,23 @@ namespace BhanuAssets.Scripts
             {
                 float horizontalInput = Input.GetAxis("Horizontal");
                 float verticalInput = Input.GetAxis("Vertical");
-                
+            
                 Vector3 moveInCameraDirection = new Vector3(horizontalInput , 0f , verticalInput);
                 moveInCameraDirection = moveInCameraDirection.x * _cvm.transform.right.normalized + moveInCameraDirection.z * _cvm.transform.forward.normalized;
                 moveInCameraDirection.y = 0f;
-                
+            
                 transform.Translate(moveInCameraDirection * playerData.MoveSpeed * Time.deltaTime , Space.World);
-                
+            
                 if(horizontalInput == 0 && verticalInput == 0)
                 {
                     moveInCameraDirection = Vector3.zero;
                 }
-                
+            
                 if(moveInCameraDirection != Vector3.zero)
                 {
                     Quaternion rotationDirection = Quaternion.LookRotation(moveInCameraDirection , Vector3.up);
                     transform.rotation = Quaternion.RotateTowards(transform.rotation , rotationDirection , playerData.RotationSpeed * Time.deltaTime);
-                }  
+                }
             }
         }
 

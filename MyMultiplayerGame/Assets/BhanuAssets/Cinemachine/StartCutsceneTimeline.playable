@@ -666,7 +666,7 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: bfda56da833e2384a9677cd3c976a436, type: 3}
-  m_Name: StartCVMTimeline
+  m_Name: StartCutsceneTimeline
   m_EditorClassIdentifier: 
   m_Version: 0
   m_Tracks:
@@ -1759,7 +1759,7 @@ AnimationClip:
     m_AdditiveReferencePoseClip: {fileID: 0}
     m_AdditiveReferencePoseTime: 0
     m_StartTime: 0
-    m_StopTime: 39.933334
+    m_StopTime: 40
     m_OrientationOffsetY: 0
     m_Level: 0
     m_CycleOffset: 0
@@ -1863,14 +1863,7 @@ AnimationClip:
   m_HasGenericRootTransform: 1
   m_HasMotionFloatCurves: 0
   m_Events:
-  - time: 0
-    functionName: StartingCutSceneStarted
-    data: 
-    objectReferenceParameter: {fileID: 0}
-    floatParameter: 0
-    intParameter: 0
-    messageOptions: 0
-  - time: 39.933334
+  - time: 40
     functionName: StartingCutSceneEnded
     data: 
     objectReferenceParameter: {fileID: 0}
