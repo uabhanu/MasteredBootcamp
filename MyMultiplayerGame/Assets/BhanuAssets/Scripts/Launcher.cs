@@ -50,7 +50,8 @@ namespace BhanuAssets.Scripts
 
         public override void OnRoomListUpdate(List<RoomInfo> roomsList)
         {
-            
+            RoomOptions roomOptions = new RoomOptions();
+            roomOptions.MaxPlayers = 2;
         }
     }
 }
