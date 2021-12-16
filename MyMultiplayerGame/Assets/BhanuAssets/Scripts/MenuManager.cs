@@ -271,7 +271,7 @@ namespace BhanuAssets.Scripts
                 {
                     roomData.Name = roomNameInputField.text;
                     roomNameTMP.text = "Welcome to the Room : " + roomData.Name;
-                    PhotonNetwork.CreateRoom(roomNameInputField.text , new RoomOptions() {MaxPlayers = roomData.MaxPlayers} , null);
+                    PhotonNetwork.CreateRoom(roomNameInputField.text , new RoomOptions() {MaxPlayers = roomData.MaxPlayers});
                 }   
             }
         }
@@ -295,14 +295,7 @@ namespace BhanuAssets.Scripts
         {
             if(!_bNoInternet)
             {
-                creatingRoomMenuObj.SetActive(false);
-                joiningRoomMenuObj.SetActive(false);
-                joinRoomButtonObj.SetActive(true);
-                loadingMenuObj.SetActive(false);
-                LogMessages.AllIsWellMessage("OnJoinedRoom() :)");
-                roomMenuObj.SetActive(true);
-                timerObj.SetActive(false);
-                titleMenuObj.SetActive(false);
+                PhotonNetwork.LoadLevel("Level01");
             }
             else
             {
