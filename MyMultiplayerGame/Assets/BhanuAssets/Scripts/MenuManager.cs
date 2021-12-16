@@ -248,6 +248,8 @@ namespace BhanuAssets.Scripts
             errorMenuObj.SetActive(true);
             errorTMP.text = "Unable to create the room as it may already exist";
             LogMessages.ErrorMessage("Unable to create the room :(");
+            mainMenuObj.SetActive(true);
+            errorMenuObj.SetActive(false);
             PhotonNetwork.CreateRoom(roomNameInputField.text);
         }
         

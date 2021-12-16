@@ -1,4 +1,3 @@
-using Photon.Realtime;
 using UnityEngine;
 
 namespace BhanuAssets.Scripts.ScriptableObjects
