@@ -419,8 +419,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df14dce030236a741927124b92d24420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  glassesRenderer: {fileID: 8508702067767340482}
-  playerRenderer: {fileID: 2110614798769228298}
   photonView: {fileID: -1239816862512665837}
   playerData: {fileID: 11400000, guid: a99eb944fd5cb3f4d8ec2b86f7d05f46, type: 2}
   nameInputTMP: {fileID: 4328137087073728326}

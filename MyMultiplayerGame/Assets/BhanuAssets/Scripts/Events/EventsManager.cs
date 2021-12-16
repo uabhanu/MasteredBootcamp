@@ -59,7 +59,7 @@ namespace Events
                 case BhanuEvent.CreateRoomRequestEvent:
                     CreateRoomRequestAction?.Invoke(); 
                 return;
-                
+
                 case BhanuEvent.ElectricBoxCollidedEvent:
                     ElectricBoxCollidedAction?.Invoke(); 
                 return;
@@ -167,7 +167,7 @@ namespace Events
                 case BhanuEvent.CreateRoomRequestEvent:
                     CreateRoomRequestAction += actionFunction;
                 return;
-                
+
                 case BhanuEvent.ElectricBoxCollidedEvent:
                     ElectricBoxCollidedAction += actionFunction;
                 return;
@@ -275,7 +275,7 @@ namespace Events
                 case BhanuEvent.CreateRoomRequestEvent:
                     CreateRoomRequestAction -= actionFunction;
                 return;
-                
+
                 case BhanuEvent.ElectricBoxCollidedEvent:
                     ElectricBoxCollidedAction -= actionFunction;
                 return;

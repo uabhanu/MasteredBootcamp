@@ -20,9 +20,7 @@ namespace BhanuAssets.Scripts
         #endregion
         
         #region Serialized Private Variables Declarations
-
-        [SerializeField] private MeshRenderer glassesRenderer;
-        [SerializeField] private MeshRenderer playerRenderer;
+        
         [SerializeField] private PhotonView photonView;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private TMP_InputField nameInputTMP;
@@ -149,7 +147,7 @@ namespace BhanuAssets.Scripts
                 _playerRenderer.material = _materialToUse;
             }
         }
-        
+
         #endregion
     }
 }

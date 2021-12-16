@@ -29,8 +29,13 @@ namespace BhanuAssets.Scripts
 
         private void CreatePlayer()
         {
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , new Vector3(Random.Range(-4f , 4f) , 1f , Random.Range(0f , 3.89f)) , Quaternion.identity);
-            startCutSceneObj.SetActive(false);
+            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
+
+            if(playerObj == null)
+            {
+                playerObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , new Vector3(Random.Range(-4f , 4f) , 1f , Random.Range(0f , 3.89f)) , Quaternion.identity);
+                startCutSceneObj.SetActive(false);
+            }
         }
 
         private void LoadNextLevel()
