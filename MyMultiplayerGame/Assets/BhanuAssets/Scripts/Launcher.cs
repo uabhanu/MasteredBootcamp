@@ -1,12 +1,17 @@
+using Bhanu;
 using Events;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
+using BhanuAssets.Scripts.ScriptableObjects;
+using UnityEngine;
 
 namespace BhanuAssets.Scripts
 {
     public class Launcher : MonoBehaviourPunCallbacks
     {
+        [SerializeField] private RoomData roomData;
+        
         public override void OnConnected()
         {
             EventsManager.InvokeEvent(BhanuEvent.ConnectedToInternetEvent);
@@ -40,6 +45,8 @@ namespace BhanuAssets.Scripts
 
         public override void OnJoinRandomFailed(short returnCode , string message)
         {
+            message = "Max Players Reached";
+            LogMessages.ErrorMessage("Unable to Join Room because : " + returnCode + " " + message);
             EventsManager.InvokeEvent(BhanuEvent.CreateRoomRequestEvent);
         }
 
@@ -52,6 +59,8 @@ namespace BhanuAssets.Scripts
         {
             RoomOptions roomOptions = new RoomOptions();
             roomOptions.MaxPlayers = 2;
+            roomData.MaxPlayers = roomOptions.MaxPlayers;
+            LogMessages.AllIsWellMessage("Maximum Players : " + roomOptions.MaxPlayers);
         }
     }
 }
