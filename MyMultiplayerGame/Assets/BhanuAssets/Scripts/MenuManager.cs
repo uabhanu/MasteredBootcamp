@@ -1,5 +1,4 @@
 using Bhanu;
-using BhanuAssets.Scripts.Events;
 using Events;
 using Photon.Pun;
 using TMPro;
@@ -365,7 +364,6 @@ namespace BhanuAssets.Scripts
                 joinRoomButtonObj.SetActive(true);
                 loadingMenuObj.SetActive(false);
                 LogMessages.AllIsWellMessage("OnJoinedRoom() :)");
-                PhotonEventsSender.SendRoomNameEvent(roomNameInputField);
                 roomButtonObj.SetActive(true);
                 roomButtonTMP.text = "Room " + roomNameInputField.text;
                 roomMenuObj.SetActive(true);
