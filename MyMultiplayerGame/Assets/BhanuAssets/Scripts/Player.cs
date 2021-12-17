@@ -12,10 +12,12 @@ namespace BhanuAssets.Scripts
         #region Private Variables Declarations
 
         private Animator _anim;
+        private bool _isGrounded;
         private CinemachineVirtualCamera _cvm;
         private GameObject[] _electricalBoxes;
         private Material _materialToUse;
         private SkinnedMeshRenderer _playerRenderer;
+        private Vector3 _playerVelocity;
         
         #endregion
         
@@ -23,6 +25,7 @@ namespace BhanuAssets.Scripts
         
         [SerializeField] private PhotonView photonView;
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private Rigidbody playerBody;
         [SerializeField] private TMP_InputField nameInputTMP;
         [SerializeField] private TMP_Text nameTMP;
 
@@ -46,6 +49,7 @@ namespace BhanuAssets.Scripts
 
         private void Update()
         {
+            photonView.RPC("Jump" , RpcTarget.All);
             photonView.RPC("Move" , RpcTarget.All);
 
             if(playerData.ElectricBoxesCollided == _electricalBoxes.Length)
@@ -62,6 +66,25 @@ namespace BhanuAssets.Scripts
                 {
                     EventsManager.InvokeEvent(BhanuEvent.ElectricBoxCollidedEvent);
                     photonView.RPC("ElectricBoxCollidedRPC" , RpcTarget.All);
+                }
+            }
+            
+            if(other.gameObject.tag.Equals("Floor"))
+            {
+                if(photonView.IsMine && photonView.AmController)
+                {
+                    _isGrounded = true;
+                }
+            }
+        }
+        
+        private void OnCollisionExit(Collision other)
+        {
+            if(other.gameObject.tag.Equals("Floor"))
+            {
+                if(photonView.IsMine && photonView.AmController)
+                {
+                    _isGrounded = false;
                 }
             }
         }
@@ -95,13 +118,17 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void Jump()
         {
-            
+            if(_isGrounded && Input.GetKeyDown(KeyCode.Space))
+            {
+                playerBody.AddForce(Vector3.up * playerData.JumpForce * Time.deltaTime , ForceMode.Impulse);
+                _anim.SetTrigger("Jump");
+            }
         }
         
         [PunRPC]
         private void Move()
         {
-            if(photonView.IsMine)
+            if(photonView.IsMine && _isGrounded)
             {
                 float horizontalInput = Input.GetAxis("Horizontal");
                 float verticalInput = Input.GetAxis("Vertical");

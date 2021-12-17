@@ -5,12 +5,26 @@ namespace BhanuAssets.Scripts.ScriptableObjects
     [CreateAssetMenu]
     public class PlayerData : ScriptableObject
     {
+        private float _gravityValue = 9.81f;
+        
+        [SerializeField] private float jumpForce;
         [SerializeField] private float moveSpeed;
         [SerializeField] private float rotationSpeed;
-        [SerializeField] private GameObject prefab;
         [SerializeField] private int electricBoxesCollided = 0;
         [SerializeField] private Material localMaterial;
         [SerializeField] private Material remoteMaterial;
+        
+        public float GravityValue
+        {
+            get => _gravityValue;
+            set => _gravityValue = value;
+        }
+        
+        public float JumpForce
+        {
+            get => jumpForce;
+            set => jumpForce = value;
+        }
         
         public float MoveSpeed
         {
@@ -22,12 +36,6 @@ namespace BhanuAssets.Scripts.ScriptableObjects
         {
             get => rotationSpeed;
             set => rotationSpeed = value;
-        }
-
-        public GameObject Prefab
-        {
-            get => prefab;
-            set => prefab = value;
         }
 
         public Material LocalMaterial

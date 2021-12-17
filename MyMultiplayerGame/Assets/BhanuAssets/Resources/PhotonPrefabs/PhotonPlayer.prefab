@@ -122,8 +122,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: df14dce030236a741927124b92d24420, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _isGrounded: 0
   photonView: {fileID: 7171924959596415489}
   playerData: {fileID: 11400000, guid: a99eb944fd5cb3f4d8ec2b86f7d05f46, type: 2}
+  playerBody: {fileID: 3119862507923306987}
   nameInputTMP: {fileID: 4328137087073728326, guid: f1e8f3fcf5900054db87560e25067a1b,
     type: 3}
   nameTMP: {fileID: 698695999870059440, guid: f1e8f3fcf5900054db87560e25067a1b, type: 3}
