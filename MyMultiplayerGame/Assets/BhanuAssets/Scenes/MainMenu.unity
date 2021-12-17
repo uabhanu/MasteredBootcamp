@@ -3379,6 +3379,7 @@ GameObject:
   - component: {fileID: 1425200127}
   - component: {fileID: 1425200132}
   - component: {fileID: 1425200131}
+  - component: {fileID: 1425200133}
   m_Layer: 5
   m_Name: MenuCanvas
   m_TagString: Untagged
@@ -3506,7 +3507,6 @@ MonoBehaviour:
   creatingRoomMenuObj: {fileID: 1074164890}
   errorMenuObj: {fileID: 1735766965}
   joiningRoomMenuObj: {fileID: 1485138930}
-  joinRoomButtonObj: {fileID: 254673910}
   leavingRoomMenuObj: {fileID: 687267419}
   loadingMenuObj: {fileID: 778724129}
   mainMenuObj: {fileID: 1589748661}
@@ -3515,10 +3515,32 @@ MonoBehaviour:
   timerObj: {fileID: 1915232600}
   titleMenuObj: {fileID: 1352015431}
   tryAgainButtonObj: {fileID: 350626798}
+  photonView: {fileID: 1425200133}
   roomData: {fileID: 11400000, guid: 493258a9476aba94b8bd5c46b123df49, type: 2}
   roomNameInputField: {fileID: 804529395}
   errorTMP: {fileID: 808325996}
-  roomNameTMP: {fileID: 2118558586}
+--- !u!114 &1425200133
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1425200126}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: aa584fbee541324448dd18d8409c7a41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObservedComponentsFoldoutOpen: 1
+  Group: 0
+  prefixField: -1
+  Synchronization: 3
+  OwnershipTransfer: 0
+  observableSearch: 2
+  ObservedComponents: []
+  sceneViewId: 1
+  InstantiationId: 0
+  isRuntimeInstantiated: 0
 --- !u!1 &1440328830
 GameObject:
   m_ObjectHideFlags: 0

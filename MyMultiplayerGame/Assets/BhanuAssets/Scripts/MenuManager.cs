@@ -21,7 +21,6 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject creatingRoomMenuObj;
         [SerializeField] private GameObject errorMenuObj;
         [SerializeField] private GameObject joiningRoomMenuObj;
-        [SerializeField] private GameObject joinRoomButtonObj;
         [SerializeField] private GameObject leavingRoomMenuObj;
         [SerializeField] private GameObject loadingMenuObj;
         [SerializeField] private GameObject mainMenuObj;
@@ -30,10 +29,10 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject timerObj;
         [SerializeField] private GameObject titleMenuObj;
         [SerializeField] private GameObject tryAgainButtonObj;
+        [SerializeField] private PhotonView photonView;
         [SerializeField] private RoomData roomData;
         [SerializeField] private TMP_InputField roomNameInputField;
         [SerializeField] private TMP_Text errorTMP;
-        [SerializeField] private TMP_Text roomNameTMP;
 
         #endregion
         
@@ -52,14 +51,14 @@ namespace BhanuAssets.Scripts
 
         private void JoinRoom()
         {
-            if(PhotonNetwork.CountOfRooms > 0)
-            {
-                PhotonNetwork.JoinRandomRoom();
-            }
-            else
-            {
-                LogMessages.ErrorMessage("JoinRoom() : There is no client to join a Room :(");
-            }
+            PhotonNetwork.JoinRandomRoom();
+        }
+
+        [PunRPC]
+        private void LoadLevel()
+        {
+            //PhotonNetwork.LoadLevel("Level01");
+            PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
         }
         
         private void ResetAll()
@@ -290,7 +289,7 @@ namespace BhanuAssets.Scripts
         {
             if(!_bNoInternet)
             {
-                PhotonNetwork.LoadLevel("Level01");
+                photonView.RPC("LoadLevel" , RpcTarget.All);
             }
             else
             {
