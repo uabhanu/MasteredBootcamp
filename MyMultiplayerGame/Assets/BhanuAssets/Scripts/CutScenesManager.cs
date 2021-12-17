@@ -27,7 +27,7 @@ namespace BhanuAssets.Scripts
         {
             StartingCutSceneEnded();
         }
-        
+
         public void StartingCutSceneEnded()
         {
             EventsManager.InvokeEvent(BhanuEvent.StartCutsceneFinishedEvent);

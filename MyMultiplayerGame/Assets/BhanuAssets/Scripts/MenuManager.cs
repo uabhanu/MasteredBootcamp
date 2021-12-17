@@ -54,14 +54,11 @@ namespace BhanuAssets.Scripts
         {
             if(PhotonNetwork.CountOfRooms > 0)
             {
-                if(PhotonNetwork.IsConnectedAndReady) //Not sure this is working or not
-                {
-                    PhotonNetwork.JoinRandomRoom();   
-                }
-                else
-                {
-                    LogMessages.ErrorMessage("JoinRoom() : There is no client to join a Room :(");
-                }
+                PhotonNetwork.JoinRandomRoom();
+            }
+            else
+            {
+                LogMessages.ErrorMessage("JoinRoom() : There is no client to join a Room :(");
             }
         }
         
@@ -269,8 +266,6 @@ namespace BhanuAssets.Scripts
                 }
                 else
                 {
-                    roomData.Name = roomNameInputField.text;
-                    roomNameTMP.text = "Welcome to the Room : " + roomData.Name;
                     PhotonNetwork.CreateRoom(roomNameInputField.text , new RoomOptions() {MaxPlayers = roomData.MaxPlayers});
                 }   
             }
@@ -391,16 +386,6 @@ namespace BhanuAssets.Scripts
             EventsManager.UnsubscribeFromEvent(BhanuEvent.LeftRoomEvent , OnLeftRoom);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.NoInternetEvent , OnNoInternet);
         }
-        
-        #endregion
-        
-        #region Photon Event Functions
-        
-        
-        #endregion
-        
-        #region Photon Event Listeners
-        
         
         #endregion
     }

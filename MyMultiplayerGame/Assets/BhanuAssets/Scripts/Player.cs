@@ -10,12 +10,12 @@ namespace BhanuAssets.Scripts
     public class Player : MonoBehaviour
     {
         #region Private Variables Declarations
-        
+
+        private Animator _anim;
         private CinemachineVirtualCamera _cvm;
-        private GameManager _gameManager;
         private GameObject[] _electricalBoxes;
         private Material _materialToUse;
-        private MeshRenderer _playerRenderer;
+        private SkinnedMeshRenderer _playerRenderer;
         
         #endregion
         
@@ -31,8 +31,8 @@ namespace BhanuAssets.Scripts
         #region MonoBehaviour Functions
         private void Start()
         {
+            _anim = GetComponent<Animator>();
             _electricalBoxes = GameObject.FindGameObjectsWithTag("Electric");
-            _gameManager = GameObject.Find("GameManager").GetComponent<GameManager>();
 
             if(photonView.IsMine)
             {
@@ -41,7 +41,6 @@ namespace BhanuAssets.Scripts
                 _cvm.LookAt = transform;
             }
             
-            //nameInputTMP.enabled = true;
             photonView.RPC("SelectRenderer" , RpcTarget.All);
         }
 
@@ -70,18 +69,7 @@ namespace BhanuAssets.Scripts
         #endregion
         
         #region User Functions
-
-        public void UpdateName()
-        {
-            nameTMP.enabled = true;
-            nameTMP.text = nameInputTMP.text;
-            nameInputTMP.enabled = false;
-        }
         
-        #endregion
-        
-        #region RPC Functions
-
         [PunRPC]
         private void ElectricBoxCollidedRPC()
         {
@@ -111,6 +99,9 @@ namespace BhanuAssets.Scripts
             {
                 float horizontalInput = Input.GetAxis("Horizontal");
                 float verticalInput = Input.GetAxis("Vertical");
+                
+                _anim.SetFloat("MovementX" , horizontalInput);
+                _anim.SetFloat("MovementZ" , verticalInput);
             
                 Vector3 moveInCameraDirection = new Vector3(horizontalInput , 0f , verticalInput);
                 moveInCameraDirection = moveInCameraDirection.x * _cvm.transform.right.normalized + moveInCameraDirection.z * _cvm.transform.forward.normalized;
@@ -134,7 +125,7 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void SelectRenderer()
         {
-            _playerRenderer = GetComponent<MeshRenderer>();
+            _playerRenderer = GetComponent<SkinnedMeshRenderer>();
     
             if(photonView.IsMine)
             {
@@ -148,6 +139,13 @@ namespace BhanuAssets.Scripts
             }
         }
 
+        public void UpdateName()
+        {
+            nameTMP.enabled = true;
+            nameTMP.text = nameInputTMP.text;
+            nameInputTMP.enabled = false;
+        }
+        
         #endregion
     }
 }

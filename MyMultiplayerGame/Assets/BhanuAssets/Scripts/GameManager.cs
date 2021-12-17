@@ -9,12 +9,14 @@ namespace BhanuAssets.Scripts
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private GameObject startCutSceneObj;
-        [SerializeField] private GameObject winCutSceneObj;
+        [SerializeField] private GameObject startCutsceneObj;
+        [SerializeField] private GameObject winCutsceneObj;
+        [SerializeField] private PhotonView photonView;
 
         #region MonoBehaviour Functions
         private void Start()
         {
+            photonView.RPC("StartStartingCutscene" , RpcTarget.All);
             SubscribeToEvents();
         }
 
@@ -33,8 +35,9 @@ namespace BhanuAssets.Scripts
 
             if(playerObj == null)
             {
-                playerObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , new Vector3(Random.Range(-4f , 4f) , 1f , Random.Range(0f , 3.89f)) , Quaternion.identity);
-                startCutSceneObj.SetActive(false);
+                //The 'y' position here is of this current object and not Player Prefab
+                playerObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , new Vector3(Random.Range(-4f , 4f) , transform.position.y , Random.Range(0f , 3.89f)) , Quaternion.identity);
+                startCutsceneObj.SetActive(false);
             }
         }
 
@@ -50,7 +53,7 @@ namespace BhanuAssets.Scripts
         private void OnStartCutsceneFinished()
         {
             CreatePlayer();
-            startCutSceneObj.SetActive(false);
+            startCutsceneObj.SetActive(false);
         }
 
         private void OnWinCutsceneFinished()
@@ -60,7 +63,13 @@ namespace BhanuAssets.Scripts
 
         private void OnWin()
         {
-            winCutSceneObj.SetActive(true);
+            winCutsceneObj.SetActive(true);
+        }
+        
+        [PunRPC]
+        private void StartStartingCutscene()
+        {
+            startCutsceneObj.SetActive(true);
         }
 
         #endregion
