@@ -91,6 +91,12 @@ namespace BhanuAssets.Scripts
                 playerData.ElectricBoxesCollided--;   
             }
         }
+
+        [PunRPC]
+        private void Jump()
+        {
+            
+        }
         
         [PunRPC]
         private void Move()
