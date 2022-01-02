@@ -30,12 +30,12 @@ namespace BhanuAssets.Scripts
 
         public void StartingCutSceneEnded()
         {
-            EventsManager.InvokeEvent(BhanuEvent.StartCutsceneFinishedEvent);
+            EventsManager.InvokeEvent(BhanuEvent.StartCutsceneFinished);
         }
 
         public void WinCutSceneEnded()
         {
-            EventsManager.InvokeEvent(BhanuEvent.WinCutsceneFinishedEvent);
+            EventsManager.InvokeEvent(BhanuEvent.WinCutsceneFinished);
         }
         
         #endregion

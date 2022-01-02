@@ -27,7 +27,7 @@ namespace BhanuAssets.Scripts
         {
             doorOpen = true;
             anim.SetBool("DoorTriggered" , doorOpen);
-            EventsManager.InvokeEvent(BhanuEvent.WinCutsceneStartedEvent);
+            EventsManager.InvokeEvent(BhanuEvent.WinCutsceneStarted);
         }
         
         #region Event Functions
@@ -43,12 +43,12 @@ namespace BhanuAssets.Scripts
         
         private void SubscribeToEvents()
         {
-            EventsManager.SubscribeToEvent(BhanuEvent.WinEvent , OnWin);
+            EventsManager.SubscribeToEvent(BhanuEvent.Win , OnWin);
         }
         
         private void UnsubscribeFromEvents()
         {
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.WinEvent , OnWin);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.Win , OnWin);
         }
         
         #endregion

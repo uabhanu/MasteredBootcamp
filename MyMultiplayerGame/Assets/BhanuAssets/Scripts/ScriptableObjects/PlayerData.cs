@@ -5,6 +5,7 @@ namespace BhanuAssets.Scripts.ScriptableObjects
     [CreateAssetMenu]
     public class PlayerData : ScriptableObject
     {
+        [SerializeField] private bool startCutsceneWatched;
         private float _gravityValue = 9.81f;
         
         [SerializeField] private float jumpForce;
@@ -55,5 +56,7 @@ namespace BhanuAssets.Scripts.ScriptableObjects
             get => electricBoxesCollided;
             set => electricBoxesCollided = value;
         }
+        
+        public bool StartCutsceneWatched { get => startCutsceneWatched; set => startCutsceneWatched = value; }
     }
 }

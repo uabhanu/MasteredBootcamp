@@ -1,3 +1,4 @@
+using Assets.BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using UnityEngine;
 
@@ -5,6 +6,8 @@ namespace BhanuAssets.Scripts
 {
     public class ElectricBox : MonoBehaviour
     {
+        private bool playerCollided = false;
+
         [SerializeField] private GameObject wallObj;
         [SerializeField] private Collider collider;
 
@@ -26,8 +29,7 @@ namespace BhanuAssets.Scripts
 
         private void OnElectricBoxCollided()
         {
-            collider.enabled = false;
-            wallObj.SetActive(true);
+            playerCollided = true;
         }
 
         #endregion
@@ -36,12 +38,12 @@ namespace BhanuAssets.Scripts
         
         private void SubscribeToEvents()
         {
-            EventsManager.SubscribeToEvent(BhanuEvent.ElectricBoxCollidedEvent , OnElectricBoxCollided);
+            EventsManager.SubscribeToEvent(BhanuEvent.ElectricBoxCollided , OnElectricBoxCollided);
         }
         
         private void UnsubscribeFromEvents()
         {
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.ElectricBoxCollidedEvent , OnElectricBoxCollided);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.ElectricBoxCollided , OnElectricBoxCollided);
         }
         
         #endregion

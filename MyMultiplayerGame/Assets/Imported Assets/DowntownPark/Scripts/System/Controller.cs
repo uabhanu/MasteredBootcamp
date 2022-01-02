@@ -82,8 +82,8 @@ public class Controller : MonoBehaviour
         Vector3 move = Vector3.zero;
         if (!LockControl)
         {
-            // Jump (we do it first as 
-            if (m_Grounded && Input.GetButtonDown("Jump"))
+            // JumpRPC (we do it first as 
+            if (m_Grounded && Input.GetButtonDown("JumpRPC"))
             {
                 m_VerticalSpeed = JumpSpeed;
                 m_Grounded = false;
@@ -98,7 +98,7 @@ public class Controller : MonoBehaviour
                 m_SpeedAtJump = actualSpeed;
             }
 
-            // Move around with WASD
+            // MoveRPC around with WASD
             move = new Vector3(Input.GetAxis("Horizontal"), 0, Input.GetAxisRaw("Vertical"));
             if (move.sqrMagnitude > 1.0f)
                 move.Normalize();

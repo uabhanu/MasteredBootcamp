@@ -52,10 +52,10 @@ public class ThirdPersonController : MonoBehaviour
         }
 
         // Changes the height position of the player..
-        if (Input.GetButtonDown("Jump") && groundedPlayer)
+        if (Input.GetButtonDown("JumpRPC") && groundedPlayer)
         {
             playerVelocity.y += Mathf.Sqrt(JumpForce * -3.0f * gravityValue);
-            m_Animator.SetTrigger("Jump");
+            m_Animator.SetTrigger("JumpRPC");
         }
 
         playerVelocity.y += gravityValue * Time.deltaTime;

@@ -2,28 +2,14 @@
 {
     public enum BhanuEvent
     {
-        ConnectedToInternetEvent,
-        ConnectedToMasterEvent,
-        ConnectingToMasterEvent,
-        CreateRoomFailedEvent,
-        CreateRoomRequestEvent,
-        ElectricBoxCollidedEvent,
-        ElectricBoxNotCollidedEvent,
-        FindRoomEvent,
-        FindingRoomEvent,
-        JoinedLobbyEvent,
-        JoinedRoomEvent,
-        LeaveRoomRequestEvent,
-        LeavingRoomEvent,
-        LeavingRoomFailedEvent,
-        LeftRoomEvent,
-        NoInternetEvent,
-        RoomsListUpdatedEvent,
-        StartCutsceneFinishedEvent,
-        StartCutsceneStartedEvent,
-        TryAgainEvent,
-        WinCutsceneFinishedEvent,
-        WinCutsceneStartedEvent,
-        WinEvent
+        Death,
+        ElectricBoxCollided,
+        ElectricBoxNotCollided,
+        StartCutsceneFinished,
+        StartCutsceneStarted,
+        TryAgain,
+        WinCutsceneFinished,
+        WinCutsceneStarted,
+        Win
     }
 }
