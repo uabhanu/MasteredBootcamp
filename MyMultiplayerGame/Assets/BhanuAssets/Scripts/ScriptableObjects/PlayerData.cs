@@ -5,8 +5,14 @@ namespace BhanuAssets.Scripts.ScriptableObjects
     [CreateAssetMenu]
     public class PlayerData : ScriptableObject
     {
-        [SerializeField] private bool startCutsceneWatched;
+        #region Private Variables Declarations
+        
+        private bool startCutsceneWatched;
         private float _gravityValue = 9.81f;
+        
+        #endregion
+        
+        #region Serialized Field Private Variables Declarations
         
         [SerializeField] private float jumpForce;
         [SerializeField] private float moveSpeed;
@@ -14,6 +20,12 @@ namespace BhanuAssets.Scripts.ScriptableObjects
         [SerializeField] private int electricBoxesCollided = 0;
         [SerializeField] private Material localMaterial;
         [SerializeField] private Material remoteMaterial;
+
+        #endregion
+        
+        #region Helper Functions
+        
+        public bool StartCutsceneWatched { get => startCutsceneWatched; set => startCutsceneWatched = value; }
         
         public float GravityValue
         {
@@ -38,6 +50,12 @@ namespace BhanuAssets.Scripts.ScriptableObjects
             get => rotationSpeed;
             set => rotationSpeed = value;
         }
+        
+        public int ElectricBoxesCollided
+        {
+            get => electricBoxesCollided;
+            set => electricBoxesCollided = value;
+        }
 
         public Material LocalMaterial
         {
@@ -51,12 +69,6 @@ namespace BhanuAssets.Scripts.ScriptableObjects
             set => remoteMaterial = value;
         }
 
-        public int ElectricBoxesCollided
-        {
-            get => electricBoxesCollided;
-            set => electricBoxesCollided = value;
-        }
-        
-        public bool StartCutsceneWatched { get => startCutsceneWatched; set => startCutsceneWatched = value; }
+        #endregion
     }
 }

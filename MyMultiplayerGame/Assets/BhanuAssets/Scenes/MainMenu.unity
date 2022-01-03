@@ -292,6 +292,7 @@ MonoBehaviour:
   roomMenuObj: {fileID: 170266292}
   startButtonObj: {fileID: 426381433}
   sceneIndex: 1
+  playerData: {fileID: 11400000, guid: a99eb944fd5cb3f4d8ec2b86f7d05f46, type: 2}
   roomNameDisplayTMP: {fileID: 1539510276}
   playersDisplayTransform: {fileID: 1233285374}
 --- !u!4 &30004452

@@ -2904,7 +2904,7 @@ namespace Photon.Realtime
                     bool[] onlineList = operationResponse[ParameterCode.FindFriendsResponseOnlineList] as bool[];
                     string[] roomList = operationResponse[ParameterCode.FindFriendsResponseRoomIdList] as string[];
 
-                    //if (onlineList == null || roomList == null || this.friendListRequested == null || onlineList.Length != this.friendListRequested.Length)
+                    //if (onlineList == null || roomInfoList == null || this.friendListRequested == null || onlineList.Length != this.friendListRequested.Length)
                     //{
                     //    // TODO: Check if we should handle this case better / more extensively
                     //    this.DebugReturn(DebugLevel.ERROR, "OpFindFriends failed. Some list is not set. OpResponse: " + operationResponse.ToStringFull());
@@ -3715,7 +3715,7 @@ namespace Photon.Realtime
         /// Each item is a RoomInfo which might include custom properties (provided you defined those as lobby-listed when creating a room).
         /// Not all types of lobbies provide a listing of rooms to the client. Some are silent and specialized for server-side matchmaking.
         /// </remarks>
-        void OnRoomListUpdate(List<RoomInfo> roomList);
+        void OnRoomListUpdate(List<RoomInfo> roomInfoList);
 
         /// <summary>
         /// Called when the Master Server sent an update for the Lobby Statistics.
@@ -4320,13 +4320,13 @@ namespace Photon.Realtime
             }
         }
 
-        public void OnRoomListUpdate(List<RoomInfo> roomList)
+        public void OnRoomListUpdate(List<RoomInfo> roomInfoList)
         {
             this.client.UpdateCallbackTargets();
 
             foreach (ILobbyCallbacks target in this)
             {
-                target.OnRoomListUpdate(roomList);
+                target.OnRoomListUpdate(roomInfoList);
             }
         }
 

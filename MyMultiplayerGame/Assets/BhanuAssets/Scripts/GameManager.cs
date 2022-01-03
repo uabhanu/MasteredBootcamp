@@ -1,10 +1,10 @@
 using BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using Photon.Pun;
+using Random = UnityEngine.Random;
 using System.IO;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using Random = UnityEngine.Random;
 
 namespace BhanuAssets.Scripts
 {
@@ -12,23 +12,13 @@ namespace BhanuAssets.Scripts
     {
         [SerializeField] private GameObject startCutsceneObj;
         [SerializeField] private GameObject winCutsceneObj;
-        [SerializeField] private PhotonView photonView;
         [SerializeField] private PlayerData playerData;
 
         #region MonoBehaviour Functions
 
         private void Start()
         {
-            if(!playerData.StartCutsceneWatched && PhotonNetwork.IsMasterClient)
-            {
-                photonView.RPC("StartStartingCutscene" , RpcTarget.All);
-            }
-            else
-            {
-                CreatePlayer();
-                //photonView.RPC("CreatePlayerRPC" , RpcTarget.All);
-            }
-            
+            CreatePlayer();
             SubscribeToEvents();
         }
 
@@ -49,7 +39,7 @@ namespace BhanuAssets.Scripts
             {
                 //The 'y' position here is of this current object and not Player Prefab
                 playerObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , new Vector3(Random.Range(-4f , 4f) , transform.position.y , Random.Range(0f , 3.89f)) , Quaternion.identity);
-                
+
                 if(startCutsceneObj != null)
                 {
                     startCutsceneObj.SetActive(false);
@@ -57,19 +47,6 @@ namespace BhanuAssets.Scripts
             }
         }
         
-        [PunRPC]
-        private void CreatePlayerRPC()
-        {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-   
-            if(playerObj == null)
-            {
-                //The 'y' position here is of this current object and not Player Prefab
-                playerObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , new Vector3(Random.Range(-4f , 4f) , transform.position.y , Random.Range(0f , 3.89f)) , Quaternion.identity);
-                startCutsceneObj.SetActive(false);
-            }
-        }
-
         private void LoadNextLevel()
         {
             PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
@@ -91,13 +68,11 @@ namespace BhanuAssets.Scripts
         private void OnDeath()
         {
             CreatePlayer();
-            //photonView.RPC("CreatePlayerRPC" , RpcTarget.All);
         }
 
         private void OnStartCutsceneFinished()
         {
             CreatePlayer();
-            //photonView.RPC("CreatePlayerRPC" , RpcTarget.All);
             startCutsceneObj.SetActive(false);
             playerData.StartCutsceneWatched = true;
         }

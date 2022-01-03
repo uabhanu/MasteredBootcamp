@@ -1,7 +1,7 @@
+using Bhanu;
 using Photon.Pun;
 using Photon.Realtime;
 using System.Collections.Generic;
-using Bhanu;
 using TMPro;
 using UnityEngine;
 
@@ -51,7 +51,7 @@ namespace BhanuAssets.Scripts
             {
                 PhotonNetwork.NickName = "Player" + Random.Range(0 , 1000); 
             }
-
+            
             playerNameInputTMP.text = PhotonNetwork.NickName;
         }
 
@@ -60,11 +60,11 @@ namespace BhanuAssets.Scripts
             LogMessages.ErrorMessage("Tried to create room but failed probably because there is already a room with the same name :(");
         }
 
-        public override void OnRoomListUpdate(List<RoomInfo> roomList)
+        public override void OnRoomListUpdate(List<RoomInfo> roomInfoList)
         {
             int tempIndex;
 
-            foreach (RoomInfo roomInfo in roomList)
+            foreach(RoomInfo roomInfo in roomInfoList)
             {
                 if(_roomListings != null)
                 {

@@ -7,12 +7,8 @@ namespace BhanuAssets.Scripts
     {
         private void Start()
         {
+            //PlayerPrefs.DeleteAll(); //This is for testing only
             PhotonNetwork.ConnectUsingSettings();
-        }
-
-        public override void OnConnectedToMaster()
-        {
-            //Your Code Here
         }
     }
 }

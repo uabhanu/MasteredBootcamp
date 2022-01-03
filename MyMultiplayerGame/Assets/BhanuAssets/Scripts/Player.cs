@@ -27,7 +27,6 @@ namespace BhanuAssets.Scripts
         [SerializeField] private PhotonView photonView;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private Rigidbody playerBody;
-        [SerializeField] private TMP_InputField nameInputTMP;
         [SerializeField] private TMP_Text nameTMP;
 
         #endregion
@@ -39,6 +38,7 @@ namespace BhanuAssets.Scripts
             _anim = GetComponent<Animator>();
             _electricalBoxes = GameObject.FindGameObjectsWithTag("Electric");
             photonView.RPC("ElectricBoxCollisionReset" , RpcTarget.All);
+            photonView.RPC("UpdateNameRPC" , RpcTarget.All);
 
             if(photonView.IsMine)
             {
@@ -159,6 +159,8 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void MoveRPC()
         {
+            nameTMP.transform.rotation = Quaternion.identity;
+            
             if(_isGrounded && photonView.AmController && photonView.IsMine)
             {
                 float horizontalInput = Input.GetAxis("Horizontal");
@@ -202,14 +204,13 @@ namespace BhanuAssets.Scripts
                 _playerRenderer.material = _materialToUse;
             }
         }
-
-        public void UpdateName()
-        {
-            nameTMP.enabled = true;
-            nameTMP.text = nameInputTMP.text;
-            nameInputTMP.enabled = false;
-        }
         
+        [PunRPC]
+        private void UpdateNameRPC()
+        {
+            nameTMP.text = photonView.Controller.NickName;
+        }
+
         #endregion
 
         #region Event Functions
