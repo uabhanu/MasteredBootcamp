@@ -11,7 +11,7 @@ namespace BhanuAssets.Scripts
     {
         #region Private Variables Declarations
         
-        private const int RoomSizeValue = 2;
+        private const int _roomSizeValue = 2;
         private List<RoomInfo> _roomListings;
         private string _roomNameValue;
         
@@ -25,7 +25,7 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject submitButtonObj;
         [SerializeField] private TMP_InputField playerNameInputTMP;
         [SerializeField] private Transform roomsDisplayTransform;
-        
+
         #endregion
 
         #region Photon Callback Functions
@@ -93,6 +93,8 @@ namespace BhanuAssets.Scripts
 
         #region User Functions
         
+        public int RoomSizeValue => _roomSizeValue;
+        
         public void BackButton()
         {
             lobbyMenuObj.SetActive(false);
@@ -102,7 +104,7 @@ namespace BhanuAssets.Scripts
 
         public void CreateRoom()
         {
-            RoomOptions roomOptions = new RoomOptions() { IsVisible = true , IsOpen = true , MaxPlayers = RoomSizeValue };
+            RoomOptions roomOptions = new RoomOptions() { IsVisible = true , IsOpen = true , MaxPlayers = _roomSizeValue };
             PhotonNetwork.CreateRoom(_roomNameValue , roomOptions);
         }
         

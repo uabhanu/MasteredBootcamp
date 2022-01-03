@@ -6,24 +6,24 @@ namespace BhanuAssets.Scripts
 {
     public class RoomButton : MonoBehaviour
     {
-        private int playersCount;
-        private int sizeValue;
-        private string nameValue;
+        private int _playersCount;
+        private int _sizeValue;
+        private string _nameValue;
 
         [SerializeField] private TMP_Text nameDisplayTMP;
         [SerializeField] private TMP_Text sizeDisplayTMP;
 
         public void JoinRoomOnClick()
         {
-            PhotonNetwork.JoinRoom(nameValue);
+            PhotonNetwork.JoinRoom(_nameValue);
             Destroy(gameObject);
         }
         
         public void SetRoom(string nameInput , int sizeInput , int countInput)
         {
-            nameValue = nameInput;
-            sizeValue = sizeInput;
-            playersCount = countInput;
+            _nameValue = nameInput;
+            _sizeValue = sizeInput;
+            _playersCount = countInput;
             nameDisplayTMP.text = nameInput;
             sizeDisplayTMP.text = countInput + " / " + sizeInput;
         }

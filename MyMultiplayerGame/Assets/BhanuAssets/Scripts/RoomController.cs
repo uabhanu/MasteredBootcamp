@@ -1,5 +1,6 @@
 using Photon.Pun;
 using System.Collections;
+using Bhanu;
 using TMPro;
 using UnityEngine;
 
@@ -14,6 +15,7 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject roomMenuObj;
         [SerializeField] private GameObject startButtonObj;
         [SerializeField] private int sceneIndex;
+        [SerializeField] private LobbyController lobbyController;
         [SerializeField] private TMP_Text roomNameDisplayTMP;
         [SerializeField] private Transform playersDisplayTransform;
         
@@ -96,11 +98,17 @@ namespace BhanuAssets.Scripts
 
         public void StartButton()
         {
-            if(PhotonNetwork.IsMasterClient)
+            if(PhotonNetwork.PlayerList.Length == 2)
             {
+                LogMessages.AllIsWellMessage("Both Players Joined :)");
                 PhotonNetwork.CurrentRoom.IsOpen = false;
                 PhotonNetwork.LoadLevel(sceneIndex);
             }
+            else
+            {
+                LogMessages.ErrorMessage("We need one more player :)");
+            }
+                
         }
         
         #endregion

@@ -1,3 +1,5 @@
+using System;
+using Bhanu;
 using BhanuAssets.Scripts.ScriptableObjects;
 using Cinemachine;
 using Events;
@@ -50,6 +52,19 @@ namespace BhanuAssets.Scripts
             photonView.RPC("SelectRendererRPC" , RpcTarget.All);
 
             SubscribeToEvents();
+        }
+
+        private void OnApplicationQuit()
+        {
+            if(photonView.IsMine)
+            {
+                LogMessages.ErrorMessage("You Quit :(");
+            }
+            
+            else if(!photonView.IsMine)
+            {
+                LogMessages.WarningMessage("Client Player Quit :(");
+            }
         }
 
         private void OnDestroy()
