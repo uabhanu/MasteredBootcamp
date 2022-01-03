@@ -11,7 +11,7 @@ namespace BhanuAssets.Scripts
     {
         #region Private Variables Declarations
         
-        private int _roomSizeValue;
+        private const int RoomSizeValue = 2;
         private List<RoomInfo> _roomListings;
         private string _roomNameValue;
         
@@ -35,7 +35,7 @@ namespace BhanuAssets.Scripts
             PhotonNetwork.AutomaticallySyncScene = true;
             _roomListings = new List<RoomInfo>();
             submitButtonObj.SetActive(true);
-
+            
             if(PlayerPrefs.HasKey("Nickname"))
             {
                 if(PlayerPrefs.GetString("Nickname") == "")
@@ -102,7 +102,7 @@ namespace BhanuAssets.Scripts
 
         public void CreateRoom()
         {
-            RoomOptions roomOptions = new RoomOptions() { IsVisible = true , IsOpen = true , MaxPlayers = (byte) _roomSizeValue };
+            RoomOptions roomOptions = new RoomOptions() { IsVisible = true , IsOpen = true , MaxPlayers = RoomSizeValue };
             PhotonNetwork.CreateRoom(_roomNameValue , roomOptions);
         }
         
@@ -119,11 +119,6 @@ namespace BhanuAssets.Scripts
         public void OnRoomNameChanged(string nameIn)
         {
             _roomNameValue = nameIn;
-        }
-
-        public void OnRoomSizeChanged(string sizeIn)
-        {
-            _roomSizeValue = int.Parse(sizeIn);
         }
 
         public void PlayerNameUpdate(string nameInput)
