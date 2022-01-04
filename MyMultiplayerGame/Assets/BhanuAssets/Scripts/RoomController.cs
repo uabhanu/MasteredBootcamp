@@ -11,6 +11,7 @@ namespace BhanuAssets.Scripts
         #region Serialized Field Private Variables Declarations
         
         [SerializeField] private GameObject lobbyMenuObj;
+        [SerializeField] private GameObject notEnoughPlayersObj;
         [SerializeField] private GameObject playersListingPrefab;
         [SerializeField] private GameObject roomMenuObj;
         [SerializeField] private GameObject startButtonObj;
@@ -96,6 +97,11 @@ namespace BhanuAssets.Scripts
             StartCoroutine(ReJoinLobby());
         }
 
+        public void OKButton()
+        {
+            notEnoughPlayersObj.SetActive(false);
+        }
+
         public void StartButton()
         {
             if(PhotonNetwork.PlayerList.Length == 2)
@@ -107,6 +113,7 @@ namespace BhanuAssets.Scripts
             else
             {
                 LogMessages.ErrorMessage("We need one more player :)");
+                notEnoughPlayersObj.SetActive(true);
             }
                 
         }
