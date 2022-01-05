@@ -5,6 +5,8 @@
         Death,
         ElectricBoxCollided,
         ElectricBoxNotCollided,
+        PipeDropped,
+        PipePickedUp,
         StartCutsceneFinished,
         StartCutsceneStarted,
         TryAgain,

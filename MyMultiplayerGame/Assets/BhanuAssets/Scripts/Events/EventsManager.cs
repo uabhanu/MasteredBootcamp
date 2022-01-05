@@ -10,6 +10,8 @@ namespace Events
         private static event Action ElectricBoxCollidedAction;
         private static event Action ElectricBoxNotCollidedAction;
         private static event Action StartCutsceneFinishedAction;
+        private static event Action PipeDroppedAction;
+        private static event Action PipePickedUpAction;
         private static event Action StartCutsceneStartedAction;
         private static event Action TryAgainAction;
         private static event Action WinCutsceneFinishedAction;
@@ -34,6 +36,14 @@ namespace Events
                 
                 case BhanuEvent.ElectricBoxNotCollided:
                     ElectricBoxNotCollidedAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.PipeDropped:
+                    PipeDroppedAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.PipePickedUp:
+                    PipePickedUpAction?.Invoke(); 
                 return;
 
                 case BhanuEvent.StartCutsceneFinished:
@@ -82,6 +92,14 @@ namespace Events
                     ElectricBoxNotCollidedAction += actionFunction;
                 return;
 
+                case BhanuEvent.PipeDropped:
+                    PipeDroppedAction += actionFunction;
+                return;
+                
+                case BhanuEvent.PipePickedUp:
+                    PipePickedUpAction += actionFunction;
+                return;
+
                 case BhanuEvent.StartCutsceneFinished:
                     StartCutsceneFinishedAction += actionFunction;
                 return;
@@ -126,6 +144,14 @@ namespace Events
                 
                 case BhanuEvent.ElectricBoxNotCollided:
                     ElectricBoxNotCollidedAction -= actionFunction;
+                return;
+
+                case BhanuEvent.PipeDropped:
+                    PipeDroppedAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.PipePickedUp:
+                    PipePickedUpAction -= actionFunction;
                 return;
 
                 case BhanuEvent.StartCutsceneFinished:
