@@ -10,9 +10,16 @@ namespace BhanuAssets.Scripts
 {
     public class GameManager : MonoBehaviour
     {
+        #region Serialized Field Private Variables Declarations
+        
         [SerializeField] private GameObject startCutsceneObj;
         [SerializeField] private GameObject winCutsceneObj;
+        [SerializeField] private int currentAllocatedViewID;
+        [SerializeField] private PhotonView photonView;
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private Transform playerPrefabTransform;
+        
+        #endregion
 
         #region MonoBehaviour Functions
 
@@ -33,17 +40,13 @@ namespace BhanuAssets.Scripts
 
         private void CreatePlayer()
         {
-            GameObject playerObj = GameObject.FindGameObjectWithTag("Player");
-   
-            if(playerObj == null)
+            Vector3 spawnPos = new Vector3(Random.Range(-4f , 4f) , transform.position.y , Random.Range(0f , 3.89f));
+            
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , spawnPos , Quaternion.identity);
+            
+            if(startCutsceneObj != null)
             {
-                //The 'y' position here is of this current object and not Player Prefab
-                playerObj = PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , new Vector3(Random.Range(-4f , 4f) , transform.position.y , Random.Range(0f , 3.89f)) , Quaternion.identity);
-
-                if(startCutsceneObj != null)
-                {
-                    startCutsceneObj.SetActive(false);
-                }
+                startCutsceneObj.SetActive(false);
             }
         }
         
@@ -88,6 +91,8 @@ namespace BhanuAssets.Scripts
             {
                 winCutsceneObj.SetActive(true);
             }
+            
+            //LogMessages.AllIsWellMessage("You Win :)");
         }
 
         #endregion

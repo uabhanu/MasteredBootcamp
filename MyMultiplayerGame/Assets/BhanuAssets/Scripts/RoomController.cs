@@ -115,7 +115,6 @@ namespace BhanuAssets.Scripts
                 LogMessages.ErrorMessage("We need one more player :)");
                 notEnoughPlayersObj.SetActive(true);
             }
-                
         }
         
         #endregion

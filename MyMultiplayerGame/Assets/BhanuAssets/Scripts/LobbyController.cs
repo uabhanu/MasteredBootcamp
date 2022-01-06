@@ -21,6 +21,7 @@ namespace BhanuAssets.Scripts
         
         [SerializeField] private GameObject lobbyMenuObj;
         [SerializeField] private GameObject matchmakingMenuObj;
+        [SerializeField] private GameObject roomCreatedAlreadyErrorObj;
         [SerializeField] private GameObject roomListingPrefab;
         [SerializeField] private GameObject submitButtonObj;
         [SerializeField] private TMP_InputField playerNameInputTMP;
@@ -58,6 +59,7 @@ namespace BhanuAssets.Scripts
         public override void OnCreateRoomFailed(short returnCode , string message)
         {
             LogMessages.ErrorMessage("Tried to create room but failed probably because there is already a room with the same name :(");
+            roomCreatedAlreadyErrorObj.SetActive(true);
         }
 
         public override void OnRoomListUpdate(List<RoomInfo> roomInfoList)
@@ -74,13 +76,7 @@ namespace BhanuAssets.Scripts
                 {
                     tempIndex = -1;
                 }
-
-                if(tempIndex != -1)
-                {
-                    _roomListings.RemoveAt(tempIndex);
-                    Destroy(roomsDisplayTransform.GetChild(tempIndex).gameObject);
-                }
-
+                
                 if(roomInfo.PlayerCount > 0)
                 {
                     _roomListings.Add(roomInfo);
@@ -112,10 +108,20 @@ namespace BhanuAssets.Scripts
         {
             if(roomInfo.IsOpen && roomInfo.IsVisible)
             {
-                GameObject tempListingObj = Instantiate(roomListingPrefab , roomsDisplayTransform);
-                RoomButton tempRoomButton = tempListingObj.GetComponent<RoomButton>();
-                tempRoomButton.SetRoom(roomInfo.Name , roomInfo.MaxPlayers , roomInfo.PlayerCount);
+                GameObject tempListingObj = GameObject.FindGameObjectWithTag("RoomList");
+
+                if(tempListingObj == null)
+                {
+                    tempListingObj = Instantiate(roomListingPrefab , roomsDisplayTransform);
+                    RoomButton tempRoomButton = tempListingObj.GetComponent<RoomButton>();
+                    tempRoomButton.SetRoom(roomInfo.Name , roomInfo.MaxPlayers , roomInfo.PlayerCount);   
+                }
             }
+        }
+
+        public void OKButton()
+        {
+            roomCreatedAlreadyErrorObj.SetActive(false);
         }
 
         public void OnRoomNameChanged(string nameIn)

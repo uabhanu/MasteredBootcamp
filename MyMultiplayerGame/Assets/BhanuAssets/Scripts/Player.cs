@@ -89,7 +89,6 @@ namespace BhanuAssets.Scripts
             {
                 photonView.RPC("JumpRPC" , RpcTarget.All);
                 photonView.RPC("MoveRPC" , RpcTarget.All);
-                photonView.RPC("PickUpPipeRPC" , RpcTarget.All);   
             }
             else
             {

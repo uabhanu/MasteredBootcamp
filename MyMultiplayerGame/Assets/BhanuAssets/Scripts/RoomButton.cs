@@ -16,7 +16,6 @@ namespace BhanuAssets.Scripts
         public void JoinRoomOnClick()
         {
             PhotonNetwork.JoinRoom(_nameValue);
-            Destroy(gameObject);
         }
         
         public void SetRoom(string nameInput , int sizeInput , int countInput)
