@@ -6,18 +6,21 @@ namespace Events
     {
         #region Event Actions Declarations
         
+        private static event Action AllElectricBoxesCollidedAction;
+        private static event Action AllSocketsFilledAction;
         private static event Action DeathAction;
         private static event Action ElectricBoxCollidedAction;
         private static event Action ElectricBoxNotCollidedAction;
         private static event Action StartCutsceneFinishedAction;
         private static event Action PipeDroppedAction;
+        private static event Action PipeInTheSocketAction;
+        private static event Action PipeNoLongerInTheSocketAction;
         private static event Action PipePickedUpAction;
         private static event Action StartCutsceneStartedAction;
         private static event Action TryAgainAction;
         private static event Action WinCutsceneFinishedAction;
         private static event Action WinCutsceneStartedAction;
-        private static event Action WinAction;
-        
+
         #endregion
 
         #region Invoke Functions
@@ -26,6 +29,14 @@ namespace Events
         {
             switch(eventToInvoke)
             {
+                case BhanuEvent.AllElectricBoxesCollided:
+                    AllElectricBoxesCollidedAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.AllSocketsFilled:
+                    AllSocketsFilledAction?.Invoke(); 
+                return;
+                
                 case BhanuEvent.Death:
                     DeathAction?.Invoke(); 
                 return;
@@ -40,6 +51,14 @@ namespace Events
                 
                 case BhanuEvent.PipeDropped:
                     PipeDroppedAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.PipeInTheSocket:
+                    PipeInTheSocketAction?.Invoke(); 
+                return;
+                
+                case BhanuEvent.PipeNoLongerInTheSocket:
+                    PipeNoLongerInTheSocketAction?.Invoke(); 
                 return;
                 
                 case BhanuEvent.PipePickedUp:
@@ -65,10 +84,6 @@ namespace Events
                 case BhanuEvent.WinCutsceneStarted:
                     WinCutsceneStartedAction?.Invoke(); 
                 return;
-                
-                case BhanuEvent.Win:
-                    WinAction?.Invoke(); 
-                return;
             }
         }
 
@@ -80,6 +95,14 @@ namespace Events
         {
             switch(eventToSubscribe)
             {
+                case BhanuEvent.AllElectricBoxesCollided:
+                    AllElectricBoxesCollidedAction += actionFunction;
+                return;
+                
+                case BhanuEvent.AllSocketsFilled:
+                    AllSocketsFilledAction += actionFunction;
+                return;
+                
                 case BhanuEvent.Death:
                     DeathAction += actionFunction;
                 return;
@@ -94,6 +117,14 @@ namespace Events
 
                 case BhanuEvent.PipeDropped:
                     PipeDroppedAction += actionFunction;
+                return;
+                
+                case BhanuEvent.PipeInTheSocket:
+                    PipeInTheSocketAction += actionFunction;
+                return;
+                
+                case BhanuEvent.PipeNoLongerInTheSocket:
+                    PipeNoLongerInTheSocketAction += actionFunction;
                 return;
                 
                 case BhanuEvent.PipePickedUp:
@@ -119,10 +150,6 @@ namespace Events
                 case BhanuEvent.WinCutsceneStarted:
                     WinCutsceneStartedAction += actionFunction;
                 return;
-                
-                case BhanuEvent.Win:
-                    WinAction += actionFunction;
-                return;
             }
         }
 
@@ -134,6 +161,14 @@ namespace Events
         {
             switch(eventToSubscribe)
             {
+                case BhanuEvent.AllElectricBoxesCollided:
+                    AllElectricBoxesCollidedAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.AllSocketsFilled:
+                    AllSocketsFilledAction -= actionFunction;
+                return;
+                
                 case BhanuEvent.Death:
                     DeathAction -= actionFunction;
                 return;
@@ -148,6 +183,14 @@ namespace Events
 
                 case BhanuEvent.PipeDropped:
                     PipeDroppedAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.PipeInTheSocket:
+                    PipeInTheSocketAction -= actionFunction;
+                return;
+                
+                case BhanuEvent.PipeNoLongerInTheSocket:
+                    PipeNoLongerInTheSocketAction -= actionFunction;
                 return;
                 
                 case BhanuEvent.PipePickedUp:
@@ -172,10 +215,6 @@ namespace Events
                 
                 case BhanuEvent.WinCutsceneStarted:
                     WinCutsceneStartedAction -= actionFunction;
-                return;
-                
-                case BhanuEvent.Win:
-                    WinAction -= actionFunction;
                 return;
             }
         }

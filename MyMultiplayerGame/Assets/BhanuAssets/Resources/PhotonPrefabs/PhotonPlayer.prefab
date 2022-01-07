@@ -170,7 +170,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isMultiplayerGame: 1
-  photonView: {fileID: 7171924959596415489}
   playerData: {fileID: 11400000, guid: a99eb944fd5cb3f4d8ec2b86f7d05f46, type: 2}
   playerBody: {fileID: 3119862507923306987}
   nameTMP: {fileID: 165858245800632372}

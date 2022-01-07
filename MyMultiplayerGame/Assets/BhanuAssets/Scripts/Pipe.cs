@@ -1,6 +1,7 @@
 using BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using System.Collections;
+using Photon.Pun;
 using UnityEngine;
 
 namespace BhanuAssets.Scripts
@@ -13,27 +14,31 @@ namespace BhanuAssets.Scripts
         private bool _isInTheSocket;
         private GameObject _collidedPlayerObj;
         private GameObject _collidedSocketObj;
-        private GameObject[] _pipes;
         private Material _defaultMaterial;
+        private PhotonView _photonView;
         
         #endregion
 
         #region Serialized Field Private Variables Declarations
         
         [SerializeField] private CapsuleCollider pipeCollider;
+        [SerializeField] private float pipeDropDelay;
         [SerializeField] private Material materialToUse;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private Transform socketTransform;
-        
+
         #endregion
 
-        #region MonoBehaviour Functions
+        #region MonoBehaviour & User Helper Functions
         
         private void Awake()
         {
+            _photonView = GetComponent<PhotonView>();
+        }
+
+        private void Start()
+        {
             _defaultMaterial = GetComponent<MeshRenderer>().material;
-            PipeSocketReset();
-            _pipes = GameObject.FindGameObjectsWithTag("Pipe");
         }
 
         private void Update()
@@ -46,11 +51,6 @@ namespace BhanuAssets.Scripts
             if(_collidedSocketObj != null && _isInTheSocket)
             {
                 transform.position = _collidedSocketObj.transform.position;
-            }
-            
-            if(playerData.PipesInTheSocket == _pipes.Length)
-            {
-                EventsManager.InvokeEvent(BhanuEvent.Win);
             }
         }
 
@@ -74,50 +74,42 @@ namespace BhanuAssets.Scripts
                 GetComponent<MeshRenderer>().material = materialToUse;
                 _isInPlayerHand = false;
                 _isInTheSocket = true;
-                PipeInTheSocket();
+
+                if(_photonView != null && _photonView.IsMine && _photonView.AmController)
+                {
+                    EventsManager.InvokeEvent(BhanuEvent.PipeInTheSocket);
+                }
+                
                 StartCoroutine(DropPipe());
             }
         }
         
         private IEnumerator DropPipe()
         {
-            yield return new WaitForSeconds(2f);
-            _collidedSocketObj = null;
-            GetComponent<MeshRenderer>().material = _defaultMaterial;
-            _isInTheSocket = false;
-            PipeNoLongerInTheSocket();
-            pipeCollider.isTrigger = false;
-        }
-        
-        #endregion
+            Socket socket = GameObject.FindGameObjectWithTag("Socket").GetComponent<Socket>();
 
-        #region User Functions
-
-        private void PipeInTheSocket()
-        {
-            //LogMessages.AllIsWellMessage("RPC : Electric Box Collided");
-
-            if(playerData.PipesInTheSocket < _pipes.Length)
+            if(socket != null && !socket.AllPipesInTheSocket())
             {
-                playerData.PipesInTheSocket++;   
+                yield return new WaitForSeconds(pipeDropDelay);
+                _collidedSocketObj = null;
+                GetComponent<MeshRenderer>().material = _defaultMaterial;
+                _isInTheSocket = false;
+            
+                if(_photonView != null && _photonView.IsMine && _photonView.AmController)
+                {
+                    EventsManager.InvokeEvent(BhanuEvent.PipeNoLongerInTheSocket);
+                }
+
+                pipeCollider.isTrigger = false;
             }
         }
         
-        private void PipeNoLongerInTheSocket()
+        public bool IsInTheSocket
         {
-            //LogMessages.AllIsWellMessage("RPC : Electric Box No Longer Collided");
-
-            if(playerData.PipesInTheSocket > 0)
-            {
-                playerData.PipesInTheSocket--;   
-            }
+            get => _isInTheSocket;
+            set => _isInTheSocket = value;
         }
-
-        private void PipeSocketReset()
-        {
-            playerData.PipesInTheSocket = 0;
-        }
-
+        
         #endregion
     }
 }

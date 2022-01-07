@@ -17,7 +17,9 @@ namespace BhanuAssets.Scripts
         private bool _isGrounded;
         private CinemachineVirtualCamera _cvm;
         private GameObject[] _electricalBoxes;
+        private int _levelIndex;
         private Material _materialToUse;
+        private PhotonView _photonView;
         private SkinnedMeshRenderer _playerRenderer;
         private Vector3 _playerVelocity;
         
@@ -26,7 +28,6 @@ namespace BhanuAssets.Scripts
         #region Serialized Private Variables Declarations
 
         [SerializeField] private bool isMultiplayerGame;
-        [SerializeField] private PhotonView photonView;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private Rigidbody playerBody;
         [SerializeField] private TMP_Text nameTMP;
@@ -36,6 +37,11 @@ namespace BhanuAssets.Scripts
 
         #region MonoBehaviour Functions
 
+        private void Awake()
+        {
+            _photonView = GetComponent<PhotonView>();
+        }
+
         private void Start()
         {
             _anim = GetComponent<Animator>();
@@ -43,17 +49,15 @@ namespace BhanuAssets.Scripts
 
             if(isMultiplayerGame)
             {
-                photonView.RPC("ElectricBoxCollisionResetRPC" , RpcTarget.All);
-                photonView.RPC("UpdateNameRPC" , RpcTarget.All);
-                
-                if(photonView.IsMine)
+                if(_photonView != null && _photonView.IsMine && _photonView.AmController)
                 {
                     _cvm = GameObject.FindGameObjectWithTag("Follow").GetComponent<CinemachineVirtualCamera>();
                     _cvm.Follow = transform;
                     _cvm.LookAt = transform;
+                    _photonView.RPC("ElectricBoxCollisionResetRPC" , RpcTarget.All);
+                    _photonView.RPC("SelectRendererRPC" , RpcTarget.All);
+                    _photonView.RPC("UpdateNameRPC" , RpcTarget.All);
                 }
-                
-                photonView.RPC("SelectRendererRPC" , RpcTarget.All);
             }
             else
             {
@@ -67,12 +71,12 @@ namespace BhanuAssets.Scripts
 
         private void OnApplicationQuit()
         {
-            if(photonView.IsMine)
+            if(_photonView.IsMine)
             {
                 LogMessages.ErrorMessage("You Quit :(");
             }
             
-            else if(!photonView.IsMine)
+            else if(!_photonView.IsMine)
             {
                 LogMessages.WarningMessage("Client Player Quit :(");
             }
@@ -87,8 +91,11 @@ namespace BhanuAssets.Scripts
         {
             if(isMultiplayerGame)
             {
-                photonView.RPC("JumpRPC" , RpcTarget.All);
-                photonView.RPC("MoveRPC" , RpcTarget.All);
+                if(_photonView != null && _photonView.IsMine && _photonView.AmController)
+                {
+                    _photonView.RPC("JumpRPC" , RpcTarget.All);
+                    _photonView.RPC("MoveRPC" , RpcTarget.All);   
+                }
             }
             else
             {
@@ -97,7 +104,7 @@ namespace BhanuAssets.Scripts
 
             if(playerData.ElectricBoxesCollided == _electricalBoxes.Length)
             {
-                EventsManager.InvokeEvent(BhanuEvent.Win);
+                EventsManager.InvokeEvent(BhanuEvent.AllElectricBoxesCollided);
             }
         }
 
@@ -105,15 +112,15 @@ namespace BhanuAssets.Scripts
         {
             if(collision.gameObject.tag.Equals("Electric"))
             {
-                if(photonView.IsMine && photonView.AmController)
+                if(_photonView != null && _photonView.IsMine && _photonView.AmController)
                 {
-                    photonView.RPC("ElectricBoxCollidedRPC" , RpcTarget.All);
+                    _photonView.RPC("ElectricBoxCollidedRPC" , RpcTarget.All);
                 }
             }
             
             if(collision.gameObject.tag.Equals("Floor"))
             {
-                if(photonView.IsMine && photonView.AmController)
+                if(_photonView != null && _photonView.IsMine)
                 {
                     _isGrounded = true;
                 }
@@ -124,15 +131,15 @@ namespace BhanuAssets.Scripts
         {
             if(collision.gameObject.tag.Equals("Electric"))
             {
-                if(photonView.IsMine && photonView.AmController)
+                if(_photonView != null && _photonView.IsMine && _photonView.AmController)
                 {
-                    photonView.RPC("ElectricBoxNoLongerCollidedRPC" , RpcTarget.All);
+                    _photonView.RPC("ElectricBoxNoLongerCollidedRPC" , RpcTarget.All);
                 }   
             }
 
             if(collision.gameObject.tag.Equals("Floor"))
             {
-                if(photonView.IsMine && photonView.AmController)
+                if(_photonView != null && _photonView.IsMine)
                 {
                     _isGrounded = false;
                 }
@@ -145,7 +152,7 @@ namespace BhanuAssets.Scripts
         
         private void Move()
         {
-            if(_isGrounded && photonView.IsMine)
+            if(_isGrounded && _photonView.IsMine)
             {
                 float horizontalInput = Input.GetAxis("Horizontal");
                 float verticalInput = Input.GetAxis("Vertical");
@@ -219,7 +226,7 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void JumpRPC()
         {
-            if(_isGrounded && Input.GetKeyDown(KeyCode.Space) && photonView.IsMine)
+            if(_isGrounded && Input.GetKeyDown(KeyCode.Space) && _photonView.IsMine)
             {
                 playerBody.AddForce(Vector3.up * playerData.JumpForce * Time.deltaTime , ForceMode.Impulse);
                 _anim.SetTrigger("Jump");
@@ -229,7 +236,7 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void MoveRPC()
         {
-            if(_isGrounded && photonView.IsMine)
+            if(_isGrounded && _photonView.IsMine)
             {
                 float horizontalInput = Input.GetAxis("Horizontal");
                 float verticalInput = Input.GetAxis("Vertical");
@@ -261,7 +268,7 @@ namespace BhanuAssets.Scripts
         {
             _playerRenderer = GetComponent<SkinnedMeshRenderer>();
     
-            if(photonView.IsMine)
+            if(_photonView.IsMine)
             {
                 _materialToUse = playerData.LocalMaterial;
                 _playerRenderer.material = _materialToUse;
@@ -276,7 +283,7 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void UpdateNameRPC()
         {
-            nameTMP.text = photonView.Controller.NickName;
+            nameTMP.text = _photonView.Controller.NickName;
         }
 
         #endregion
@@ -285,7 +292,7 @@ namespace BhanuAssets.Scripts
 
         private void OnDeath()
         {
-            photonView.RPC("DestroyRPCs" , RpcTarget.All);
+            _photonView.RPC("DestroyRPCs" , RpcTarget.All);
             //PhotonNetwork.IsMessageQueueRunning = false;
             //PhotonNetwork.OpRemoveCompleteCache();
             PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex);

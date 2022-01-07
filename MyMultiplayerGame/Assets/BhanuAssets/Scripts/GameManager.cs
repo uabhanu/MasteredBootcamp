@@ -1,3 +1,4 @@
+using Bhanu;
 using BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using Photon.Pun;
@@ -14,11 +15,8 @@ namespace BhanuAssets.Scripts
         
         [SerializeField] private GameObject startCutsceneObj;
         [SerializeField] private GameObject winCutsceneObj;
-        [SerializeField] private int currentAllocatedViewID;
-        [SerializeField] private PhotonView photonView;
         [SerializeField] private PlayerData playerData;
-        [SerializeField] private Transform playerPrefabTransform;
-        
+
         #endregion
 
         #region MonoBehaviour Functions
@@ -40,10 +38,20 @@ namespace BhanuAssets.Scripts
 
         private void CreatePlayer()
         {
-            Vector3 spawnPos = new Vector3(Random.Range(-4f , 4f) , transform.position.y , Random.Range(0f , 3.89f));
+            int levelIndex = SceneManager.GetActiveScene().buildIndex;
             
-            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , spawnPos , Quaternion.identity);
-            
+            if(levelIndex == 3)
+            {
+                PlayerPositioner playerPositioner = GameObject.Find("PlayerPositioner").GetComponent<PlayerPositioner>();
+                int randomIndex = Random.Range(0 , playerPositioner.SpawnPositions.Length);
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , playerPositioner.SpawnPositions[randomIndex] , Quaternion.identity).GetComponent<PhotonView>();
+            }
+            else
+            {
+                Vector3 spawnPos = new Vector3(Random.Range(-4f , 4f) , transform.position.y , Random.Range(0f , 3.89f));
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , spawnPos , Quaternion.identity).GetComponent<PhotonView>();   
+            }
+
             if(startCutsceneObj != null)
             {
                 startCutsceneObj.SetActive(false);
@@ -68,6 +76,15 @@ namespace BhanuAssets.Scripts
         
         #region Event Functions
 
+        private void OnAllElectricBoxesCollided()
+        {
+            if(winCutsceneObj != null && !winCutsceneObj.activeSelf)
+            {
+                //LogMessages.AllIsWellMessage("You AllElectricBoxesCollided :)");
+                winCutsceneObj.SetActive(true);
+            }
+        }
+
         private void OnDeath()
         {
             CreatePlayer();
@@ -85,34 +102,24 @@ namespace BhanuAssets.Scripts
             PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
         }
 
-        private void OnWin()
-        {
-            if(winCutsceneObj != null)
-            {
-                winCutsceneObj.SetActive(true);
-            }
-            
-            //LogMessages.AllIsWellMessage("You Win :)");
-        }
-
         #endregion
         
         #region Event Listeners
         
         private void SubscribeToEvents()
         {
+            EventsManager.SubscribeToEvent(BhanuEvent.AllElectricBoxesCollided , OnAllElectricBoxesCollided);
             EventsManager.SubscribeToEvent(BhanuEvent.Death , OnDeath);
             EventsManager.SubscribeToEvent(BhanuEvent.StartCutsceneFinished , OnStartCutsceneFinished);
             EventsManager.SubscribeToEvent(BhanuEvent.WinCutsceneFinished , OnWinCutsceneFinished);
-            EventsManager.SubscribeToEvent(BhanuEvent.Win , OnWin);
         }
         
         private void UnsubscribeFromEvents()
         {
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.AllElectricBoxesCollided , OnAllElectricBoxesCollided);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.Death , OnDeath);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.StartCutsceneFinished , OnStartCutsceneFinished);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.WinCutsceneFinished , OnWinCutsceneFinished);
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.Win , OnWin);
         }
         
         #endregion

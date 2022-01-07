@@ -21,6 +21,7 @@ namespace BhanuAssets.Scripts
         
         [SerializeField] private GameObject lobbyMenuObj;
         [SerializeField] private GameObject matchmakingMenuObj;
+        [SerializeField] private GameObject noMoreRoomsErrorObj;
         [SerializeField] private GameObject roomCreatedAlreadyErrorObj;
         [SerializeField] private GameObject roomListingPrefab;
         [SerializeField] private GameObject submitButtonObj;
@@ -100,8 +101,15 @@ namespace BhanuAssets.Scripts
 
         public void CreateRoom()
         {
-            RoomOptions roomOptions = new RoomOptions() { IsVisible = true , IsOpen = true , MaxPlayers = _roomSizeValue };
-            PhotonNetwork.CreateRoom(_roomNameValue , roomOptions);
+            if(PhotonNetwork.CountOfRooms == 0)
+            {
+                RoomOptions roomOptions = new RoomOptions() { IsVisible = true , IsOpen = true , MaxPlayers = _roomSizeValue };
+                PhotonNetwork.CreateRoom(_roomNameValue , roomOptions);   
+            }
+            else
+            {
+                noMoreRoomsErrorObj.SetActive(true);
+            }
         }
         
         private void ListRoom(RoomInfo roomInfo)
@@ -121,6 +129,7 @@ namespace BhanuAssets.Scripts
 
         public void OKButton()
         {
+            noMoreRoomsErrorObj.SetActive(false);
             roomCreatedAlreadyErrorObj.SetActive(false);
         }
 

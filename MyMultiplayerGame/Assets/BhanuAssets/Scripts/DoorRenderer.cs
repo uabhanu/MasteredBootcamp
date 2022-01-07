@@ -56,12 +56,12 @@ namespace BhanuAssets.Scripts
         
         private void SubscribeToEvents()
         {
-            EventsManager.SubscribeToEvent(BhanuEvent.Win , OnWin);
+            EventsManager.SubscribeToEvent(BhanuEvent.AllElectricBoxesCollided , OnWin);
         }
         
         private void UnsubscribeFromEvents()
         {
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.Win , OnWin);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.AllElectricBoxesCollided , OnWin);
         }
         
         #endregion
