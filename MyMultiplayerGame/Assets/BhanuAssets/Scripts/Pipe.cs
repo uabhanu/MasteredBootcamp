@@ -27,6 +27,8 @@ namespace BhanuAssets.Scripts
         [SerializeField] private PlayerData playerData;
         [SerializeField] private Transform socketTransform;
 
+        [SerializeField] private int testVar = 0;
+
         #endregion
 
         #region MonoBehaviour & User Helper Functions
@@ -48,7 +50,7 @@ namespace BhanuAssets.Scripts
                 transform.position = _collidedPlayerObj.GetComponent<Player>().RightHandTransform.position;   
             }
 
-            if(_collidedSocketObj != null && _isInTheSocket)
+            else if(_collidedSocketObj != null && _isInTheSocket)
             {
                 transform.position = _collidedSocketObj.transform.position;
             }
@@ -56,12 +58,16 @@ namespace BhanuAssets.Scripts
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.tag.Equals("Player"))
+            if(collision.gameObject.tag.Equals("Player") && !_isInTheSocket)
             {
+                if(!_isInPlayerHand)
+                {
+                    _isInPlayerHand = true;
+                    pipeCollider.isTrigger = true;
+                }
+                
                 _collidedPlayerObj = collision.gameObject;
                 GetComponent<MeshRenderer>().material = _collidedPlayerObj.GetComponent<SkinnedMeshRenderer>().material;
-                _isInPlayerHand = true;
-                pipeCollider.isTrigger = true;
             }
         }
 
@@ -69,47 +75,34 @@ namespace BhanuAssets.Scripts
         {
             if(collider.gameObject.tag.Equals("Socket"))
             {
+                if(_isInPlayerHand)
+                {
+                    EventsManager.InvokeEvent(BhanuEvent.PipeInTheSocket);
+                    _isInPlayerHand = false;
+                }
+                
                 _collidedSocketObj = collider.gameObject;
                 _collidedPlayerObj = null;
                 GetComponent<MeshRenderer>().material = materialToUse;
-                _isInPlayerHand = false;
                 _isInTheSocket = true;
-
-                if(_photonView != null && _photonView.IsMine && _photonView.AmController)
-                {
-                    EventsManager.InvokeEvent(BhanuEvent.PipeInTheSocket);
-                }
-                
                 StartCoroutine(DropPipe());
             }
         }
         
         private IEnumerator DropPipe()
         {
-            Socket socket = GameObject.FindGameObjectWithTag("Socket").GetComponent<Socket>();
+            yield return new WaitForSeconds(pipeDropDelay);
+            EventsManager.InvokeEvent(BhanuEvent.PipeNoLongerInTheSocket);
+            _collidedSocketObj = null;
+            GetComponent<MeshRenderer>().material = _defaultMaterial;
 
-            if(socket != null && !socket.AllPipesInTheSocket())
+            if(!_isInPlayerHand && _isInTheSocket)
             {
-                yield return new WaitForSeconds(pipeDropDelay);
-                _collidedSocketObj = null;
-                GetComponent<MeshRenderer>().material = _defaultMaterial;
                 _isInTheSocket = false;
-            
-                if(_photonView != null && _photonView.IsMine && _photonView.AmController)
-                {
-                    EventsManager.InvokeEvent(BhanuEvent.PipeNoLongerInTheSocket);
-                }
-
                 pipeCollider.isTrigger = false;
             }
         }
-        
-        public bool IsInTheSocket
-        {
-            get => _isInTheSocket;
-            set => _isInTheSocket = value;
-        }
-        
+
         #endregion
     }
 }

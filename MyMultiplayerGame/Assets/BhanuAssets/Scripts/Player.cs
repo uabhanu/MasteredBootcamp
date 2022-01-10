@@ -17,6 +17,7 @@ namespace BhanuAssets.Scripts
         private bool _isGrounded;
         private CinemachineVirtualCamera _cvm;
         private GameObject[] _electricalBoxes;
+        private GameObject[] _totalPipes;
         private int _levelIndex;
         private Material _materialToUse;
         private PhotonView _photonView;
@@ -46,8 +47,15 @@ namespace BhanuAssets.Scripts
         {
             _anim = GetComponent<Animator>();
             _electricalBoxes = GameObject.FindGameObjectsWithTag("Electric");
+            _totalPipes = GameObject.FindGameObjectsWithTag("Pipe");
 
-            if(isMultiplayerGame)
+            if(!isMultiplayerGame)
+            {
+                _cvm = GameObject.FindGameObjectWithTag("Follow").GetComponent<CinemachineVirtualCamera>();
+                _cvm.Follow = transform;
+                _cvm.LookAt = transform;
+            }
+            else
             {
                 if(_photonView != null && _photonView.IsMine && _photonView.AmController)
                 {
@@ -55,15 +63,10 @@ namespace BhanuAssets.Scripts
                     _cvm.Follow = transform;
                     _cvm.LookAt = transform;
                     _photonView.RPC("ElectricBoxCollisionResetRPC" , RpcTarget.All);
+                    _photonView.RPC("PipesInTheSocketResetRPC" , RpcTarget.All);
                     _photonView.RPC("SelectRendererRPC" , RpcTarget.All);
                     _photonView.RPC("UpdateNameRPC" , RpcTarget.All);
-                }
-            }
-            else
-            {
-                _cvm = GameObject.FindGameObjectWithTag("Follow").GetComponent<CinemachineVirtualCamera>();
-                _cvm.Follow = transform;
-                _cvm.LookAt = transform;
+                }   
             }
 
             SubscribeToEvents();
@@ -262,6 +265,39 @@ namespace BhanuAssets.Scripts
                 }
             }
         }
+        
+        [PunRPC]
+        private void PipeInTheSocketRPC()
+        {
+            if(playerData.PipesInTheSocket < _totalPipes.Length)
+            {
+                playerData.PipesInTheSocket++;
+            }
+        }
+
+        [PunRPC]
+        private void PipeNoLongerInTheSocketRPC()
+        {
+            if(playerData.PipesInTheSocket > 0)
+            {
+                playerData.PipesInTheSocket--;
+            }
+        }
+
+        [PunRPC]
+        private void PipesInTheSocketResetRPC()
+        {
+            playerData.PipesInTheSocket = 0;
+        }
+        
+        [PunRPC]
+        private void PipesInTheSocketRPC()
+        {
+            if(playerData.PipesInTheSocket == _totalPipes.Length)
+            {
+                //EventsManager.InvokeEvent(BhanuEvent.AllSocketsFilled);
+            }
+        }
 
         [PunRPC]
         private void SelectRendererRPC()
@@ -293,9 +329,43 @@ namespace BhanuAssets.Scripts
         private void OnDeath()
         {
             _photonView.RPC("DestroyRPCs" , RpcTarget.All);
-            //PhotonNetwork.IsMessageQueueRunning = false;
-            //PhotonNetwork.OpRemoveCompleteCache();
             PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex);
+        }
+
+        private void OnPipeInTheSocket()
+        {
+            if(!isMultiplayerGame)
+            {
+                if(playerData.PipesInTheSocket < _totalPipes.Length)
+                {
+                    playerData.PipesInTheSocket++;
+                }
+            }
+            else
+            {
+                if(_photonView != null && _photonView.IsMine && _photonView.AmController)
+                {
+                    _photonView.RPC("PipeInTheSocketRPC" , RpcTarget.All);
+                }   
+            }
+        }
+
+        private void OnPipeNoLongerInTheSocket()
+        {
+            if(!isMultiplayerGame)
+            {
+                if(playerData.PipesInTheSocket < _totalPipes.Length)
+                {
+                    playerData.PipesInTheSocket--;
+                }
+            }
+            else
+            {
+                if(_photonView != null && _photonView.IsMine && _photonView.AmController)
+                {
+                    _photonView.RPC("PipeNoLongerInTheSocketRPC" , RpcTarget.All);
+                }   
+            }
         }
 
         #endregion
@@ -305,11 +375,15 @@ namespace BhanuAssets.Scripts
         private void SubscribeToEvents()
         {
             EventsManager.SubscribeToEvent(BhanuEvent.Death , OnDeath);
+            EventsManager.SubscribeToEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
+            EventsManager.SubscribeToEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);
         }
         
         private void UnsubscribeFromEvents()
         {
             EventsManager.UnsubscribeFromEvent(BhanuEvent.Death , OnDeath);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);
         }
         
         #endregion
