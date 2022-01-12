@@ -1,9 +1,10 @@
-using Bhanu;
 using BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using Photon.Pun;
 using Random = UnityEngine.Random;
+using System.Collections.Generic;
 using System.IO;
+using Bhanu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -11,11 +12,16 @@ namespace BhanuAssets.Scripts
 {
     public class GameManager : MonoBehaviour
     {
+        [SerializeField] private bool _pipeInTheSocket;
+        [SerializeField] private GameObject[] _totalPipeObjs;
+        [SerializeField] private List<bool> _listOfPipesInside;
+
         #region Serialized Field Private Variables Declarations
         
         [SerializeField] private GameObject startCutsceneObj;
         [SerializeField] private GameObject winCutsceneObj;
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private Socket socket;
 
         #endregion
 
@@ -23,8 +29,9 @@ namespace BhanuAssets.Scripts
 
         private void Start()
         {
-            CreatePlayer();
             SubscribeToEvents();
+            _totalPipeObjs = GameObject.FindGameObjectsWithTag("Pipe");
+            CreatePlayer();
         }
 
         private void OnDestroy()
@@ -49,7 +56,7 @@ namespace BhanuAssets.Scripts
             else
             {
                 Vector3 spawnPos = new Vector3(Random.Range(-4f , 4f) , transform.position.y , Random.Range(0f , 3.89f));
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , spawnPos , Quaternion.identity).GetComponent<PhotonView>();   
+                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , spawnPos , Quaternion.identity).GetComponent<PhotonView>();
             }
 
             if(startCutsceneObj != null)
@@ -89,6 +96,23 @@ namespace BhanuAssets.Scripts
         {
             CreatePlayer();
         }
+        
+        private void OnPipeInTheSocket()
+        {
+            _pipeInTheSocket = true;
+            
+            _listOfPipesInside.Add(_pipeInTheSocket);    
+               
+            if(_listOfPipesInside.Count == _totalPipeObjs.Length)
+            {
+                EventsManager.InvokeEvent(BhanuEvent.AllSocketsFilled);
+            }
+        }
+
+        private void OnPipeNoLongerInTheSocket()
+        {
+            _listOfPipesInside.Remove(_pipeInTheSocket);
+        }
 
         private void OnStartCutsceneFinished()
         {
@@ -105,11 +129,13 @@ namespace BhanuAssets.Scripts
         #endregion
         
         #region Event Listeners
-        
+
         private void SubscribeToEvents()
         {
             EventsManager.SubscribeToEvent(BhanuEvent.AllElectricBoxesCollided , OnAllElectricBoxesCollided);
             EventsManager.SubscribeToEvent(BhanuEvent.Death , OnDeath);
+            EventsManager.SubscribeToEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
+            EventsManager.SubscribeToEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);
             EventsManager.SubscribeToEvent(BhanuEvent.StartCutsceneFinished , OnStartCutsceneFinished);
             EventsManager.SubscribeToEvent(BhanuEvent.WinCutsceneFinished , OnWinCutsceneFinished);
         }
@@ -118,6 +144,8 @@ namespace BhanuAssets.Scripts
         {
             EventsManager.UnsubscribeFromEvent(BhanuEvent.AllElectricBoxesCollided , OnAllElectricBoxesCollided);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.Death , OnDeath);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.StartCutsceneFinished , OnStartCutsceneFinished);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.WinCutsceneFinished , OnWinCutsceneFinished);
         }

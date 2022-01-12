@@ -102,6 +102,12 @@ namespace BhanuAssets.Scripts
                 pipeCollider.isTrigger = false;
             }
         }
+        
+        public GameObject CollidedSocketObj
+        {
+            get => _collidedSocketObj;
+            set => _collidedSocketObj = value;
+        }
 
         #endregion
     }
