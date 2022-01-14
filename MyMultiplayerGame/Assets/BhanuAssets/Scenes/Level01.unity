@@ -4293,7 +4293,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   startCutsceneObj: {fileID: 1345433919}
-  winCutsceneObj: {fileID: 430332454}
+  level01WinCutsceneObj: {fileID: 430332454}
+  level02WinCutsceneObj: {fileID: 0}
   playerData: {fileID: 11400000, guid: a99eb944fd5cb3f4d8ec2b86f7d05f46, type: 2}
 --- !u!4 &1147120166
 Transform:

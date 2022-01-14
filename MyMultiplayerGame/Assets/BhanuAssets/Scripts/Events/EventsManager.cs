@@ -7,7 +7,6 @@ namespace Events
         #region Event Actions Declarations
         
         private static event Action AllElectricBoxesCollidedAction;
-        private static event Action AllSocketsFilledAction;
         private static event Action DeathAction;
         private static event Action ElectricBoxCollidedAction;
         private static event Action ElectricBoxNotCollidedAction;
@@ -32,11 +31,7 @@ namespace Events
                 case BhanuEvent.AllElectricBoxesCollided:
                     AllElectricBoxesCollidedAction?.Invoke(); 
                 return;
-                
-                case BhanuEvent.AllSocketsFilled:
-                    AllSocketsFilledAction?.Invoke(); 
-                return;
-                
+
                 case BhanuEvent.Death:
                     DeathAction?.Invoke(); 
                 return;
@@ -98,11 +93,7 @@ namespace Events
                 case BhanuEvent.AllElectricBoxesCollided:
                     AllElectricBoxesCollidedAction += actionFunction;
                 return;
-                
-                case BhanuEvent.AllSocketsFilled:
-                    AllSocketsFilledAction += actionFunction;
-                return;
-                
+
                 case BhanuEvent.Death:
                     DeathAction += actionFunction;
                 return;
@@ -164,11 +155,7 @@ namespace Events
                 case BhanuEvent.AllElectricBoxesCollided:
                     AllElectricBoxesCollidedAction -= actionFunction;
                 return;
-                
-                case BhanuEvent.AllSocketsFilled:
-                    AllSocketsFilledAction -= actionFunction;
-                return;
-                
+
                 case BhanuEvent.Death:
                     DeathAction -= actionFunction;
                 return;

@@ -1,10 +1,10 @@
+using System;
 using BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using Photon.Pun;
 using Random = UnityEngine.Random;
 using System.Collections.Generic;
 using System.IO;
-using Bhanu;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -12,24 +12,35 @@ namespace BhanuAssets.Scripts
 {
     public class GameManager : MonoBehaviour
     {
-        [SerializeField] private bool _pipeInTheSocket;
-        [SerializeField] private GameObject[] _totalPipeObjs;
-        [SerializeField] private List<bool> _listOfPipesInside;
+        #region Private Variables Declarations
+        
+        private bool _pipeInTheSocket;
+        private GameObject[] _totalPipeObjs;
+        private List<bool> _listOfPipesInside;
+        private PhotonView _photonView;
+        
+        #endregion
 
         #region Serialized Field Private Variables Declarations
         
         [SerializeField] private GameObject startCutsceneObj;
-        [SerializeField] private GameObject winCutsceneObj;
+        [SerializeField] private GameObject level01WinCutsceneObj;
+        [SerializeField] private GameObject level02WinCutsceneObj;
         [SerializeField] private PlayerData playerData;
-        [SerializeField] private Socket socket;
 
         #endregion
 
         #region MonoBehaviour Functions
 
+        private void Awake()
+        {
+            _photonView = GetComponent<PhotonView>();
+        }
+
         private void Start()
         {
             SubscribeToEvents();
+            _listOfPipesInside = new List<bool>();
             _totalPipeObjs = GameObject.FindGameObjectsWithTag("Pipe");
             CreatePlayer();
         }
@@ -71,6 +82,19 @@ namespace BhanuAssets.Scripts
         }
 
         [PunRPC]
+        private void LevelCompleteRPC()
+        {
+            GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
+
+            for(int i = 0; i < playerObjs.Length; i++)
+            {
+                playerObjs[i].SetActive(false);
+            }
+                
+            level02WinCutsceneObj.SetActive(true);
+        }
+
+        [PunRPC]
         private void StartStartingCutscene()
         {
             if(!playerData.StartCutsceneWatched)
@@ -85,10 +109,10 @@ namespace BhanuAssets.Scripts
 
         private void OnAllElectricBoxesCollided()
         {
-            if(winCutsceneObj != null && !winCutsceneObj.activeSelf)
+            if(level01WinCutsceneObj != null && !level01WinCutsceneObj.activeSelf)
             {
                 //LogMessages.AllIsWellMessage("You AllElectricBoxesCollided :)");
-                winCutsceneObj.SetActive(true);
+                level01WinCutsceneObj.SetActive(true);
             }
         }
 
@@ -101,11 +125,11 @@ namespace BhanuAssets.Scripts
         {
             _pipeInTheSocket = true;
             
-            _listOfPipesInside.Add(_pipeInTheSocket);    
-               
+            _listOfPipesInside.Add(_pipeInTheSocket);
+
             if(_listOfPipesInside.Count == _totalPipeObjs.Length)
             {
-                EventsManager.InvokeEvent(BhanuEvent.AllSocketsFilled);
+                _photonView.RPC("LevelCompleteRPC" , RpcTarget.All);
             }
         }
 

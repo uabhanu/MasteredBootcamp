@@ -3,7 +3,6 @@
     public enum BhanuEvent
     {
         AllElectricBoxesCollided,
-        AllSocketsFilled,
         Death,
         ElectricBoxCollided,
         ElectricBoxNotCollided,
