@@ -14,7 +14,7 @@ namespace BhanuAssets.Scripts
         {
             if(Input.GetKey(KeyCode.Escape))
             {
-                photonView.RPC("SkipStartingCutscene" , RpcTarget.All);
+                photonView.RPC("SkipStartingCutsceneRPC" , RpcTarget.All);
             }
         }
 
@@ -23,9 +23,18 @@ namespace BhanuAssets.Scripts
         #region User Functions
 
         [PunRPC]
-        private void SkipStartingCutscene()
+        private void SkipStartingCutsceneRPC()
         {
             StartingCutSceneEnded();
+        }
+
+        public void EndGame()
+        {
+            #if UNITY_EDITOR
+                UnityEditor.EditorApplication.isPlaying = false;
+            #else
+                Application.Quit();
+            #endif
         }
 
         public void StartingCutSceneEnded()
