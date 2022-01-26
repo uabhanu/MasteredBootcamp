@@ -83,10 +83,12 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void LevelCompleteRPC()
         {
+            GameObject[] pipeObjs = GameObject.FindGameObjectsWithTag("Pipe");
             GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
 
             for(int i = 0; i < playerObjs.Length; i++)
             {
+                pipeObjs[i].SetActive(false);
                 playerObjs[i].SetActive(false);
             }
                 
@@ -111,6 +113,14 @@ namespace BhanuAssets.Scripts
             if(level01WinCutsceneObj != null && !level01WinCutsceneObj.activeSelf)
             {
                 //LogMessages.AllIsWellMessage("You AllElectricBoxesCollided :)");
+                
+                GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
+
+                for(int i = 0; i < playerObjs.Length; i++)
+                {
+                    playerObjs[i].SetActive(false);
+                }
+                
                 level01WinCutsceneObj.SetActive(true);
             }
         }

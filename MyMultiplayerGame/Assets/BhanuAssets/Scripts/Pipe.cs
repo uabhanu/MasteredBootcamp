@@ -14,7 +14,6 @@ namespace BhanuAssets.Scripts
         private bool _isInTheSocket;
         private GameObject _collidedPlayerObj;
         private GameObject _collidedSocketObj;
-        private Material _defaultMaterial;
         private PhotonView _photonView;
         
         #endregion
@@ -23,7 +22,6 @@ namespace BhanuAssets.Scripts
         
         [SerializeField] private CapsuleCollider pipeCollider;
         [SerializeField] private float pipeDropDelay;
-        [SerializeField] private Material materialToUse;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private Transform socketTransform;
 
@@ -36,11 +34,6 @@ namespace BhanuAssets.Scripts
         private void Awake()
         {
             _photonView = GetComponent<PhotonView>();
-        }
-
-        private void Start()
-        {
-            _defaultMaterial = GetComponent<MeshRenderer>().material;
         }
 
         private void Update()
@@ -83,9 +76,12 @@ namespace BhanuAssets.Scripts
                 
                 _collidedSocketObj = collider.gameObject;
                 _collidedPlayerObj = null;
-                GetComponent<MeshRenderer>().material = materialToUse;
                 _isInTheSocket = true;
-                StartCoroutine(DropPipe());
+
+                if(gameObject.activeSelf)
+                {
+                    StartCoroutine(DropPipe());   
+                }
             }
         }
         
@@ -94,7 +90,6 @@ namespace BhanuAssets.Scripts
             yield return new WaitForSeconds(pipeDropDelay);
             EventsManager.InvokeEvent(BhanuEvent.PipeNoLongerInTheSocket);
             _collidedSocketObj = null;
-            GetComponent<MeshRenderer>().material = _defaultMaterial;
 
             if(!_isInPlayerHand && _isInTheSocket)
             {
