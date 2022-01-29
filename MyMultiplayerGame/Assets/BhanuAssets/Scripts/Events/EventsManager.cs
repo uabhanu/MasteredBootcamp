@@ -6,7 +6,7 @@ namespace Events
     {
         #region Event Actions Declarations
         
-        private static event Action AllElectricBoxesCollidedAction;
+        private static event Action BothCylindersCollidedAction;
         private static event Action DeathAction;
         private static event Action ElectricBoxCollidedAction;
         private static event Action ElectricBoxNotCollidedAction;
@@ -28,19 +28,19 @@ namespace Events
         {
             switch(eventToInvoke)
             {
-                case BhanuEvent.AllElectricBoxesCollided:
-                    AllElectricBoxesCollidedAction?.Invoke(); 
+                case BhanuEvent.BothCylindersCollided:
+                    BothCylindersCollidedAction?.Invoke(); 
                 return;
 
                 case BhanuEvent.Death:
                     DeathAction?.Invoke(); 
                 return;
 
-                case BhanuEvent.ElectricBoxCollided:
+                case BhanuEvent.CylinderCollided:
                     ElectricBoxCollidedAction?.Invoke(); 
                 return;
                 
-                case BhanuEvent.ElectricBoxNotCollided:
+                case BhanuEvent.CylinderNotCollided:
                     ElectricBoxNotCollidedAction?.Invoke(); 
                 return;
                 
@@ -90,19 +90,19 @@ namespace Events
         {
             switch(eventToSubscribe)
             {
-                case BhanuEvent.AllElectricBoxesCollided:
-                    AllElectricBoxesCollidedAction += actionFunction;
+                case BhanuEvent.BothCylindersCollided:
+                    BothCylindersCollidedAction += actionFunction;
                 return;
 
                 case BhanuEvent.Death:
                     DeathAction += actionFunction;
                 return;
 
-                case BhanuEvent.ElectricBoxCollided:
+                case BhanuEvent.CylinderCollided:
                     ElectricBoxCollidedAction += actionFunction;
                 return;
                 
-                case BhanuEvent.ElectricBoxNotCollided:
+                case BhanuEvent.CylinderNotCollided:
                     ElectricBoxNotCollidedAction += actionFunction;
                 return;
 
@@ -152,19 +152,19 @@ namespace Events
         {
             switch(eventToSubscribe)
             {
-                case BhanuEvent.AllElectricBoxesCollided:
-                    AllElectricBoxesCollidedAction -= actionFunction;
+                case BhanuEvent.BothCylindersCollided:
+                    BothCylindersCollidedAction -= actionFunction;
                 return;
 
                 case BhanuEvent.Death:
                     DeathAction -= actionFunction;
                 return;
 
-                case BhanuEvent.ElectricBoxCollided:
+                case BhanuEvent.CylinderCollided:
                     ElectricBoxCollidedAction -= actionFunction;
                 return;
                 
-                case BhanuEvent.ElectricBoxNotCollided:
+                case BhanuEvent.CylinderNotCollided:
                     ElectricBoxNotCollidedAction -= actionFunction;
                 return;
 

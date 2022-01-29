@@ -19,6 +19,7 @@ namespace BhanuAssets.Scripts
         
         #region Serialized Field Private Variables Declarations
         
+        [SerializeField] private GameObject loadingObj;
         [SerializeField] private GameObject lobbyMenuObj;
         [SerializeField] private GameObject matchmakingMenuObj;
         [SerializeField] private GameObject noMoreRoomsErrorObj;
@@ -36,6 +37,7 @@ namespace BhanuAssets.Scripts
         {
             PhotonNetwork.AutomaticallySyncScene = true;
             _roomListings = new List<RoomInfo>();
+            loadingObj.SetActive(false);
             submitButtonObj.SetActive(true);
             
             if(PlayerPrefs.HasKey("Nickname"))

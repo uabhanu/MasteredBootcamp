@@ -43,12 +43,12 @@ namespace BhanuAssets.Scripts
         
         private void SubscribeToEvents()
         {
-            EventsManager.SubscribeToEvent(BhanuEvent.AllElectricBoxesCollided , OnWin);
+            EventsManager.SubscribeToEvent(BhanuEvent.BothCylindersCollided , OnWin);
         }
         
         private void UnsubscribeFromEvents()
         {
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.AllElectricBoxesCollided , OnWin);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.BothCylindersCollided , OnWin);
         }
         
         #endregion

@@ -2,10 +2,10 @@
 {
     public enum BhanuEvent
     {
-        AllElectricBoxesCollided,
+        BothCylindersCollided,
         Death,
-        ElectricBoxCollided,
-        ElectricBoxNotCollided,
+        CylinderCollided,
+        CylinderNotCollided,
         PipeDropped,
         PipeInTheSocket,
         PipeNoLongerInTheSocket,

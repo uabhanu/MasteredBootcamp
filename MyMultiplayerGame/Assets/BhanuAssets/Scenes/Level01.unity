@@ -12107,10 +12107,20 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 510704109}
     m_Modifications:
+    - target: {fileID: 550706756726574897, guid: 289ab39bad368984a9177eb956b8e876,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
+      objectReference: {fileID: 0}
     - target: {fileID: 3749737347183368469, guid: 289ab39bad368984a9177eb956b8e876,
         type: 3}
       propertyPath: m_Name
       value: ElectricalBox
+      objectReference: {fileID: 0}
+    - target: {fileID: 4204159352089582633, guid: 289ab39bad368984a9177eb956b8e876,
+        type: 3}
+      propertyPath: m_TagString
+      value: Untagged
       objectReference: {fileID: 0}
     - target: {fileID: 4558327735047488431, guid: 289ab39bad368984a9177eb956b8e876,
         type: 3}

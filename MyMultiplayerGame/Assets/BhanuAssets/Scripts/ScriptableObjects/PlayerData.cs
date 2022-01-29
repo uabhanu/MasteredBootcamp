@@ -17,7 +17,7 @@ namespace BhanuAssets.Scripts.ScriptableObjects
         [SerializeField] private float jumpForce;
         [SerializeField] private float moveSpeed;
         [SerializeField] private float rotationSpeed;
-        [SerializeField] private int electricBoxesCollided = 0;
+        [SerializeField] private int cylindersCollided = 0;
         [SerializeField] private Material localMaterial;
         [SerializeField] private Material remoteMaterial;
 
@@ -51,10 +51,10 @@ namespace BhanuAssets.Scripts.ScriptableObjects
             set => rotationSpeed = value;
         }
         
-        public int ElectricBoxesCollided
+        public int CylindersCollided
         {
-            get => electricBoxesCollided;
-            set => electricBoxesCollided = value;
+            get => cylindersCollided;
+            set => cylindersCollided = value;
         }
 
         public Material LocalMaterial

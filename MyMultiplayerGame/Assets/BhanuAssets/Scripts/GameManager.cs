@@ -55,19 +55,8 @@ namespace BhanuAssets.Scripts
 
         private void CreatePlayer()
         {
-            int levelIndex = SceneManager.GetActiveScene().buildIndex;
-            
-            if(levelIndex == 3)
-            {
-                PlayerPositioner playerPositioner = GameObject.Find("PlayerPositioner").GetComponent<PlayerPositioner>();
-                int randomIndex = Random.Range(0 , playerPositioner.SpawnPositions.Length);
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , playerPositioner.SpawnPositions[randomIndex] , Quaternion.identity).GetComponent<PhotonView>();
-            }
-            else
-            {
-                Vector3 spawnPos = new Vector3(Random.Range(-4f , 4f) , transform.position.y , Random.Range(0f , 3.89f));
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , spawnPos , Quaternion.identity).GetComponent<PhotonView>();
-            }
+            Vector3 spawnPos = new Vector3(37.2f , transform.position.y , Random.Range(-10f , 10f));
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , spawnPos , Quaternion.identity).GetComponent<PhotonView>();
 
             if(startCutsceneObj != null)
             {
@@ -112,7 +101,7 @@ namespace BhanuAssets.Scripts
         {
             if(level01WinCutsceneObj != null && !level01WinCutsceneObj.activeSelf)
             {
-                //LogMessages.AllIsWellMessage("You AllElectricBoxesCollided :)");
+                //LogMessages.AllIsWellMessage("You BothCylindersCollided :)");
                 
                 GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
 
@@ -165,7 +154,7 @@ namespace BhanuAssets.Scripts
 
         private void SubscribeToEvents()
         {
-            EventsManager.SubscribeToEvent(BhanuEvent.AllElectricBoxesCollided , OnAllElectricBoxesCollided);
+            EventsManager.SubscribeToEvent(BhanuEvent.BothCylindersCollided , OnAllElectricBoxesCollided);
             EventsManager.SubscribeToEvent(BhanuEvent.Death , OnDeath);
             EventsManager.SubscribeToEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
             EventsManager.SubscribeToEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);
@@ -175,7 +164,7 @@ namespace BhanuAssets.Scripts
         
         private void UnsubscribeFromEvents()
         {
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.AllElectricBoxesCollided , OnAllElectricBoxesCollided);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.BothCylindersCollided , OnAllElectricBoxesCollided);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.Death , OnDeath);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);

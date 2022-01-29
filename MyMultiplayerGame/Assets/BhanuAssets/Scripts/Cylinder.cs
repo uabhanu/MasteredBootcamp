@@ -1,10 +1,9 @@
-using Assets.BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using UnityEngine;
 
 namespace BhanuAssets.Scripts
 {
-    public class ElectricBox : MonoBehaviour
+    public class Cylinder : MonoBehaviour
     {
         private bool playerCollided = false;
 
@@ -38,12 +37,12 @@ namespace BhanuAssets.Scripts
         
         private void SubscribeToEvents()
         {
-            EventsManager.SubscribeToEvent(BhanuEvent.ElectricBoxCollided , OnElectricBoxCollided);
+            EventsManager.SubscribeToEvent(BhanuEvent.CylinderCollided , OnElectricBoxCollided);
         }
         
         private void UnsubscribeFromEvents()
         {
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.ElectricBoxCollided , OnElectricBoxCollided);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.CylinderCollided , OnElectricBoxCollided);
         }
         
         #endregion
