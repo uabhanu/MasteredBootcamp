@@ -3063,7 +3063,7 @@ GameObject:
   - component: {fileID: 211487977}
   m_Layer: 0
   m_Name: torpedo (3)
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -7852,7 +7852,7 @@ GameObject:
   - component: {fileID: 617528626}
   m_Layer: 0
   m_Name: stairs_big_with_emmision
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -9426,7 +9426,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 732544391}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.1, y: 0, z: -55.1}
+  m_LocalPosition: {x: 15.45, y: 0, z: -14.39}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1554384397}
@@ -10512,7 +10512,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 789372697}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -5.5, y: 0, z: 45.2}
+  m_LocalPosition: {x: 15.33, y: 0, z: 14.06}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 1554384397}
@@ -13543,6 +13543,7 @@ MonoBehaviour:
   startCutsceneObj: {fileID: 0}
   level01WinCutsceneObj: {fileID: 1502587198}
   level02WinCutsceneObj: {fileID: 0}
+  levelData: {fileID: 11400000, guid: 8657f4e242449184baeac263be83ad7a, type: 2}
   playerData: {fileID: 11400000, guid: a99eb944fd5cb3f4d8ec2b86f7d05f46, type: 2}
 --- !u!1 &981119786
 GameObject:
@@ -14858,7 +14859,7 @@ GameObject:
   - component: {fileID: 1107397191}
   m_Layer: 0
   m_Name: torpedo (2)
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -21295,7 +21296,7 @@ GameObject:
   - component: {fileID: 1497152703}
   m_Layer: 0
   m_Name: torpedo (4)
-  m_TagString: Floor
+  m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0

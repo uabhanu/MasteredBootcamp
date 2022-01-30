@@ -25,6 +25,7 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject startCutsceneObj;
         [SerializeField] private GameObject level01WinCutsceneObj;
         [SerializeField] private GameObject level02WinCutsceneObj;
+        [SerializeField] private LevelData levelData;
         [SerializeField] private PlayerData playerData;
 
         #endregion
@@ -55,7 +56,7 @@ namespace BhanuAssets.Scripts
 
         private void CreatePlayer()
         {
-            Vector3 spawnPos = new Vector3(37.2f , transform.position.y , Random.Range(-10f , 10f));
+            Vector3 spawnPos = new Vector3(levelData.SpawnXPosition - levelData.Offset , transform.position.y , Random.Range(-levelData.SpawnZPosition , levelData.SpawnZPosition) - levelData.Offset);
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , spawnPos , Quaternion.identity).GetComponent<PhotonView>();
 
             if(startCutsceneObj != null)

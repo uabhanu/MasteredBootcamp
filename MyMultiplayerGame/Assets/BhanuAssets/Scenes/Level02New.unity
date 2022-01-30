@@ -42251,6 +42251,7 @@ MonoBehaviour:
   startCutsceneObj: {fileID: 0}
   level01WinCutsceneObj: {fileID: 0}
   level02WinCutsceneObj: {fileID: 0}
+  levelData: {fileID: 11400000, guid: 0a94153918ed7dc46ad8e58eae6b7b71, type: 2}
   playerData: {fileID: 11400000, guid: a99eb944fd5cb3f4d8ec2b86f7d05f46, type: 2}
 --- !u!23 &1955016703
 MeshRenderer:

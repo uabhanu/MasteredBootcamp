@@ -3,7 +3,7 @@ using UnityEngine;
 namespace Assets.BhanuAssets.Scripts.ScriptableObjects
 {
     [CreateAssetMenu]
-    public class ElectricBoxData : ScriptableObject
+    public class CylinderData : ScriptableObject
     {
         [SerializeField] private bool playerCollided;
 
