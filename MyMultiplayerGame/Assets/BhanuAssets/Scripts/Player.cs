@@ -17,7 +17,6 @@ namespace BhanuAssets.Scripts
         private bool _isGrounded;
         private CinemachineVirtualCamera _cvm;
         private GameObject[] _cylinders;
-        private int _levelIndex;
         private Material _materialToUse;
         private PhotonView _photonView;
         private SkinnedMeshRenderer _playerRenderer;

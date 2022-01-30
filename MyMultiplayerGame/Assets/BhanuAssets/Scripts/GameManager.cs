@@ -97,7 +97,7 @@ namespace BhanuAssets.Scripts
         
         #region Event Functions
 
-        private void OnAllElectricBoxesCollided()
+        private void OnBothCylindersCollided()
         {
             if(level01WinCutsceneObj != null && !level01WinCutsceneObj.activeSelf)
             {
@@ -154,7 +154,7 @@ namespace BhanuAssets.Scripts
 
         private void SubscribeToEvents()
         {
-            EventsManager.SubscribeToEvent(BhanuEvent.BothCylindersCollided , OnAllElectricBoxesCollided);
+            EventsManager.SubscribeToEvent(BhanuEvent.BothCylindersCollided , OnBothCylindersCollided);
             EventsManager.SubscribeToEvent(BhanuEvent.Death , OnDeath);
             EventsManager.SubscribeToEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
             EventsManager.SubscribeToEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);
@@ -164,7 +164,7 @@ namespace BhanuAssets.Scripts
         
         private void UnsubscribeFromEvents()
         {
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.BothCylindersCollided , OnAllElectricBoxesCollided);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.BothCylindersCollided , OnBothCylindersCollided);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.Death , OnDeath);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);
