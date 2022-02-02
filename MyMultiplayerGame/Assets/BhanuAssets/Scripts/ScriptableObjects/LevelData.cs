@@ -5,14 +5,23 @@ namespace BhanuAssets.Scripts.ScriptableObjects
     [CreateAssetMenu]
     public class LevelData : ScriptableObject
     {
-        [SerializeField] private float offset;
+        [SerializeField] private float offsetX;
+        [SerializeField] private float offsetZ;
         [SerializeField] private float spawnXPosition;
         [SerializeField] private float spawnZPosition;
+        [SerializeField] private Material socketMaterialGreen;
+        [SerializeField] private Material socketMaterialRed;
 
-        public float Offset
+        public float OffsetX
         {
-            get => offset;
-            set => offset = value;
+            get => offsetX;
+            set => offsetX = value;
+        }
+        
+        public float OffsetZ
+        {
+            get => offsetZ;
+            set => offsetZ = value;
         }
 
         public float SpawnXPosition

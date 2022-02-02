@@ -1,6 +1,8 @@
+using System;
 using BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using System.Collections;
+using Bhanu;
 using Photon.Pun;
 using UnityEngine;
 
@@ -9,6 +11,9 @@ namespace BhanuAssets.Scripts
     public class Pipe : MonoBehaviour
     {
         #region Private Variables Declarations
+
+        private const float DEFAULTXROTATION = 270f;
+        private const float INPLAYERHANDXROTATION = 0f;
         
         private bool _isInPlayerHand;
         private bool _isInTheSocket;
@@ -20,12 +25,10 @@ namespace BhanuAssets.Scripts
 
         #region Serialized Field Private Variables Declarations
         
-        [SerializeField] private CapsuleCollider pipeCollider;
+        [SerializeField] private Collider pipeCollider;
         [SerializeField] private float pipeDropDelay;
         [SerializeField] private PlayerData playerData;
         [SerializeField] private Transform socketTransform;
-
-        [SerializeField] private int testVar = 0;
 
         #endregion
 
@@ -34,13 +37,16 @@ namespace BhanuAssets.Scripts
         private void Awake()
         {
             _photonView = GetComponent<PhotonView>();
+            Vector3 rotationVector = new Vector3(DEFAULTXROTATION , 0f , 0f);
+            Quaternion rotation = Quaternion.Euler(rotationVector);
+            transform.rotation = rotation;
         }
 
         private void Update()
         {
             if(_collidedPlayerObj != null && _isInPlayerHand)
             {
-                transform.position = _collidedPlayerObj.GetComponent<Player>().RightHandTransform.position;   
+                transform.position = _collidedPlayerObj.GetComponent<Player>().RightHandTransform.position;
             }
 
             else if(_collidedSocketObj != null && _isInTheSocket)
@@ -57,10 +63,12 @@ namespace BhanuAssets.Scripts
                 {
                     _isInPlayerHand = true;
                     pipeCollider.isTrigger = true;
+                    Vector3 rotationVector = new Vector3(INPLAYERHANDXROTATION , 0f , 0f);
+                    Quaternion rotation = Quaternion.Euler(rotationVector);
+                    transform.rotation = rotation;
                 }
                 
                 _collidedPlayerObj = collision.gameObject;
-                GetComponent<MeshRenderer>().material = _collidedPlayerObj.GetComponent<SkinnedMeshRenderer>().material;
             }
         }
 
@@ -68,10 +76,15 @@ namespace BhanuAssets.Scripts
         {
             if(collider.gameObject.tag.Equals("Socket"))
             {
+                LogMessages.AllIsWellMessage("Pipe Collided with Mechanic Eye");
+                
                 if(_isInPlayerHand)
                 {
                     EventsManager.InvokeEvent(BhanuEvent.PipeInTheSocket);
                     _isInPlayerHand = false;
+                    Vector3 rotationVector = new Vector3(DEFAULTXROTATION , 0f , 0f);
+                    Quaternion rotation = Quaternion.Euler(rotationVector);
+                    transform.rotation = rotation;
                 }
                 
                 _collidedSocketObj = collider.gameObject;
