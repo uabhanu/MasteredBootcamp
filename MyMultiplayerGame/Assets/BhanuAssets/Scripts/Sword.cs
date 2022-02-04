@@ -1,4 +1,3 @@
-using System;
 using BhanuAssets.Scripts.ScriptableObjects;
 using Events;
 using System.Collections;
@@ -8,7 +7,7 @@ using UnityEngine;
 
 namespace BhanuAssets.Scripts
 {
-    public class Pipe : MonoBehaviour
+    public class Sword : MonoBehaviour
     {
         #region Private Variables Declarations
 
@@ -25,9 +24,10 @@ namespace BhanuAssets.Scripts
 
         #region Serialized Field Private Variables Declarations
         
-        [SerializeField] private Collider pipeCollider;
-        [SerializeField] private float pipeDropDelay;
+        [SerializeField] private Collider swordCollider;
+        [SerializeField] private float swordDropDelay;
         [SerializeField] private PlayerData playerData;
+        [SerializeField] private Rigidbody swordBody;
         [SerializeField] private Transform socketTransform;
 
         #endregion
@@ -49,10 +49,10 @@ namespace BhanuAssets.Scripts
                 transform.position = _collidedPlayerObj.GetComponent<Player>().RightHandTransform.position;
             }
 
-            else if(_collidedSocketObj != null && _isInTheSocket)
-            {
-                transform.position = _collidedSocketObj.transform.position;
-            }
+            // else if(_collidedSocketObj != null && _isInTheSocket)
+            // {
+            //     transform.position = _collidedSocketObj.transform.position;
+            // }
         }
 
         private void OnCollisionEnter(Collision collision)
@@ -62,7 +62,7 @@ namespace BhanuAssets.Scripts
                 if(!_isInPlayerHand)
                 {
                     _isInPlayerHand = true;
-                    pipeCollider.isTrigger = true;
+                    swordCollider.isTrigger = true;
                     Vector3 rotationVector = new Vector3(INPLAYERHANDXROTATION , 0f , 0f);
                     Quaternion rotation = Quaternion.Euler(rotationVector);
                     transform.rotation = rotation;
@@ -76,11 +76,12 @@ namespace BhanuAssets.Scripts
         {
             if(collider.gameObject.tag.Equals("Socket"))
             {
-                LogMessages.AllIsWellMessage("Pipe Collided with Mechanic Eye");
-                
+                LogMessages.AllIsWellMessage("Sword Collided with Mechanic Eye");
+                swordBody.constraints = RigidbodyConstraints.FreezePositionY;
+
                 if(_isInPlayerHand)
                 {
-                    EventsManager.InvokeEvent(BhanuEvent.PipeInTheSocket);
+                    EventsManager.InvokeEvent(BhanuEvent.SwordInTheSocket);
                     _isInPlayerHand = false;
                     Vector3 rotationVector = new Vector3(DEFAULTXROTATION , 0f , 0f);
                     Quaternion rotation = Quaternion.Euler(rotationVector);
@@ -88,26 +89,28 @@ namespace BhanuAssets.Scripts
                 }
                 
                 _collidedSocketObj = collider.gameObject;
+                transform.position = _collidedSocketObj.transform.position;
                 _collidedPlayerObj = null;
                 _isInTheSocket = true;
 
                 if(gameObject.activeSelf)
                 {
-                    StartCoroutine(DropPipe());   
+                    StartCoroutine(DropSword());   
                 }
             }
         }
         
-        private IEnumerator DropPipe()
+        private IEnumerator DropSword()
         {
-            yield return new WaitForSeconds(pipeDropDelay);
-            EventsManager.InvokeEvent(BhanuEvent.PipeNoLongerInTheSocket);
+            yield return new WaitForSeconds(swordDropDelay);
+            EventsManager.InvokeEvent(BhanuEvent.SwordNoLongerInTheSocket);
             _collidedSocketObj = null;
 
             if(!_isInPlayerHand && _isInTheSocket)
             {
                 _isInTheSocket = false;
-                pipeCollider.isTrigger = false;
+                swordCollider.isTrigger = false;
+                swordBody.constraints = RigidbodyConstraints.FreezeRotation;
             }
         }
         

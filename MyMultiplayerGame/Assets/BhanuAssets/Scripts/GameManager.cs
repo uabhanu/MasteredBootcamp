@@ -13,9 +13,9 @@ namespace BhanuAssets.Scripts
     {
         #region Private Variables Declarations
         
-        private bool _pipeInTheSocket;
-        private GameObject[] _totalPipeObjs;
-        private List<bool> _listOfPipesInside;
+        private bool _swordInTheSocket;
+        private GameObject[] _totalSwordObjs;
+        [SerializeField] private List<bool> _listOfSwordsInside;
         private PhotonView _photonView;
         
         #endregion
@@ -40,8 +40,8 @@ namespace BhanuAssets.Scripts
         private void Start()
         {
             SubscribeToEvents();
-            _listOfPipesInside = new List<bool>();
-            _totalPipeObjs = GameObject.FindGameObjectsWithTag("Pipe");
+            _listOfSwordsInside = new List<bool>();
+            _totalSwordObjs = GameObject.FindGameObjectsWithTag("Sword");
             CreatePlayer();
         }
 
@@ -73,13 +73,13 @@ namespace BhanuAssets.Scripts
         [PunRPC]
         private void LevelCompleteRPC()
         {
-            GameObject[] pipeObjs = GameObject.FindGameObjectsWithTag("Pipe");
             GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
+            GameObject[] swordObjs = GameObject.FindGameObjectsWithTag("Sword");
 
             for(int i = 0; i < playerObjs.Length; i++)
             {
-                pipeObjs[i].SetActive(false);
                 playerObjs[i].SetActive(false);
+                swordObjs[i].SetActive(false);
             }
                 
             level02WinCutsceneObj.SetActive(true);
@@ -119,29 +119,29 @@ namespace BhanuAssets.Scripts
         {
             CreatePlayer();
         }
-        
-        private void OnPipeInTheSocket()
-        {
-            _pipeInTheSocket = true;
-            
-            _listOfPipesInside.Add(_pipeInTheSocket);
-
-            if(_listOfPipesInside.Count == _totalPipeObjs.Length)
-            {
-                _photonView.RPC("LevelCompleteRPC" , RpcTarget.All);
-            }
-        }
-
-        private void OnPipeNoLongerInTheSocket()
-        {
-            _listOfPipesInside.Remove(_pipeInTheSocket);
-        }
 
         private void OnStartCutsceneFinished()
         {
             CreatePlayer();
             startCutsceneObj.SetActive(false);
             playerData.StartCutsceneWatched = true;
+        }
+        
+        private void OnSwordInTheSocket()
+        {
+            _swordInTheSocket = true;
+            
+            _listOfSwordsInside.Add(_swordInTheSocket);
+
+            if(_listOfSwordsInside.Count == _totalSwordObjs.Length)
+            {
+                _photonView.RPC("LevelCompleteRPC" , RpcTarget.All);
+            }
+        }
+
+        private void OnSwordNoLongerInTheSocket()
+        {
+            _listOfSwordsInside.Remove(_swordInTheSocket);
         }
 
         private void OnWinCutsceneFinished()
@@ -157,9 +157,9 @@ namespace BhanuAssets.Scripts
         {
             EventsManager.SubscribeToEvent(BhanuEvent.BothCylindersCollided , OnBothCylindersCollided);
             EventsManager.SubscribeToEvent(BhanuEvent.Death , OnDeath);
-            EventsManager.SubscribeToEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
-            EventsManager.SubscribeToEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);
             EventsManager.SubscribeToEvent(BhanuEvent.StartCutsceneFinished , OnStartCutsceneFinished);
+            EventsManager.SubscribeToEvent(BhanuEvent.SwordInTheSocket , OnSwordInTheSocket);
+            EventsManager.SubscribeToEvent(BhanuEvent.SwordNoLongerInTheSocket , OnSwordNoLongerInTheSocket);
             EventsManager.SubscribeToEvent(BhanuEvent.WinCutsceneFinished , OnWinCutsceneFinished);
         }
         
@@ -167,9 +167,9 @@ namespace BhanuAssets.Scripts
         {
             EventsManager.UnsubscribeFromEvent(BhanuEvent.BothCylindersCollided , OnBothCylindersCollided);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.Death , OnDeath);
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.StartCutsceneFinished , OnStartCutsceneFinished);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.SwordInTheSocket , OnSwordInTheSocket);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.SwordNoLongerInTheSocket , OnSwordNoLongerInTheSocket);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.WinCutsceneFinished , OnWinCutsceneFinished);
         }
         
