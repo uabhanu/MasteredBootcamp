@@ -74,12 +74,15 @@ namespace BhanuAssets.Scripts
         private void LevelCompleteRPC()
         {
             GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
-            GameObject[] swordObjs = GameObject.FindGameObjectsWithTag("Sword");
 
             for(int i = 0; i < playerObjs.Length; i++)
             {
                 playerObjs[i].SetActive(false);
-                swordObjs[i].SetActive(false);
+            }
+            
+            for(int i = 0; i < _totalSwordObjs.Length; i++)
+            {
+                _totalSwordObjs[i].SetActive(false);
             }
                 
             level02WinCutsceneObj.SetActive(true);
