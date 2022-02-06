@@ -18,6 +18,7 @@ namespace BhanuAssets.Scripts
         private bool _isInTheSocket;
         private GameObject _collidedPlayerObj;
         private GameObject _collidedSocketObj;
+        private Material _mechanicalEyeMaterial;
         private PhotonView _photonView;
         
         #endregion
@@ -77,6 +78,7 @@ namespace BhanuAssets.Scripts
             if(collider.gameObject.tag.Equals("Socket"))
             {
                 LogMessages.AllIsWellMessage("Sword Collided with Mechanic Eye");
+                _mechanicalEyeMaterial = playerData.MechanicalEyeMaterialGreen;
                 swordBody.constraints = RigidbodyConstraints.FreezePositionY;
 
                 if(_isInPlayerHand)
@@ -89,6 +91,7 @@ namespace BhanuAssets.Scripts
                 }
                 
                 _collidedSocketObj = collider.gameObject;
+                _collidedSocketObj.GetComponentInParent<MeshRenderer>().material = _mechanicalEyeMaterial;
                 transform.position = _collidedSocketObj.transform.position;
                 _collidedPlayerObj = null;
                 _isInTheSocket = true;
@@ -104,6 +107,8 @@ namespace BhanuAssets.Scripts
         {
             yield return new WaitForSeconds(swordDropDelay);
             EventsManager.InvokeEvent(BhanuEvent.SwordNoLongerInTheSocket);
+            _mechanicalEyeMaterial = playerData.MechanicalEyeMaterialRed;
+            _collidedSocketObj.GetComponentInParent<MeshRenderer>().material = _mechanicalEyeMaterial;
             _collidedSocketObj = null;
 
             if(!_isInPlayerHand && _isInTheSocket)

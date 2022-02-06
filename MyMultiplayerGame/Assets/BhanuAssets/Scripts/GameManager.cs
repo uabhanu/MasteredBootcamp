@@ -56,7 +56,7 @@ namespace BhanuAssets.Scripts
 
         private void CreatePlayer()
         {
-            Vector3 spawnPos = new Vector3(Random.Range(levelData.SpawnXPosition , levelData.SpawnXPosition + levelData.OffsetX) , transform.position.y , Random.Range(levelData.SpawnZPosition , levelData.SpawnZPosition + levelData.OffsetZ));
+            Vector3 spawnPos = new Vector3(levelData.SpawnXPosition , transform.position.y , Random.Range(levelData.SpawnZPosition , levelData.SpawnZPosition + levelData.OffsetZ));
             PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , spawnPos , Quaternion.identity).GetComponent<PhotonView>();
 
             if(startCutsceneObj != null)

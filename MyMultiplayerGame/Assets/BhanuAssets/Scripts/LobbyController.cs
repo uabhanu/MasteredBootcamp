@@ -19,6 +19,7 @@ namespace BhanuAssets.Scripts
         
         #region Serialized Field Private Variables Declarations
         
+        [SerializeField] private GameObject backgroundMusicObj;
         [SerializeField] private GameObject loadingObj;
         [SerializeField] private GameObject lobbyMenuObj;
         [SerializeField] private GameObject matchmakingMenuObj;
@@ -35,9 +36,10 @@ namespace BhanuAssets.Scripts
         
         public override void OnConnectedToMaster()
         {
+            backgroundMusicObj.SetActive(true);
+            loadingObj.SetActive(false);
             PhotonNetwork.AutomaticallySyncScene = true;
             _roomListings = new List<RoomInfo>();
-            loadingObj.SetActive(false);
             submitButtonObj.SetActive(true);
             
             if(PlayerPrefs.HasKey("Nickname"))

@@ -19,6 +19,8 @@ namespace BhanuAssets.Scripts.ScriptableObjects
         [SerializeField] private float rotationSpeed;
         [SerializeField] private int cylindersCollided = 0;
         [SerializeField] private Material localMaterial;
+        [SerializeField] private Material mechanicalEyeMaterialGreen;
+        [SerializeField] private Material mechanicalEyeMaterialRed;
         [SerializeField] private Material remoteMaterial;
 
         #endregion
@@ -61,6 +63,18 @@ namespace BhanuAssets.Scripts.ScriptableObjects
         {
             get => localMaterial;
             set => localMaterial = value;
+        }
+        
+        public Material MechanicalEyeMaterialGreen
+        {
+            get => mechanicalEyeMaterialGreen;
+            set => mechanicalEyeMaterialGreen = value;
+        }
+
+        public Material MechanicalEyeMaterialRed
+        {
+            get => mechanicalEyeMaterialRed;
+            set => mechanicalEyeMaterialRed = value;
         }
 
         public Material RemoteMaterial
