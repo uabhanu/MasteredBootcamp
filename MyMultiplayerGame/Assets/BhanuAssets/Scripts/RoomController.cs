@@ -3,6 +3,7 @@ using Photon.Pun;
 using System.Collections;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace BhanuAssets.Scripts
@@ -13,20 +14,35 @@ namespace BhanuAssets.Scripts
         
         [SerializeField] private GameObject continueButtonObj;
         [SerializeField] private GameObject lobbyMenuObj;
-        [SerializeField] private GameObject matchmakingMenuObj;
         [SerializeField] private GameObject notEnoughPlayersObj;
         [SerializeField] private GameObject playersListingPrefab;
         [SerializeField] private GameObject roomMenuObj;
-        [SerializeField] private GameObject vivoxManagerObj;
-        [SerializeField] private GameObject vivoxRosterObj;
-        [SerializeField] private int sceneIndex;
+        [SerializeField] private GameObject startButtonObj;
         [SerializeField] private LobbyController lobbyController;
-        [SerializeField] private Text vivoxPlayerNameDisplay;
         [SerializeField] private TMP_Text roomNameDisplayTMP;
         [SerializeField] private Transform playersDisplayTransform;
         
         #endregion
+
+        #region MonoBehaviour Functions
         
+        private void Start()
+        {
+            if(startButtonObj != null)
+            {
+                if(PhotonNetwork.IsMasterClient)
+                {
+                    startButtonObj.GetComponent<Button>().interactable = true;
+                }
+                else
+                {
+                    startButtonObj.GetComponent<Button>().interactable = false;
+                }   
+            }
+        }
+        
+        #endregion
+
         #region Photon Callback Functions
         
         public override void OnJoinedRoom()
@@ -99,7 +115,7 @@ namespace BhanuAssets.Scripts
             {
                 LogMessages.AllIsWellMessage("All Players Joined :)");
                 PhotonNetwork.CurrentRoom.IsOpen = false;
-                PhotonNetwork.LoadLevel(sceneIndex);
+                PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else
             {
@@ -128,7 +144,7 @@ namespace BhanuAssets.Scripts
             {
                 LogMessages.AllIsWellMessage("All Players Joined :)");
                 PhotonNetwork.CurrentRoom.IsOpen = false;
-                PhotonNetwork.LoadLevel(sceneIndex);
+                PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else
             {

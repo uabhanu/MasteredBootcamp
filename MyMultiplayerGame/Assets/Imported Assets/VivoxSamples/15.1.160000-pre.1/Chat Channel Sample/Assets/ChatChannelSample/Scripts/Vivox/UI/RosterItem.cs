@@ -6,10 +6,10 @@ namespace Imported_Assets.VivoxSamples._15._1._160000_pre._1.Chat_Channel_Sample
 {
     public class RosterItem : MonoBehaviour
     {
-        //private Text _playerNameText;
         private VivoxVoiceManager _vivoxVoiceManager;
 
-        [SerializeField] private Text loginScreenPlayerNameDisplay;
+        //[SerializeField] private Text loginScreenPlayerNameDisplay;
+        [SerializeField] private Text _playerNameText;
 
         public Image ChatStateImage;
         public IParticipant Participant;
@@ -83,6 +83,7 @@ namespace Imported_Assets.VivoxSamples._15._1._160000_pre._1.Chat_Channel_Sample
             Participant = participant;
 
             //_playerNameText.text = loginScreenPlayerNameDisplay.text;
+            _playerNameText.text = Participant.Account.DisplayName;
             
             IsMuted = participant.IsSelf ? _vivoxVoiceManager.AudioInputDevices.Muted : Participant.LocalMute;
             IsSpeaking = participant.SpeechDetected;

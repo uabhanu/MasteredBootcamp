@@ -99,6 +99,7 @@ namespace BhanuAssets.Scripts
         public void BackButton()
         {
             lobbyMenuObj.SetActive(false);
+            matchmakingMenuObj.SetActive(true);
             PhotonNetwork.LeaveLobby();
         }
 
