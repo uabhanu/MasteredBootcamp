@@ -22,7 +22,6 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject backgroundMusicObj;
         [SerializeField] private GameObject loadingObj;
         [SerializeField] private GameObject lobbyMenuObj;
-        [SerializeField] private GameObject loginCredentialsObj;
         [SerializeField] private GameObject matchmakingMenuObj;
         [SerializeField] private GameObject noMoreRoomsErrorObj;
         [SerializeField] private GameObject roomCreatedAlreadyErrorObj;
@@ -39,11 +38,10 @@ namespace BhanuAssets.Scripts
         {
             backgroundMusicObj.SetActive(true);
             loadingObj.SetActive(false);
-            loginCredentialsObj.SetActive(true);
             PhotonNetwork.AutomaticallySyncScene = true;
             _roomListings = new List<RoomInfo>();
             submitButtonObj.SetActive(true);
-            
+
             if(PlayerPrefs.HasKey("Nickname"))
             {
                 if(PlayerPrefs.GetString("Nickname") == "")
@@ -101,7 +99,6 @@ namespace BhanuAssets.Scripts
         public void BackButton()
         {
             lobbyMenuObj.SetActive(false);
-            matchmakingMenuObj.SetActive(true);
             PhotonNetwork.LeaveLobby();
         }
 
