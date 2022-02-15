@@ -2,16 +2,16 @@
 {
     public enum BhanuEvent
     {
-        AllElectricBoxesCollided,
+        BothCylindersCollided,
         Death,
-        ElectricBoxCollided,
-        ElectricBoxNotCollided,
-        PipeDropped,
-        PipeInTheSocket,
-        PipeNoLongerInTheSocket,
-        PipePickedUp,
+        CylinderCollided,
+        CylinderNotCollided,
         StartCutsceneFinished,
         StartCutsceneStarted,
+        SwordDropped,
+        SwordInTheSocket,
+        SwordNoLongerInTheSocket,
+        SwordPickedUp,
         TryAgain,
         WinCutsceneFinished,
         WinCutsceneStarted

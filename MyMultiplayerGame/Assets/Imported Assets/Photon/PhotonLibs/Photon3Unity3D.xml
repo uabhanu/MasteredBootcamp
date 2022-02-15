@@ -66,7 +66,7 @@
         <member name="F:ExitGames.Client.Photon.ByteArraySlice.Buffer">
             <summary>The buffer for the slice.</summary>
         </member>
-        <member name="F:ExitGames.Client.Photon.ByteArraySlice.Offset">
+        <member name="F:ExitGames.Client.Photon.ByteArraySlice.OffsetX">
             <summary>The position where the content starts in Buffer.</summary>
         </member>
         <member name="F:ExitGames.Client.Photon.ByteArraySlice.Count">
@@ -101,7 +101,7 @@
             </returns>
         </member>
         <member name="M:ExitGames.Client.Photon.ByteArraySlice.Reset">
-            <summary>Resets Count and Offset to 0 each.</summary>
+            <summary>Resets Count and OffsetX to 0 each.</summary>
         </member>
         <member name="T:ExitGames.Client.Photon.ByteArraySlicePool">
             <summary>Tiered pool for ByteArraySlices. Reduces the allocations once enough slices are available.</summary>
@@ -1231,7 +1231,7 @@
             
              The ByteArraySlice.Buffer will usually be bigger than the send/received byte-array.
              Check the ByteArraySlice.Count and read only the actually received bytes.
-             The Buffer is reused and not cleared. The Offset will be 0 for incoming events.
+             The Buffer is reused and not cleared. The OffsetX will be 0 for incoming events.
             
              Important:
              While the peer will acquire the ByteArraySlice and passes it to OnEvent, the game code has to call ByteArraySlice.Release()

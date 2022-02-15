@@ -1,8 +1,10 @@
+using Bhanu;
 using Photon.Pun;
 using System.Collections;
-using Bhanu;
 using TMPro;
 using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
 
 namespace BhanuAssets.Scripts
 {
@@ -10,18 +12,37 @@ namespace BhanuAssets.Scripts
     {
         #region Serialized Field Private Variables Declarations
         
+        [SerializeField] private GameObject continueButtonObj;
         [SerializeField] private GameObject lobbyMenuObj;
         [SerializeField] private GameObject notEnoughPlayersObj;
         [SerializeField] private GameObject playersListingPrefab;
         [SerializeField] private GameObject roomMenuObj;
         [SerializeField] private GameObject startButtonObj;
-        [SerializeField] private int sceneIndex;
         [SerializeField] private LobbyController lobbyController;
         [SerializeField] private TMP_Text roomNameDisplayTMP;
         [SerializeField] private Transform playersDisplayTransform;
         
         #endregion
+
+        #region MonoBehaviour Functions
         
+        private void Start()
+        {
+            if(startButtonObj != null)
+            {
+                if(PhotonNetwork.IsMasterClient)
+                {
+                    startButtonObj.GetComponent<Button>().interactable = true;
+                }
+                else
+                {
+                    startButtonObj.GetComponent<Button>().interactable = false;
+                }   
+            }
+        }
+        
+        #endregion
+
         #region Photon Callback Functions
         
         public override void OnJoinedRoom()
@@ -32,11 +53,11 @@ namespace BhanuAssets.Scripts
 
             if(PhotonNetwork.IsMasterClient)
             {
-                startButtonObj.SetActive(true);
+                continueButtonObj.SetActive(true);
             }
             else
             {
-                startButtonObj.SetActive(false);
+                continueButtonObj.SetActive(false);
             }
 
             ClearPlayerListings();
@@ -56,7 +77,7 @@ namespace BhanuAssets.Scripts
 
             if(PhotonNetwork.IsMasterClient)
             {
-                startButtonObj.SetActive(true);
+                continueButtonObj.SetActive(true);
             }
         }
         
@@ -87,6 +108,21 @@ namespace BhanuAssets.Scripts
                 tempDisplay.text = player.NickName;
             }
         }
+
+        public void ContinueButton()
+        {
+            if(PhotonNetwork.PlayerList.Length == 2)
+            {
+                LogMessages.AllIsWellMessage("All Players Joined :)");
+                PhotonNetwork.CurrentRoom.IsOpen = false;
+                PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
+            }
+            else
+            {
+                LogMessages.ErrorMessage("We need one more player :)");
+                notEnoughPlayersObj.SetActive(true);
+            }
+        }
         
         public void LeaveButton()
         {
@@ -106,9 +142,9 @@ namespace BhanuAssets.Scripts
         {
             if(PhotonNetwork.PlayerList.Length == 2)
             {
-                LogMessages.AllIsWellMessage("Both Players Joined :)");
+                LogMessages.AllIsWellMessage("All Players Joined :)");
                 PhotonNetwork.CurrentRoom.IsOpen = false;
-                PhotonNetwork.LoadLevel(sceneIndex);
+                PhotonNetwork.LoadLevel(SceneManager.GetActiveScene().buildIndex + 1);
             }
             else
             {

@@ -13,9 +13,9 @@ namespace BhanuAssets.Scripts
     {
         #region Private Variables Declarations
         
-        private bool _pipeInTheSocket;
-        private GameObject[] _totalPipeObjs;
-        private List<bool> _listOfPipesInside;
+        private bool _swordInTheSocket;
+        private GameObject[] _totalSwordObjs;
+        [SerializeField] private List<bool> _listOfSwordsInside;
         private PhotonView _photonView;
         
         #endregion
@@ -25,6 +25,7 @@ namespace BhanuAssets.Scripts
         [SerializeField] private GameObject startCutsceneObj;
         [SerializeField] private GameObject level01WinCutsceneObj;
         [SerializeField] private GameObject level02WinCutsceneObj;
+        [SerializeField] private LevelData levelData;
         [SerializeField] private PlayerData playerData;
 
         #endregion
@@ -39,8 +40,8 @@ namespace BhanuAssets.Scripts
         private void Start()
         {
             SubscribeToEvents();
-            _listOfPipesInside = new List<bool>();
-            _totalPipeObjs = GameObject.FindGameObjectsWithTag("Pipe");
+            _listOfSwordsInside = new List<bool>();
+            _totalSwordObjs = GameObject.FindGameObjectsWithTag("Sword");
             CreatePlayer();
         }
 
@@ -55,19 +56,8 @@ namespace BhanuAssets.Scripts
 
         private void CreatePlayer()
         {
-            int levelIndex = SceneManager.GetActiveScene().buildIndex;
-            
-            if(levelIndex == 3)
-            {
-                PlayerPositioner playerPositioner = GameObject.Find("PlayerPositioner").GetComponent<PlayerPositioner>();
-                int randomIndex = Random.Range(0 , playerPositioner.SpawnPositions.Length);
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , playerPositioner.SpawnPositions[randomIndex] , Quaternion.identity).GetComponent<PhotonView>();
-            }
-            else
-            {
-                Vector3 spawnPos = new Vector3(Random.Range(-4f , 4f) , transform.position.y , Random.Range(0f , 3.89f));
-                PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , spawnPos , Quaternion.identity).GetComponent<PhotonView>();
-            }
+            Vector3 spawnPos = new Vector3(levelData.SpawnXPosition , transform.position.y , Random.Range(levelData.SpawnZPosition , levelData.SpawnZPosition + levelData.OffsetZ));
+            PhotonNetwork.Instantiate(Path.Combine("PhotonPrefabs" , "PhotonPlayer") , spawnPos , Quaternion.identity).GetComponent<PhotonView>();
 
             if(startCutsceneObj != null)
             {
@@ -89,6 +79,11 @@ namespace BhanuAssets.Scripts
             {
                 playerObjs[i].SetActive(false);
             }
+            
+            for(int i = 0; i < _totalSwordObjs.Length; i++)
+            {
+                _totalSwordObjs[i].SetActive(false);
+            }
                 
             level02WinCutsceneObj.SetActive(true);
         }
@@ -106,11 +101,19 @@ namespace BhanuAssets.Scripts
         
         #region Event Functions
 
-        private void OnAllElectricBoxesCollided()
+        private void OnBothCylindersCollided()
         {
             if(level01WinCutsceneObj != null && !level01WinCutsceneObj.activeSelf)
             {
-                //LogMessages.AllIsWellMessage("You AllElectricBoxesCollided :)");
+                //LogMessages.AllIsWellMessage("You BothCylindersCollided :)");
+                
+                GameObject[] playerObjs = GameObject.FindGameObjectsWithTag("Player");
+
+                for(int i = 0; i < playerObjs.Length; i++)
+                {
+                    playerObjs[i].SetActive(false);
+                }
+                
                 level01WinCutsceneObj.SetActive(true);
             }
         }
@@ -119,29 +122,29 @@ namespace BhanuAssets.Scripts
         {
             CreatePlayer();
         }
-        
-        private void OnPipeInTheSocket()
-        {
-            _pipeInTheSocket = true;
-            
-            _listOfPipesInside.Add(_pipeInTheSocket);
-
-            if(_listOfPipesInside.Count == _totalPipeObjs.Length)
-            {
-                _photonView.RPC("LevelCompleteRPC" , RpcTarget.All);
-            }
-        }
-
-        private void OnPipeNoLongerInTheSocket()
-        {
-            _listOfPipesInside.Remove(_pipeInTheSocket);
-        }
 
         private void OnStartCutsceneFinished()
         {
             CreatePlayer();
             startCutsceneObj.SetActive(false);
             playerData.StartCutsceneWatched = true;
+        }
+        
+        private void OnSwordInTheSocket()
+        {
+            _swordInTheSocket = true;
+            
+            _listOfSwordsInside.Add(_swordInTheSocket);
+
+            if(_listOfSwordsInside.Count == _totalSwordObjs.Length)
+            {
+                _photonView.RPC("LevelCompleteRPC" , RpcTarget.All);
+            }
+        }
+
+        private void OnSwordNoLongerInTheSocket()
+        {
+            _listOfSwordsInside.Remove(_swordInTheSocket);
         }
 
         private void OnWinCutsceneFinished()
@@ -155,21 +158,21 @@ namespace BhanuAssets.Scripts
 
         private void SubscribeToEvents()
         {
-            EventsManager.SubscribeToEvent(BhanuEvent.AllElectricBoxesCollided , OnAllElectricBoxesCollided);
+            EventsManager.SubscribeToEvent(BhanuEvent.BothCylindersCollided , OnBothCylindersCollided);
             EventsManager.SubscribeToEvent(BhanuEvent.Death , OnDeath);
-            EventsManager.SubscribeToEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
-            EventsManager.SubscribeToEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);
             EventsManager.SubscribeToEvent(BhanuEvent.StartCutsceneFinished , OnStartCutsceneFinished);
+            EventsManager.SubscribeToEvent(BhanuEvent.SwordInTheSocket , OnSwordInTheSocket);
+            EventsManager.SubscribeToEvent(BhanuEvent.SwordNoLongerInTheSocket , OnSwordNoLongerInTheSocket);
             EventsManager.SubscribeToEvent(BhanuEvent.WinCutsceneFinished , OnWinCutsceneFinished);
         }
         
         private void UnsubscribeFromEvents()
         {
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.AllElectricBoxesCollided , OnAllElectricBoxesCollided);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.BothCylindersCollided , OnBothCylindersCollided);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.Death , OnDeath);
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeInTheSocket , OnPipeInTheSocket);
-            EventsManager.UnsubscribeFromEvent(BhanuEvent.PipeNoLongerInTheSocket , OnPipeNoLongerInTheSocket);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.StartCutsceneFinished , OnStartCutsceneFinished);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.SwordInTheSocket , OnSwordInTheSocket);
+            EventsManager.UnsubscribeFromEvent(BhanuEvent.SwordNoLongerInTheSocket , OnSwordNoLongerInTheSocket);
             EventsManager.UnsubscribeFromEvent(BhanuEvent.WinCutsceneFinished , OnWinCutsceneFinished);
         }
         

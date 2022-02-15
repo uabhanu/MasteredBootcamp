@@ -16,8 +16,7 @@ namespace BhanuAssets.Scripts
         private Animator _anim;
         private bool _isGrounded;
         private CinemachineVirtualCamera _cvm;
-        private GameObject[] _electricalBoxes;
-        private int _levelIndex;
+        private GameObject[] _cylinders;
         private Material _materialToUse;
         private PhotonView _photonView;
         private SkinnedMeshRenderer _playerRenderer;
@@ -45,7 +44,7 @@ namespace BhanuAssets.Scripts
         private void Start()
         {
             _anim = GetComponent<Animator>();
-            _electricalBoxes = GameObject.FindGameObjectsWithTag("Electric");
+            _cylinders = GameObject.FindGameObjectsWithTag("Cylinder");
 
             if(isMultiplayerGame)
             {
@@ -54,7 +53,7 @@ namespace BhanuAssets.Scripts
                     _cvm = GameObject.FindGameObjectWithTag("Follow").GetComponent<CinemachineVirtualCamera>();
                     _cvm.Follow = transform;
                     _cvm.LookAt = transform;
-                    _photonView.RPC("ElectricBoxCollisionResetRPC" , RpcTarget.All);
+                    _photonView.RPC("CylinderCollisionResetRPC" , RpcTarget.All);
                     _photonView.RPC("SelectRendererRPC" , RpcTarget.All);
                     _photonView.RPC("UpdateNameRPC" , RpcTarget.All);
                 }
@@ -102,19 +101,19 @@ namespace BhanuAssets.Scripts
                 Move();
             }
 
-            if(playerData.ElectricBoxesCollided == _electricalBoxes.Length)
+            if(playerData.CylindersCollided == _cylinders.Length)
             {
-                EventsManager.InvokeEvent(BhanuEvent.AllElectricBoxesCollided);
+                EventsManager.InvokeEvent(BhanuEvent.BothCylindersCollided);
             }
         }
 
         private void OnCollisionEnter(Collision collision)
         {
-            if(collision.gameObject.tag.Equals("Electric"))
+            if(collision.gameObject.tag.Equals("Cylinder"))
             {
                 if(_photonView != null && _photonView.IsMine && _photonView.AmController)
                 {
-                    _photonView.RPC("ElectricBoxCollidedRPC" , RpcTarget.All);
+                    _photonView.RPC("CylinderCollidedRPC" , RpcTarget.All);
                 }
             }
             
@@ -129,11 +128,11 @@ namespace BhanuAssets.Scripts
         
         private void OnCollisionExit(Collision collision)
         {
-            if(collision.gameObject.tag.Equals("Electric"))
+            if(collision.gameObject.tag.Equals("Cylinder"))
             {
                 if(_photonView != null && _photonView.IsMine && _photonView.AmController)
                 {
-                    _photonView.RPC("ElectricBoxNoLongerCollidedRPC" , RpcTarget.All);
+                    _photonView.RPC("CylinderNoLongerCollidedRPC" , RpcTarget.All);
                 }   
             }
 
@@ -190,31 +189,31 @@ namespace BhanuAssets.Scripts
         }
 
         [PunRPC]
-        private void ElectricBoxCollidedRPC()
+        private void CylinderCollidedRPC()
         {
             //LogMessages.AllIsWellMessage("RPC : Electric Box Collided");
 
-            if(playerData.ElectricBoxesCollided < _electricalBoxes.Length)
+            if(playerData.CylindersCollided < _cylinders.Length)
             {
-                playerData.ElectricBoxesCollided++;   
+                playerData.CylindersCollided++;   
             }
         }
         
         [PunRPC]
-        private void ElectricBoxNoLongerCollidedRPC()
+        private void CylinderNoLongerCollidedRPC()
         {
             //LogMessages.AllIsWellMessage("RPC : Electric Box No Longer Collided");
 
-            if(playerData.ElectricBoxesCollided > 0)
+            if(playerData.CylindersCollided > 0)
             {
-                playerData.ElectricBoxesCollided--;   
+                playerData.CylindersCollided--;   
             }
         }
 
         [PunRPC]
-        private void ElectricBoxCollisionResetRPC()
+        private void CylinderCollisionResetRPC()
         {
-            playerData.ElectricBoxesCollided = 0;
+            playerData.CylindersCollided = 0;
         }
 
         [PunRPC]
