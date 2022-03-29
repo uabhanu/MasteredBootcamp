@@ -102,11 +102,12 @@ public class LoginScreenUI : MonoBehaviour
     {
         LoginButton.interactable = false;
 
-        if (string.IsNullOrEmpty(DisplayNameInput.text))
+        if(string.IsNullOrEmpty(DisplayNameInput.text))
         {
             Debug.LogError("Please enter a display name.");
             return;
         }
+        
         _vivoxVoiceManager.Login(DisplayNameInput.text);
     }
 

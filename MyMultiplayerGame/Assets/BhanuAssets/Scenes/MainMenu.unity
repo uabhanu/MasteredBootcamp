@@ -152,19 +152,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 970c87943de33d24d9d5dbe8fb07243f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  chatData: {fileID: 11400000, guid: 8d3f5a616897e7346b5599bb35927de7, type: 2}
   continueButtonObj: {fileID: 426381433}
   lobbyMenuObj: {fileID: 1117515535}
-  matchmakingMenuObj: {fileID: 1425200126}
   notEnoughPlayersObj: {fileID: 1982476838}
   playersListingPrefab: {fileID: 552330330183711773, guid: e01eb5600984bdc4abe22d3849423737,
     type: 3}
   roomMenuObj: {fileID: 170266292}
-  vivoxManagerObj: {fileID: 0}
-  vivoxRosterObj: {fileID: 7643098909923231182, guid: 0198c1e675d07a54eb6343bb94c589e5,
-    type: 3}
-  sceneIndex: 1
-  lobbyController: {fileID: 43948892}
-  vivoxPlayerNameDisplay: {fileID: 0}
   roomNameDisplayTMP: {fileID: 1539510276}
   playersDisplayTransform: {fileID: 1233285374}
 --- !u!4 &30004452

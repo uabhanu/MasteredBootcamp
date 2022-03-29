@@ -1,10 +1,10 @@
 using Bhanu;
+using BhanuAssets.Scripts.ScriptableObjects;
 using Photon.Pun;
 using System.Collections;
 using TMPro;
 using UnityEngine;
 using UnityEngine.SceneManagement;
-using UnityEngine.UI;
 
 namespace BhanuAssets.Scripts
 {
@@ -12,34 +12,14 @@ namespace BhanuAssets.Scripts
     {
         #region Serialized Field Private Variables Declarations
         
+        [SerializeField] private ChatData chatData;
         [SerializeField] private GameObject continueButtonObj;
         [SerializeField] private GameObject lobbyMenuObj;
         [SerializeField] private GameObject notEnoughPlayersObj;
         [SerializeField] private GameObject playersListingPrefab;
         [SerializeField] private GameObject roomMenuObj;
-        [SerializeField] private GameObject startButtonObj;
-        [SerializeField] private LobbyController lobbyController;
         [SerializeField] private TMP_Text roomNameDisplayTMP;
         [SerializeField] private Transform playersDisplayTransform;
-        
-        #endregion
-
-        #region MonoBehaviour Functions
-        
-        private void Start()
-        {
-            if(startButtonObj != null)
-            {
-                if(PhotonNetwork.IsMasterClient)
-                {
-                    startButtonObj.GetComponent<Button>().interactable = true;
-                }
-                else
-                {
-                    startButtonObj.GetComponent<Button>().interactable = false;
-                }   
-            }
-        }
         
         #endregion
 
@@ -106,6 +86,7 @@ namespace BhanuAssets.Scripts
                 GameObject playerListingObj = Instantiate(playersListingPrefab , playersDisplayTransform);
                 TMP_Text tempDisplay = playerListingObj.transform.GetChild(0).GetComponent<TMP_Text>();
                 tempDisplay.text = player.NickName;
+                chatData.PlayerName = player.NickName;
             }
         }
 
