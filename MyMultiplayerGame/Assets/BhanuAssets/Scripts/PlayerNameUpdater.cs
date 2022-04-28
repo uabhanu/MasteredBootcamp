@@ -9,7 +9,7 @@ namespace BhanuAssets.Scripts
         [SerializeField] private ChatData chatData;
         [SerializeField] private GameObject playerNamePlaceHolderObj;
         [SerializeField] private TMP_Text playerNameTMP;
-
+        
         private void Awake()
         {
             playerNameTMP.text = chatData.PlayerName;

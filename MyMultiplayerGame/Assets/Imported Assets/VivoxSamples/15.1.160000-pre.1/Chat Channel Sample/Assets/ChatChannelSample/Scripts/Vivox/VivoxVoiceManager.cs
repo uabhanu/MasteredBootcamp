@@ -62,6 +62,7 @@ namespace Imported_Assets.VivoxSamples._15._1._160000_pre._1.Chat_Channel_Sample
         private Account m_Account;
 
         // Check to see if we're about to be destroyed.
+        private bool _isLoggedIn;
         private static object m_Lock = new object();
         private static VivoxVoiceManager m_Instance;
 
@@ -125,11 +126,17 @@ namespace Imported_Assets.VivoxSamples._15._1._160000_pre._1.Chat_Channel_Sample
                 }
             }
         }
+
+        public bool IsLoggedIn
+        {
+            get => _isLoggedIn;
+            set => _isLoggedIn = value;
+        }
+
         #endregion
 
         private void Awake()
         {
-        
             if (m_Instance != this && m_Instance != null)
             {
                 Debug.LogWarning("Multiple VivoxVoiceManager detected in the scene. Only one VivoxVoiceManager can exist at a time. The duplicate VivoxVoiceManager will be destroyed.");
@@ -290,6 +297,7 @@ namespace Imported_Assets.VivoxSamples._15._1._160000_pre._1.Chat_Channel_Sample
                 {
                     VivoxLog("Connected to voice server and logged in.");
                     OnUserLoggedInEvent?.Invoke();
+                    _isLoggedIn = true;
                     break;
                 }
                 case LoginState.LoggingOut:
@@ -300,6 +308,7 @@ namespace Imported_Assets.VivoxSamples._15._1._160000_pre._1.Chat_Channel_Sample
                 case LoginState.LoggedOut:
                 {
                     VivoxLog("Logged out");
+                    _isLoggedIn = false;
                     LoginSession.PropertyChanged -= OnLoginSessionPropertyChanged;
                     break;
                 }

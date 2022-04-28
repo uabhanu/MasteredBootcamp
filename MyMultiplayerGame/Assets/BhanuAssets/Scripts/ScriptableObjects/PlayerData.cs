@@ -28,7 +28,7 @@ namespace BhanuAssets.Scripts.ScriptableObjects
         #region Helper Functions
         
         public bool StartCutsceneWatched { get => startCutsceneWatched; set => startCutsceneWatched = value; }
-        
+
         public float GravityValue
         {
             get => _gravityValue;
