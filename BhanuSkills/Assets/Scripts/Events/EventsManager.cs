@@ -7,6 +7,7 @@ namespace Events
         #region Event Actions Declarations
         private static event Action AllCollectedAction;
         private static event Action CollectibleCollectedAction;
+        private static event Action DiegeticUIEnabledAction;
         private static event Action DoorCloseAction;
         private static event Action DoorOpenAction;
         private static event Action GameOverAction;
@@ -15,6 +16,7 @@ namespace Events
         private static event Action HealthLossAction;
         private static event Action InfoAction;
         private static event Action KeyCollectedAction;
+        private static event Action NonDiegeticUIEnabledAction;
         private static event Action PauseAction;
         private static event Action TrophyCollectedAction;
         private static event Action UnpauseAction;
@@ -31,6 +33,10 @@ namespace Events
                 
                 case BhanuSkillsEvent.CollectibleCollectedEvent:
                     CollectibleCollectedAction?.Invoke(); 
+                return;
+                
+                case BhanuSkillsEvent.DiegeticUIEnabledEvent:
+                    DiegeticUIEnabledAction?.Invoke(); 
                 return;
 
                 case BhanuSkillsEvent.DoorCloseEvent:
@@ -63,6 +69,10 @@ namespace Events
                 
                 case BhanuSkillsEvent.KeyCollectedEvent:
                     KeyCollectedAction?.Invoke(); 
+                return;
+                
+                case BhanuSkillsEvent.NonDiegeticUIEnabledEvent:
+                    NonDiegeticUIEnabledAction?.Invoke(); 
                 return;
                 
                 case BhanuSkillsEvent.PauseEvent:
@@ -101,6 +111,10 @@ namespace Events
                     DoorOpenAction += actionFunction;
                 return;
                 
+                case BhanuSkillsEvent.DiegeticUIEnabledEvent:
+                    DiegeticUIEnabledAction += actionFunction;
+                return;
+                
                 case BhanuSkillsEvent.GameOverEvent:
                     GameOverAction += actionFunction; 
                 return;
@@ -123,6 +137,10 @@ namespace Events
                 
                 case BhanuSkillsEvent.KeyCollectedEvent:
                     KeyCollectedAction += actionFunction;
+                return;
+                
+                case BhanuSkillsEvent.NonDiegeticUIEnabledEvent:
+                    NonDiegeticUIEnabledAction += actionFunction;
                 return;
                 
                 case BhanuSkillsEvent.PauseEvent:
@@ -151,6 +169,10 @@ namespace Events
                 
                 case BhanuSkillsEvent.CollectibleCollectedEvent:
                     CollectibleCollectedAction -= actionFunction;
+                return;
+                
+                case BhanuSkillsEvent.DiegeticUIEnabledEvent:
+                    DiegeticUIEnabledAction -= actionFunction;
                 return;
                 
                 case BhanuSkillsEvent.DoorCloseEvent:
@@ -183,6 +205,10 @@ namespace Events
                 
                 case BhanuSkillsEvent.KeyCollectedEvent:
                     KeyCollectedAction -= actionFunction;
+                return;
+                
+                case BhanuSkillsEvent.NonDiegeticUIEnabledEvent:
+                    NonDiegeticUIEnabledAction -= actionFunction;
                 return;
                 
                 case BhanuSkillsEvent.PauseEvent:
