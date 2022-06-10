@@ -1,19 +1,17 @@
-using BhanuAssets.Scripts.Events;
-using Events;
+using MyAssets.Scripts.Events;
 using UnityEngine;
 
-namespace BhanuAssets.Scripts
+namespace MyAssets.Scripts
 {
     public class ExternalEventsSender : MonoBehaviour
     {
         [SerializeField] private int shipID;
-        [SerializeField] private int playerID;
 
         //For simplicity, I am creating buttons for the respective external event
         
         public void PurchaseButton()
         {
-            EventsManager.InvokeEvent(BhanuEvent.PurcaseShipEvent , playerID , shipID);
+            EventsManager.InvokeEvent(HullEvent.PurcaseShipEvent , shipID);
         }
     }
 }
