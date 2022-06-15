@@ -3,6 +3,12 @@ using UnityEngine;
 
 public class PlayerTank : MonoBehaviour
 {
+    [SerializeField] private Vector2 _movementVector;
+
+    [SerializeField] private float maxSpeed;
+    [SerializeField] private float rotationSpeed;
+    [SerializeField] private Rigidbody2D tankBody2D;
+    
     #region MonoBehaviour Functions
     
     private void Start()
@@ -14,24 +20,31 @@ public class PlayerTank : MonoBehaviour
     {
         UnsubscribeFromEvents();
     }
-    
+
+    private void FixedUpdate()
+    {
+        tankBody2D.velocity = (Vector2)transform.up * (_movementVector.y * maxSpeed * Time.fixedDeltaTime);
+        tankBody2D.MoveRotation(transform.rotation * Quaternion.Euler(0 , 0 , -_movementVector.x * rotationSpeed * Time.fixedDeltaTime));
+    }
+
     #endregion
     
     #region Player Input Event Functions
     
     private void OnMoveBody(Vector2 movementVector)
     {
-        Debug.Log(movementVector);
+        _movementVector = movementVector;
+        //Debug.Log("Player Tank Movement : " + movementVector);
     }
 
     private void OnMoveTurret(Vector2 mouseVector)
     {
-        Debug.Log(mouseVector);
+        //Debug.Log("Player Mouse : " + mouseVector);
     }
 
     private void OnShoot()
     {
-        Debug.Log("Player Pressed Shoot Button");
+        //Debug.Log("Player Pressed Shoot Button");
     }
     
     #endregion

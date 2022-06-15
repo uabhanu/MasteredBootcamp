@@ -10,7 +10,6 @@ public class PlayerInputManager : MonoBehaviour , IMoveBody , IMoveTurret , ISho
     
     #endregion
     
-    
     #region Serialized Field Private Variable Declarations
     
     [SerializeField] private Camera mainCamera;
@@ -47,35 +46,32 @@ public class PlayerInputManager : MonoBehaviour , IMoveBody , IMoveTurret , ISho
     
     private Vector2 GetMousePosition()
     {
-        Vector3 mousePosition = _playerInputActions.Ground.Mouse.ReadValue<Vector2>();
-        mousePosition.z = mainCamera.nearClipPlane;
+        Vector3 mousePosition = _playerInputActions.Ground.Movement.ReadValue<Vector2>();
+        mousePosition.z += mainCamera.nearClipPlane;
+        
         Vector2 mouseWorldPosition = mainCamera.ScreenToWorldPoint(mousePosition);
         return mouseWorldPosition;
     }
-    
-    #endregion
 
-    #region Interface Methods
-    
-    public void MoveBody()
+    private void MoveBodyInput()
     {
-        Vector2 movementVector = _playerInputActions.Ground.Movement.ReadValue<Vector2>();
+        Vector2 movementVectorInput = _playerInputActions.Ground.Movement.ReadValue<Vector2>();
 
         if(_playerInputActions.Ground.Movement.triggered)
         {
-            EventsManager.InvokeEvent(PlayerInputEvent.InputEventMoveBody , movementVector.normalized);    
+            EventsManager.InvokeEvent(PlayerInputEvent.InputEventMoveBody , movementVectorInput);
         }
     }
 
-    public void MoveTurret()
+    private void MoveTurretInput()
     {
         if(_playerInputActions.Ground.Mouse.triggered)
         {
             EventsManager.InvokeEvent(PlayerInputEvent.InputEventMoveTurret , GetMousePosition());    
         }
     }
-    
-    public void Shoot()
+
+    private void ShootInput()
     {
         _playerInputActions.Ground.Shoot.ReadValue<float>();
 
@@ -83,6 +79,25 @@ public class PlayerInputManager : MonoBehaviour , IMoveBody , IMoveTurret , ISho
         {
             EventsManager.InvokeEvent(PlayerInputEvent.InputEventShoot);
         }
+    }
+    
+    #endregion
+
+    #region Interface Functions
+    
+    public void MoveBody()
+    {
+        MoveBodyInput();
+    }
+
+    public void MoveTurret()
+    {
+        MoveTurretInput();
+    }
+    
+    public void Shoot()
+    {
+        ShootInput();
     }
     
     #endregion
