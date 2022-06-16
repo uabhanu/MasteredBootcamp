@@ -7,6 +7,7 @@ public class PlayerInputManager : MonoBehaviour , IMoveBody , IMoveTurret , ISho
     #region Private Variable Declarations
     
     private PlayerInputActions _playerInputActions;
+    private Vector2 _mouseMovement;
     
     #endregion
     
@@ -21,6 +22,7 @@ public class PlayerInputManager : MonoBehaviour , IMoveBody , IMoveTurret , ISho
     private void Awake()
     {
         _playerInputActions = new PlayerInputActions();
+        _playerInputActions.Ground.Mouse.performed += x => _mouseMovement = x.ReadValue<Vector2>();
     }
 
     private void OnEnable()
@@ -44,21 +46,25 @@ public class PlayerInputManager : MonoBehaviour , IMoveBody , IMoveTurret , ISho
     
     #region Local Functions
     
-    private Vector2 GetMousePosition()
-    {
-        Vector3 mousePosition = _playerInputActions.Ground.Movement.ReadValue<Vector2>();
-        mousePosition.z += mainCamera.nearClipPlane;
-        
-        Vector2 mouseWorldPosition = mainCamera.ScreenToWorldPoint(mousePosition);
-        return mouseWorldPosition;
-    }
+    // private Vector2 GetMousePosition()
+    // {
+    //     Vector3 mousePosition = _playerInputActions.Ground.Mouse.ReadValue<Vector2>();
+    //     Vector2 mouseWorldPosition = mainCamera.ScreenToWorldPoint(mousePosition);
+    //     return mouseWorldPosition;
+    //     //TODO This may not be returning the expected result so investigate
+    // }
 
     private void MoveBodyInput()
     {
-        Vector2 movementVectorInput = _playerInputActions.Ground.Movement.ReadValue<Vector2>();
-
         if(_playerInputActions.Ground.Movement.triggered)
         {
+            Vector2 movementVectorInput = _playerInputActions.Ground.Movement.ReadValue<Vector2>();
+            EventsManager.InvokeEvent(PlayerInputEvent.InputEventMoveBody , movementVectorInput);
+        }
+        
+        else if(_playerInputActions.Ground.Movement.WasReleasedThisFrame())
+        {
+            Vector2 movementVectorInput = Vector2.zero;
             EventsManager.InvokeEvent(PlayerInputEvent.InputEventMoveBody , movementVectorInput);
         }
     }
@@ -67,7 +73,7 @@ public class PlayerInputManager : MonoBehaviour , IMoveBody , IMoveTurret , ISho
     {
         if(_playerInputActions.Ground.Mouse.triggered)
         {
-            EventsManager.InvokeEvent(PlayerInputEvent.InputEventMoveTurret , GetMousePosition());    
+            EventsManager.InvokeEvent(PlayerInputEvent.InputEventMoveTurret , _mouseMovement);
         }
     }
 

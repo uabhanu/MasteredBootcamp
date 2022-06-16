@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class PlayerTank : MonoBehaviour
 {
-    [SerializeField] private Vector2 _movementVector;
+    private Vector2 _movementVector;
 
     [SerializeField] private float maxSpeed;
     [SerializeField] private float rotationSpeed;
@@ -37,16 +37,6 @@ public class PlayerTank : MonoBehaviour
         //Debug.Log("Player Tank Movement : " + movementVector);
     }
 
-    private void OnMoveTurret(Vector2 mouseVector)
-    {
-        //Debug.Log("Player Mouse : " + mouseVector);
-    }
-
-    private void OnShoot()
-    {
-        //Debug.Log("Player Pressed Shoot Button");
-    }
-    
     #endregion
 
     #region Event Listeners
@@ -54,15 +44,11 @@ public class PlayerTank : MonoBehaviour
     private void SubscribeToEvents()
     {
         EventsManager.SubscribeToPlayerInputEvent(PlayerInputEvent.InputEventMoveBody , OnMoveBody);
-        EventsManager.SubscribeToPlayerInputEvent(PlayerInputEvent.InputEventMoveTurret , OnMoveTurret);
-        EventsManager.SubscribeToPlayerInputEvent(PlayerInputEvent.InputEventShoot , OnShoot);
     }
     
     private void UnsubscribeFromEvents()
     {
         EventsManager.UnsubscribeFromPlayerInputEvent(PlayerInputEvent.InputEventMoveBody , OnMoveBody);
-        EventsManager.UnsubscribeFromPlayerInputEvent(PlayerInputEvent.InputEventMoveTurret , OnMoveTurret);
-        EventsManager.UnsubscribeFromPlayerInputEvent(PlayerInputEvent.InputEventShoot , OnShoot);
     }
 
     #endregion
