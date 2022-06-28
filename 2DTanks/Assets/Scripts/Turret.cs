@@ -1,42 +1,52 @@
-using Events;
+using System.Collections.Generic;
 using UnityEngine;
 
 public class Turret : MonoBehaviour
 {
+    #region Private Variable Declarations
+    
+    private bool _canSoot = true;
+    private Collider2D[] _tankColliders2D;
+    private float _currentDelay = 0f;
+    
+    #endregion
+
+    #region Private Serialized Field Variable Declarations
+    
+    [SerializeField] private float reloadDelay = 1f;
+    [SerializeField] private GameObject bulletPrefab;
+    [SerializeField] private List<Transform> barrelsList;
+    
+    #endregion
+
     #region MonoBehaviour Functions
     
     private void Start()
     {
-        SubscribeToEvents();
+        _tankColliders2D = GetComponentsInParent<Collider2D>();
     }
 
-    private void OnDestroy()
+    private void Update()
     {
-        UnsubscribeFromEvents();
+        if(!_canSoot)
+        {
+            _currentDelay = Time.deltaTime;
+
+            if(_currentDelay <= 0 )
+            {
+                _canSoot = true;
+            }
+        }
     }
-    
+
     #endregion
 
-    #region Player Input Event Functions
+    #region Custom Functions
     
-    private void OnShoot()
+    public void Shoot()
     {
-        Debug.Log("Player Pressed Shoot Button");
+        Debug.Log("Player Pressed Shoot"); //This is not showing in a line per turret but hopefully working fine
     }
     
-    #endregion
-    
-    #region Event Listeners
-
-    private void SubscribeToEvents()
-    {
-        EventsManager.SubscribeToPlayerInputEvent(PlayerInputEvent.InputEventShoot , OnShoot);
-    }
-    
-    private void UnsubscribeFromEvents()
-    {
-        EventsManager.UnsubscribeFromPlayerInputEvent(PlayerInputEvent.InputEventMoveTurret , OnShoot);
-    }
-
     #endregion
 }
