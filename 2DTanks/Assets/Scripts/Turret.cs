@@ -30,7 +30,7 @@ public class Turret : MonoBehaviour
     {
         if(!_canSoot)
         {
-            _currentDelay = Time.deltaTime;
+            _currentDelay -= Time.deltaTime;
 
             if(_currentDelay <= 0 )
             {
@@ -45,7 +45,27 @@ public class Turret : MonoBehaviour
     
     public void Shoot()
     {
-        Debug.Log("Player Pressed Shoot"); //This is not showing in a line per turret but hopefully working fine
+        if(_canSoot)
+        {
+            _canSoot = false;
+            _currentDelay = reloadDelay;
+        }
+
+        foreach(Transform barrel in barrelsList)
+        {
+            GameObject bulletObj = Instantiate(bulletPrefab);
+            bulletObj.transform.position = barrel.position;
+            bulletObj.transform.localRotation = barrel.rotation;
+            bulletObj.GetComponent<Bullet>().Initialize();
+
+            foreach(Collider2D collider in _tankColliders2D)
+            {
+                //Ignore the collision between the tank and bullet created by that tank
+                Physics2D.IgnoreCollision(bulletObj.GetComponent<Collider2D>() , collider);
+            }
+        }
+        
+        //Debug.Log("Player Pressed Shoot"); //This is not showing in a line per turret but hopefully working fine
     }
     
     #endregion

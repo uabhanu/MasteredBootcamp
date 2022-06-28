@@ -24,7 +24,7 @@ public class Bullet : MonoBehaviour
     {
         _travelledDistance = Vector2.Distance(transform.position , _startPosition);
 
-        if(_travelledDistance > maxDistance)
+        if(_travelledDistance >= maxDistance)
         {
             DisableObject();
         }
@@ -32,6 +32,13 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col2D)
     {
+        Damageable damageable = col2D.GetComponent<Damageable>();
+
+        if(damageable != null)
+        {
+            damageable.Hit(damage);
+        }
+        
         DisableObject();
     }
     

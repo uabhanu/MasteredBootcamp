@@ -1,4 +1,3 @@
-using Unity.Mathematics;
 using UnityEngine;
 
 public class TurretPlaceholder : MonoBehaviour
@@ -34,7 +33,9 @@ public class TurretPlaceholder : MonoBehaviour
         Vector3 turretDirection = (Vector3)inputPointerPosition - transform.position;
         float desiredAngle = Mathf.Atan2(turretDirection.y , turretDirection.x) * Mathf.Rad2Deg; //Convert the angle from Radians to Degrees
         float rotationStep = rotationSpeed * Time.deltaTime;
-        transform.rotation = Quaternion.RotateTowards(transform.rotation , quaternion.Euler(0 , 0 , desiredAngle) , rotationStep);
+        
+        //Make sure that the Quaternion is starting with 'Q' unless you intend to start with 'q' to avoid bad results
+        transform.rotation = Quaternion.RotateTowards(transform.rotation , Quaternion.Euler(0 , 0 , desiredAngle) , rotationStep);
     }
     
     #endregion
