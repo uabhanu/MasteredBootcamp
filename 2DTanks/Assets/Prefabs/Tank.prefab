@@ -46,7 +46,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   rotationSpeed: 150
-  allExistingTurrets: []
 --- !u!1 &3784408200869814860
 GameObject:
   m_ObjectHideFlags: 0
@@ -58,6 +57,7 @@ GameObject:
   - component: {fileID: 3784408200869814861}
   - component: {fileID: 3784408200869814859}
   - component: {fileID: 9107844028286548964}
+  - component: {fileID: 8188160119469863526}
   - component: {fileID: 1461074509739890734}
   - component: {fileID: 3784408200869814858}
   - component: {fileID: 9046778891729959850}
@@ -118,10 +118,10 @@ MonoBehaviour:
   OnDead:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3784408200869814860}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 8188160119469863526}
+        m_TargetAssemblyTypeName: Utils.DestroyHelper, Assembly-CSharp
+        m_MethodName: DestroySelf
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -139,6 +139,18 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &8188160119469863526
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784408200869814860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea806588f56de9546b99ce54a3a36e66, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1461074509739890734
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -255,7 +267,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5096191563165507710}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0.566, z: 0}
+  m_LocalPosition: {x: -0, y: 0.303, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -373,6 +385,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8720578288732436723}
+  - component: {fileID: 8109754967869473579}
   - component: {fileID: 8720578288732436716}
   - component: {fileID: 6837319690707785662}
   m_Layer: 6
@@ -398,6 +411,21 @@ Transform:
   m_Father: {fileID: 2836207289894278179}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &8109754967869473579
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8720578288732436722}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9eed109009947e74da6d4d4f16b6f974, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToPool: {fileID: 0}
+  poolSize: 2
+  spawnedObjectsParent: {fileID: 0}
 --- !u!212 &8720578288732436716
 SpriteRenderer:
   m_ObjectHideFlags: 0

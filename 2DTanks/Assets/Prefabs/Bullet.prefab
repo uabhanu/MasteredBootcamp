@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   maxDistance: 10
-  speed: 30
+  speed: 10
   damage: 20
   bulletBody2D: {fileID: 7640623072542102523}
 --- !u!50 &7640623072542102523

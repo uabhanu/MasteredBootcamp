@@ -1,6 +1,7 @@
 using System.Collections.Generic;
 using UnityEngine;
 
+[RequireComponent(typeof(ObjectPool))]
 public class Turret : MonoBehaviour
 {
     #region Private Variable Declarations
@@ -8,6 +9,8 @@ public class Turret : MonoBehaviour
     private bool _canSoot = true;
     private Collider2D[] _tankColliders2D;
     private float _currentDelay = 0f;
+    private int _bulletsPoolCount = 0;
+    private ObjectPool _bulletsPool;
     
     #endregion
 
@@ -20,10 +23,17 @@ public class Turret : MonoBehaviour
     #endregion
 
     #region MonoBehaviour Functions
-    
+
+    private void Awake()
+    {
+        _bulletsPool = GetComponent<ObjectPool>();
+        _bulletsPoolCount = _bulletsPool.PoolSize;
+        _tankColliders2D = GetComponentsInParent<Collider2D>();
+    }
+
     private void Start()
     {
-        _tankColliders2D = GetComponentsInParent<Collider2D>();
+        _bulletsPool.Initialize(bulletPrefab , _bulletsPoolCount);
     }
 
     private void Update()
@@ -54,7 +64,8 @@ public class Turret : MonoBehaviour
         // Not sure why we have to do this way because a turret can only ever have one barrel
         foreach(Transform barrel in barrelsList)
         {
-            GameObject bulletObj = Instantiate(bulletPrefab);
+            //GameObject bulletObj = Instantiate(bulletPrefab); // Regular method which involves Garbage Collector
+            GameObject bulletObj = _bulletsPool.CreateObject(); // Optimized method using Object Pool Design
             bulletObj.transform.position = barrel.position;
             bulletObj.transform.localRotation = barrel.rotation;
             bulletObj.GetComponent<Bullet>().Initialize();
