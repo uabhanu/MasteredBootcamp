@@ -51,6 +51,7 @@ public class Turret : MonoBehaviour
             _currentDelay = reloadDelay;
         }
 
+        // Not sure why we have to do this way because a turret can only ever have one barrel
         foreach(Transform barrel in barrelsList)
         {
             GameObject bulletObj = Instantiate(bulletPrefab);
@@ -65,7 +66,7 @@ public class Turret : MonoBehaviour
             }
         }
         
-        //Debug.Log("Player Pressed Shoot"); //This is not showing in a line per turret but hopefully working fine
+        //Debug.Log("Player Pressed Shoot"); // This is not showing in a line per turret but hopefully working fine
     }
     
     #endregion
