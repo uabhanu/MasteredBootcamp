@@ -10,7 +10,7 @@ GameObject:
   m_Component:
   - component: {fileID: 2836207289894278179}
   - component: {fileID: 4356181195218599668}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankTurretPlaceholder
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
@@ -58,9 +58,10 @@ GameObject:
   - component: {fileID: 3784408200869814861}
   - component: {fileID: 3784408200869814859}
   - component: {fileID: 9107844028286548964}
-  - component: {fileID: 9046778891729959850}
+  - component: {fileID: 1461074509739890734}
   - component: {fileID: 3784408200869814858}
-  m_Layer: 0
+  - component: {fileID: 9046778891729959850}
+  m_Layer: 6
   m_Name: Tank
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -138,7 +139,7 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
---- !u!114 &9046778891729959850
+--- !u!114 &1461074509739890734
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -147,10 +148,55 @@ MonoBehaviour:
   m_GameObject: {fileID: 3784408200869814860}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 898dad143fa1e8b4eb2659daf979fec7, type: 3}
+  m_Script: {fileID: 11500000, guid: 249388d4d5f252846bac54f8cba9250e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankBodyMover: {fileID: 0}
+  mainCamera: {fileID: 0}
+  OnMoveBody:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 9046778891729959850}
+        m_TargetAssemblyTypeName: Tank, Assembly-CSharp
+        m_MethodName: HandleMoveBody
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnMoveTurret:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4356181195218599668}
+        m_TargetAssemblyTypeName: TurretPlaceholder, Assembly-CSharp
+        m_MethodName: HandleTurretMovement
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+  OnShoot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 4356181195218599668}
+        m_TargetAssemblyTypeName: TurretPlaceholder, Assembly-CSharp
+        m_MethodName: HandleShoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!50 &3784408200869814858
 Rigidbody2D:
   serializedVersion: 4
@@ -172,6 +218,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &9046778891729959850
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3784408200869814860}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 898dad143fa1e8b4eb2659daf979fec7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  tankBodyMover: {fileID: 0}
 --- !u!1 &5096191563165507710
 GameObject:
   m_ObjectHideFlags: 0
@@ -181,7 +240,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 747077406534720512}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Barrel
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -214,7 +273,7 @@ GameObject:
   - component: {fileID: 7177132877212859810}
   - component: {fileID: 7177132877212859811}
   - component: {fileID: 112051362986411279}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankBody
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -316,7 +375,7 @@ GameObject:
   - component: {fileID: 8720578288732436723}
   - component: {fileID: 8720578288732436716}
   - component: {fileID: 6837319690707785662}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: TankTurret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
