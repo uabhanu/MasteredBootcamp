@@ -11,9 +11,21 @@ PrefabInstance:
       propertyPath: tankMovementDataSo
       value: 
       objectReference: {fileID: 11400000, guid: 78d302116dd731d4c954f60fb0693277, type: 2}
+    - target: {fileID: 2836207289894278178, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
     - target: {fileID: 3784408200869814860, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
       propertyPath: m_Name
       value: PlayerTank
+      objectReference: {fileID: 0}
+    - target: {fileID: 3784408200869814860, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3784408200869814860, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
+      propertyPath: m_IsActive
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3784408200869814861, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
       propertyPath: m_RootOrder
@@ -58,6 +70,18 @@ PrefabInstance:
     - target: {fileID: 3784408200869814861, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 5096191563165507710, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 7177132877212859813, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
+      propertyPath: m_Layer
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 8720578288732436722, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
+      propertyPath: m_Layer
+      value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8720578288732436723, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
       propertyPath: m_LocalPosition.y
