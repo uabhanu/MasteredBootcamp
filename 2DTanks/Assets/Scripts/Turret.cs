@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using ScriptableObjects;
 using UnityEngine;
 
 [RequireComponent(typeof(ObjectPool))]
@@ -16,9 +17,8 @@ public class Turret : MonoBehaviour
 
     #region Private Serialized Field Variable Declarations
     
-    [SerializeField] private float reloadDelay = 1f;
-    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private List<Transform> barrelsList;
+    [SerializeField] private TurretData turretDataSo;
     
     #endregion
 
@@ -33,7 +33,7 @@ public class Turret : MonoBehaviour
 
     private void Start()
     {
-        _bulletsPool.Initialize(bulletPrefab , _bulletsPoolCount);
+        _bulletsPool.Initialize(turretDataSo.BulletPrefab , _bulletsPoolCount);
     }
 
     private void Update()
@@ -57,26 +57,26 @@ public class Turret : MonoBehaviour
     {
         if(_canSoot)
         {
-            _canSoot = false;
-            _currentDelay = reloadDelay;
-        }
-
-        // Not sure why we have to do this way because a turret can only ever have one barrel
-        foreach(Transform barrel in barrelsList)
-        {
-            //GameObject bulletObj = Instantiate(bulletPrefab); // Regular method which involves Garbage Collector
-            GameObject bulletObj = _bulletsPool.CreateObject(); // Optimized method using Object Pool Design
-            bulletObj.transform.position = barrel.position;
-            bulletObj.transform.localRotation = barrel.rotation;
-            bulletObj.GetComponent<Bullet>().Initialize();
-
-            foreach(Collider2D collider in _tankColliders2D)
+            // Not sure why we have to do this way because a turret can only ever have one barrel
+            foreach(Transform barrel in barrelsList)
             {
-                //Ignore the collision between the tank and bullet created by that tank
-                Physics2D.IgnoreCollision(bulletObj.GetComponent<Collider2D>() , collider);
+                //GameObject bulletObj = Instantiate(bulletPrefab); // Regular method which involves Garbage Collector
+                GameObject bulletObj = _bulletsPool.CreateObject(); // Optimized method using Object Pool Design
+                bulletObj.transform.position = barrel.position;
+                bulletObj.transform.localRotation = barrel.rotation;
+                bulletObj.GetComponent<Bullet>().Initialize(turretDataSo.BulletDataSo);
+
+                foreach(Collider2D collider in _tankColliders2D)
+                {
+                    //Ignore the collision between the tank and bullet created by that tank
+                    Physics2D.IgnoreCollision(bulletObj.GetComponent<Collider2D>() , collider);
+                }
             }
+            
+            _canSoot = false;
+            _currentDelay = turretDataSo.ReloadDelay; //TODO This doesn't seem to be used at all so rewatch the shooting video
         }
-        
+
         //Debug.Log("Player Pressed Shoot"); // This is not showing in a line per turret but hopefully working fine
     }
     

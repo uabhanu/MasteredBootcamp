@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 112051362986411279, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
+      propertyPath: tankMovementDataSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 78d302116dd731d4c954f60fb0693277, type: 2}
     - target: {fileID: 3784408200869814860, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
       propertyPath: m_Name
       value: PlayerTank

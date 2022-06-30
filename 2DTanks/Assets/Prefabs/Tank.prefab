@@ -371,11 +371,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 288be9ca680b3e24e964e4edc8a6f8d6, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  acceleration: 70
-  deacceleration: 70
-  maxSpeed: 70
-  rotationSpeed: 200
   tankBody2D: {fileID: 0}
+  tankMovementDataSo: {fileID: 0}
 --- !u!1 &8720578288732436722
 GameObject:
   m_ObjectHideFlags: 0
@@ -490,7 +487,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: fc013459bcef7f64ebb7746954b78c1c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  reloadDelay: 1
-  bulletPrefab: {fileID: 7640623072542102520, guid: 7e9c87eb74334ac4ab7368cfaa258996, type: 3}
   barrelsList:
   - {fileID: 747077406534720512}
+  turretDataSo: {fileID: 11400000, guid: 28f81bdd66aae4d4d9410bcc8e6ec8d1, type: 2}

@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using UnityEngine;
 
 public class TankBodyMover : MonoBehaviour
@@ -11,12 +12,9 @@ public class TankBodyMover : MonoBehaviour
     #endregion
     
     #region Private Serialized Field Variable Declarations
-
-    [SerializeField] private float acceleration = 70f;
-    [SerializeField] private float deacceleration = 70f;
-    [SerializeField] private float maxSpeed;
-    [SerializeField] private float rotationSpeed;
+    
     [SerializeField] private Rigidbody2D tankBody2D;
+    [SerializeField] private TankMovementData tankMovementDataSo;
     
     #endregion
     
@@ -33,7 +31,7 @@ public class TankBodyMover : MonoBehaviour
     private void FixedUpdate()
     {
         tankBody2D.velocity = (Vector2)transform.up * (_currentSpeed * _currentForwardDirection * Time.fixedDeltaTime);
-        tankBody2D.MoveRotation(transform.rotation * Quaternion.Euler(0 , 0 , -_movementVector.x * rotationSpeed * Time.fixedDeltaTime));
+        tankBody2D.MoveRotation(transform.rotation * Quaternion.Euler(0 , 0 , -_movementVector.x * tankMovementDataSo.RotationSpeed * Time.fixedDeltaTime));
     }
 
     #endregion
@@ -44,14 +42,14 @@ public class TankBodyMover : MonoBehaviour
     {
         if(Mathf.Abs(movementVector.y) > 0)
         {
-            _currentSpeed += acceleration * Time.deltaTime;
+            _currentSpeed += tankMovementDataSo.Acceleration * Time.deltaTime;
         }
         else
         {
-            _currentSpeed -= deacceleration * Time.deltaTime;
+            _currentSpeed -= tankMovementDataSo.Deacceleration * Time.deltaTime;
         }
 
-        _currentSpeed = Mathf.Clamp(_currentSpeed , 0 , maxSpeed);
+        _currentSpeed = Mathf.Clamp(_currentSpeed , 0 , tankMovementDataSo.MaxSpeed);
     }
     
     public void MoveBody(Vector2 movementVector)

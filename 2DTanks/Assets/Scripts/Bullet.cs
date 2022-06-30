@@ -1,3 +1,4 @@
+using ScriptableObjects;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -11,9 +12,7 @@ public class Bullet : MonoBehaviour
     
     #region Private Serialized Field Variable Declarations
     
-    [SerializeField] private float maxDistance;
-    [SerializeField] private float speed;
-    [SerializeField] private int damage;
+    [SerializeField] private BulletData bulletDataSo;
     [SerializeField] private Rigidbody2D bulletBody2D;
     
     #endregion
@@ -24,7 +23,7 @@ public class Bullet : MonoBehaviour
     {
         _travelledDistance = Vector2.Distance(transform.position , _startPosition);
 
-        if(_travelledDistance >= maxDistance)
+        if(_travelledDistance >= bulletDataSo.MaxDistance)
         {
             DisableObject();
         }
@@ -36,7 +35,7 @@ public class Bullet : MonoBehaviour
 
         if(damageable != null)
         {
-            damageable.Hit(damage);
+            damageable.Hit(bulletDataSo.Damage);
         }
         
         DisableObject();
@@ -52,10 +51,11 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Initialize()
+    public void Initialize(BulletData bulletData)
     {
+        bulletDataSo = bulletData;
         _startPosition = transform.position;
-        bulletBody2D.velocity = transform.up * speed;
+        bulletBody2D.velocity = transform.up * bulletDataSo.Speed;
     }
     
     #endregion

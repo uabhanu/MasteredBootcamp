@@ -35,13 +35,16 @@ public class ObjectPool : MonoBehaviour
     {
         foreach(GameObject gobj in _objectPool)
         {
-            if(!gobj.activeSelf)
+            if(gobj != null)
             {
-                Destroy(gobj);
-            }
-            else
-            {
-                gobj.GetComponent<DestroyIfDisabled>().SelfDestructionEnabled = true;
+                if(!gobj.activeSelf)
+                {
+                    Destroy(gobj);
+                }
+                else
+                {
+                    gobj.GetComponent<DestroyIfDisabled>().SelfDestructionEnabled = true;
+                } 
             }
         }
     }

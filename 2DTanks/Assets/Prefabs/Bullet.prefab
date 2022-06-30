@@ -73,9 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 45e772913bdc6c346b3587fb43b061e4, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maxDistance: 10
-  speed: 10
-  damage: 20
+  bulletDataSo: {fileID: 11400000, guid: 6bd9bffd57302d14aa47bea0b96d99fa, type: 2}
   bulletBody2D: {fileID: 7640623072542102523}
 --- !u!50 &7640623072542102523
 Rigidbody2D:
