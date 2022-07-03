@@ -11,7 +11,7 @@ GameObject:
   - component: {fileID: 2836207289894278179}
   - component: {fileID: 4356181195218599668}
   m_Layer: 0
-  m_Name: TankTurretPlaceholder
+  m_Name: TurretPlaceholder
   m_TagString: Untagged
   m_Icon: {fileID: 8418204508859773708, guid: 0000000000000000d000000000000000, type: 0}
   m_NavMeshLayer: 0
@@ -65,7 +65,7 @@ GameObject:
   - component: {fileID: 3784408200869814858}
   - component: {fileID: 9046778891729959850}
   m_Layer: 0
-  m_Name: Tank
+  m_Name: Character
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -167,7 +167,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 821d2b6e98c22c145a53b6bf33c6990a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  patrolBehaviour: {fileID: 5051784773485508372}
+  patrolBehaviour: {fileID: 0}
   shootBehaviour: {fileID: -243739786761497384}
   aiDetector: {fileID: 8488990344210218205}
   tank: {fileID: 9046778891729959850}
@@ -387,7 +387,7 @@ GameObject:
   - component: {fileID: 7177132877212859811}
   - component: {fileID: 112051362986411279}
   m_Layer: 0
-  m_Name: TankBody
+  m_Name: Body
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -449,7 +449,7 @@ SpriteRenderer:
   m_SortingLayerID: 542892479
   m_SortingLayer: 5
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: 18ff8933678639c4a8eb3b376d6e7320, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0
@@ -457,7 +457,7 @@ SpriteRenderer:
   m_Size: {x: 0.76, y: 0.72}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &112051362986411279
@@ -487,7 +487,7 @@ GameObject:
   - component: {fileID: 8720578288732436716}
   - component: {fileID: 6837319690707785662}
   m_Layer: 0
-  m_Name: TankTurret
+  m_Name: Turret
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -521,7 +521,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9eed109009947e74da6d4d4f16b6f974, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  objectToPool: {fileID: 0}
   poolSize: 2
   spawnedObjectsParent: {fileID: 0}
 --- !u!212 &8720578288732436716
@@ -565,7 +564,7 @@ SpriteRenderer:
   m_SortingLayerID: 542892479
   m_SortingLayer: 5
   m_SortingOrder: 1
-  m_Sprite: {fileID: 21300000, guid: e53fa0b0249ff2b448a99c198ffecd8a, type: 3}
+  m_Sprite: {fileID: 0}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 1
@@ -573,7 +572,7 @@ SpriteRenderer:
   m_Size: {x: 0.32, y: 0.6}
   m_AdaptiveModeThreshold: 0.5
   m_SpriteTileMode: 0
-  m_WasSpriteAssigned: 1
+  m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
 --- !u!114 &6837319690707785662
