@@ -7,13 +7,13 @@ public class ObjectPool : MonoBehaviour
     #region Protected Variable Declerations
     
     //First in First out Data Structure
+    protected GameObject _objectToPool;
     protected Queue<GameObject> _objectPool;
     
     #endregion
     
     #region Serialized Field Protected Variable Declerations
     
-    [SerializeField] protected GameObject objectToPool;
     [SerializeField] protected int poolSize = 10;
     
     #endregion
@@ -57,7 +57,7 @@ public class ObjectPool : MonoBehaviour
     {
         if(spawnedObjectsParent == null)
         {
-            string name = "Object Pool : " + objectToPool.name;
+            string name = "Object Pool : " + _objectToPool.name;
             
             GameObject parentGObj = GameObject.Find(name);
 
@@ -80,8 +80,8 @@ public class ObjectPool : MonoBehaviour
 
         if(_objectPool.Count < poolSize)
         {
-            spawnedObject = Instantiate(objectToPool , transform.position , Quaternion.identity);
-            spawnedObject.name = transform.root.name + "_" + objectToPool.name + "_" + _objectPool.Count;
+            spawnedObject = Instantiate(_objectToPool , transform.position , Quaternion.identity);
+            spawnedObject.name = transform.root.name + "_" + _objectToPool.name + "_" + _objectPool.Count;
             spawnedObject.transform.SetParent(spawnedObjectsParent);
             spawnedObject.AddComponent<DestroyIfDisabled>(); // To avoid adding to all the objects in question manually and avoid danger of forgetting it
         }
@@ -99,7 +99,7 @@ public class ObjectPool : MonoBehaviour
 
     public void Initialize(GameObject objToPool , int pSize = 10)
     {
-        objectToPool = objToPool;
+        _objectToPool = objToPool;
         poolSize = pSize;
     }
     

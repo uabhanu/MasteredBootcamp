@@ -8,11 +8,14 @@ namespace Characters.AI
 
         private bool TargetInFOV(AIDetector aiDetector , TurretPlaceholder turretPlaceholder)
         {
-            Vector3 direction = aiDetector.VisibleTargetTransform.position - turretPlaceholder.transform.position;
-
-            if(Vector2.Angle(turretPlaceholder.transform.right , direction) < FieldOfVisionForShooting / 2)
+            if(aiDetector.VisibleTargetTransform != null)
             {
-                return true;
+                Vector3 direction = aiDetector.VisibleTargetTransform.position - turretPlaceholder.transform.position;
+                
+                if(Vector2.Angle(turretPlaceholder.transform.right , direction) < FieldOfVisionForShooting / 2)
+                {
+                    return true;
+                }
             }
 
             return false;
@@ -20,8 +23,11 @@ namespace Characters.AI
         
         public override void PerformAction(AIDetector aiDetector , Tank tank , TurretPlaceholder turretPlaceholder)
         {
-            turretPlaceholder.HandleTurretMovement(aiDetector.VisibleTargetTransform.position);
-            
+            if(aiDetector.VisibleTargetTransform != null)
+            {
+                turretPlaceholder.HandleTurretMovement(aiDetector.VisibleTargetTransform.position);   
+            }
+
             if(TargetInFOV(aiDetector , turretPlaceholder))
             {
                 tank.HandleMoveBody(Vector2.zero);
