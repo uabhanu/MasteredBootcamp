@@ -1,14 +1,14 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Characters
+namespace Characters.AI
 {
     public class AIDetector : MonoBehaviour
     {
         #region Private Variable Declerations
         
         private bool _targetVisible;
-        private Transform _visibleTargetTransform;
+        [SerializeField] private Transform _visibleTargetTransform;
         
         #endregion
         
@@ -36,6 +36,7 @@ namespace Characters
 
         private void Start()
         {
+            _visibleTargetTransform = null;
             StartCoroutine(DetectionCoroutine());
         }
 

@@ -123,17 +123,6 @@ NavMeshSettings:
     debug:
       m_Flags: 0
   m_NavMeshData: {fileID: 0}
---- !u!114 &103105579 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4447222041273020405, guid: 9940809aa9f23a0439d63235d4352475, type: 3}
-  m_PrefabInstance: {fileID: 435707219}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: e9fe006e2881afc4e8336dee3ab6c2d5, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &224235025
 GameObject:
   m_ObjectHideFlags: 0
@@ -16551,45 +16540,6 @@ Tilemap:
     e31: 0
     e32: 0
     e33: 1
---- !u!1 &1936551733 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 3839068408558367565, guid: 9940809aa9f23a0439d63235d4352475, type: 3}
-  m_PrefabInstance: {fileID: 435707219}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &1936551739
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1936551733}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 249388d4d5f252846bac54f8cba9250e, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  mainCamera: {fileID: 519420031}
-  OnMoveBody:
-    m_PersistentCalls:
-      m_Calls: []
-  OnMoveTurret:
-    m_PersistentCalls:
-      m_Calls: []
-  OnShoot:
-    m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 103105579}
-        m_TargetAssemblyTypeName: TurretPlaceholder, Assembly-CSharp
-        m_MethodName: HandleShoot
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
 --- !u!1001 &2003861778
 PrefabInstance:
   m_ObjectHideFlags: 0

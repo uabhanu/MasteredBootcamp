@@ -79,7 +79,7 @@ namespace Characters
                 _currentDelay = turretDataSo.ReloadDelay; //TODO This doesn't seem to be used at all so rewatch the shooting video
             }
 
-            //Debug.Log("Player Pressed Shoot"); // This is not showing in a line per turret but hopefully working fine
+            //Debug.Log("Player Pressed PerformAction"); // This is not showing in a line per turret but hopefully working fine
         }
     
         #endregion
