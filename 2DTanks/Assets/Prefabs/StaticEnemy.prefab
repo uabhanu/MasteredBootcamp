@@ -25,7 +25,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3784408200869814860, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
       propertyPath: m_Name
-      value: StaticEnemyTank
+      value: StaticEnemy
       objectReference: {fileID: 0}
     - target: {fileID: 3784408200869814860, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
       propertyPath: m_Layer
@@ -83,6 +83,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 6837319690707785662, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
+      propertyPath: turretDataSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 14d54e6558829744fa4dfec7363ad497, type: 2}
     - target: {fileID: 7177132877212859811, guid: fef689d5f940d6e4e954a85fa4c7ecfa, type: 3}
       propertyPath: m_Sprite
       value: 

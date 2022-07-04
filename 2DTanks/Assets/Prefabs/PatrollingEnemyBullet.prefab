@@ -14,7 +14,7 @@ GameObject:
   - component: {fileID: 7640623072542102523}
   - component: {fileID: 7640623072542102521}
   m_Layer: 3
-  m_Name: FastBullet
+  m_Name: PatrollingEnemyBullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -137,7 +137,7 @@ SpriteRenderer:
   m_SortingLayerID: -1935351645
   m_SortingLayer: 7
   m_SortingOrder: 0
-  m_Sprite: {fileID: 21300000, guid: c84634f59de54d6439466a91eec1f214, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 86d59ded647a6eb41a764fa0ef4b8412, type: 3}
   m_Color: {r: 1, g: 1, b: 1, a: 1}
   m_FlipX: 0
   m_FlipY: 0

@@ -589,4 +589,4 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   barrelsList:
   - {fileID: 747077406534720512}
-  turretDataSo: {fileID: 11400000, guid: 28f81bdd66aae4d4d9410bcc8e6ec8d1, type: 2}
+  turretDataSo: {fileID: 0}
