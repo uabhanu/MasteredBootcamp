@@ -4,8 +4,14 @@ namespace Characters.AI
 {
     public class EnemyAIShootBehaviour : AIBehaviour
     {
+        #region Variable Declarations
+        
         public float FieldOfVisionForShooting = 60f;
-
+        
+        #endregion
+        
+        #region Functions
+        
         private bool TargetInFOV(AIDetector aiDetector , TurretPlaceholder turretPlaceholder)
         {
             if(aiDetector.VisibleTargetTransform != null)
@@ -34,5 +40,6 @@ namespace Characters.AI
                 turretPlaceholder.HandleShoot();
             }
         }
+        #endregion
     }
 }

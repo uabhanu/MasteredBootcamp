@@ -5,12 +5,17 @@ namespace Characters.AI
 {
     public class EnemyAIStaticPatrolBehaviour : AIBehaviour
     {
+        #region Variable Declarations
+        
         private float _currentPatrolDelay;
         
         [SerializeField] private Vector2 randomDirection = Vector2.zero;
 
         public float PatrolDelay = 4f;
-
+        
+        #endregion
+        
+        #region Functions
 
         private void Awake()
         {
@@ -41,5 +46,7 @@ namespace Characters.AI
                 }
             }
         }
+        
+        #endregion
     }
 }
