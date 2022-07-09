@@ -7024,6 +7024,7 @@ GameObject:
   - component: {fileID: 1298416778594792428}
   - component: {fileID: 1298416778594792431}
   - component: {fileID: 1298416778594792430}
+  - component: {fileID: 1298416778594792432}
   m_Layer: 7
   m_Name: Turret
   m_TagString: Untagged
@@ -7048,6 +7049,7 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4641923904200717916, guid: 31e095060c76892478a7d61fc2d30f09, type: 3}
   turretBarrelsList:
   - {fileID: 1298416778348994981}
+  bulletPool: {fileID: 0}
 --- !u!212 &1298416778594792431
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -7099,6 +7101,21 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!114 &1298416778594792432
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298416778594792429}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1751f7c42611f464291d43cd87fc2023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToPool: {fileID: 0}
+  poolSize: 5
+  spawnedObjectsParentTransform: {fileID: 0}
 --- !u!114 &1298416778786120648
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -7116,10 +7133,10 @@ MonoBehaviour:
   OnDead:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1298416778786120653}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: 1298416778786120657}
+        m_TargetAssemblyTypeName: DestroyHelper, Assembly-CSharp
+        m_MethodName: DestroySelf
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -7179,8 +7196,10 @@ GameObject:
   - component: {fileID: 1298416778786120652}
   - component: {fileID: 1298416778786120654}
   - component: {fileID: 1298416778786120648}
+  - component: {fileID: 1298416778786120657}
   - component: {fileID: 1298416778786120655}
   - component: {fileID: 1298416778786120649}
+  - component: {fileID: 1298416778786120656}
   m_Layer: 7
   m_Name: EnemyTank
   m_TagString: Untagged
@@ -7225,3 +7244,49 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &1298416778786120656
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298416778786120653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f8a184c00693b5e4d8b732b65be915fd, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  mainCamera: {fileID: 0}
+  OnMoveBody:
+    m_PersistentCalls:
+      m_Calls: []
+  OnMoveTurret:
+    m_PersistentCalls:
+      m_Calls: []
+  OnShoot:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1298416778786120649}
+        m_TargetAssemblyTypeName: TankController, Assembly-CSharp
+        m_MethodName: HandleShoot
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1298416778786120657
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1298416778786120653}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad3d9064e6acb9458df3350b576250e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 

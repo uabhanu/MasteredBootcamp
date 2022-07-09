@@ -41,6 +41,7 @@ GameObject:
   - component: {fileID: 8713391748755346846}
   - component: {fileID: 8713391748755346844}
   - component: {fileID: 8713391748755346842}
+  - component: {fileID: -8849041850609991148}
   - component: {fileID: 8713391748755346845}
   - component: {fileID: 8713391748755346843}
   m_Layer: 7
@@ -99,10 +100,10 @@ MonoBehaviour:
   OnDead:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 8713391748755346847}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: -8849041850609991148}
+        m_TargetAssemblyTypeName: DestroyHelper, Assembly-CSharp
+        m_MethodName: DestroySelf
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -120,6 +121,18 @@ MonoBehaviour:
   OnHit:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-8849041850609991148
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8713391748755346847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad3d9064e6acb9458df3350b576250e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &8713391748755346845
 Rigidbody2D:
   serializedVersion: 4
@@ -312,6 +325,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 8713391749102912958}
+  - component: {fileID: 6386178470405239956}
   - component: {fileID: 8713391749102912957}
   - component: {fileID: 8713391749102912956}
   m_Layer: 7
@@ -336,6 +350,21 @@ Transform:
   m_Father: {fileID: 8713391749083291583}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &6386178470405239956
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8713391749102912959}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1751f7c42611f464291d43cd87fc2023, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToPool: {fileID: 0}
+  poolSize: 3
+  spawnedObjectsParentTransform: {fileID: 0}
 --- !u!212 &8713391749102912957
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -404,3 +433,4 @@ MonoBehaviour:
   bulletPrefab: {fileID: 4641923904200717916, guid: 31e095060c76892478a7d61fc2d30f09, type: 3}
   turretBarrelsList:
   - {fileID: 8713391748320319479}
+  bulletPool: {fileID: 0}
