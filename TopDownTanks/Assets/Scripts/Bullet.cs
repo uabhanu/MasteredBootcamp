@@ -8,10 +8,8 @@ public class Bullet : MonoBehaviour
     private float _travelledDistance;
     private Rigidbody2D _bulletBody2D;
     private Vector2 _startPosition;
-    
-    [SerializeField] private float speed = 25f;
-    [SerializeField] private float maxTravelDistance = 10f;
-    [SerializeField] private int damage = 10;
+
+    [SerializeField] private BulletDataSo bulletDataSo;
     
     #endregion
 
@@ -29,7 +27,7 @@ public class Bullet : MonoBehaviour
     {
         _travelledDistance = Vector2.Distance(transform.position , _startPosition);
 
-        if(_travelledDistance > maxTravelDistance)
+        if(_travelledDistance > bulletDataSo.MaxDistance)
         {
             DisableObject();
         }
@@ -41,7 +39,7 @@ public class Bullet : MonoBehaviour
 
         if(damageable != null)
         {
-            damageable.Hit(damage); 
+            damageable.Hit(bulletDataSo.Damage); 
         }
         
         DisableObject();
@@ -53,10 +51,11 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Initialize(BulletDataSo bulletDataSo)
+    public void Initialize(BulletDataSo bulletData)
     {
+        bulletData = bulletDataSo;
         _startPosition = transform.position;
-        _bulletBody2D.velocity = transform.up * speed;
+        _bulletBody2D.velocity = transform.up * bulletData.Speed;
     }
     
     #endregion
