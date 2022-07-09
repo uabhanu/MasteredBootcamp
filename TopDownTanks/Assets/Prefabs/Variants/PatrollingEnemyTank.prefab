@@ -1,6 +1,6 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
---- !u!1001 &6227383289158858063
+--- !u!1001 &4725430313784687989
 PrefabInstance:
   m_ObjectHideFlags: 0
   serializedVersion: 2
@@ -13,7 +13,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6522826777703018778, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: viewRadius
-      value: 3
+      value: 2
       objectReference: {fileID: 0}
     - target: {fileID: 8713391748320319480, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_Layer
@@ -65,7 +65,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 8713391748755346847, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_Name
-      value: StaticEnemyTank
+      value: PatrollingEnemyTank
       objectReference: {fileID: 0}
     - target: {fileID: 8713391748755346847, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_Layer
@@ -76,24 +76,16 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 11400000, guid: bea89e6e546e56c49852ff83e25482a2, type: 2}
     - target: {fileID: 8713391748984750130, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
-      propertyPath: m_Size.x
-      value: 0.68
-      objectReference: {fileID: 0}
-    - target: {fileID: 8713391748984750130, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_Size.y
       value: 0.72
       objectReference: {fileID: 0}
     - target: {fileID: 8713391748984750130, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: 992327a32e037db47bbd94a272ee4595, type: 3}
+      objectReference: {fileID: 21300000, guid: 5983483feee2e454a9a5f27ee0bbadaf, type: 3}
     - target: {fileID: 8713391748984750130, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_SortingLayer
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8713391748984750130, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
-      propertyPath: m_SortingOrder
-      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 8713391748984750130, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_SortingLayerID
@@ -114,18 +106,14 @@ PrefabInstance:
     - target: {fileID: 8713391749102912956, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: turretDataSo
       value: 
-      objectReference: {fileID: 11400000, guid: 438876364da1f054ca19582d142ac6f2, type: 2}
+      objectReference: {fileID: 11400000, guid: 39e5845fea97bb340b38026ae8b13484, type: 2}
     - target: {fileID: 8713391749102912957, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_Sprite
       value: 
-      objectReference: {fileID: 21300000, guid: fbd41112020278a4896e7a32448bed44, type: 3}
+      objectReference: {fileID: 21300000, guid: d6fe7afa2650da84eaff5a50ab43eca0, type: 3}
     - target: {fileID: 8713391749102912957, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_SortingLayer
       value: 4
-      objectReference: {fileID: 0}
-    - target: {fileID: 8713391749102912957, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
-      propertyPath: m_SortingOrder
-      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 8713391749102912957, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_SortingLayerID

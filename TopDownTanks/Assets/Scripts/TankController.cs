@@ -7,8 +7,8 @@ public class TankController : MonoBehaviour
     private Vector2 _movementVector;
 
     [SerializeField] private TankTurret[] tankTurretsArray;
-    [SerializeField] private TankBodyMover tankBodyMover;
     
+    public TankBodyMover TankBodyMover;
     public TankTurretHandler TankTurretHandler;
 
     #endregion
@@ -17,9 +17,9 @@ public class TankController : MonoBehaviour
 
     private void Awake()
     {
-        if(tankBodyMover == null)
+        if(TankBodyMover == null)
         {
-            tankBodyMover = GetComponentInChildren<TankBodyMover>();
+            TankBodyMover = GetComponentInChildren<TankBodyMover>();
         }
         
         if(TankTurretHandler == null)
@@ -43,7 +43,7 @@ public class TankController : MonoBehaviour
 
     public void HandleMoveBody(Vector2 movementVector)
     {
-        tankBodyMover.Move(movementVector);
+        TankBodyMover.Move(movementVector);
     }
 
     public void HandleMoveTurret(Vector2 mousePointerPos)

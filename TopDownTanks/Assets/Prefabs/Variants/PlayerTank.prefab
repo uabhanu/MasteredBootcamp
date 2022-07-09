@@ -8,8 +8,16 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 5143587702910330202, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 5143587702910330202, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_IsActive
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8713391748320319480, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     - target: {fileID: 8713391748755346846, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_RootOrder
@@ -59,6 +67,10 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTank
       objectReference: {fileID: 0}
+    - target: {fileID: 8713391748755346847, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8713391748984750129, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: tankMovementData
       value: 
@@ -75,6 +87,14 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8713391748984750132, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
+    - target: {fileID: 8713391749083291552, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
+      propertyPath: m_Layer
+      value: 10
+      objectReference: {fileID: 0}
     - target: {fileID: 8713391749102912956, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: turretDataSo
       value: 
@@ -86,6 +106,10 @@ PrefabInstance:
     - target: {fileID: 8713391749102912957, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_WasSpriteAssigned
       value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 8713391749102912959, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
+      propertyPath: m_Layer
+      value: 10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
