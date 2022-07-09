@@ -55,6 +55,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: PlayerTank
       objectReference: {fileID: 0}
+    - target: {fileID: 8713391748984750129, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
+      propertyPath: tankMovementData
+      value: 
+      objectReference: {fileID: 11400000, guid: fa94fb9b964d7cb40b01e8e0ea0821f2, type: 2}
+    - target: {fileID: 8713391748984750129, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
+      propertyPath: tankMovementDataSo
+      value: 
+      objectReference: {fileID: 11400000, guid: fa94fb9b964d7cb40b01e8e0ea0821f2, type: 2}
     - target: {fileID: 8713391748984750130, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_Sprite
       value: 
@@ -63,6 +71,10 @@ PrefabInstance:
       propertyPath: m_WasSpriteAssigned
       value: 1
       objectReference: {fileID: 0}
+    - target: {fileID: 8713391749102912956, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
+      propertyPath: turretDataSo
+      value: 
+      objectReference: {fileID: 11400000, guid: e8dddae09754d50448cc5e25684b081c, type: 2}
     - target: {fileID: 8713391749102912957, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_Sprite
       value: 

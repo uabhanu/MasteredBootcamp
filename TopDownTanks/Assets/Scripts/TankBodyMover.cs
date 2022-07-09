@@ -1,18 +1,16 @@
+using DataSo;
 using UnityEngine;
 
 public class TankBodyMover : MonoBehaviour
 {
     #region Variable Declarations
 
+    private float _currentSpeed = 0f;
+    private float _currentForwardDirection = 1f;
     private Vector2 _movementVector;
-
-    [SerializeField] private float accelaration = 75f;
-    [SerializeField] private float currentSpeed = 0f;
-    [SerializeField] private float currentForwardDirection = 1f;
-    [SerializeField] private float deaccelaration = 80f;
-    [SerializeField] private float maxMoveSpeed = 10f;
-    [SerializeField] private float rotationSpeed = 100f;
+    
     [SerializeField] private Rigidbody2D tankBody2D;
+    [SerializeField] private TankMovementDataSo tankMovementDataSo;
 
     #endregion
 
@@ -28,22 +26,22 @@ public class TankBodyMover : MonoBehaviour
     
     private void FixedUpdate()
     {
-        tankBody2D.velocity = (Vector2)transform.up * (currentSpeed * currentForwardDirection * Time.fixedDeltaTime);
-        tankBody2D.MoveRotation(transform.rotation * Quaternion.Euler(0 , 0 , -_movementVector.x * rotationSpeed * Time.fixedDeltaTime));
+        tankBody2D.velocity = (Vector2)transform.up * (_currentSpeed * _currentForwardDirection * Time.fixedDeltaTime);
+        tankBody2D.MoveRotation(transform.rotation * Quaternion.Euler(0 , 0 , -_movementVector.x * tankMovementDataSo.RotationSpeed * Time.fixedDeltaTime));
     }
 
     private void CalculateCurrentSpeed(Vector2 moveVector)
     {
         if(Mathf.Abs(moveVector.y) > 0)
         {
-            currentSpeed += accelaration * Time.deltaTime;
+            _currentSpeed += tankMovementDataSo.Acceleration * Time.deltaTime;
         }
         else
         {
-            currentSpeed -= deaccelaration * Time.deltaTime;
+            _currentSpeed -= tankMovementDataSo.Deacceleration * Time.deltaTime;
         }
 
-        currentSpeed = Mathf.Clamp(currentSpeed , 0 , maxMoveSpeed);
+        _currentSpeed = Mathf.Clamp(_currentSpeed , 0 , tankMovementDataSo.MaxMoveSpeed);
     }
 
     public void Move(Vector2 moveVector)
@@ -53,12 +51,12 @@ public class TankBodyMover : MonoBehaviour
 
         if(_movementVector.y > 0)
         {
-            currentForwardDirection = 1f;
+            _currentForwardDirection = 1f;
         }
         
         else if(_movementVector.y < 0)
         {
-            currentForwardDirection = -1f;
+            _currentForwardDirection = -1f;
         }
     }
 

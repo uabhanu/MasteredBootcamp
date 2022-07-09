@@ -1,3 +1,4 @@
+using DataSo;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -52,7 +53,7 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Initialize()
+    public void Initialize(BulletDataSo bulletDataSo)
     {
         _startPosition = transform.position;
         _bulletBody2D.velocity = transform.up * speed;

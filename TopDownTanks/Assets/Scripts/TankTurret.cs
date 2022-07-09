@@ -1,3 +1,4 @@
+using DataSo;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -11,10 +12,9 @@ public class TankTurret : MonoBehaviour
     private int _bulletPoolSize;
 
     [SerializeField] private float currentDelay = 0f;
-    [SerializeField] private float reloadDelay = 1f;
-    [SerializeField] private GameObject bulletPrefab;
     [SerializeField] private List<Transform> turretBarrelsList;
     [SerializeField] private ObjectPool bulletPool;
+    [SerializeField] private TurretDataSo turretDataSo;
     
     #endregion
 
@@ -37,7 +37,7 @@ public class TankTurret : MonoBehaviour
 
     private void Start()
     {
-        bulletPool.Initialize(bulletPrefab , _bulletPoolSize);
+        bulletPool.Initialize(turretDataSo.BulletPrefab , _bulletPoolSize);
     }
 
     private void Update()
@@ -58,7 +58,7 @@ public class TankTurret : MonoBehaviour
         if(_bCanShoot)
         {
             _bCanShoot = false;
-            currentDelay = reloadDelay;
+            currentDelay = turretDataSo.ReloadDelay;
 
             foreach (var barrel in turretBarrelsList)
             {
@@ -67,7 +67,7 @@ public class TankTurret : MonoBehaviour
                 bulletObj.transform.position = barrel.position;
                 // Barrel Rotation 90 giving wrong result so left it as 0 ignoring the instructor's instruction
                 bulletObj.transform.localRotation = barrel.rotation;
-                bulletObj.GetComponent<Bullet>().Initialize();
+                bulletObj.GetComponent<Bullet>().Initialize(turretDataSo.BulletDataSo);
 
                 foreach (var collider in _tankColliders2D)
                 {
