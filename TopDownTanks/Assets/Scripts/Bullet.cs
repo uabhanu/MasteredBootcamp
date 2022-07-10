@@ -10,7 +10,7 @@ public class Bullet : MonoBehaviour
     private Rigidbody2D _bulletBody2D;
     private Vector2 _startPosition;
 
-    [SerializeField] private BulletDataSo bulletDataSo;
+    [SerializeField] private TurretDataSo turretDataSo;
 
     public UnityEvent OnHit = new UnityEvent();
     
@@ -30,7 +30,7 @@ public class Bullet : MonoBehaviour
     {
         _travelledDistance = Vector2.Distance(transform.position , _startPosition);
 
-        if(_travelledDistance > bulletDataSo.MaxDistance)
+        if(_travelledDistance > turretDataSo.BulletDataSo.MaxDistance)
         {
             DisableObject();
         }
@@ -44,7 +44,7 @@ public class Bullet : MonoBehaviour
 
         if(damageable != null)
         {
-            damageable.Hit(bulletDataSo.Damage); 
+            damageable.Hit(turretDataSo.BulletDataSo.Damage); 
         }
         
         DisableObject();
@@ -58,7 +58,7 @@ public class Bullet : MonoBehaviour
 
     public void Initialize(BulletDataSo bulletData)
     {
-        bulletData = bulletDataSo;
+        bulletData = turretDataSo.BulletDataSo;
         _startPosition = transform.position;
         _bulletBody2D.velocity = transform.up * bulletData.Speed;
     }

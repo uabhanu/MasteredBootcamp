@@ -22,23 +22,26 @@ namespace AI
 
         public override void PerformAction(TankController tankController , AIDetector aiDetector)
         {
-            float angle = Vector2.Angle(tankController.TankTurretHandler.transform.right , randomDirection);
+            if(tankController != null)
+            {
+                float angle = Vector2.Angle(tankController.TankTurretHandler.transform.right , randomDirection);
 
-            if(currentPatrolDelay <= 0 && (angle < 2))
-            {
-                randomDirection = Random.insideUnitCircle;
-                currentPatrolDelay = patrolDelay;
-            }
-            else
-            {
-                if(currentPatrolDelay > 0)
+                if(currentPatrolDelay <= 0 && (angle < 2))
                 {
-                    currentPatrolDelay -= Time.deltaTime;
+                    randomDirection = Random.insideUnitCircle;
+                    currentPatrolDelay = patrolDelay;
                 }
                 else
                 {
-                    tankController.HandleMoveTurret((Vector2)tankController.TankTurretHandler.transform.position + randomDirection);
-                }
+                    if(currentPatrolDelay > 0)
+                    {
+                        currentPatrolDelay -= Time.deltaTime;
+                    }
+                    else
+                    {
+                        tankController.HandleMoveTurret((Vector2)tankController.TankTurretHandler.transform.position + randomDirection);
+                    }
+                }   
             }
         }
         

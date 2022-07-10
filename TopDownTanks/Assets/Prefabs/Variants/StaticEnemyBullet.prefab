@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7367364677312502101, guid: 31e095060c76892478a7d61fc2d30f09, type: 3}
+      propertyPath: turretDataSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 438876364da1f054ca19582d142ac6f2, type: 2}
     - target: {fileID: 4641923904200717916, guid: 31e095060c76892478a7d61fc2d30f09, type: 3}
       propertyPath: m_Name
       value: StaticEnemyBullet
@@ -81,11 +85,11 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4641923904200717920, guid: 31e095060c76892478a7d61fc2d30f09, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.x
-      value: 0.08
+      value: 0.25
       objectReference: {fileID: 0}
     - target: {fileID: 4641923904200717920, guid: 31e095060c76892478a7d61fc2d30f09, type: 3}
       propertyPath: m_SpriteTilingProperty.oldSize.y
-      value: 0.2
+      value: 0.625
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 31e095060c76892478a7d61fc2d30f09, type: 3}

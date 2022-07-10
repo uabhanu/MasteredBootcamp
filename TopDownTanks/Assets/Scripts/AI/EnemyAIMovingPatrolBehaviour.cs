@@ -47,33 +47,36 @@ namespace AI
                     return;
                 }
 
-                if(!_isInitialized)
+                if(tankController != null)
                 {
-                    var currentPathPoint = PatrolPath.GetClosestPathPoint(tankController.transform.position);
-                    _currentIndex = currentPathPoint.Index;
-                    currentPatrolTargetPos = currentPathPoint.Position;
-                    _isInitialized = true;
-                }
+                    if(!_isInitialized)
+                    {
+                        var currentPathPoint = PatrolPath.GetClosestPathPoint(tankController.transform.position);
+                        _currentIndex = currentPathPoint.Index;
+                        currentPatrolTargetPos = currentPathPoint.Position;
+                        _isInitialized = true;
+                    }
 
-                if(Vector2.Distance(tankController.transform.position , currentPatrolTargetPos) < ArriveDistance)
-                {
-                    isWaiting = true;
-                    StartCoroutine(WaitCoroutine());
-                    return;
-                }
+                    if(Vector2.Distance(tankController.transform.position , currentPatrolTargetPos) < ArriveDistance)
+                    {
+                        isWaiting = true;
+                        StartCoroutine(WaitCoroutine());
+                        return;
+                    }
 
-                Vector2 directionToMove = currentPatrolTargetPos - (Vector2)tankController.TankBodyMover.transform.position;
-                var dotProduct = Vector2.Dot(tankController.TankBodyMover.transform.up , directionToMove.normalized);
+                    Vector2 directionToMove = currentPatrolTargetPos - (Vector2)tankController.TankBodyMover.transform.position;
+                    var dotProduct = Vector2.Dot(tankController.TankBodyMover.transform.up , directionToMove.normalized);
 
-                if(dotProduct < 0.98f)
-                {
-                    var crossProduct = Vector3.Cross(tankController.TankBodyMover.transform.up , directionToMove.normalized);
-                    int rotationResult = crossProduct.z >= 0 ? -1 : 1;
-                    tankController.HandleMoveBody(new Vector2(rotationResult , 1));
-                }
-                else
-                {
-                    tankController.HandleMoveBody(Vector2.up);
+                    if(dotProduct < 0.98f)
+                    {
+                        var crossProduct = Vector3.Cross(tankController.TankBodyMover.transform.up , directionToMove.normalized);
+                        int rotationResult = crossProduct.z >= 0 ? -1 : 1;
+                        tankController.HandleMoveBody(new Vector2(rotationResult , 1));
+                    }
+                    else
+                    {
+                        tankController.HandleMoveBody(Vector2.up);
+                    }   
                 }
             }
         }

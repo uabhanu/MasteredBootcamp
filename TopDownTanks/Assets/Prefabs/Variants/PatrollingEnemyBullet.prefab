@@ -7,6 +7,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: -7367364677312502101, guid: 31e095060c76892478a7d61fc2d30f09, type: 3}
+      propertyPath: turretDataSo
+      value: 
+      objectReference: {fileID: 11400000, guid: 39e5845fea97bb340b38026ae8b13484, type: 2}
     - target: {fileID: 4641923904200717916, guid: 31e095060c76892478a7d61fc2d30f09, type: 3}
       propertyPath: m_Name
       value: PatrollingEnemyBullet

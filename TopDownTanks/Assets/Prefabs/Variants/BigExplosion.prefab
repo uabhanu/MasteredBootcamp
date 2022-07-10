@@ -1,0 +1,51 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1001 &1797963663201923838
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 8111894299669120116, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}
+      propertyPath: m_RootOrder
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111894299669120116, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}
+      propertyPath: m_LocalScale.x
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111894299669120116, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}
+      propertyPath: m_LocalScale.y
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111894299669120116, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}
+      propertyPath: m_LocalScale.z
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111894299669120116, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111894299669120116, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111894299669120116, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111894299669120117, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 2f4bd49cf932c15468b0124da87cd1ab, type: 2}
+    - target: {fileID: 8111894299669120118, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}
+      propertyPath: m_WasSpriteAssigned
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8111894299669120119, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}
+      propertyPath: m_Name
+      value: BigExplosion
+      objectReference: {fileID: 0}
+    m_RemovedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}

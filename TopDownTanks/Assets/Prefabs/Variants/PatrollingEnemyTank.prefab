@@ -19,6 +19,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 8713391748755346842, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
+      propertyPath: _maxHealth
+      value: 20
+      objectReference: {fileID: 0}
     - target: {fileID: 8713391748755346846, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: m_RootOrder
       value: 0
