@@ -1,15 +1,18 @@
 using DataSo;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class Bullet : MonoBehaviour
 {
-    #region Variable Declarations
+    #region Variables
     
     private float _travelledDistance;
     private Rigidbody2D _bulletBody2D;
     private Vector2 _startPosition;
 
     [SerializeField] private BulletDataSo bulletDataSo;
+
+    public UnityEvent OnHit = new UnityEvent();
     
     #endregion
 
@@ -35,6 +38,8 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col2D)
     {
+        OnHit?.Invoke();
+        
         var damageable = col2D.GetComponent<Damageable>();
 
         if(damageable != null)

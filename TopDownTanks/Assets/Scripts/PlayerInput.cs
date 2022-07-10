@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class PlayerInput : MonoBehaviour
 {
-    #region Variable Declarations
+    #region Variables
     
     [SerializeField] private Camera mainCamera;
     

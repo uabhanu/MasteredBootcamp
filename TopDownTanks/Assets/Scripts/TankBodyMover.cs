@@ -3,7 +3,7 @@ using UnityEngine;
 
 public class TankBodyMover : MonoBehaviour
 {
-    #region Variable Declarations
+    #region Variables
 
     private float _currentSpeed = 0f;
     private float _currentForwardDirection = 1f;

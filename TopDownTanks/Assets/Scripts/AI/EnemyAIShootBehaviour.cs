@@ -4,7 +4,7 @@ namespace AI
 {
     public class EnemyAIShootBehaviour : EnemyAIBehaviour
     {
-        #region Variable Declarations
+        #region Variables
         
         [SerializeField] private float fieldOfVisionForShooting = 60f;
 

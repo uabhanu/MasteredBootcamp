@@ -5,7 +5,7 @@ namespace AI
 {
     public class PatrolPath : MonoBehaviour
     {
-        #region Variable Declarations
+        #region Variables
         
         [SerializeField] private List<Transform> patrolPoints = new List<Transform>();
         

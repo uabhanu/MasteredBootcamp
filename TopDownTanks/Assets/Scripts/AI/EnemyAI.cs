@@ -4,7 +4,7 @@ namespace AI
 {
     public class EnemyAI : MonoBehaviour
     {
-        #region Variable Declarations
+        #region Variables
         
         [SerializeField] private AIDetector aiDetector;
         [SerializeField] private EnemyAIBehaviour patrolBehaviour;

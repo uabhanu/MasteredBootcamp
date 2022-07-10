@@ -3,7 +3,7 @@ using UnityEngine.Events;
 
 public class Damageable : MonoBehaviour
 {
-    #region Variable Declarations
+    #region Variables
     
     [SerializeField] private int _maxHealth = 100; // Remove SerializedField after testing
 

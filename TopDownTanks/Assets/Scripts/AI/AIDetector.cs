@@ -5,7 +5,7 @@ namespace AI
 {
     public class AIDetector : MonoBehaviour
     {
-        #region Variable Declarations
+        #region Variables
         
         private Transform _target = null;
         

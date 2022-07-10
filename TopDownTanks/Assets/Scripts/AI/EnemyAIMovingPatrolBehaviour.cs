@@ -5,7 +5,7 @@ namespace AI
 {
     public class EnemyAIMovingPatrolBehaviour : EnemyAIBehaviour
     {
-        #region Variable Declarations
+        #region Variables
 
         private bool _isInitialized;
         private int _currentIndex = -1;

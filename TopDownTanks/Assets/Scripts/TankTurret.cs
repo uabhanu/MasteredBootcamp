@@ -1,11 +1,13 @@
 using DataSo;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
+using Util;
 
 [RequireComponent(typeof(ObjectPool))]
 public class TankTurret : MonoBehaviour
 {
-    #region Variable Declarations
+    #region Variables
     
     private bool _bCanShoot;
     private  Collider2D[] _tankColliders2D;
@@ -15,7 +17,11 @@ public class TankTurret : MonoBehaviour
     [SerializeField] private List<Transform> turretBarrelsList;
     [SerializeField] private ObjectPool bulletPool;
     [SerializeField] private TurretDataSo turretDataSo;
-    
+
+    public UnityEvent OnCantShoot;
+    public UnityEvent OnShoot;
+    public UnityEvent<float> OnReloading;
+
     #endregion
 
     #region Functions
@@ -38,6 +44,7 @@ public class TankTurret : MonoBehaviour
     private void Start()
     {
         bulletPool.Initialize(turretDataSo.BulletPrefab , _bulletPoolSize);
+        OnReloading?.Invoke(currentDelay);
     }
 
     private void Update()
@@ -45,6 +52,7 @@ public class TankTurret : MonoBehaviour
         if(!_bCanShoot)
         {
             currentDelay -= Time.deltaTime;
+            OnReloading?.Invoke(currentDelay);
 
             if(currentDelay <= 0)
             {
@@ -74,6 +82,14 @@ public class TankTurret : MonoBehaviour
                     Physics2D.IgnoreCollision(bulletObj.GetComponent<Collider2D>() , collider);
                 }
             }
+            
+            OnShoot?.Invoke();
+            OnReloading?.Invoke(currentDelay);
+            
+        }
+        else
+        {
+            OnCantShoot?.Invoke();
         }
     }
     

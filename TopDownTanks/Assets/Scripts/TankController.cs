@@ -2,7 +2,7 @@ using UnityEngine;
 
 public class TankController : MonoBehaviour
 {
-    #region Variable Declarations
+    #region Variables
 
     private Vector2 _movementVector;
 

@@ -5,7 +5,7 @@ namespace AI
 {
     public class EnemyAIPatrolStaticBehaviour : EnemyAIBehaviour
     {
-        #region Variable Declarations
+        #region Variables
         
         [SerializeField] private float currentPatrolDelay;
         [SerializeField] private float patrolDelay = 4f;
