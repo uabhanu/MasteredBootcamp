@@ -720,7 +720,9 @@ PrefabInstance:
       propertyPath: OnHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_ObjectArgumentAssemblyTypeName
       value: UnityEngine.Object, UnityEngine
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3446736736267683189, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}
+    - {fileID: 158076747098306986, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}
 --- !u!114 &8560951885316381411 stripped
 MonoBehaviour:
