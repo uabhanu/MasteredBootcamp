@@ -52,7 +52,7 @@ public class TankTurret : MonoBehaviour
         if(!_bCanShoot)
         {
             currentDelay -= Time.deltaTime;
-            OnReloading?.Invoke(currentDelay);
+            OnReloading?.Invoke(currentDelay / turretDataSo.ReloadDelay);
 
             if(currentDelay <= 0)
             {
