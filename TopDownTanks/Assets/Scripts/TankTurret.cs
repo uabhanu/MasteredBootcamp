@@ -68,9 +68,15 @@ public class TankTurret : MonoBehaviour
             _bCanShoot = false;
             currentDelay = turretDataSo.ReloadDelay;
 
-            foreach (var barrel in turretBarrelsList)
+            foreach(var barrel in turretBarrelsList)
             {
-                //GameObject bulletObj = Instantiate(bulletPrefab);
+                var hit = Physics2D.Raycast(barrel.position , barrel.up);
+
+                if(hit.collider != null)
+                {
+                    Debug.Log(hit.collider.name);
+                }
+                
                 GameObject bulletObj = bulletPool.CreateObject();
                 bulletObj.transform.position = barrel.position;
                 // Barrel Rotation 90 giving wrong result so left it as 0 ignoring the instructor's instruction
