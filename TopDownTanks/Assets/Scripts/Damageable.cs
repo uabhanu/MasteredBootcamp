@@ -7,7 +7,7 @@ public class Damageable : MonoBehaviour
     
     [SerializeField] private int _maxHealth = 100; // Remove SerializedField after testing
 
-    [SerializeField] private int health;
+    [SerializeField] private int health = 0;
 
     public UnityEvent OnDead;
     public UnityEvent<float> OnHealthChange;
@@ -20,7 +20,10 @@ public class Damageable : MonoBehaviour
 
     private void Start()
     {
-        Health = _maxHealth;
+        if(health == 0)
+        {
+            Health = _maxHealth;   
+        }
     }
     
     public int Health
