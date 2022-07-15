@@ -141,9 +141,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   currentVolume: 0
-  DeltaVolume: 0.2
-  MaxVolume: 0.3
-  MinVolume: 0.1
+  deltaVolume: 0.01
+  maxVolume: 1
+  minVolume: 0.5
 --- !u!1 &1406898306663082411
 GameObject:
   m_ObjectHideFlags: 0
@@ -543,8 +543,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToPool: {fileID: 0}
   poolSize: 5
+  bAlwaysDestroy: 0
   spawnedObjectsParentTransform: {fileID: 0}
-  B_AlwaysDestroy: 1
 --- !u!114 &4500580968314866642
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -557,9 +557,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc9c23221466a44fb8d583923e994c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  TrackDistance: 0.2
-  TrackMarksPrefab: {fileID: 2228775656030741933, guid: 34fdaa3589cb69c44a50e5e15f3fea0e, type: 3}
-  ObjectPoolSize: 50
+  trackDistance: 0.2
+  trackMarksPrefab: {fileID: 2228775656030741933, guid: 34fdaa3589cb69c44a50e5e15f3fea0e, type: 3}
+  objectPoolSize: 50
 --- !u!1 &8713391748320319480
 GameObject:
   m_ObjectHideFlags: 0
@@ -666,13 +666,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b3afaecdd1d774ea2f9676064ec10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _maxHealth: 100
   health: 0
-  OnDead:
+  onDead:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: -8849041850609991148}
-        m_TargetAssemblyTypeName: DestroyHelper, Assembly-CSharp
+        m_TargetAssemblyTypeName: Util.DestroyHelper, Assembly-CSharp
         m_MethodName: DestroySelf
         m_Mode: 1
         m_Arguments:
@@ -707,9 +706,21 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  OnHealthChange:
+  onHealthChange:
     m_PersistentCalls:
       m_Calls:
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
+        m_MethodName: SetActive
+        m_Mode: 6
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 1
+        m_CallState: 2
       - m_Target: {fileID: 0}
         m_TargetAssemblyTypeName: UnityEngine.UI.Slider, UnityEngine.UI
         m_MethodName: set_value
@@ -720,12 +731,12 @@ MonoBehaviour:
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
-          m_BoolArgument: 0
+          m_BoolArgument: 1
         m_CallState: 2
-  OnHeal:
+  onHeal:
     m_PersistentCalls:
       m_Calls: []
-  OnHit:
+  onHit:
     m_PersistentCalls:
       m_Calls: []
 --- !u!114 &-8849041850609991148
@@ -875,7 +886,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   tankBody2D: {fileID: 0}
   tankMovementDataSo: {fileID: 0}
-  OnSpeedChange:
+  onSpeedChange:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 150787802537463196}
@@ -985,8 +996,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   objectToPool: {fileID: 0}
   poolSize: 3
+  bAlwaysDestroy: 0
   spawnedObjectsParentTransform: {fileID: 0}
-  B_AlwaysDestroy: 0
 --- !u!212 &8713391749102912957
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -1055,10 +1066,10 @@ MonoBehaviour:
   - {fileID: 8713391748320319479}
   bulletPool: {fileID: 0}
   turretDataSo: {fileID: 0}
-  OnCantShoot:
+  onCantShoot:
     m_PersistentCalls:
       m_Calls: []
-  OnShoot:
+  onShoot:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 6328358361999702114}
@@ -1085,6 +1096,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  OnReloading:
+  onReloading:
     m_PersistentCalls:
       m_Calls: []

@@ -8,9 +8,9 @@ public class TrackMarksSpawner : MonoBehaviour
     private ObjectPool _objectPool;
     private Vector2 _lastPosition;
 
-    public float TrackDistance = 0.2f;
-    public GameObject TrackMarksPrefab;
-    public int ObjectPoolSize = 50;
+    [SerializeField] private float trackDistance = 0.2f;
+    [SerializeField] private GameObject trackMarksPrefab;
+    [SerializeField] private int objectPoolSize = 50;
     
     #endregion
     
@@ -24,14 +24,14 @@ public class TrackMarksSpawner : MonoBehaviour
     private void Start()
     {
         _lastPosition = transform.position;
-        _objectPool.Initialize(TrackMarksPrefab , ObjectPoolSize);
+        _objectPool.Initialize(trackMarksPrefab , objectPoolSize);
     }
 
     private void Update()
     {
         var distanceDriven = Vector2.Distance(transform.position , _lastPosition);
 
-        if(distanceDriven >= TrackDistance)
+        if(distanceDriven >= trackDistance)
         {
             _lastPosition = transform.position;
 

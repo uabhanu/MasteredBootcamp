@@ -17,10 +17,9 @@ public class TankTurret : MonoBehaviour
     [SerializeField] private List<Transform> turretBarrelsList;
     [SerializeField] private ObjectPool bulletPool;
     [SerializeField] private TurretDataSo turretDataSo;
-
-    public UnityEvent OnCantShoot;
-    public UnityEvent OnShoot;
-    public UnityEvent<float> OnReloading;
+    [SerializeField] private UnityEvent onCantShoot;
+    [SerializeField] private UnityEvent onShoot;
+    [SerializeField] private UnityEvent<float> onReloading;
 
     #endregion
 
@@ -44,7 +43,7 @@ public class TankTurret : MonoBehaviour
     private void Start()
     {
         bulletPool.Initialize(turretDataSo.BulletPrefab , _bulletPoolSize);
-        OnReloading?.Invoke(currentDelay);
+        onReloading?.Invoke(currentDelay);
     }
 
     private void Update()
@@ -52,7 +51,7 @@ public class TankTurret : MonoBehaviour
         if(!_bCanShoot)
         {
             currentDelay -= Time.deltaTime;
-            OnReloading?.Invoke(currentDelay / turretDataSo.ReloadDelay);
+            onReloading?.Invoke(currentDelay / turretDataSo.ReloadDelay);
 
             if(currentDelay <= 0)
             {
@@ -89,13 +88,13 @@ public class TankTurret : MonoBehaviour
                 }
             }
             
-            OnShoot?.Invoke();
-            OnReloading?.Invoke(currentDelay);
+            onShoot?.Invoke();
+            onReloading?.Invoke(currentDelay);
             
         }
         else
         {
-            OnCantShoot?.Invoke();
+            onCantShoot?.Invoke();
         }
     }
     

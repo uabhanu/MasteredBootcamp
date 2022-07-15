@@ -74,7 +74,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   turretDataSo: {fileID: 0}
-  OnHit:
+  onHit:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 7555891378884416200}

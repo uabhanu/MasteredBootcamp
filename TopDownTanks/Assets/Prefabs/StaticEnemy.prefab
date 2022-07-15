@@ -226,7 +226,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a8b505fba61dd47b1567fdc0c83b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectToFollow: {fileID: 6973024065840769987}
+  objectToFollow: {fileID: 6973024065840769987}
 --- !u!1 &5639944667590657934
 GameObject:
   m_ObjectHideFlags: 0
@@ -547,6 +547,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
       propertyPath: OnHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5639944667590657938}
+    - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+      propertyPath: onHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 5639944667538508882}
+    - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+      propertyPath: onHealthChange.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 5639944667590657938}
     - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}

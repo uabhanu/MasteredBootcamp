@@ -11,8 +11,7 @@ public class Bullet : MonoBehaviour
     private Vector2 _startPosition;
 
     [SerializeField] private TurretDataSo turretDataSo;
-
-    public UnityEvent OnHit = new UnityEvent();
+    [SerializeField] private UnityEvent onHit = new UnityEvent();
     
     #endregion
 
@@ -38,7 +37,7 @@ public class Bullet : MonoBehaviour
 
     private void OnTriggerEnter2D(Collider2D col2D)
     {
-        OnHit?.Invoke();
+        onHit?.Invoke();
         
         var damageable = col2D.GetComponent<Damageable>();
 

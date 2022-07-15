@@ -166,10 +166,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: bd13059727980d64c8b5aa6becdad83a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerHealthKey: PlayerHealth
-  SavePresentKey: SavePresent
-  SceneIndexKey: SceneIndex
-  OnDataLoadedResult:
+  playerHealthKey: PlayerHealth
+  savePresentKey: SavePresent
+  sceneIndexKey: SceneIndex
+  onDataLoadedResult:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 521911095}
@@ -1439,5 +1439,3 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4227d96621b38d34d90c2cc296f25da7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  PlayerObj: {fileID: 0}
-  SaveSystem: {fileID: 0}

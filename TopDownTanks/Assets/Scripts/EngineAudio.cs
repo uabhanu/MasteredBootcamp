@@ -7,10 +7,9 @@ public class EngineAudio : MonoBehaviour
     private AudioSource _audioSource;
 
     [SerializeField] private float currentVolume;
-
-    public float DeltaVolume = 0.01f;
-    public float MaxVolume = 0.10f;
-    public float MinVolume = 0.05f;
+    [SerializeField] private float deltaVolume = 0.01f;
+    [SerializeField] private float maxVolume = 0.10f;
+    [SerializeField] private float minVolume = 0.05f;
 
     #endregion
 
@@ -19,7 +18,7 @@ public class EngineAudio : MonoBehaviour
     private void Awake()
     {
         _audioSource = GetComponent<AudioSource>();
-        currentVolume = MinVolume;
+        currentVolume = minVolume;
     }
 
     private void Start()
@@ -31,20 +30,20 @@ public class EngineAudio : MonoBehaviour
     {
         if(tankMoveSpeed > 0)
         {
-            if(currentVolume < MaxVolume)
+            if(currentVolume < maxVolume)
             {
-                currentVolume += DeltaVolume * Time.deltaTime;
+                currentVolume += deltaVolume * Time.deltaTime;
             }
         }
         else
         {
-            if(currentVolume > MinVolume)
+            if(currentVolume > minVolume)
             {
-                currentVolume -= DeltaVolume * Time.deltaTime;
+                currentVolume -= deltaVolume * Time.deltaTime;
             }
         }
 
-        currentVolume = Mathf.Clamp(currentVolume , MinVolume , MaxVolume);
+        currentVolume = Mathf.Clamp(currentVolume , minVolume , maxVolume);
         _audioSource.volume = currentVolume;
     }
     

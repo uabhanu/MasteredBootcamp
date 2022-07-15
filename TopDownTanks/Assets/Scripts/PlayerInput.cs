@@ -6,10 +6,9 @@ public class PlayerInput : MonoBehaviour
     #region Variables
     
     [SerializeField] private Camera mainCamera;
-    
-    public UnityEvent<Vector2> OnMoveBody = new UnityEvent<Vector2>();
-    public UnityEvent<Vector2> OnMoveTurret = new UnityEvent<Vector2>();
-    public UnityEvent OnShoot = new UnityEvent();
+    [SerializeField] private UnityEvent<Vector2> onMoveBody = new UnityEvent<Vector2>();
+    [SerializeField] private UnityEvent<Vector2> onMoveTurret = new UnityEvent<Vector2>();
+    [SerializeField] private UnityEvent onShoot = new UnityEvent();
     
     #endregion
     
@@ -41,19 +40,19 @@ public class PlayerInput : MonoBehaviour
     private void GetBodyMovement()
     {
         Vector2 movementVector = new Vector2(Input.GetAxis("Horizontal") , Input.GetAxis("Vertical"));
-        OnMoveBody?.Invoke(movementVector.normalized);
+        onMoveBody?.Invoke(movementVector.normalized);
     }
 
     private void GetTurrentMovement()
     {
-        OnMoveTurret?.Invoke(GetMousePosition());
+        onMoveTurret?.Invoke(GetMousePosition());
     }
 
     private void GetShootInput()
     {
         if(Input.GetMouseButtonDown(0))
         {
-            OnShoot?.Invoke();
+            onShoot?.Invoke();
         }
     }
     

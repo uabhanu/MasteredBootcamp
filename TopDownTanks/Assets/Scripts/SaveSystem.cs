@@ -5,11 +5,12 @@ public class SaveSystem : MonoBehaviour
 {
     #region Variables
     
+    [SerializeField] private string playerHealthKey = "PlayerHealth";
+    [SerializeField] private string savePresentKey = "SavePresent";
+    [SerializeField] private string sceneIndexKey = "SceneIndex";
+    [SerializeField] private UnityEvent<bool> onDataLoadedResult;
+    
     public LoadedData LoadedData { get; private set; }
-    public string PlayerHealthKey = "PlayerHealth";
-    public string SavePresentKey = "SavePresent";
-    public string SceneIndexKey = "SceneIndex";
-    public UnityEvent<bool> OnDataLoadedResult;
     
     #endregion
     
@@ -23,16 +24,16 @@ public class SaveSystem : MonoBehaviour
     private void Start()
     {
         var result = LoadData();
-        OnDataLoadedResult?.Invoke(result);
+        onDataLoadedResult?.Invoke(result);
     }
 
     public bool LoadData()
     {
-        if(PlayerPrefs.GetInt(SavePresentKey) == 1)
+        if(PlayerPrefs.GetInt(savePresentKey) == 1)
         {
             LoadedData = new LoadedData();
-            LoadedData.PlayerHealth = PlayerPrefs.GetInt(PlayerHealthKey);
-            LoadedData.SceneIndex = PlayerPrefs.GetInt(SceneIndexKey);
+            LoadedData.PlayerHealth = PlayerPrefs.GetInt(playerHealthKey);
+            LoadedData.SceneIndex = PlayerPrefs.GetInt(sceneIndexKey);
             return true;
         }
 
@@ -42,9 +43,9 @@ public class SaveSystem : MonoBehaviour
     public void ResetData()
     {
         LoadedData = null;
-        PlayerPrefs.DeleteKey(PlayerHealthKey);
-        PlayerPrefs.DeleteKey(SavePresentKey);
-        PlayerPrefs.DeleteKey(SceneIndexKey);
+        PlayerPrefs.DeleteKey(playerHealthKey);
+        PlayerPrefs.DeleteKey(savePresentKey);
+        PlayerPrefs.DeleteKey(sceneIndexKey);
     }
 
     public void SaveData(int sceneIndex , int playerHealth)
@@ -55,9 +56,9 @@ public class SaveSystem : MonoBehaviour
             LoadedData.PlayerHealth = playerHealth;
             LoadedData.SceneIndex = sceneIndex;
 
-            PlayerPrefs.SetInt(PlayerHealthKey , playerHealth);
-            PlayerPrefs.SetInt(SceneIndexKey , sceneIndex);
-            PlayerPrefs.SetInt(SavePresentKey , 1);
+            PlayerPrefs.SetInt(playerHealthKey , playerHealth);
+            PlayerPrefs.SetInt(sceneIndexKey , sceneIndex);
+            PlayerPrefs.SetInt(savePresentKey , 1);
         }
     }
 

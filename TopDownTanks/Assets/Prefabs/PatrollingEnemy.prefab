@@ -237,7 +237,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c6a8b505fba61dd47b1567fdc0c83b0a, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjectToFollow: {fileID: 6099861425440390759}
+  objectToFollow: {fileID: 6099861425440390759}
 --- !u!1 &7917110242714143051
 GameObject:
   m_ObjectHideFlags: 0
@@ -506,10 +506,10 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   isWaiting: 0
+  arriveDistance: 1
+  waitTime: 0.5
+  patrolPath: {fileID: 0}
   currentPatrolTargetPos: {x: 0, y: 0}
-  ArriveDistance: 0.1
-  WaitTime: 0.5
-  PatrolPath: {fileID: 7917110243963583286}
 --- !u!114 &7917110243605324551
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -713,6 +713,14 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4141119730194737391, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}
       propertyPath: OnHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7917110242714143049}
+    - target: {fileID: 4141119730194737391, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}
+      propertyPath: onHealthChange.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 7917110242620362484}
+    - target: {fileID: 4141119730194737391, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}
+      propertyPath: onHealthChange.m_PersistentCalls.m_Calls.Array.data[1].m_Target
       value: 
       objectReference: {fileID: 7917110242714143049}
     - target: {fileID: 4141119730194737391, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}

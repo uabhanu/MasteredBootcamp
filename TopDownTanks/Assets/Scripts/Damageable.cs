@@ -5,14 +5,13 @@ public class Damageable : MonoBehaviour
 {
     #region Variables
     
-    [SerializeField] private int _maxHealth = 100; // Remove SerializedField after testing
+    private int _maxHealth = 100;
 
     [SerializeField] private int health = 0;
-
-    public UnityEvent OnDead;
-    public UnityEvent<float> OnHealthChange;
-    public UnityEvent OnHeal;
-    public UnityEvent OnHit;
+    [SerializeField] private UnityEvent onDead;
+    [SerializeField] private UnityEvent<float> onHealthChange;
+    [SerializeField] private UnityEvent onHeal;
+    [SerializeField] private UnityEvent onHit;
     
     #endregion
 
@@ -33,7 +32,7 @@ public class Damageable : MonoBehaviour
         set
         {
             health = value;
-            OnHealthChange?.Invoke((float)Health / _maxHealth);
+            onHealthChange?.Invoke((float)Health / _maxHealth);
         }
     }
 
@@ -41,7 +40,7 @@ public class Damageable : MonoBehaviour
     {
         Health += healValue;
         Health = Mathf.Clamp(Health , 0 , _maxHealth);
-        OnHeal?.Invoke();
+        onHeal?.Invoke();
     }
     
     public void Hit(int damageValue)
@@ -50,11 +49,11 @@ public class Damageable : MonoBehaviour
 
         if(Health <= 0)
         {
-            OnDead?.Invoke();
+            onDead?.Invoke();
         }
         else
         {
-            OnHit?.Invoke();
+            onHit?.Invoke();
         }
     }
 

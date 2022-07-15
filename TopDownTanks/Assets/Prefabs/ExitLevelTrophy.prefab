@@ -71,8 +71,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 53ed8414f108fbf459223899516c7800, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  _gameManager: {fileID: 0}
-  PlayerLayerMask:
+  playerLayerMask:
     serializedVersion: 2
     m_Bits: 1024
 --- !u!212 &5064070967564115658
