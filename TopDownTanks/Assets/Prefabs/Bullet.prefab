@@ -73,7 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: a42531878078ebe4f8f889c50ee0b868, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  bulletDataSo: {fileID: 11400000, guid: 845bfae7fb37c0c468bfba2f4e15f4ef, type: 2}
+  turretDataSo: {fileID: 0}
   OnHit:
     m_PersistentCalls:
       m_Calls:
@@ -217,7 +217,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f904fe8e8642ace448a1c48155a4bb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjToInstantiate: {fileID: 3703262643242783313, guid: 8e45186a3c743a946a630a0b086b1deb, type: 3}
+  objToInstantiate: {fileID: 3703262643242783313, guid: 8e45186a3c743a946a630a0b086b1deb, type: 3}
 --- !u!114 &7555891378884416200
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -230,5 +230,5 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 241dcf909bb8bd8469b476dbd247deab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 0.2
-  ObjPrefab: {fileID: 8111894299669120119, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}
+  radius: 0.2
+  objPrefab: {fileID: 8111894299669120119, guid: ecadf1da9c4a13f4d9c686162d1fee25, type: 3}

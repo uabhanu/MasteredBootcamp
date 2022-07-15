@@ -7,8 +7,8 @@ namespace Util
     {
         #region Variables
         
-        public float Radius = 0.2f;
-        public GameObject ObjPrefab;
+        [SerializeField] private float radius = 0.2f;
+        [SerializeField] private GameObject objPrefab;
         
         #endregion
 
@@ -17,7 +17,7 @@ namespace Util
         private void OnDrawGizmos()
         {
             Gizmos.color = Color.yellow;
-            Gizmos.DrawWireSphere(transform.position , Radius);
+            Gizmos.DrawWireSphere(transform.position , radius);
         }
 
         protected Quaternion Random2DRotation()
@@ -27,12 +27,12 @@ namespace Util
         
         protected Vector2 GetRandomPosition()
         {
-            return Random.insideUnitCircle * Radius + (Vector2)transform.position;
+            return Random.insideUnitCircle * radius + (Vector2)transform.position;
         }
 
         protected virtual GameObject GetObject()
         {
-            return Instantiate(ObjPrefab);
+            return Instantiate(objPrefab);
         }
 
         public void CreateObject()

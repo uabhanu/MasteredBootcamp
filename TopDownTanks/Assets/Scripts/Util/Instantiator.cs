@@ -4,11 +4,11 @@ namespace Util
 {
     public class Instantiator : MonoBehaviour
     {
-        public GameObject ObjToInstantiate;
+        [SerializeField] private GameObject objToInstantiate;
 
         public void InstantiateObject()
         {
-            Instantiate(ObjToInstantiate);
+            Instantiate(objToInstantiate);
         }
     }
 }

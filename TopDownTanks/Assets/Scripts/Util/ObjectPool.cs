@@ -12,9 +12,9 @@ namespace Util
     
         [SerializeField] protected GameObject objectToPool;
         [SerializeField] protected int poolSize = 5;
+        [SerializeField] private bool bAlwaysDestroy = false;
         [SerializeField] private Transform spawnedObjectsParentTransform;
-
-        public bool B_AlwaysDestroy = false;
+        
         public int PoolSize => poolSize;
 
         #endregion
@@ -35,7 +35,7 @@ namespace Util
                     continue;
                 }
 
-                else if(!obj.activeSelf || B_AlwaysDestroy)
+                else if(!obj.activeSelf || bAlwaysDestroy)
                 {
                     Destroy(obj);
                 }

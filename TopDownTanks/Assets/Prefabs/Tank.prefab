@@ -188,7 +188,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f904fe8e8642ace448a1c48155a4bb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ObjToInstantiate: {fileID: 4694268509876598553, guid: f494471e805ceaa47a5c35ba13418b14, type: 3}
+  objToInstantiate: {fileID: 4694268509876598553, guid: f494471e805ceaa47a5c35ba13418b14, type: 3}
 --- !u!114 &1501616224378195016
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -201,8 +201,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 241dcf909bb8bd8469b476dbd247deab, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Radius: 0.1
-  ObjPrefab: {fileID: 7521181320764896905, guid: 0e3526307270fee47bc8846f87528467, type: 3}
+  radius: 0.2
+  objPrefab: {fileID: 7521181320764896905, guid: 0e3526307270fee47bc8846f87528467, type: 3}
 --- !u!1 &1959426527514794292
 GameObject:
   m_ObjectHideFlags: 0
