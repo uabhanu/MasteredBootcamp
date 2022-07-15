@@ -11,11 +11,10 @@ namespace AI
         private int _currentIndex = -1;
         
         [SerializeField] private bool isWaiting;
+        [Range(0.1f , 1.0f)] [SerializeField] private float arriveDistance = 1f;
+        [SerializeField] private float waitTime = 0.5f;
+        [SerializeField] private PatrolPath patrolPath;
         [SerializeField] private Vector2 currentPatrolTargetPos = Vector2.zero;
-        
-        [Range(0.1f , 1.0f)] public float ArriveDistance = 1f;
-        public float WaitTime = 0.5f;
-        public PatrolPath PatrolPath;
         
         #endregion
         
@@ -23,16 +22,16 @@ namespace AI
 
         private void Awake()
         {
-            if(PatrolPath == null)
+            if(patrolPath == null)
             {
-                PatrolPath = GetComponentInChildren<PatrolPath>();
+                patrolPath = GetComponentInChildren<PatrolPath>();
             }
         }
 
         private IEnumerator WaitCoroutine()
         {
-            yield return new WaitForSeconds(WaitTime);
-            var nextPathPoint = PatrolPath.GetNextPathPoint(_currentIndex);
+            yield return new WaitForSeconds(waitTime);
+            var nextPathPoint = patrolPath.GetNextPathPoint(_currentIndex);
             _currentIndex = nextPathPoint.Index;
             currentPatrolTargetPos = nextPathPoint.Position;
             isWaiting = false;
@@ -42,7 +41,7 @@ namespace AI
         {
             if(!_isInitialized)
             {
-                var currentPathPoint = PatrolPath.GetClosestPathPoint(tankController.transform.position);
+                var currentPathPoint = patrolPath.GetClosestPathPoint(tankController.transform.position);
                 _currentIndex = currentPathPoint.Index;
                 currentPatrolTargetPos = currentPathPoint.Position;
                 _isInitialized = true;
@@ -68,7 +67,7 @@ namespace AI
 
         private void CalculateDistance(TankController tankController)
         {
-            if(Vector2.Distance(tankController.transform.position , currentPatrolTargetPos) < ArriveDistance)
+            if(Vector2.Distance(tankController.transform.position , currentPatrolTargetPos) < arriveDistance)
             {
                 isWaiting = true;
                 StartCoroutine(WaitCoroutine());
@@ -80,7 +79,7 @@ namespace AI
         {
             if(!isWaiting)
             {
-                if(PatrolPath.Length < 2)
+                if(patrolPath.Length < 2)
                 {
                     return;
                 }
