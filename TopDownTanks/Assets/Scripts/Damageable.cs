@@ -1,3 +1,4 @@
+using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 
@@ -7,6 +8,8 @@ public class Damageable : MonoBehaviour
     
     private int _maxHealth = 100;
 
+    [SerializeField] private float disappearTime;
+    [SerializeField] private GameObject healthBarObj;
     [SerializeField] private int health = 0;
     [SerializeField] private UnityEvent onDead;
     [SerializeField] private UnityEvent<float> onHealthChange;
@@ -23,6 +26,12 @@ public class Damageable : MonoBehaviour
         {
             Health = _maxHealth;   
         }
+    }
+
+    private IEnumerator DisappearCoroutine(GameObject gameObjectToDisappear)
+    {
+        yield return new WaitForSeconds(disappearTime);
+        gameObjectToDisappear.SetActive(false);
     }
     
     public int Health
@@ -45,6 +54,8 @@ public class Damageable : MonoBehaviour
     
     public void Hit(int damageValue)
     {
+        StartCoroutine(DisappearCoroutine(healthBarObj));
+        
         Health -= damageValue;
 
         if(Health <= 0)

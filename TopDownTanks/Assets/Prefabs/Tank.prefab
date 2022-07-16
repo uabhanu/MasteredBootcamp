@@ -676,6 +676,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 04b3afaecdd1d774ea2f9676064ec10f, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  disappearTime: 5
+  healthBarObj: {fileID: 0}
   health: 0
   onDead:
     m_PersistentCalls:

@@ -511,6 +511,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+      propertyPath: healthBarObj
+      value: 
+      objectReference: {fileID: 5639944667538508882}
+    - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
       propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.size
       value: 1
       objectReference: {fileID: 0}
