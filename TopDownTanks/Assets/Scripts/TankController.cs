@@ -5,7 +5,7 @@ using Util;
 public class TankController : MonoBehaviour
 {
     #region Variables
-
+    
     private Vector2 _movementVector;
 
     [SerializeField] private TankTurret[] tankTurretsArray;
@@ -50,7 +50,10 @@ public class TankController : MonoBehaviour
 
     public void HandleMoveTurret(Vector2 mousePointerPos)
     {
-        TankTurretHandler.Aim(mousePointerPos);
+        if(TankBodyMover.TankBody2D.velocity.y == 0)
+        {
+            TankTurretHandler.Aim(mousePointerPos);   
+        }
     }
 
     #endregion
