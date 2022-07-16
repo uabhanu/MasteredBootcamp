@@ -145,6 +145,52 @@ MonoBehaviour:
   deltaVolume: 0.01
   maxVolume: 1
   minVolume: 0.5
+--- !u!1 &399162220796588316
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6487159714974262453}
+  - component: {fileID: 4126378812015824719}
+  m_Layer: 0
+  m_Name: DeathReward
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6487159714974262453
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399162220796588316}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 8713391748755346846}
+  m_RootOrder: 4
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4126378812015824719
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399162220796588316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 241dcf909bb8bd8469b476dbd247deab, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  radius: 0.2
+  objPrefab: {fileID: 6902695089841354505, guid: 46fa24e8d70535a459ac9eac35e50f6a, type: 3}
 --- !u!1 &1406898306663082411
 GameObject:
   m_ObjectHideFlags: 0
@@ -635,6 +681,7 @@ Transform:
   - {fileID: 8713391749083291583}
   - {fileID: 3615264195267848203}
   - {fileID: 6656968051445303619}
+  - {fileID: 6487159714974262453}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -707,6 +754,18 @@ MonoBehaviour:
       - m_Target: {fileID: 1321317772119244115}
         m_TargetAssemblyTypeName: Util.Instantiator, Assembly-CSharp
         m_MethodName: InstantiateObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 4126378812015824719}
+        m_TargetAssemblyTypeName: Util.ObjectGeneratorAtRandomPosition, Assembly-CSharp
+        m_MethodName: CreateObject
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -894,7 +953,6 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _currentForwardDirection: 0
-  tankBody2D: {fileID: 0}
   tankMovementDataSo: {fileID: 0}
   onSpeedChange:
     m_PersistentCalls:
@@ -911,6 +969,7 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
+  TankBody2D: {fileID: 0}
 --- !u!1 &8713391749083291552
 GameObject:
   m_ObjectHideFlags: 0
@@ -956,8 +1015,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce873972b53831441b7f0416821c7142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  tankBodyMover: {fileID: 8713391748984750129}
-  tankController: {fileID: 8713391748755346843}
   turretRotationSpeed: 110
 --- !u!1 &8713391749102912959
 GameObject:
