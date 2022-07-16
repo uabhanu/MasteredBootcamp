@@ -6,13 +6,13 @@ public class TankBodyMover : MonoBehaviour
 {
     #region Variables
 
-    private float _currentSpeed = 0f;
-    private float _currentForwardDirection = 1f;
+    private float _currentSpeed;
+    [SerializeField] private float _currentForwardDirection;
     private Vector2 _movementVector;
     
     [SerializeField] private Rigidbody2D tankBody2D;
     [SerializeField] private TankMovementDataSo tankMovementDataSo;
-    [SerializeField] private UnityEvent<float> onSpeedChange = new UnityEvent<float>();
+    [SerializeField] private UnityEvent<float> onSpeedChange;
 
     #endregion
 
@@ -45,11 +45,17 @@ public class TankBodyMover : MonoBehaviour
 
         _currentSpeed = Mathf.Clamp(_currentSpeed , 0 , tankMovementDataSo.MaxMoveSpeed);
     }
+    
+    public float CurrentForwardDirection
+    {
+        get => _currentForwardDirection;
+        set => _currentForwardDirection = value;
+    }
 
     public void Move(Vector2 moveVector)
     {
         _movementVector = moveVector;
-        CalculateCurrentSpeed(_movementVector); // If necessary, pass moveVector instead
+        CalculateCurrentSpeed(_movementVector);
         onSpeedChange?.Invoke(_movementVector.magnitude);
 
         if(_movementVector.y > 0)
@@ -60,6 +66,11 @@ public class TankBodyMover : MonoBehaviour
         else if(_movementVector.y < 0)
         {
             _currentForwardDirection = -1f;
+        }
+
+        else
+        {
+            _currentForwardDirection = 0f;
         }
     }
 

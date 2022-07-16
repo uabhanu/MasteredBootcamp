@@ -156,6 +156,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42fdd36203b6d348adf4403aeba47e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  defaultTurretRotation: {x: 0, y: 0, z: 0, w: 0}
+  turretHandler: {fileID: 6973024065648615907}
   fieldOfVisionForShooting: 60
 --- !u!1 &5639944667538508882
 GameObject:
@@ -631,6 +633,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 211e802b2176ea8469a4f3dda6523e02, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &6973024065648615907 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3350734997365041905, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+  m_PrefabInstance: {fileID: 5639944668341193490}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ce873972b53831441b7f0416821c7142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
 --- !u!4 &6973024065840769987 stripped

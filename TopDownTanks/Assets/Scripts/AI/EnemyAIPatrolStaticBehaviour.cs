@@ -20,11 +20,11 @@ namespace AI
             randomDirection = Random.insideUnitCircle;
         }
 
-        public override void PerformAction(TankController tankController , AIDetector aiDetector)
+        public override void PerformAction(TankController targetTankController , AIDetector aiDetector)
         {
-            if(tankController != null)
+            if(targetTankController != null)
             {
-                float angle = Vector2.Angle(tankController.TankTurretHandler.transform.right , randomDirection);
+                float angle = Vector2.Angle(targetTankController.TankTurretHandler.transform.right , randomDirection);
 
                 if(currentPatrolDelay <= 0 && (angle < 2))
                 {
@@ -39,7 +39,7 @@ namespace AI
                     }
                     else
                     {
-                        tankController.HandleMoveTurret((Vector2)tankController.TankTurretHandler.transform.position + randomDirection);
+                        targetTankController.HandleMoveTurret((Vector2)targetTankController.TankTurretHandler.transform.position + randomDirection);
                     }
                 }   
             }

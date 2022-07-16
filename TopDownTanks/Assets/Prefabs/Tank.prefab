@@ -893,6 +893,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca58276007d46f0458899b42f2310803, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  _currentForwardDirection: 0
   tankBody2D: {fileID: 0}
   tankMovementDataSo: {fileID: 0}
   onSpeedChange:
@@ -955,6 +956,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ce873972b53831441b7f0416821c7142, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  tankBodyMover: {fileID: 8713391748984750129}
+  tankController: {fileID: 8713391748755346843}
   turretRotationSpeed: 110
 --- !u!1 &8713391749102912959
 GameObject:

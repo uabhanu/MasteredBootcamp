@@ -4,6 +4,6 @@ namespace AI
 {
     public abstract class EnemyAIBehaviour : MonoBehaviour
     {
-        public abstract void PerformAction(TankController tankController , AIDetector aiDetector);
+        public abstract void PerformAction(TankController targetTankController , AIDetector aiDetector);
     }
 }

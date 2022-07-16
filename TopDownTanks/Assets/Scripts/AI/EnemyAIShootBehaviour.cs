@@ -6,6 +6,7 @@ namespace AI
     {
         #region Variables
         
+        
         [SerializeField] private float fieldOfVisionForShooting = 60f;
 
         #endregion
@@ -26,26 +27,26 @@ namespace AI
                     }
                 }   
             }
-
+            
             return false;
         }
 
-        public override void PerformAction(TankController tankController , AIDetector aiDetector)
+        public override void PerformAction(TankController targetTankController , AIDetector aiDetector)
         {
-            if(aiDetector == null || tankController == null)
+            if(aiDetector == null || targetTankController == null)
             {
                 return;
             }
             
-            if(TargetInFOV(tankController , aiDetector))
+            if(TargetInFOV(targetTankController , aiDetector))
             {
-                tankController.HandleMoveBody(Vector2.zero);
-                tankController.HandleShoot();
+                targetTankController.HandleMoveBody(Vector2.zero);
+                targetTankController.HandleShoot();
             }
 
             if(aiDetector.Target != null)
             {
-                tankController.HandleMoveTurret(aiDetector.Target.position);   
+                targetTankController.HandleMoveTurret(aiDetector.Target.position);   
             }
         }
         
