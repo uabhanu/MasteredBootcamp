@@ -1,11 +1,17 @@
+using DataSo;
 using UnityEngine;
 using UnityEngine.Events;
+using Util;
 
+[RequireComponent(typeof(DestroyHelper))]
 public class MedicKit : MonoBehaviour
 {
+    #region Variables
+    
+    [SerializeField] private MedicKitDataSo medicKitDataSo;
     [SerializeField] private UnityEvent onHeal;
-
-    public int HealValue;
+    
+    #endregion
 
     private void OnTriggerEnter2D(Collider2D col2D)
     {
@@ -15,7 +21,7 @@ public class MedicKit : MonoBehaviour
 
         if(damageable != null)
         {
-            damageable.Heal(HealValue); 
+            damageable.Heal(medicKitDataSo.HealValue); 
         }
     }
 }

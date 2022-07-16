@@ -565,9 +565,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 3dc9c23221466a44fb8d583923e994c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  trackDistance: 0.2
-  trackMarksPrefab: {fileID: 2228775656030741933, guid: 34fdaa3589cb69c44a50e5e15f3fea0e, type: 3}
-  objectPoolSize: 50
+  trackMarksSo: {fileID: 11400000, guid: 0495ccb023019c44ea8ff3a937d5eabc, type: 2}
 --- !u!1 &8713391748320319480
 GameObject:
   m_ObjectHideFlags: 0
@@ -733,9 +731,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 1
         m_CallState: 2
-  onHeal:
-    m_PersistentCalls:
-      m_Calls: []
   onHit:
     m_PersistentCalls:
       m_Calls:

@@ -1,5 +1,7 @@
 using UnityEngine;
+using Util;
 
+[RequireComponent(typeof(Damageable) , typeof(DestroyHelper))]
 public class TankController : MonoBehaviour
 {
     #region Variables

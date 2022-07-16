@@ -73,6 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 9a4a148a04ff078479018325a631d69e, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  medicKitDataSo: {fileID: 11400000, guid: ecfcf79a759c783459523ec2dfc63a55, type: 2}
   onHeal:
     m_PersistentCalls:
       m_Calls:
@@ -88,7 +89,6 @@ MonoBehaviour:
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-  HealValue: 100
 --- !u!114 &8167222191067580536
 MonoBehaviour:
   m_ObjectHideFlags: 0
