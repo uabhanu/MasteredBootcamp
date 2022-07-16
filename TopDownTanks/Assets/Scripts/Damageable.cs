@@ -13,7 +13,6 @@ public class Damageable : MonoBehaviour
     [SerializeField] private int health = 0;
     [SerializeField] private UnityEvent onDead;
     [SerializeField] private UnityEvent<float> onHealthChange;
-    [SerializeField] private UnityEvent onHeal;
     [SerializeField] private UnityEvent onHit;
     
     #endregion
@@ -49,13 +48,15 @@ public class Damageable : MonoBehaviour
     {
         Health += healValue;
         Health = Mathf.Clamp(Health , 0 , _maxHealth);
-        onHeal?.Invoke();
     }
     
     public void Hit(int damageValue)
     {
-        StartCoroutine(DisappearCoroutine(healthBarObj));
-        
+        if(healthBarObj != null)
+        {
+            StartCoroutine(DisappearCoroutine(healthBarObj));   
+        }
+
         Health -= damageValue;
 
         if(Health <= 0)
