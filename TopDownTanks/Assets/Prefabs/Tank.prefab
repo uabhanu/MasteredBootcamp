@@ -657,6 +657,7 @@ GameObject:
   - component: {fileID: 8713391748755346842}
   - component: {fileID: -8849041850609991148}
   - component: {fileID: 8713391748755346845}
+  - component: {fileID: 6311758881827944067}
   - component: {fileID: 8713391748755346843}
   m_Layer: 0
   m_Name: Tank
@@ -724,49 +725,74 @@ MonoBehaviour:
   disappearTime: 5
   healthBarObj: {fileID: 0}
   health: 0
+  scoreManager: {fileID: 0}
   onDead:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: -8849041850609991148}
-        m_TargetAssemblyTypeName: Util.DestroyHelper, Assembly-CSharp
-        m_MethodName: DestroySelf
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1501616224378195016}
-        m_TargetAssemblyTypeName: Util.ObjectGeneratorAtRandomPosition, Assembly-CSharp
-        m_MethodName: CreateObject
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 1321317772119244115}
-        m_TargetAssemblyTypeName: Util.Instantiator, Assembly-CSharp
-        m_MethodName: InstantiateObject
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_ObjectArgumentAssemblyTypeName: 
           m_IntArgument: 0
           m_FloatArgument: 0
           m_StringArgument: 
           m_BoolArgument: 0
         m_CallState: 2
-      - m_Target: {fileID: 4126378812015824719}
-        m_TargetAssemblyTypeName: Util.ObjectGeneratorAtRandomPosition, Assembly-CSharp
-        m_MethodName: CreateObject
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
         m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: 
+        m_MethodName: 
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: 
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 0}
+        m_TargetAssemblyTypeName: ScoreManager, Assembly-CSharp
+        m_MethodName: ScoreUpdate
+        m_Mode: 3
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -838,6 +864,19 @@ Rigidbody2D:
   m_SleepingMode: 1
   m_CollisionDetection: 0
   m_Constraints: 0
+--- !u!114 &6311758881827944067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8713391748755346847}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: a933e41fb0899a54dba1c5977cfe3aeb, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ScoreIncrement: 0
 --- !u!114 &8713391748755346843
 MonoBehaviour:
   m_ObjectHideFlags: 0

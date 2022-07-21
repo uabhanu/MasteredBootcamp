@@ -1,6 +1,7 @@
 using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
+using Util;
 
 public class Damageable : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class Damageable : MonoBehaviour
     [SerializeField] private float disappearTime;
     [SerializeField] private GameObject healthBarObj;
     [SerializeField] private int health = 0;
+    [SerializeField] private ScoreManager scoreManager;
     [SerializeField] private UnityEvent onDead;
     [SerializeField] private UnityEvent<float> onHealthChange;
     [SerializeField] private UnityEvent onHit;
@@ -57,6 +59,12 @@ public class Damageable : MonoBehaviour
         if(Health <= 0)
         {
             onDead?.Invoke();
+
+            if(scoreManager != null)
+            {
+                var scoreHelper = GetComponent<ScoreHelper>();
+                scoreManager.ScoreUpdate(scoreHelper.ScoreIncrement);   
+            }
         }
         else
         {

@@ -85,6 +85,12 @@ namespace AI
         private void ResetTurretRotation()
         {
             var patrollingEnemyObj = gameObject;
+            var tankController = patrollingEnemyObj.GetComponentInChildren<TankController>();
+
+            if(tankController == null)
+            {
+                return;
+            }
 
             if(patrollingEnemyObj.GetComponentInChildren<Rigidbody2D>().velocity.y > 0)
             {

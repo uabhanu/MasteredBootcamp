@@ -24,15 +24,15 @@ PrefabInstance:
       value: 20
       objectReference: {fileID: 0}
     - target: {fileID: 8713391748755346842, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
-      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.size
-      value: 5
-      objectReference: {fileID: 0}
-    - target: {fileID: 8713391748755346842, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
       value: 6
       objectReference: {fileID: 0}
     - target: {fileID: 8713391748755346842, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
       propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 0}
+    - target: {fileID: 8713391748755346842, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
+      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
       objectReference: {fileID: 0}
     - target: {fileID: 8713391748755346842, guid: 3511b786fb7b7c542b635a6fe5f71955, type: 3}
