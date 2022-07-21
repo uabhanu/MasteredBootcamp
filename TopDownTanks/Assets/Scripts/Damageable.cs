@@ -1,4 +1,3 @@
-using System.Collections;
 using UnityEngine;
 using UnityEngine.Events;
 using Util;
@@ -29,12 +28,6 @@ public class Damageable : MonoBehaviour
         }
     }
 
-    private IEnumerator DisappearCoroutine(GameObject gameObjectToDisappear)
-    {
-        yield return new WaitForSeconds(disappearTime);
-        gameObjectToDisappear.SetActive(false);
-    }
-    
     public int Health
     {
         get => health;
@@ -69,11 +62,6 @@ public class Damageable : MonoBehaviour
         else
         {
             onHit?.Invoke();
-        }
-        
-        if(healthBarObj != null)
-        {
-            StartCoroutine(DisappearCoroutine(healthBarObj));   
         }
     }
 

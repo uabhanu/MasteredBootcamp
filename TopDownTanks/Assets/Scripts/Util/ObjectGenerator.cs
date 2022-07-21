@@ -1,9 +1,8 @@
-using Random = UnityEngine.Random;
 using UnityEngine;
 
 namespace Util
 {
-    public class ObjectGeneratorAtRandomPosition : MonoBehaviour
+    public class ObjectGenerator : MonoBehaviour
     {
         #region Variables
         
@@ -20,16 +19,6 @@ namespace Util
             Gizmos.DrawWireSphere(transform.position , radius);
         }
 
-        protected Quaternion Random2DRotation()
-        {
-            return Quaternion.Euler(0 , 0 , Random.Range(0 , 360));
-        }
-        
-        protected Vector2 GetRandomPosition()
-        {
-            return Random.insideUnitCircle * radius + (Vector2)transform.position;
-        }
-
         protected virtual GameObject GetObject()
         {
             return Instantiate(objPrefab);
@@ -37,10 +26,9 @@ namespace Util
 
         public void CreateObject()
         {
-            Vector2 position = GetRandomPosition();
+            Vector2 position = transform.position;
             GameObject impactObject = GetObject();
             impactObject.transform.position = position;
-            impactObject.transform.rotation = Random2DRotation();
         }
         
         #endregion
