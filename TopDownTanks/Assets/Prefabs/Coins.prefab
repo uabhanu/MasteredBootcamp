@@ -514,6 +514,8 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 2887051979559683238}
+  - component: {fileID: 5911761169128807366}
+  - component: {fileID: -6824091562968272813}
   m_Layer: 7
   m_Name: Coins
   m_TagString: Untagged
@@ -542,6 +544,33 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &5911761169128807366
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354214721056641101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 64beb8e498a364a439250eab5b4f9a6a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onCollected:
+    m_PersistentCalls:
+      m_Calls: []
+--- !u!114 &-6824091562968272813
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 8354214721056641101}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3ad3d9064e6acb9458df3350b576250e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &8874512592504016778
 GameObject:
   m_ObjectHideFlags: 0

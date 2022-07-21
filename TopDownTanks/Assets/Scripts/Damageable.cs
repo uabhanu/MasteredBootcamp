@@ -52,11 +52,6 @@ public class Damageable : MonoBehaviour
     
     public void Hit(int damageValue)
     {
-        if(healthBarObj != null)
-        {
-            StartCoroutine(DisappearCoroutine(healthBarObj));   
-        }
-
         Health -= damageValue;
 
         if(Health <= 0)
@@ -66,6 +61,11 @@ public class Damageable : MonoBehaviour
         else
         {
             onHit?.Invoke();
+        }
+        
+        if(healthBarObj != null)
+        {
+            StartCoroutine(DisappearCoroutine(healthBarObj));   
         }
     }
 

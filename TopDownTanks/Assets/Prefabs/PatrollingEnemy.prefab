@@ -529,8 +529,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d42fdd36203b6d348adf4403aeba47e8, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  defaultTurretRotation: {x: 0, y: 0, z: 0, w: 0}
-  turretHandler: {fileID: 6099861425935053895}
   fieldOfVisionForShooting: 60
 --- !u!1 &7917110243699500606
 GameObject:
@@ -727,6 +725,10 @@ PrefabInstance:
       value: 
       objectReference: {fileID: 7917110242620362484}
     - target: {fileID: 4141119730194737391, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}
+      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 7917110242620362484}
+    - target: {fileID: 4141119730194737391, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}
       propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[0].m_CallState
       value: 2
       objectReference: {fileID: 0}
@@ -834,17 +836,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 4141119730194737387, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}
   m_PrefabInstance: {fileID: 7917110243390461580}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &6099861425935053895 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 4141119729866793675, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}
-  m_PrefabInstance: {fileID: 7917110243390461580}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ce873972b53831441b7f0416821c7142, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &8560951885316381411 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 1950522290699193455, guid: 32ea0e46e9a19e44ead5c1140cc2a606, type: 3}
