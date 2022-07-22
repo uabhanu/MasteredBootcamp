@@ -539,6 +539,14 @@ PrefabInstance:
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[4].m_Mode
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[5].m_Mode
+      value: 6
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
       propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[0].m_Target
       value: 
       objectReference: {fileID: 5639944667538508882}
@@ -568,6 +576,10 @@ PrefabInstance:
       objectReference: {fileID: 2407966177234481426}
     - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
       propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[4].m_Target
+      value: 
+      objectReference: {fileID: 8228995664023276924}
+    - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[5].m_Target
       value: 
       objectReference: {fileID: 5639944667538508882}
     - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
@@ -608,6 +620,10 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
       propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[4].m_MethodName
+      value: InstantiateObject
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[5].m_MethodName
       value: SetActive
       objectReference: {fileID: 0}
     - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
@@ -655,6 +671,14 @@ PrefabInstance:
       value: Util.ObjectGeneratorAtRandomPosition, Assembly-CSharp
       objectReference: {fileID: 0}
     - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[4].m_TargetAssemblyTypeName
+      value: Util.Instantiator, Assembly-CSharp
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+      propertyPath: onDead.m_PersistentCalls.m_Calls.Array.data[5].m_TargetAssemblyTypeName
+      value: UnityEngine.GameObject, UnityEngine
+      objectReference: {fileID: 0}
+    - target: {fileID: 3350734997725487317, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
       propertyPath: OnHit.m_PersistentCalls.m_Calls.Array.data[0].m_Arguments.m_BoolArgument
       value: 1
       objectReference: {fileID: 0}
@@ -694,6 +718,10 @@ PrefabInstance:
       propertyPath: m_Layer
       value: 9
       objectReference: {fileID: 0}
+    - target: {fileID: 4356766714332153454, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+      propertyPath: objToInstantiate
+      value: 
+      objectReference: {fileID: 8536518401494040285, guid: bf0902afa8fa3b24591d8ad745d88988, type: 3}
     - target: {fileID: 8011846226345638400, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
       propertyPath: objPrefab
       value: 
@@ -771,5 +799,16 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 1367f0302b9de994e9acd25ea5cec397, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &8228995664023276924 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 4356766714332153454, guid: fb0f2422fb7f7bf4a96665846b373d90, type: 3}
+  m_PrefabInstance: {fileID: 5639944668341193490}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904fe8e8642ace448a1c48155a4bb4c, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 

@@ -154,6 +154,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 6487159714974262453}
+  - component: {fileID: 7645498243782538017}
   - component: {fileID: 4126378812015824719}
   m_Layer: 0
   m_Name: DeathReward
@@ -177,6 +178,19 @@ Transform:
   m_Father: {fileID: 8713391748755346846}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &7645498243782538017
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 399162220796588316}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f904fe8e8642ace448a1c48155a4bb4c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objToInstantiate: {fileID: 0}
 --- !u!114 &4126378812015824719
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -190,7 +204,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   radius: 0.2
-  objPrefab: {fileID: 6902695089841354505, guid: 46fa24e8d70535a459ac9eac35e50f6a, type: 3}
+  objPrefab: {fileID: 0}
 --- !u!1 &1406898306663082411
 GameObject:
   m_ObjectHideFlags: 0
