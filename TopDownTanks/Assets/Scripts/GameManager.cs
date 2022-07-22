@@ -8,8 +8,6 @@ public class GameManager : MonoBehaviour
     private GameObject _playerObj;
     private SaveSystem _saveSystem;
 
-    [SerializeField] private ScoreManager scoreManager;
-    
     #endregion
 
     #region Functions
@@ -71,7 +69,7 @@ public class GameManager : MonoBehaviour
     {
         if(_playerObj != null)
         {
-            _saveSystem.SaveData(scoreManager.CoinsScoreValue , SceneManager.GetActiveScene().buildIndex + 1 , _playerObj.GetComponentInChildren<Damageable>().Health);
+            _saveSystem.SaveData(SceneManager.GetActiveScene().buildIndex + 1 , _playerObj.GetComponentInChildren<Damageable>().Health);
         }
     }
 

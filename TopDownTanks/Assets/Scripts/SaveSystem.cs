@@ -33,7 +33,7 @@ public class SaveSystem : MonoBehaviour
         if(PlayerPrefs.GetInt(savePresentKey) == 1)
         {
             LoadedData = new LoadedData();
-            LoadedData.EurosCollected = PlayerPrefs.GetInt(eurosCollectedKey);
+            //LoadedData.EurosCollected = PlayerPrefs.GetInt(eurosCollectedKey);
             LoadedData.PlayerHealth = PlayerPrefs.GetInt(playerHealthKey);
             LoadedData.SceneIndex = PlayerPrefs.GetInt(sceneIndexKey);
             return true;
@@ -48,16 +48,16 @@ public class SaveSystem : MonoBehaviour
         PlayerPrefs.DeleteAll();
     }
 
-    public void SaveData(int eurosCollected , int sceneIndex , int playerHealth)
+    public void SaveData(int sceneIndex , int playerHealth)
     {
         if(LoadedData == null)
         {
             LoadedData = new LoadedData();
-            LoadedData.EurosCollected = eurosCollected;
+            //LoadedData.EurosCollected = eurosCollected;
             LoadedData.PlayerHealth = playerHealth;
             LoadedData.SceneIndex = sceneIndex;
 
-            PlayerPrefs.SetInt(eurosCollectedKey , eurosCollected);
+            //PlayerPrefs.SetInt(eurosCollectedKey , eurosCollected);
             PlayerPrefs.SetInt(playerHealthKey , playerHealth);
             PlayerPrefs.SetInt(sceneIndexKey , sceneIndex);
             PlayerPrefs.SetInt(savePresentKey , 1);
@@ -71,7 +71,7 @@ public class LoadedData
 {
     #region Variables
 
-    public int EurosCollected = 0;
+    //public int EurosCollected = 0;
     public int PlayerHealth = -1;
     public int SceneIndex = -1;
     
