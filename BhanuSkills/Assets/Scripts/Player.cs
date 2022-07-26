@@ -4,11 +4,17 @@ using UnityEngine;
 
 public class Player : ThirdPersonController //Inheritance
 {
-    private bool _keyCollected = false;
-    private bool _keyFound = false;
+    #region Variables
+    
+    private bool _keyCollected;
+    private bool _keyFound;
 
     [SerializeField] private InGameUIManager inGameUIManager;
+    
+    #endregion
 
+    #region Functions
+    
     private void Start()
     {
         base.Start();
@@ -19,14 +25,6 @@ public class Player : ThirdPersonController //Inheritance
     {
         UnsubscribeFromEvents();
     }
-
-    // private void OnTriggerExit(Collider other)
-    // {
-    //     if(other.tag.Equals("Door"))
-    //     {
-    //         EventsManager.InvokeEvent(BhanuSkillsEvent.DoorCloseEvent);
-    //     }
-    // }
 
     private void OnTriggerEnter(Collider other)
     {
@@ -91,8 +89,9 @@ public class Player : ThirdPersonController //Inheritance
         return _keyCollected;
     }
     
-    
-    #region Event Listeners
+    #endregion
+
+    #region Event Listening Functions
     private void SubscribeToEvents()
     {
         EventsManager.SubscribeToEvent(BhanuSkillsEvent.AllCollectedEvent , OnAllCollected);
