@@ -15,9 +15,10 @@ public class InGameUIManager : MonoBehaviour
     private Sprite _heartWorldSprite;
     
     #region private Serialized Variables Declarations
-
-    [SerializeField] private bool diegeticUI;
-    [SerializeField] private GameObject gameOverMenuObj;
+    
+    [SerializeField] private GameObject diegeticUIOffButtonObj;
+    [SerializeField] private GameObject diegeticUIOnButtonObj;
+    [SerializeField] private GameObject gameOverCanvasObj;
     [SerializeField] private GameObject goToRoofTextObj;
     [SerializeField] private GameObject healthBarOverlayObj;
     [SerializeField] private GameObject healthBarDiagetic;
@@ -32,7 +33,6 @@ public class InGameUIManager : MonoBehaviour
     [SerializeField] private GameObject trophyObj;
     [SerializeField] private Gradient healthBarGradient;
     [SerializeField] private Gradient healthBarWorldGradient;
-    [SerializeField] private HealthBar healthBar;
     [SerializeField] private HealthBarData healthBarData;
     [SerializeField] private Image heartImage;
     [SerializeField] private Image heartWorldImage;
@@ -46,29 +46,14 @@ public class InGameUIManager : MonoBehaviour
     #region All Other Functions
     private void Start()
     {
+        diegeticUIOffButtonObj.SetActive(false);
+        diegeticUIOnButtonObj.SetActive(false);
         _heartSprite = healthBarData.GreenSprite;
         _heartWorldSprite = healthBarData.GreenSprite;
         _maxHealth = healthBarSlider.value;
         _maxHealthWorld = healthBarWorldSlider.value;
 
-        if(diegeticUI)
-        {
-            healthBarDiagetic.SetActive(true);
-
-            healthBarNonDiagetic.SetActive(false);
-            minimapObj.SetActive(false);
-            scoreUINonDiagetic.SetActive(false);
-        }
-        else
-        {
-            healthBarDiagetic.SetActive(false);
-
-            healthBarNonDiagetic.SetActive(true);
-            minimapObj.SetActive(true);
-            scoreUINonDiagetic.SetActive(true);
-        }
-        
-        gameOverMenuObj.SetActive(false);
+        gameOverCanvasObj.SetActive(false);
         healthBarOverlayObj.SetActive(false);
         infoObj.SetActive(false);
         keyObj.SetActive(false);
@@ -78,6 +63,7 @@ public class InGameUIManager : MonoBehaviour
         trophyObj.SetActive(false);
         _totalCollectibleObjs = GameObject.FindGameObjectsWithTag("Collectible");
         _totalToCollect = _totalCollectibleObjs.Length;
+        SetNonDiegeticUI();
         SubscribeToEvents();
     }
 
@@ -85,16 +71,27 @@ public class InGameUIManager : MonoBehaviour
     {
         UnsubscribeFromEvents();
     }
-    
-    public bool DiegeticUI
+
+    private void SetDiegeticUI()
     {
-        get => diegeticUI;
-        set => diegeticUI = value;
+        diegeticUIOffButtonObj.SetActive(true);
+        diegeticUIOnButtonObj.SetActive(false);
+        EventsManager.InvokeEvent(BhanuSkillsEvent.DiegeticUIEnabledEvent);
+        healthBarDiagetic.SetActive(true);
+        healthBarNonDiagetic.SetActive(false);
+        minimapObj.SetActive(false);
+        scoreUINonDiagetic.SetActive(false);
     }
 
-    private void DisplayMenu()
+    private void SetNonDiegeticUI()
     {
-        gameOverMenuObj.SetActive(true);
+        diegeticUIOffButtonObj.SetActive(false);
+        diegeticUIOnButtonObj.SetActive(true);
+        EventsManager.InvokeEvent(BhanuSkillsEvent.NonDiegeticUIEnabledEvent);
+        healthBarDiagetic.SetActive(false);
+        healthBarNonDiagetic.SetActive(true);
+        minimapObj.SetActive(true);
+        scoreUINonDiagetic.SetActive(true);
     }
 
     private void SetMaxHealth()
@@ -108,7 +105,7 @@ public class InGameUIManager : MonoBehaviour
         heartObj.SetActive(false);
         infoObj.SetActive(true);
     }
-    
+
     public int TotalCollectedByPlayer
     {
         get => _totalCollectedByPlayer;
@@ -120,10 +117,21 @@ public class InGameUIManager : MonoBehaviour
         get => _totalToCollect;
         set => _totalToCollect = value;
     }
+
     #endregion
     
     #region Menu Button Functions
 
+    public void DiegeticUIOffButton()
+    {
+        SetNonDiegeticUI();
+    }
+    
+    public void DiegeticUIOnButton()
+    {
+        SetDiegeticUI();
+    }
+    
     public void PauseButton()
     {
         EventsManager.InvokeEvent(BhanuSkillsEvent.PauseEvent);
@@ -160,8 +168,11 @@ public class InGameUIManager : MonoBehaviour
     
     private void OnGameOver()
     {
+        diegeticUIOffButtonObj.SetActive(false);
+        diegeticUIOnButtonObj.SetActive(false);
+        gameOverCanvasObj.SetActive(true);
+        gameObject.SetActive(false);
         healthBarOverlayObj.SetActive(false);
-        DisplayMenu();
     }
     
     private void OnHealthAlmostEmpty()
@@ -190,7 +201,6 @@ public class InGameUIManager : MonoBehaviour
     private void OnPause()
     {
         pauseMenuObj.SetActive(true);
-        Time.timeScale = 0;
     }
 
     private void OnTrophyCollected()

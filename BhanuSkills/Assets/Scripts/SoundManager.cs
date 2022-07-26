@@ -1,7 +1,6 @@
 using Events;
 using ScriptableObjects;
 using UnityEngine;
-using UnityEngine.Timeline;
 
 public class SoundManager : MonoBehaviour
 {

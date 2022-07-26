@@ -4,6 +4,7 @@
     {
         AllCollectedEvent,
         CollectibleCollectedEvent,
+        DiegeticUIEnabledEvent,
         DoorCloseEvent,
         DoorOpenEvent,
         GameOverEvent,
@@ -12,6 +13,7 @@
         HealthLossEvent,
         InfoEvent,
         KeyCollectedEvent,
+        NonDiegeticUIEnabledEvent,
         PauseEvent,
         TrophyCollectedEvent,
         UnpauseEvent

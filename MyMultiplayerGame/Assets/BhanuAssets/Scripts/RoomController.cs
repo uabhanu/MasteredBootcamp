@@ -86,7 +86,11 @@ namespace BhanuAssets.Scripts
                 GameObject playerListingObj = Instantiate(playersListingPrefab , playersDisplayTransform);
                 TMP_Text tempDisplay = playerListingObj.transform.GetChild(0).GetComponent<TMP_Text>();
                 tempDisplay.text = player.NickName;
-                chatData.PlayerName = player.NickName;
+
+                if(player.IsLocal)
+                {
+                    chatData.PlayerName = tempDisplay.text;   
+                }
             }
         }
 
@@ -119,7 +123,7 @@ namespace BhanuAssets.Scripts
             notEnoughPlayersObj.SetActive(false);
         }
 
-        public void StartButton()
+        public void StartGameButton()
         {
             if(PhotonNetwork.PlayerList.Length == 2)
             {
