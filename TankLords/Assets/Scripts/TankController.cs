@@ -3,46 +3,53 @@ using UnityEngine;
 public class TankController : MonoBehaviour
 {
     #region Variables
-    
-    private Vector2 _movementVector;
-    
-    public float MaxSpeed = 10f;
-    public float RotationSpeed = 100f;
-    public float TurretRotationSpeed = 150f;
-    public Rigidbody2D Rb2d;
+
+    public AimTurret AimTurret;
+    public TankMover TankMover;
     public Transform TurretParent;
-    
+    public Turret[] Turrets;
+
     #endregion
 
     #region Functions
-    
+
     private void Awake()
     {
-        Rb2d = GetComponent<Rigidbody2D>();
-    }
+        // In case user doesn't assign this in the inspector
+        if(AimTurret == null)
+        {
+            AimTurret = GetComponentInChildren<AimTurret>();
+        }
+        
+        // In case user doesn't assign this in the inspector
+        if(TankMover == null)
+        {
+            TankMover = GetComponentInChildren<TankMover>();
+        }
 
-    private void FixedUpdate()
-    {
-        Rb2d.velocity = (Vector2)transform.up * (_movementVector.y * MaxSpeed * Time.fixedDeltaTime);
-        Rb2d.MoveRotation(transform.rotation * Quaternion.Euler(0 , 0 , -_movementVector.x * RotationSpeed * Time.fixedDeltaTime));
+        // In case user doesn't assign this in the inspector
+        if(Turrets == null || Turrets.Length == 0)
+        {
+            Turrets = GetComponentsInChildren<Turret>();
+        }
     }
 
     public void HandleMoveBody(Vector2 movementVector)
     {
-        _movementVector = movementVector;
+        TankMover.Move(movementVector);
     }
     
     public void HandleMoveTurret(Vector2 pointerPosition)
     {
-        var turretDirection = (Vector3)pointerPosition - transform.position;
-        var desiredAngle = Mathf.Atan2(turretDirection.y , turretDirection.x) * Mathf.Rad2Deg;
-        var rotationStep = TurretRotationSpeed * Time.deltaTime;
-        TurretParent.rotation = Quaternion.RotateTowards(TurretParent.rotation , Quaternion.Euler(0 , 0 , desiredAngle - 90) , rotationStep);
+        AimTurret.Aim(pointerPosition);
     }
     
     public void HandleShoot()
     {
-        Debug.Log("Shooting");
+        foreach(var turret in Turrets)
+        {
+            turret.Shoot();
+        }
     }
     
     #endregion
