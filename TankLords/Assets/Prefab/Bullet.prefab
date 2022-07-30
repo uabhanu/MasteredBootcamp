@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 6958753002250220424}
   - component: {fileID: 6958753002250220430}
   - component: {fileID: 6958753002250220428}
-  m_Layer: 0
+  m_Layer: 6
   m_Name: Bullet
   m_TagString: Untagged
   m_Icon: {fileID: 0}
@@ -52,7 +52,7 @@ BoxCollider2D:
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0.5, y: 0.5}
-    oldSize: {x: 0.125, y: 0.3125}
+    oldSize: {x: 0.25, y: 0.625}
     newSize: {x: 0.16, y: 0.36}
     adaptiveTilingThreshold: 0.5
     drawMode: 0
@@ -73,9 +73,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a929214670baa419824d69b0af65b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Damage: 5
   MaxDistance: 15
   Speed: 10
+  Damage: 5
 --- !u!50 &6958753002250220430
 Rigidbody2D:
   serializedVersion: 4
