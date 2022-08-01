@@ -86,8 +86,9 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 3319198042998797031}
+  - component: {fileID: 3962259710166170145}
   - component: {fileID: 3319198042998797024}
-  - component: {fileID: 3319198042998797025}
+  - component: {fileID: 814767366792779803}
   m_Layer: 7
   m_Name: TankTurret
   m_TagString: Untagged
@@ -111,6 +112,21 @@ Transform:
   m_Father: {fileID: 3319198042600799711}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: -90}
+--- !u!114 &3962259710166170145
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3319198042998797030}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7bf6bd0e326fcce4497497dd2a49ab51, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  objectToPool: {fileID: 0}
+  poolSize: 10
+  SpawnedObjectsParent: {fileID: 0}
 --- !u!212 &3319198042998797024
 SpriteRenderer:
   m_ObjectHideFlags: 0
@@ -163,7 +179,7 @@ SpriteRenderer:
   m_WasSpriteAssigned: 1
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
---- !u!114 &3319198042998797025
+--- !u!114 &814767366792779803
 MonoBehaviour:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
@@ -175,6 +191,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: e12ea38f2622f084b8701f995789acb0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  bulletPoolCount: 2
   CurrentDelay: 0
   ReloadDelay: 1
   BulletPrefab: {fileID: 6958753002250220435, guid: bccbfe4e721841247857dbb54f4c3304, type: 3}
@@ -295,6 +312,7 @@ GameObject:
   - component: {fileID: 3319198043761731166}
   - component: {fileID: 3319198043761731160}
   - component: {fileID: 3760019551403206827}
+  - component: {fileID: -3963502256043606398}
   - component: {fileID: 3319198043761731167}
   - component: {fileID: 3319198043761731161}
   m_Layer: 7
@@ -354,10 +372,10 @@ MonoBehaviour:
   OnDead:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 3319198043761731165}
-        m_TargetAssemblyTypeName: UnityEngine.GameObject, UnityEngine
-        m_MethodName: SetActive
-        m_Mode: 6
+      - m_Target: {fileID: -3963502256043606398}
+        m_TargetAssemblyTypeName: DestroyUtil, Assembly-CSharp
+        m_MethodName: DestroyHelper
+        m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
           m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
@@ -375,6 +393,18 @@ MonoBehaviour:
   OnHealthChange:
     m_PersistentCalls:
       m_Calls: []
+--- !u!114 &-3963502256043606398
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3319198043761731165}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c9c49bc52d07843a0600d2c47f6176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!50 &3319198043761731167
 Rigidbody2D:
   serializedVersion: 4
