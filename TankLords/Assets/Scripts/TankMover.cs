@@ -1,19 +1,17 @@
+using DataSO;
 using UnityEngine;
 
 public class TankMover : MonoBehaviour
 {
     #region Variables
     
+    private float _currentForwardDirection = 1f;
+    private float _currentSpeed = 0f;
     private Vector2 _movementVector;
 
-    public float Acceleration = 70f;
-    public float CurrentForwardDirection = 1f;
-    public float CurrentSpeed = 0f;
-    public float Deacceleration = 50f;
-    public float MaxSpeed = 70f;
-    public float RotationSpeed = 200f;
     public Rigidbody2D Rb2d;
-    
+    public TankMovementData TankMovementData;
+
     #endregion
 
     #region Functions
@@ -25,22 +23,22 @@ public class TankMover : MonoBehaviour
     
     private void FixedUpdate()
     {
-        Rb2d.velocity = (Vector2)transform.up * (CurrentForwardDirection * CurrentSpeed * Time.fixedDeltaTime);
-        Rb2d.MoveRotation(transform.rotation * Quaternion.Euler(0 , 0 , -_movementVector.x * RotationSpeed * Time.fixedDeltaTime));
+        Rb2d.velocity = (Vector2)transform.up * (_currentForwardDirection * _currentSpeed * Time.fixedDeltaTime);
+        Rb2d.MoveRotation(transform.rotation * Quaternion.Euler(0 , 0 , -_movementVector.x * TankMovementData.RotationSpeed * Time.fixedDeltaTime));
     }
 
     private void CalculateCurrentSpeed(Vector2 movementVector)
     {
         if(Mathf.Abs(movementVector.y) > 0)
         {
-            CurrentSpeed += Acceleration * Time.deltaTime;
+            _currentSpeed += TankMovementData.Acceleration * Time.deltaTime;
         }
         else
         {
-            CurrentSpeed -= Deacceleration * Time.deltaTime;
+            _currentSpeed -= TankMovementData.Deacceleration * Time.deltaTime;
         }
 
-        CurrentSpeed = Mathf.Clamp(CurrentSpeed , 0f , MaxSpeed);
+        _currentSpeed = Mathf.Clamp(_currentSpeed , 0f , TankMovementData.MaxSpeed);
     }
 
     public void Move(Vector2 movementVector)
@@ -50,12 +48,12 @@ public class TankMover : MonoBehaviour
 
         if(movementVector.y > 0)
         {
-            CurrentForwardDirection = 1f;
+            _currentForwardDirection = 1f;
         }
         
         else if(movementVector.y < 0)
         {
-            CurrentForwardDirection = -1f;
+            _currentForwardDirection = -1f;
         }
     }
     

@@ -193,10 +193,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   bulletPoolCount: 2
   CurrentDelay: 0
-  ReloadDelay: 1
-  BulletPrefab: {fileID: 6958753002250220435, guid: bccbfe4e721841247857dbb54f4c3304, type: 3}
   TurretBarrels:
   - {fileID: 3319198042664601251}
+  TurretData: {fileID: 11400000, guid: 269c0f91a9da634439ea0a7f2b756f6b, type: 2}
 --- !u!1 &3319198043001905295
 GameObject:
   m_ObjectHideFlags: 0
@@ -294,13 +293,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 684b440b879d91b48903e3cea5acf257, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Acceleration: 70
-  CurrentForwardDirection: 1
-  CurrentSpeed: 0
-  Deacceleration: 50
-  MaxSpeed: 70
-  RotationSpeed: 200
   Rb2d: {fileID: 0}
+  TankMovementData: {fileID: 11400000, guid: 702948d7aa91a8c449b4a5566b6ab6b6, type: 2}
 --- !u!1 &3319198043761731165
 GameObject:
   m_ObjectHideFlags: 0

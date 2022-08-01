@@ -1,4 +1,5 @@
 using System.Collections.Generic;
+using DataSO;
 using UnityEngine;
 
 [RequireComponent(typeof(ObjectPool))]
@@ -13,9 +14,8 @@ public class Turret : MonoBehaviour
     [SerializeField] private int bulletPoolCount;
 
     public float CurrentDelay = 0f;
-    public float ReloadDelay = 1f;
-    public GameObject BulletPrefab;
     public List<Transform> TurretBarrels;
+    public TurretData TurretData;
     
     #endregion
     
@@ -29,7 +29,7 @@ public class Turret : MonoBehaviour
 
     private void Start()
     {
-        bulletPool.Initialize(BulletPrefab , bulletPoolCount);
+        bulletPool.Initialize(TurretData.BulletPrefab , bulletPoolCount);
     }
 
     private void Update()
@@ -50,7 +50,7 @@ public class Turret : MonoBehaviour
         if(_canShoot)
         {
             _canShoot = false;
-            CurrentDelay = ReloadDelay;
+            CurrentDelay = TurretData.ReloadDelay;
 
             foreach(var barrel in TurretBarrels)
             {
@@ -58,7 +58,7 @@ public class Turret : MonoBehaviour
                 GameObject bullet = bulletPool.CreateObject();
                 bullet.transform.position = barrel.position;
                 bullet.transform.localRotation = barrel.rotation;
-                bullet.GetComponent<Bullet>().Initialize();
+                bullet.GetComponent<Bullet>().Initialize(TurretData.BulletData);
 
                 foreach(var collider in _tankColliders)
                 {

@@ -1,3 +1,4 @@
+using DataSO;
 using UnityEngine;
 
 public class Bullet : MonoBehaviour
@@ -7,11 +8,9 @@ public class Bullet : MonoBehaviour
     private float _conquaredDistance;
     private Rigidbody2D _rb2d;
     private Vector2 _startPosition;
-    
-    public float MaxDistance = 15f;
-    public float Speed = 10f;
-    public int Damage = 10;
-    
+
+    public BulletData BulletData;
+
     #endregion
 
     #region Functions
@@ -25,7 +24,7 @@ public class Bullet : MonoBehaviour
     {
         _conquaredDistance = Vector2.Distance(transform.position , _startPosition);
 
-        if(_conquaredDistance >= MaxDistance)
+        if(_conquaredDistance >= BulletData.MaxDistance)
         {
             DisableObject();
         }
@@ -39,7 +38,7 @@ public class Bullet : MonoBehaviour
 
         if(damageable != null)
         {
-            damageable.Hit(Damage);
+            damageable.Hit(BulletData.Damage);
         }
         
         DisableObject();
@@ -51,10 +50,11 @@ public class Bullet : MonoBehaviour
         gameObject.SetActive(false);
     }
 
-    public void Initialize()
+    public void Initialize(BulletData bulletData)
     {
+        BulletData = bulletData;
         _startPosition = transform.position;
-        _rb2d.velocity = transform.up * Speed;
+        _rb2d.velocity = transform.up * BulletData.Speed;
     }
     
     #endregion
