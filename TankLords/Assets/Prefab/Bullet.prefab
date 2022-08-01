@@ -59,7 +59,7 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 0.125, y: 0.3125}
+  m_Size: {x: 0.25, y: 0.625}
   m_EdgeRadius: 0
 --- !u!114 &6958753002250220424
 MonoBehaviour:
@@ -73,9 +73,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 38a929214670baa419824d69b0af65b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  MaxDistance: 15
-  Speed: 10
-  Damage: 5
+  BulletData: {fileID: 0}
 --- !u!50 &6958753002250220430
 Rigidbody2D:
   serializedVersion: 4
@@ -139,7 +137,7 @@ SpriteRenderer:
   m_SortingLayer: 7
   m_SortingOrder: 0
   m_Sprite: {fileID: 21300000, guid: 32dff4c5777bb144cb5bf82a38bc7f36, type: 3}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0, g: 0, b: 0, a: 0.19607843}
   m_FlipX: 0
   m_FlipY: 0
   m_DrawMode: 0

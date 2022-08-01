@@ -10,8 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 567643649706e92428beb8771af3f0d7, type: 3}
-  m_Name: FastTurretData
+  m_Name: BasicBlackTurretData
   m_EditorClassIdentifier: 
-  BulletData: {fileID: 11400000, guid: 7455c439c28e6584ab6178cf57c01b69, type: 2}
-  ReloadDelay: 0.3
-  BulletPrefab: {fileID: 6958753002250220435, guid: bccbfe4e721841247857dbb54f4c3304, type: 3}
+  BulletData: {fileID: 11400000, guid: a724c8df4edac8048bdd323019912ce8, type: 2}
+  ReloadDelay: 1
+  BulletPrefab: {fileID: 4355591191998084063, guid: bebc980a0585f5045854c5f048cb6700, type: 3}

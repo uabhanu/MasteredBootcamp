@@ -1,7 +1,7 @@
 using System.Collections;
 using UnityEngine;
 
-namespace Ai
+namespace AI
 {
     public class AIDetector : MonoBehaviour
     {

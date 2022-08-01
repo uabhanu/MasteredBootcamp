@@ -384,6 +384,10 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 1497932618}
     m_Modifications:
+    - target: {fileID: 814767366792779803, guid: f93662aa8add9a54bbc0d2522bf2f66b, type: 3}
+      propertyPath: TurretData
+      value: 
+      objectReference: {fileID: 11400000, guid: 9ccd48d1734c49e44afb32fbc9adfb54, type: 2}
     - target: {fileID: 3319198042600799710, guid: f93662aa8add9a54bbc0d2522bf2f66b, type: 3}
       propertyPath: m_Layer
       value: 10
@@ -460,6 +464,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 3760019551403206827, guid: f93662aa8add9a54bbc0d2522bf2f66b, type: 3}
+      propertyPath: OnDead.m_PersistentCalls.m_Calls.Array.data[0].m_Target
+      value: 
+      objectReference: {fileID: 1497932622}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: f93662aa8add9a54bbc0d2522bf2f66b, type: 3}
 --- !u!1 &519420028
@@ -12649,6 +12657,10 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 1497932618}
+  - component: {fileID: 1497932621}
+  - component: {fileID: 1497932620}
+  - component: {fileID: 1497932619}
+  - component: {fileID: 1497932622}
   m_Layer: 10
   m_Name: StaticEnemy
   m_TagString: Untagged
@@ -12672,6 +12684,73 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1497932619
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497932617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 0fad87eb64a562043a2a6d7302bcf7f6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  patrolBehaviour: {fileID: 1497932621}
+  shootBehaviour: {fileID: 1497932620}
+  aiDetector: {fileID: 1401571507}
+  tankController: {fileID: 1498877927}
+--- !u!114 &1497932620
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497932617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d9ac81c569c9d6d4c8e681400e46eee6, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FieldOfVisionForShooting: 60
+--- !u!114 &1497932621
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497932617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4bd3f2abadc59ba4e80f903fc3512e41, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  currentPatrolDelay: 0
+  randomDirection: {x: 0, y: 0}
+  PatrolDelay: 2.5
+--- !u!114 &1497932622
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1497932617}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f9c9c49bc52d07843a0600d2c47f6176, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!114 &1498877927 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 3319198043761731161, guid: f93662aa8add9a54bbc0d2522bf2f66b, type: 3}
+  m_PrefabInstance: {fileID: 192789969}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 5efcf0c2dae09cf4a8ef1284ed116999, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!4 &1498877931 stripped
 Transform:
   m_CorrespondingSourceObject: {fileID: 3319198043761731166, guid: f93662aa8add9a54bbc0d2522bf2f66b, type: 3}
