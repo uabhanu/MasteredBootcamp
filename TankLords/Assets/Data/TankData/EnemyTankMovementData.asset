@@ -13,6 +13,6 @@ MonoBehaviour:
   m_Name: EnemyTankMovementData
   m_EditorClassIdentifier: 
   Acceleration: 50
-  Deacceleration: 50
+  Deacceleration: 90
   MaxSpeed: 50
   RotationSpeed: 100
