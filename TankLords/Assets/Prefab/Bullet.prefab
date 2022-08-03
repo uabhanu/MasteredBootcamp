@@ -1,5 +1,66 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!1 &900773032451661606
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6830029925572755295}
+  - component: {fileID: 38642102413785866}
+  - component: {fileID: 3639606287729124027}
+  m_Layer: 6
+  m_Name: ImpactFeedback
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6830029925572755295
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900773032451661606}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0.311, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 6958753002250220429}
+  m_RootOrder: 0
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &38642102413785866
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900773032451661606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 3016b7f2dbd25cb4ab405b0f37569843, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  ObjectToInstantiate: {fileID: 2716751525430024913, guid: 59442de0b58cb2945ad2807f9d40421a, type: 3}
+--- !u!114 &3639606287729124027
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 900773032451661606}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ea97165f02bba5540b2a81dd91a6af47, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  gizmosColour: {r: 1, g: 1, b: 1, a: 1}
+  Radius: 0.2
+  ObjPrefab: {fileID: 733834024763334036, guid: 486e618f0658e6845a8ac888706302c8, type: 3}
 --- !u!1 &6958753002250220435
 GameObject:
   m_ObjectHideFlags: 0
@@ -31,7 +92,8 @@ Transform:
   m_LocalPosition: {x: 0.873, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
-  m_Children: []
+  m_Children:
+  - {fileID: 6830029925572755295}
   m_Father: {fileID: 0}
   m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
@@ -74,6 +136,33 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   BulletData: {fileID: 0}
+  OnHit:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 38642102413785866}
+        m_TargetAssemblyTypeName: InstantiateUtil, Assembly-CSharp
+        m_MethodName: InstantiateObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+      - m_Target: {fileID: 3639606287729124027}
+        m_TargetAssemblyTypeName: ObjectGeneratorRandomPositionUtil, Assembly-CSharp
+        m_MethodName: CreateObject
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!50 &6958753002250220430
 Rigidbody2D:
   serializedVersion: 4

@@ -1,6 +1,7 @@
-using System.Collections.Generic;
 using DataSO;
+using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.Events;
 
 [RequireComponent(typeof(ObjectPool))]
 public class Turret : MonoBehaviour
@@ -16,6 +17,9 @@ public class Turret : MonoBehaviour
     public float CurrentDelay = 0f;
     public List<Transform> TurretBarrels;
     public TurretData TurretData;
+    public UnityEvent OnCanShoot;
+    public UnityEvent OnShoot;
+    public UnityEvent<float> OnReloading;
     
     #endregion
     
@@ -30,6 +34,7 @@ public class Turret : MonoBehaviour
     private void Start()
     {
         bulletPool.Initialize(TurretData.BulletPrefab , bulletPoolCount);
+        OnReloading?.Invoke(CurrentDelay);
     }
 
     private void Update()
@@ -37,6 +42,7 @@ public class Turret : MonoBehaviour
         if(!_canShoot)
         {
             CurrentDelay -= Time.deltaTime;
+            OnReloading?.Invoke(CurrentDelay);
 
             if(CurrentDelay <= 0)
             {
@@ -65,6 +71,13 @@ public class Turret : MonoBehaviour
                     Physics2D.IgnoreCollision(bullet.GetComponent<Collider2D>() , collider);
                 }
             }
+            
+            OnShoot?.Invoke();
+            OnReloading?.Invoke(CurrentDelay);
+        }
+        else
+        {
+            OnCanShoot?.Invoke();
         }
     }
     
