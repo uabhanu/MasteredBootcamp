@@ -571,7 +571,8 @@ PrefabInstance:
       propertyPath: ObjectToFollow
       value: 
       objectReference: {fileID: 7828921310002580562}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3186306885174065482, guid: f93662aa8add9a54bbc0d2522bf2f66b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f93662aa8add9a54bbc0d2522bf2f66b, type: 3}
 --- !u!114 &2558800253294937159 stripped
 MonoBehaviour:

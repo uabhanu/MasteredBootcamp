@@ -10,6 +10,7 @@ public class ObjectPool : MonoBehaviour
     [SerializeField] protected GameObject objectToPool;
     [SerializeField] protected int poolSize = 10;
 
+    public bool AlwaysDestroy;
     public Transform SpawnedObjectsParent;
     
     #endregion
@@ -30,7 +31,7 @@ public class ObjectPool : MonoBehaviour
                 continue;
             }
             
-            else if(!item.activeSelf)
+            else if(!item.activeSelf || AlwaysDestroy)
             {
                 Destroy(item);
             }

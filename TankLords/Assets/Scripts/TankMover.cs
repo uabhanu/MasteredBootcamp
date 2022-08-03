@@ -1,5 +1,6 @@
 using DataSO;
 using UnityEngine;
+using UnityEngine.Events;
 
 public class TankMover : MonoBehaviour
 {
@@ -11,6 +12,7 @@ public class TankMover : MonoBehaviour
 
     public Rigidbody2D Rb2d;
     public TankMovementData TankMovementData;
+    public UnityEvent<float> OnSpeedChange = new UnityEvent<float>();
 
     #endregion
 
@@ -45,6 +47,7 @@ public class TankMover : MonoBehaviour
     {
         _movementVector = movementVector;
         CalculateCurrentSpeed(movementVector);
+        OnSpeedChange?.Invoke(movementVector.magnitude);
 
         if(movementVector.y > 0)
         {

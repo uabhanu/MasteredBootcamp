@@ -730,7 +730,8 @@ PrefabInstance:
       propertyPath: gizmosColour.r
       value: 0.34509805
       objectReference: {fileID: 0}
-    m_RemovedComponents: []
+    m_RemovedComponents:
+    - {fileID: 3186306885174065482, guid: f93662aa8add9a54bbc0d2522bf2f66b, type: 3}
   m_SourcePrefab: {fileID: 100100000, guid: f93662aa8add9a54bbc0d2522bf2f66b, type: 3}
 --- !u!4 &565836926598980034 stripped
 Transform:
