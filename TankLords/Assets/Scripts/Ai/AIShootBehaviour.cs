@@ -14,24 +14,31 @@ namespace AI
         
         private bool TargetInFOV(TankController tankController , AIDetector aiDetector)
         {
-            var direction = aiDetector.Target.position - tankController.AimTurret.transform.position;
-
-            if(Vector2.Angle(tankController.AimTurret.transform.right , direction) < FieldOfVisionForShooting / 2)
+            if(tankController != null)
             {
-                return true;
+                var direction = aiDetector.Target.position - tankController.AimTurret.transform.position;
+
+                if(Vector2.Angle(tankController.AimTurret.transform.right , direction) < FieldOfVisionForShooting / 2)
+                {
+                    return true;
+                }   
             }
-            
+
             return false;
         }
         
         public override void PerformAction(TankController tankController , AIDetector aiDetector)
         {
-            if(TargetInFOV(tankController , aiDetector))
+            if(tankController != null)
             {
-                tankController.HandleShoot();
-            }
+                if(TargetInFOV(tankController , aiDetector))
+                {
+                    tankController.HandleMoveBody(Vector2.zero);
+                    tankController.HandleShoot();
+                }
             
-            tankController.HandleMoveTurret(aiDetector.Target.position);
+                tankController.HandleMoveTurret(aiDetector.Target.position);   
+            }
         }
         
         #endregion

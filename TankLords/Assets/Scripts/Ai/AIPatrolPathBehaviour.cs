@@ -40,42 +40,45 @@ namespace AI
 
         public override void PerformAction(TankController tankController , AIDetector aiDetector)
         {
-            if(!isWaiting)
+            if(tankController != null)
             {
-                if(PatrolPath.Length < 2)
+                if(!isWaiting)
                 {
-                    return;
-                }
+                    if(PatrolPath.Length < 2)
+                    {
+                        return;
+                    }
 
-                if(!_isInitialized) //Extract into a method later
-                {
-                    var currentPathPoint = PatrolPath.GetClosestPathPoint(tankController.transform.position);
-                    _currentIndex = currentPathPoint.Index;
-                    currentPatrolTarget = currentPathPoint.Position;
-                    _isInitialized = true;
-                }
+                    if(!_isInitialized) //Extract into a method later
+                    {
+                        var currentPathPoint = PatrolPath.GetClosestPathPoint(tankController.transform.position);
+                        _currentIndex = currentPathPoint.Index;
+                        currentPatrolTarget = currentPathPoint.Position;
+                        _isInitialized = true;
+                    }
 
-                //Extract into a method later
-                if(Vector2.Distance(tankController.transform.position , currentPatrolTarget) < ArriveDistance)
-                {
-                    isWaiting = true;
-                    StartCoroutine(WaitCoroutine());
-                }
+                    //Extract into a method later
+                    if(Vector2.Distance(tankController.transform.position , currentPatrolTarget) < ArriveDistance)
+                    {
+                        isWaiting = true;
+                        StartCoroutine(WaitCoroutine());
+                    }
 
-                //Extract into a method later
-                Vector2 directionToGo = currentPatrolTarget - (Vector2)tankController.TankMover.transform.position;
-                var dotProduct = Vector2.Dot(tankController.TankMover.transform.up , directionToGo.normalized);
+                    //Extract into a method later
+                    Vector2 directionToGo = currentPatrolTarget - (Vector2)tankController.TankMover.transform.position;
+                    var dotProduct = Vector2.Dot(tankController.TankMover.transform.up , directionToGo.normalized);
 
-                if(dotProduct < 0.98f)
-                {
-                    var crossProduct = Vector3.Cross(tankController.TankMover.transform.up , directionToGo.normalized);
-                    int rotationResult = crossProduct.z >= 0 ? -1 : 1;
-                    tankController.HandleMoveBody(new Vector2(rotationResult , 1));
-                }
-                else
-                {
-                    tankController.HandleMoveBody(Vector2.up);
-                }
+                    if(dotProduct < 0.98f)
+                    {
+                        var crossProduct = Vector3.Cross(tankController.TankMover.transform.up , directionToGo.normalized);
+                        int rotationResult = crossProduct.z >= 0 ? -1 : 1;
+                        tankController.HandleMoveBody(new Vector2(rotationResult , 1));
+                    }
+                    else
+                    {
+                        tankController.HandleMoveBody(Vector2.up);
+                    }
+                }   
             }
         }
 

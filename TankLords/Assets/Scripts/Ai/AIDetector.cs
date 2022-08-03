@@ -71,7 +71,7 @@ namespace AI
         
         private void DetectIfOutOfRange()
         {
-            if(Target == null || !Target.gameObject.activeSelf || Vector2.Distance(transform.position , Target.position) > viewRadius)
+            if(Target == null || !Target.gameObject.activeSelf || Vector2.Distance(transform.position , Target.position) > viewRadius + 1)
             {
                 Target = null;
             }
